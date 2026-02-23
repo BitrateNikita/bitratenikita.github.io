@@ -27,13 +27,12 @@
             line-height: 1.6;
             background-image: url('doodle-bg.png');
             background-repeat: repeat;
-            background-size: 200px;
-            background-opacity: 0.05;
+            background-size: auto; /* сохраняем оригинальный размер */
         }
         .container {
-            max-width: 1200px;
+            max-width: 1400px; /* увеличил для отступов */
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 100px; /* ← ОТСТУПЫ 100px СЛЕВА И СПРАВА */
         }
         /* ===== ЛИПКАЯ ШАПКА ===== */
         header {
@@ -77,11 +76,15 @@
             border-radius: 30px;
             text-decoration: none;
             font-weight: 500;
-            transition: background 0.3s, transform 0.3s;
+            transition: transform 0.2s cubic-bezier(0.28, 0.84, 0.42, 1), background 0.3s;
+            display: inline-block;
         }
         .header-right .nav-btn:hover {
             background: var(--hover);
-            transform: scale(1.05);
+            transform: scale(1.1);
+        }
+        .header-right .nav-btn:active {
+            transform: scale(0.95);
         }
         .hero {
             text-align: center;
@@ -115,9 +118,15 @@
             border-radius: 40px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: transform 0.2s cubic-bezier(0.28, 0.84, 0.42, 1), background 0.3s;
             text-decoration: none;
             display: inline-block;
+        }
+        .btn:hover {
+            transform: scale(1.1);
+        }
+        .btn:active {
+            transform: scale(0.95);
         }
         .btn-primary {
             background: var(--primary);
@@ -125,7 +134,6 @@
         }
         .btn-primary:hover {
             background: var(--hover);
-            transform: scale(1.05);
         }
         .btn-outline {
             background: transparent;
@@ -135,7 +143,6 @@
         .btn-outline:hover {
             background: var(--primary);
             color: var(--text-light);
-            transform: scale(1.05);
         }
         .section-title {
             text-align: center;
@@ -159,10 +166,13 @@
             padding: 30px 20px;
             border-radius: 20px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
+            transition: transform 0.2s cubic-bezier(0.28, 0.84, 0.42, 1);
             text-align: center;
             animation: bounceFadeIn 0.8s cubic-bezier(0.28, 0.84, 0.42, 1) forwards;
             opacity: 0;
+        }
+        .card:hover {
+            transform: scale(1.05);
         }
         .cards .card:nth-child(1) { animation-delay: 0.2s; }
         .cards .card:nth-child(2) { animation-delay: 0.4s; }
@@ -174,9 +184,6 @@
             100% { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        .card:hover {
-            transform: translateY(-10px);
-        }
         .card-icon {
             width: 80px;
             height: 80px;
@@ -214,11 +221,14 @@
             border-radius: 50px;
             text-decoration: none;
             font-size: 1.1rem;
-            transition: all 0.3s;
+            transition: transform 0.2s cubic-bezier(0.28, 0.84, 0.42, 1), background 0.3s;
         }
         .contact-btn:hover {
             background: var(--hover);
-            transform: scale(1.05);
+            transform: scale(1.1);
+        }
+        .contact-btn:active {
+            transform: scale(0.95);
         }
         footer {
             text-align: center;
@@ -242,6 +252,9 @@
         .contacts { animation: fadeIn 0.8s; animation-delay: 0.6s; animation-fill-mode: both; }
 
         @media (max-width: 768px) {
+            .container {
+                padding: 0 20px; /* на мобильных отступы уменьшаем */
+            }
             header {
                 flex-direction: column;
                 gap: 15px;
