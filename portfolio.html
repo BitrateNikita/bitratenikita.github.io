@@ -25,9 +25,9 @@
             line-height: 1.6;
         }
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 100px;
         }
         header {
             position: sticky;
@@ -71,11 +71,15 @@
             border-radius: 30px;
             text-decoration: none;
             font-weight: 500;
-            transition: background 0.3s, transform 0.3s;
+            transition: transform 0.2s cubic-bezier(0.28, 0.84, 0.42, 1), background 0.3s;
+            display: inline-block;
         }
         .header-right .nav-btn:hover {
             background: var(--hover);
-            transform: scale(1.05);
+            transform: scale(1.1);
+        }
+        .header-right .nav-btn:active {
+            transform: scale(0.95);
         }
         .hero {
             text-align: center;
@@ -151,12 +155,15 @@
             text-decoration: none;
             border-radius: 40px;
             font-weight: 600;
-            transition: all 0.3s;
+            transition: transform 0.2s cubic-bezier(0.28, 0.84, 0.42, 1), background 0.3s;
             margin: 20px 0;
         }
         .btn:hover {
             background: var(--hover);
-            transform: scale(1.05);
+            transform: scale(1.1);
+        }
+        .btn:active {
+            transform: scale(0.95);
         }
         footer {
             text-align: center;
@@ -177,6 +184,9 @@
         .btn { animation: fadeIn 0.8s; animation-delay: 1s; animation-fill-mode: both; }
 
         @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
             header {
                 flex-direction: column;
                 gap: 15px;
@@ -216,7 +226,8 @@
             <div class="portfolio-grid">
                 <div class="portfolio-item">
                     <div class="video-container">
-                        <iframe src="https://player.vimeo.com/video/123456789?autoplay=1&loop=1&background=1&muted=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                        <!-- ЗДЕСЬ ТЫ ВСТАВИШЬ СВОИ ССЫЛКИ -->
+                        <iframe src="https://player.vimeo.com/video/824607814?autoplay=1&loop=1&background=1&muted=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
                     </div>
                     <div class="portfolio-info">
                         <h3>Bat</h3>
@@ -226,7 +237,7 @@
                 </div>
                 <div class="portfolio-item">
                     <div class="video-container">
-                        <iframe src="https://player.vimeo.com/video/123456790?autoplay=1&loop=1&background=1&muted=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                        <iframe src="https://player.vimeo.com/video/824607815?autoplay=1&loop=1&background=1&muted=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
                     </div>
                     <div class="portfolio-info">
                         <h3>Awake Vampire</h3>
@@ -236,7 +247,7 @@
                 </div>
                 <div class="portfolio-item">
                     <div class="video-container">
-                        <iframe src="https://player.vimeo.com/video/123456791?autoplay=1&loop=1&background=1&muted=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                        <iframe src="https://player.vimeo.com/video/824607816?autoplay=1&loop=1&background=1&muted=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
                     </div>
                     <div class="portfolio-info">
                         <h3>The Ghost Cart</h3>
@@ -246,7 +257,7 @@
                 </div>
                 <div class="portfolio-item">
                     <div class="video-container">
-                        <iframe src="https://player.vimeo.com/video/123456792?autoplay=1&loop=1&background=1&muted=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                        <iframe src="https://player.vimeo.com/video/824607817?autoplay=1&loop=1&background=1&muted=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
                     </div>
                     <div class="portfolio-info">
                         <h3>Diver</h3>
