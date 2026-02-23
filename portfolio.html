@@ -41,34 +41,39 @@
             flex-wrap: wrap;
             box-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
         .logo img {
             height: 60px;
             width: auto;
             filter: brightness(0.9) contrast(1.2);
         }
-        nav {
+        .header-left nav {
             display: flex;
             gap: 30px;
-            align-items: center;
-            flex-wrap: wrap;
         }
-        nav a {
+        .header-left nav a {
             text-decoration: none;
             color: var(--text);
             font-weight: 500;
             transition: color 0.3s;
         }
-        nav a:hover {
+        .header-left nav a:hover {
             color: var(--primary);
         }
-        .nav-btn {
+        .header-right .nav-btn {
             background: var(--primary);
             color: var(--text-light) !important;
             padding: 8px 20px;
             border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
             transition: background 0.3s, transform 0.3s;
         }
-        .nav-btn:hover {
+        .header-right .nav-btn:hover {
             background: var(--hover);
             transform: scale(1.05);
         }
@@ -122,15 +127,6 @@
             height: 100%;
             border: none;
         }
-        .video-placeholder {
-            width: 100%;
-            height: 200px;
-            background: #333;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #999;
-        }
         .portfolio-info {
             padding: 20px;
         }
@@ -173,13 +169,21 @@
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        .hero { animation: fadeIn 0.8s; }
+        .portfolio-item:nth-child(1) { animation: fadeIn 0.8s; animation-delay: 0.2s; animation-fill-mode: both; }
+        .portfolio-item:nth-child(2) { animation: fadeIn 0.8s; animation-delay: 0.4s; animation-fill-mode: both; }
+        .portfolio-item:nth-child(3) { animation: fadeIn 0.8s; animation-delay: 0.6s; animation-fill-mode: both; }
+        .portfolio-item:nth-child(4) { animation: fadeIn 0.8s; animation-delay: 0.8s; animation-fill-mode: both; }
+        .btn { animation: fadeIn 0.8s; animation-delay: 1s; animation-fill-mode: both; }
+
         @media (max-width: 768px) {
             header {
                 flex-direction: column;
                 gap: 15px;
             }
-            nav {
-                justify-content: center;
+            .header-left {
+                flex-direction: column;
+                gap: 15px;
             }
             .hero h1 {
                 font-size: 2rem;
@@ -190,13 +194,17 @@
 <body>
     <div class="container">
         <header>
-            <div class="logo">
-                <img src="logo.png" alt="Кинеограф">
+            <div class="header-left">
+                <div class="logo">
+                    <img src="logo.png" alt="Кинеограф">
+                </div>
+                <nav>
+                    <a href="#">Контакты</a>
+                </nav>
             </div>
-            <nav>
+            <div class="header-right">
                 <a href="index.html" class="nav-btn">Школа анимации</a>
-                <a href="#">Контакты</a>
-            </nav>
+            </div>
         </header>
 
         <section class="hero">
@@ -207,35 +215,43 @@
         <div class="container">
             <div class="portfolio-grid">
                 <div class="portfolio-item">
-                    <div class="video-placeholder">Bat (Night Hunt)</div>
+                    <div class="video-container">
+                        <iframe src="https://player.vimeo.com/video/123456789?autoplay=1&loop=1&background=1&muted=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                    </div>
                     <div class="portfolio-info">
                         <h3>Bat</h3>
                         <p>Анимация врага для игры Night Hunt</p>
-                        <a href="https://artstation.com/artwork/..." class="portfolio-link" target="_blank">Смотреть на ArtStation →</a>
+                        <a href="https://artstation.com/nikitapetrov" class="portfolio-link" target="_blank">Смотреть на ArtStation →</a>
                     </div>
                 </div>
                 <div class="portfolio-item">
-                    <div class="video-placeholder">Awake Vampire</div>
+                    <div class="video-container">
+                        <iframe src="https://player.vimeo.com/video/123456790?autoplay=1&loop=1&background=1&muted=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                    </div>
                     <div class="portfolio-info">
                         <h3>Awake Vampire</h3>
                         <p>Персонажная анимация для Night Hunt</p>
-                        <a href="https://artstation.com/artwork/..." class="portfolio-link" target="_blank">Смотреть на ArtStation →</a>
+                        <a href="https://artstation.com/nikitapetrov" class="portfolio-link" target="_blank">Смотреть на ArtStation →</a>
                     </div>
                 </div>
                 <div class="portfolio-item">
-                    <div class="video-placeholder">The Ghost Cart</div>
+                    <div class="video-container">
+                        <iframe src="https://player.vimeo.com/video/123456791?autoplay=1&loop=1&background=1&muted=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                    </div>
                     <div class="portfolio-info">
                         <h3>The Ghost Cart</h3>
                         <p>Анимация босса для Night Hunt</p>
-                        <a href="https://artstation.com/artwork/..." class="portfolio-link" target="_blank">Смотреть на ArtStation →</a>
+                        <a href="https://artstation.com/nikitapetrov" class="portfolio-link" target="_blank">Смотреть на ArtStation →</a>
                     </div>
                 </div>
                 <div class="portfolio-item">
-                    <div class="video-placeholder">Diver</div>
+                    <div class="video-container">
+                        <iframe src="https://player.vimeo.com/video/123456792?autoplay=1&loop=1&background=1&muted=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                    </div>
                     <div class="portfolio-info">
                         <h3>Diver</h3>
                         <p>Анимация врага для Night Hunt</p>
-                        <a href="https://artstation.com/artwork/..." class="portfolio-link" target="_blank">Смотреть на ArtStation →</a>
+                        <a href="https://artstation.com/nikitapetrov" class="portfolio-link" target="_blank">Смотреть на ArtStation →</a>
                     </div>
                 </div>
             </div>
