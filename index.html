@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Кинеограф — студия анимации для детей</title>
     <style>
-        /* ===== ЦВЕТА (меняй здесь) ===== */
         :root {
             --bg: #F9F6F0;
             --primary: #2C5F5F;
@@ -19,7 +18,6 @@
             --footer-text: #ffffff;
         }
 
-        /* ===== СБРОС ===== */
         * {
             margin: 0;
             padding: 0;
@@ -39,7 +37,6 @@
             padding: 0 100px;
         }
 
-        /* ===== ШАПКА ===== */
         header {
             position: sticky;
             top: 0;
@@ -68,6 +65,7 @@
             text-decoration: none;
             color: var(--text);
             font-weight: 500;
+            transition: color 0.3s;
         }
 
         .nav-links a:hover {
@@ -90,7 +88,6 @@
             transform: scale(1.05);
         }
 
-        /* ===== ГЛАВНЫЙ ЭКРАН ===== */
         .hero {
             text-align: center;
             padding: 80px 20px;
@@ -119,7 +116,6 @@
             justify-content: center;
         }
 
-        /* ===== КНОПКИ ===== */
         .btn {
             padding: 12px 30px;
             border: none;
@@ -155,14 +151,12 @@
             color: var(--text-light);
         }
 
-        /* ===== ЗАГОЛОВКИ СЕКЦИЙ ===== */
         .section-title {
             text-align: center;
             font-size: 2.2rem;
             margin-bottom: 40px;
         }
 
-        /* ===== ЦВЕТНЫЕ СЕКЦИИ ===== */
         .section-colored {
             padding: 60px 0;
             margin: 40px 0;
@@ -171,7 +165,6 @@
         .section-colored:nth-of-type(1) { background: var(--section-bg-1); }
         .section-colored:nth-of-type(2) { background: var(--section-bg-2); }
 
-        /* ===== КАРТОЧКИ ===== */
         .cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -188,13 +181,11 @@
             text-align: center;
         }
 
-        /* АНИМАЦИЯ ПРИ НАВЕДЕНИИ */
         .card:hover {
             transform: scale(1.05);
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
 
-        /* ===== КОНТАКТЫ ===== */
         .contacts {
             background: var(--card-bg);
             padding: 60px 20px;
@@ -229,7 +220,6 @@
             transform: scale(1.05);
         }
 
-        /* ===== ФУТЕР ===== */
         footer {
             text-align: center;
             padding: 40px 0;
@@ -238,7 +228,6 @@
             margin-top: 60px;
         }
 
-        /* ===== АДАПТАЦИЯ ===== */
         @media (max-width: 768px) {
             .container {
                 padding: 0 20px;
@@ -272,7 +261,6 @@
 </head>
 <body>
     <div class="container">
-        <!-- ===== ШАПКА ===== -->
         <header>
             <div class="logo">
                 <img src="logo.png" alt="Кинеограф">
@@ -284,7 +272,6 @@
             </div>
         </header>
 
-        <!-- ===== ГЛАВНЫЙ ЭКРАН ===== -->
         <section class="hero">
             <h1>Кинеограф - студия анимации для детей в Новороссийске</h1>
             <p>Учим создавать анимации с 8 лет с первого занятия</p>
@@ -294,7 +281,6 @@
             </div>
         </section>
 
-        <!-- ===== БЛОК 1: КАК ПРОХОДЯТ ЗАНЯТИЯ ===== -->
         <div class="section-colored">
             <div class="container">
                 <h2 class="section-title">Как проходят занятия</h2>
@@ -315,7 +301,6 @@
             </div>
         </div>
 
-        <!-- ===== БЛОК 2: ПОЧЕМУ МЫ ===== -->
         <div class="section-colored">
             <div class="container">
                 <h2 class="section-title">Почему мы</h2>
@@ -336,7 +321,6 @@
             </div>
         </div>
 
-        <!-- ===== КОНТАКТЫ ===== -->
         <section class="contacts">
             <h2 class="section-title">Свяжитесь с нами</h2>
             <div class="contact-buttons">
@@ -346,7 +330,6 @@
             </div>
         </section>
 
-        <!-- ===== ФУТЕР ===== -->
         <footer>
             © 2026 Кинеограф. Все права защищены.
         </footer>
