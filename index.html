@@ -5,44 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Кинеограф — студия анимации для детей</title>
     <style>
+        /* =====================================================
+           🌈 ЦВЕТОВАЯ СХЕМА (меняй здесь — и всё поменяется)
+           ===================================================== */
         :root {
-            --bg: #F9F6F0;
-            --primary: #2C5F5F;
-            --text: #2E2E2E;
-            --text-light: #ffffff;
-            --card-bg: #ffffff;
-            --hover: #1E4A4A;
-            --section-bg-1: #f5efe7;
-            --section-bg-2: #f0f0f0;
-            --footer-bg: #2C5F5F; /* ← ЦВЕТ ФУТЕРА, МЕНЯЙ ЗДЕСЬ */
-            --footer-text: #ffffff;
+            --bg: #F9F6F0;              /* общий фон страницы */
+            --primary: #2C5F5F;          /* главный акцентный цвет (кнопки, ссылки) */
+            --text: #2E2E2E;             /* цвет обычного текста */
+            --text-light: #ffffff;        /* цвет текста на тёмном фоне */
+            --card-bg: #ffffff;           /* фон карточек */
+            --hover: #1E4A4A;             /* цвет при наведении (темнее primary) */
+            --section-bg-1: #f5efe7;       /* фон для блока "Как проходят занятия" */
+            --section-bg-2: #f0f0f0;       /* фон для блока "Почему мы" */
+            --footer-bg: #2C5F5F;          /* фон футера (чистый цвет, без картинки) */
+            --footer-text: #ffffff;         /* цвет текста в футере */
         }
+
+        /* =====================================================
+           🧹 СБРОС СТИЛЕЙ И БАЗОВЫЕ НАСТРОЙКИ
+           ===================================================== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
             background: var(--bg);
             color: var(--text);
             line-height: 1.6;
+            /* фон с каракулями (детский стиль) — заменишь позже */
             background-image: url('doodle-bg.png');
             background-repeat: repeat;
             background-size: auto;
         }
+
+        /* =====================================================
+           📦 КОНТЕЙНЕР (центрирует контент, задаёт отступы по бокам)
+           ===================================================== */
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 100px;
+            padding: 0 100px;  /* ← отступы 100px слева и справа */
         }
-        /* ===== ЛИПКАЯ ШАПКА ===== */
+
+        /* =====================================================
+           🧷 ЛИПКАЯ ШАПКА (остаётся сверху при скролле)
+           ===================================================== */
         header {
             position: sticky;
             top: 0;
             z-index: 1000;
             background: var(--bg);
-            background-image: url('doodle-bg.png');
+            background-image: url('doodle-bg.png'); /* тот же фон, что и у body */
             background-repeat: repeat;
             background-size: auto;
             display: flex;
@@ -52,24 +68,32 @@
             flex-wrap: wrap;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
+
+        /* Логотип */
         .logo img {
             height: 60px;
             width: auto;
         }
+
+        /* ===== ПРАВАЯ ЧАСТЬ ШАПКИ (все ссылки здесь) ===== */
         .nav-links {
             display: flex;
             gap: 30px;
             align-items: center;
         }
+
         .nav-links a {
             text-decoration: none;
             color: var(--text);
             font-weight: 500;
             transition: color 0.3s;
         }
+
         .nav-links a:hover {
             color: var(--primary);
         }
+
+        /* Главная кнопка (переключение между страницами) */
         .nav-btn {
             background: var(--primary);
             color: var(--text-light) !important;
@@ -80,15 +104,21 @@
             transition: transform 0.2s cubic-bezier(0.28, 0.84, 0.42, 1), background 0.3s;
             display: inline-block;
             cursor: pointer;
-            margin-left: 20px;
+            margin-left: 20px;  /* отступ от остальных ссылок */
         }
+
         .nav-btn:hover {
             background: var(--hover);
-            transform: scale(1.1);
+            transform: scale(1.1);  /* bounce при наведении */
         }
+
         .nav-btn:active {
-            transform: scale(0.95);
+            transform: scale(0.95);  /* эффект нажатия */
         }
+
+        /* =====================================================
+           🎬 ГЛАВНЫЙ ЭКРАН (HERO)
+           ===================================================== */
         .hero {
             text-align: center;
             padding: 80px 20px;
@@ -97,6 +127,7 @@
             margin-bottom: 60px;
             animation: fadeIn 1s;
         }
+
         .hero h1 {
             font-size: 2.2rem;
             margin-bottom: 20px;
@@ -105,16 +136,22 @@
             margin-left: auto;
             margin-right: auto;
         }
+
         .hero p {
             font-size: 1.2rem;
             margin-bottom: 40px;
             opacity: 0.9;
         }
+
         .hero-buttons {
             display: flex;
             gap: 20px;
             justify-content: center;
         }
+
+        /* =====================================================
+           🔘 БАЗОВЫЙ СТИЛЬ КНОПОК (с анимацией)
+           ===================================================== */
         .btn {
             padding: 12px 30px;
             border: none;
@@ -125,45 +162,65 @@
             text-decoration: none;
             display: inline-block;
         }
+
         .btn:hover {
             transform: scale(1.1);
         }
+
         .btn:active {
             transform: scale(0.95);
         }
+
         .btn-primary {
             background: var(--primary);
             color: var(--text-light);
         }
+
         .btn-primary:hover {
             background: var(--hover);
         }
+
         .btn-outline {
             background: transparent;
             border: 2px solid var(--primary);
             color: var(--primary);
         }
+
         .btn-outline:hover {
             background: var(--primary);
             color: var(--text-light);
         }
+
+        /* =====================================================
+           🧱 ЗАГОЛОВКИ СЕКЦИЙ
+           ===================================================== */
         .section-title {
             text-align: center;
             font-size: 2.2rem;
             margin-bottom: 40px;
         }
+
+        /* ===== ЦВЕТНЫЕ БЛОКИ (секции с фоном) ===== */
         .section-colored {
-            background: var(--section-bg-1);
             padding: 60px 0;
             margin: 40px 0;
             animation: fadeIn 1.2s;
         }
+
+        /* разные фоны для разных секций */
+        .section-colored:nth-of-type(1) { background: var(--section-bg-1); }
+        .section-colored:nth-of-type(2) { background: var(--section-bg-2); }
+
+        /* =====================================================
+           🃏 КАРТОЧКИ (используются в обоих блоках)
+           ===================================================== */
         .cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 30px;
             margin: 40px 0;
         }
+
         .card {
             background: var(--card-bg);
             padding: 30px 20px;
@@ -173,24 +230,31 @@
             text-align: center;
             animation: bounceFadeIn 0.8s cubic-bezier(0.28, 0.84, 0.42, 1) forwards;
             opacity: 0;
-            cursor: pointer;
+            cursor: pointer;  /* чтобы было видно, что это интерактивный элемент */
         }
+
+        /* АНИМАЦИЯ ПРИ НАВЕДЕНИИ — ТЕПЕРЬ РАБОТАЕТ */
         .card:hover {
             transform: scale(1.05);
         }
+
         .card:active {
             transform: scale(0.95);
         }
+
+        /* поочередное появление карточек */
         .cards .card:nth-child(1) { animation-delay: 0.2s; }
         .cards .card:nth-child(2) { animation-delay: 0.4s; }
         .cards .card:nth-child(3) { animation-delay: 0.6s; }
 
+        /* анимация появления с баунсом */
         @keyframes bounceFadeIn {
             0% { opacity: 0; transform: translateY(40px) scale(0.9); }
             50% { opacity: 0.8; transform: translateY(-10px) scale(1.02); }
             100% { opacity: 1; transform: translateY(0) scale(1); }
         }
 
+        /* иконки для карточек (подготовлено для будущих иконок) */
         .card-icon {
             width: 80px;
             height: 80px;
@@ -199,10 +263,15 @@
             background-repeat: no-repeat;
             background-position: center;
         }
-        .card-icon-1 { background-image: url('icon-draw.png'); }
-        .card-icon-2 { background-image: url('icon-create.png'); }
-        .card-icon-3 { background-image: url('icon-film.png'); }
 
+        /* временные заглушки для иконок (потом заменишь) */
+        .card-icon-1 { background-color: #ddd; border-radius: 50%; }
+        .card-icon-2 { background-color: #ddd; border-radius: 50%; }
+        .card-icon-3 { background-color: #ddd; border-radius: 50%; }
+
+        /* =====================================================
+           📞 БЛОК КОНТАКТОВ
+           ===================================================== */
         .contacts {
             background: var(--card-bg);
             padding: 60px 20px;
@@ -211,6 +280,7 @@
             text-align: center;
             animation: fadeIn 1.4s;
         }
+
         .contact-buttons {
             display: flex;
             justify-content: center;
@@ -218,6 +288,7 @@
             flex-wrap: wrap;
             margin-top: 30px;
         }
+
         .contact-btn {
             display: inline-flex;
             align-items: center;
@@ -231,53 +302,70 @@
             transition: transform 0.2s cubic-bezier(0.28, 0.84, 0.42, 1), background 0.3s;
             cursor: pointer;
         }
+
         .contact-btn:hover {
             background: var(--hover);
             transform: scale(1.1);
         }
+
         .contact-btn:active {
             transform: scale(0.95);
         }
+
+        /* =====================================================
+           🦶 ФУТЕР (ЧИСТЫЙ ЦВЕТ, БЕЗ КАРТИНКИ)
+           ===================================================== */
         footer {
             text-align: center;
             padding: 40px 0;
-            background: var(--footer-bg);
+            background: var(--footer-bg);      /* ← чистый цвет */
             color: var(--footer-text);
             margin-top: 60px;
+            /* убираем фоновую картинку, если она была */
+            background-image: none;
         }
-        .fade-in {
-            animation: fadeIn 1.5s;
-        }
+
+        /* =====================================================
+           ✨ БАЗОВЫЕ АНИМАЦИИ ПОЯВЛЕНИЯ
+           ===================================================== */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Поочередная анимация для всех секций */
+        /* поочередное появление секций */
         .hero { animation: fadeIn 0.8s; }
         .section-colored:nth-of-type(1) { animation: fadeIn 0.8s; animation-delay: 0.2s; animation-fill-mode: both; }
         .section-colored:nth-of-type(2) { animation: fadeIn 0.8s; animation-delay: 0.4s; animation-fill-mode: both; }
         .contacts { animation: fadeIn 0.8s; animation-delay: 0.6s; animation-fill-mode: both; }
 
+        /* =====================================================
+           📱 АДАПТАЦИЯ ДЛЯ МОБИЛЬНЫХ
+           ===================================================== */
         @media (max-width: 768px) {
             .container {
-                padding: 0 20px;
+                padding: 0 20px;  /* на мобильных отступы меньше */
             }
+
             header {
                 flex-direction: column;
                 gap: 15px;
             }
+
             .hero h1 {
                 font-size: 1.8rem;
             }
+
             .hero-buttons {
                 flex-direction: column;
                 gap: 10px;
             }
+
             .contact-buttons {
                 flex-direction: column;
                 align-items: center;
             }
+
             .contact-btn {
                 width: 100%;
                 justify-content: center;
@@ -287,6 +375,7 @@
 </head>
 <body>
     <div class="container">
+        <!-- ===== ШАПКА ===== -->
         <header>
             <div class="logo">
                 <img src="logo.png" alt="Кинеограф">
@@ -298,6 +387,7 @@
             </div>
         </header>
 
+        <!-- ===== ГЛАВНЫЙ ЭКРАН ===== -->
         <section class="hero">
             <h1>Кинеограф - студия анимации для детей в Новороссийске</h1>
             <p>Учим создавать анимации с 8 лет с первого занятия</p>
@@ -307,6 +397,7 @@
             </div>
         </section>
 
+        <!-- ===== БЛОК 1: КАК ПРОХОДЯТ ЗАНЯТИЯ ===== -->
         <div class="section-colored">
             <div class="container">
                 <h2 class="section-title">Как проходят занятия</h2>
@@ -330,7 +421,8 @@
             </div>
         </div>
 
-        <div class="section-colored" style="background: var(--section-bg-2);">
+        <!-- ===== БЛОК 2: ПОЧЕМУ МЫ ===== -->
+        <div class="section-colored">
             <div class="container">
                 <h2 class="section-title">Почему мы</h2>
                 <div class="cards">
@@ -350,6 +442,7 @@
             </div>
         </div>
 
+        <!-- ===== БЛОК КОНТАКТОВ ===== -->
         <section class="contacts">
             <h2 class="section-title">Свяжитесь с нами</h2>
             <div class="contact-buttons">
@@ -359,6 +452,7 @@
             </div>
         </section>
 
+        <!-- ===== ФУТЕР ===== -->
         <footer>
             © 2026 Кинеограф. Все права защищены.
         </footer>
