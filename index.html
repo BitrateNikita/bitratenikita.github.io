@@ -5,17 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Кинеограф — студия анимации для детей</title>
     <style>
+        /* =====================================================
+           🌈 ЦВЕТОВАЯ СХЕМА (МЕНЯЙ ЗДЕСЬ — И ВСЁ ПОМЕНЯЕТСЯ)
+           ===================================================== */
         :root {
-            --bg: #F9F6F0;
-            --primary: #2C5F5F;
-            --text: #2E2E2E;
-            --text-light: #ffffff;
-            --card-bg: #ffffff;
-            --hover: #1E4A4A;
-            --section-bg-1: #f5efe7;
-            --section-bg-2: #f0f0f0;
-            --footer-bg: #2C5F5F;
-            --footer-text: #ffffff;
+            --bg: #F9F6F0;              /* общий фон страницы */
+            --primary: #2C5F5F;          /* цвет кнопок и акцентов */
+            --text: #2E2E2E;             /* цвет обычного текста */
+            --text-light: #ffffff;        /* цвет текста на тёмном фоне */
+            --card-bg: #ffffff;           /* фон карточек */
+            --hover: #1E4A4A;             /* цвет кнопок при наведении */
+            --section-bg-1: #f5efe7;       /* фон для первого блока */
+            --section-bg-2: #f0f0f0;       /* фон для второго блока */
+            --footer-bg: #2C5F5F;          /* фон футера */
+            --footer-text: #ffffff;         /* цвет текста в футере */
         }
 
         * {
@@ -31,34 +34,46 @@
             line-height: 1.6;
         }
 
+        /* ===== КОНТЕЙНЕР ===== */
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 100px;
+            padding: 0 100px;  /* ← отступы по бокам 100px */
         }
 
+        /* ===== ШАПКА (ЛИПКАЯ) ===== */
         header {
             position: sticky;
             top: 0;
             z-index: 1000;
             background: var(--bg);
             display: flex;
-            justify-content: space-between;
             align-items: center;
             padding: 20px 0;
             flex-wrap: wrap;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
 
+        /* ===== ЛОГОТИП (ТЕПЕРЬ ЭТО КНОПКА) ===== */
+        .logo {
+            margin-right: auto;  /* прижимает логотип влево */
+        }
+        .logo a {
+            display: block;
+            text-decoration: none;
+        }
         .logo img {
             height: 60px;
             width: auto;
+            display: block;
         }
 
+        /* ===== КНОПКИ В ШАПКЕ ===== */
         .nav-links {
             display: flex;
             gap: 30px;
             align-items: center;
+            margin-left: 150px;  /* ← сдвиг влево на 150px (по твоей просьбе) */
         }
 
         .nav-links a {
@@ -72,6 +87,7 @@
             color: var(--primary);
         }
 
+        /* главная кнопка "Портфолио для студий" */
         .nav-btn {
             background: var(--primary);
             color: var(--text-light) !important;
@@ -88,6 +104,7 @@
             transform: scale(1.05);
         }
 
+        /* ===== ГЛАВНЫЙ ЭКРАН ===== */
         .hero {
             text-align: center;
             padding: 80px 20px;
@@ -116,6 +133,7 @@
             justify-content: center;
         }
 
+        /* ===== ОСНОВНЫЕ КНОПКИ ===== */
         .btn {
             padding: 12px 30px;
             border: none;
@@ -151,12 +169,14 @@
             color: var(--text-light);
         }
 
+        /* ===== ЗАГОЛОВКИ СЕКЦИЙ ===== */
         .section-title {
             text-align: center;
             font-size: 2.2rem;
             margin-bottom: 40px;
         }
 
+        /* ===== ЦВЕТНЫЕ СЕКЦИИ ===== */
         .section-colored {
             padding: 60px 0;
             margin: 40px 0;
@@ -165,6 +185,7 @@
         .section-colored:nth-of-type(1) { background: var(--section-bg-1); }
         .section-colored:nth-of-type(2) { background: var(--section-bg-2); }
 
+        /* ===== КАРТОЧКИ ===== */
         .cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -186,6 +207,7 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
 
+        /* ===== БЛОК КОНТАКТОВ ===== */
         .contacts {
             background: var(--card-bg);
             padding: 60px 20px;
@@ -220,14 +242,35 @@
             transform: scale(1.05);
         }
 
+        /* ===== ФУТЕР ===== */
         footer {
-            text-align: center;
-            padding: 40px 0;
+            text-align: left;              /* выравнивание текста по левому краю */
+            padding: 40px 20px 40px 150px; /* отступ слева 150px для всего футера */
             background: var(--footer-bg);
             color: var(--footer-text);
             margin-top: 60px;
         }
 
+        /* логотип в футере */
+        .footer-logo {
+            margin-bottom: 15px;
+        }
+        .footer-logo a {
+            display: inline-block;
+        }
+        .footer-logo img {
+            height: 50px;
+            width: auto;
+            display: block;
+        }
+
+        /* копирайт в футере */
+        .footer-copyright {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* ===== АДАПТАЦИЯ ДЛЯ МОБИЛЬНЫХ ===== */
         @media (max-width: 768px) {
             .container {
                 padding: 0 20px;
@@ -236,6 +279,12 @@
             header {
                 flex-direction: column;
                 gap: 15px;
+            }
+
+            .nav-links {
+                margin-left: 0;  /* на мобильных убираем сдвиг */
+                flex-wrap: wrap;
+                justify-content: center;
             }
 
             .hero h1 {
@@ -256,15 +305,26 @@
                 width: 100%;
                 justify-content: center;
             }
+
+            footer {
+                padding: 40px 20px;  /* на мобильных убираем большой отступ */
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- ===== ШАПКА ===== -->
         <header>
+            <!-- Логотип слева, ведёт на главную -->
             <div class="logo">
-                <img src="logo.png" alt="Кинеограф">
+                <a href="index.html">
+                    <img src="logo.png" alt="Кинеограф">
+                </a>
             </div>
+
+            <!-- Кнопки справа -->
             <div class="nav-links">
                 <a href="#">О школе</a>
                 <a href="#">Контакты</a>
@@ -272,15 +332,19 @@
             </div>
         </header>
 
+        <!-- ===== ГЛАВНЫЙ ЭКРАН ===== -->
         <section class="hero">
             <h1>Кинеограф - студия анимации для детей в Новороссийске</h1>
             <p>Учим создавать анимации с 8 лет с первого занятия</p>
             <div class="hero-buttons">
+                <!-- КНОПКА ЗАПИСАТЬСЯ - сюда вставишь ссылку позже -->
                 <a href="#" class="btn btn-primary">Записаться</a>
+                <!-- КНОПКА УЗНАТЬ БОЛЬШЕ - сюда вставишь ссылку позже -->
                 <a href="#" class="btn btn-outline">Узнать больше</a>
             </div>
         </section>
 
+        <!-- ===== БЛОК 1: КАК ПРОХОДЯТ ЗАНЯТИЯ ===== -->
         <div class="section-colored">
             <div class="container">
                 <h2 class="section-title">Как проходят занятия</h2>
@@ -301,6 +365,7 @@
             </div>
         </div>
 
+        <!-- ===== БЛОК 2: ПОЧЕМУ МЫ ===== -->
         <div class="section-colored">
             <div class="container">
                 <h2 class="section-title">Почему мы</h2>
@@ -321,17 +386,31 @@
             </div>
         </div>
 
+        <!-- ===== БЛОК КОНТАКТОВ ===== -->
         <section class="contacts">
             <h2 class="section-title">Свяжитесь с нами</h2>
             <div class="contact-buttons">
+                <!-- КНОПКА TELEGRAM - ссылка уже работает -->
                 <a href="https://t.me/BITRATEmotion" class="contact-btn" target="_blank">Telegram</a>
+                <!-- КНОПКА EMAIL - ссылка уже работает -->
                 <a href="mailto:bitrate.motiondesign@gmail.com" class="contact-btn" target="_blank">Email</a>
+                <!-- КНОПКА ARTSTATION - ссылка уже работает -->
                 <a href="https://artstation.com/nikitapetrov" class="contact-btn" target="_blank">ArtStation</a>
             </div>
         </section>
 
+        <!-- ===== ФУТЕР ===== -->
         <footer>
-            © 2026 Кинеограф. Все права защищены.
+            <!-- Логотип в футере, ведёт на главную -->
+            <div class="footer-logo">
+                <a href="index.html">
+                    <img src="logo.png" alt="Кинеограф">
+                </a>
+            </div>
+            <!-- Копирайт -->
+            <div class="footer-copyright">
+                © 2026 Кинеограф. Все права защищены.
+            </div>
         </footer>
     </div>
 </body>
