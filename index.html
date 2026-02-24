@@ -14,6 +14,8 @@
             --hover: #1E4A4A;
             --section-bg-1: #f5efe7;
             --section-bg-2: #f0f0f0;
+            --footer-bg: #2C5F5F; /* ← ЦВЕТ ФУТЕРА, МЕНЯЙ ЗДЕСЬ */
+            --footer-text: #ffffff;
         }
         * {
             margin: 0;
@@ -32,7 +34,7 @@
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 100px; /* ← ОТСТУПЫ 100px РАБОТАЮТ */
+            padding: 0 100px;
         }
         /* ===== ЛИПКАЯ ШАПКА ===== */
         header {
@@ -40,7 +42,7 @@
             top: 0;
             z-index: 1000;
             background: var(--bg);
-            background-image: url('doodle-bg.png'); /* ← ТОТ ЖЕ ФОН */
+            background-image: url('doodle-bg.png');
             background-repeat: repeat;
             background-size: auto;
             display: flex;
@@ -50,29 +52,25 @@
             flex-wrap: wrap;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 40px;
-        }
         .logo img {
             height: 60px;
             width: auto;
         }
-        .header-left nav {
+        .nav-links {
             display: flex;
             gap: 30px;
+            align-items: center;
         }
-        .header-left nav a {
+        .nav-links a {
             text-decoration: none;
             color: var(--text);
             font-weight: 500;
             transition: color 0.3s;
         }
-        .header-left nav a:hover {
+        .nav-links a:hover {
             color: var(--primary);
         }
-        .header-right .nav-btn {
+        .nav-btn {
             background: var(--primary);
             color: var(--text-light) !important;
             padding: 8px 20px;
@@ -81,13 +79,14 @@
             font-weight: 500;
             transition: transform 0.2s cubic-bezier(0.28, 0.84, 0.42, 1), background 0.3s;
             display: inline-block;
-            cursor: pointer; /* ← ЯВНО УКАЗЫВАЕМ, ЧТО ЭТО КНОПКА */
+            cursor: pointer;
+            margin-left: 20px;
         }
-        .header-right .nav-btn:hover {
+        .nav-btn:hover {
             background: var(--hover);
             transform: scale(1.1);
         }
-        .header-right .nav-btn:active {
+        .nav-btn:active {
             transform: scale(0.95);
         }
         .hero {
@@ -174,13 +173,13 @@
             text-align: center;
             animation: bounceFadeIn 0.8s cubic-bezier(0.28, 0.84, 0.42, 1) forwards;
             opacity: 0;
-            cursor: pointer; /* ← ТЕПЕРЬ ЭТО КНОПКА */
+            cursor: pointer;
         }
         .card:hover {
-            transform: scale(1.05); /* ← BOUPCE ПРИ НАВЕДЕНИИ */
+            transform: scale(1.05);
         }
         .card:active {
-            transform: scale(0.95); /* ← ЭФФЕКТ ПРИ НАЖАТИИ */
+            transform: scale(0.95);
         }
         .cards .card:nth-child(1) { animation-delay: 0.2s; }
         .cards .card:nth-child(2) { animation-delay: 0.4s; }
@@ -242,9 +241,9 @@
         footer {
             text-align: center;
             padding: 40px 0;
-            border-top: 1px solid rgba(0,0,0,0.1);
+            background: var(--footer-bg);
+            color: var(--footer-text);
             margin-top: 60px;
-            color: #666;
         }
         .fade-in {
             animation: fadeIn 1.5s;
@@ -262,13 +261,9 @@
 
         @media (max-width: 768px) {
             .container {
-                padding: 0 20px; /* на мобильных отступы уменьшаем */
+                padding: 0 20px;
             }
             header {
-                flex-direction: column;
-                gap: 15px;
-            }
-            .header-left {
                 flex-direction: column;
                 gap: 15px;
             }
@@ -293,16 +288,12 @@
 <body>
     <div class="container">
         <header>
-            <div class="header-left">
-                <div class="logo">
-                    <img src="logo.png" alt="Кинеограф">
-                </div>
-                <nav>
-                    <a href="#">О школе</a>
-                    <a href="#">Контакты</a>
-                </nav>
+            <div class="logo">
+                <img src="logo.png" alt="Кинеограф">
             </div>
-            <div class="header-right">
+            <div class="nav-links">
+                <a href="#">О школе</a>
+                <a href="#">Контакты</a>
                 <a href="portfolio.html" class="nav-btn">Портфолио для студий</a>
             </div>
         </header>
