@@ -12,6 +12,8 @@
             --text-light: #ffffff;
             --card-bg: #252b3d;
             --hover: #4d7ca3;
+            --footer-bg: #1a1f2e;
+            --footer-text: #e0e0e0;
         }
         * {
             margin: 0;
@@ -42,30 +44,26 @@
             flex-wrap: wrap;
             box-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 40px;
-        }
         .logo img {
             height: 60px;
             width: auto;
             filter: brightness(0.9) contrast(1.2);
         }
-        .header-left nav {
+        .nav-links {
             display: flex;
             gap: 30px;
+            align-items: center;
         }
-        .header-left nav a {
+        .nav-links a {
             text-decoration: none;
             color: var(--text);
             font-weight: 500;
             transition: color 0.3s;
         }
-        .header-left nav a:hover {
+        .nav-links a:hover {
             color: var(--primary);
         }
-        .header-right .nav-btn {
+        .nav-btn {
             background: var(--primary);
             color: var(--text-light) !important;
             padding: 8px 20px;
@@ -74,12 +72,13 @@
             font-weight: 500;
             transition: transform 0.2s cubic-bezier(0.28, 0.84, 0.42, 1), background 0.3s;
             display: inline-block;
+            margin-left: 20px;
         }
-        .header-right .nav-btn:hover {
+        .nav-btn:hover {
             background: var(--hover);
             transform: scale(1.1);
         }
-        .header-right .nav-btn:active {
+        .nav-btn:active {
             transform: scale(0.95);
         }
         .hero {
@@ -125,7 +124,7 @@
         .video-container {
             position: relative;
             width: 100%;
-            padding-bottom: 56.25%; /* 16:9 */
+            padding-bottom: 56.25%;
             background: #000;
         }
         .video-container iframe {
@@ -178,9 +177,10 @@
         footer {
             text-align: center;
             padding: 40px 0;
-            border-top: 1px solid #333;
+            background: var(--footer-bg);
+            color: var(--footer-text);
             margin-top: 60px;
-            color: #999;
+            border-top: 1px solid #333;
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
@@ -201,10 +201,6 @@
                 flex-direction: column;
                 gap: 15px;
             }
-            .header-left {
-                flex-direction: column;
-                gap: 15px;
-            }
             .hero h1 {
                 font-size: 2rem;
             }
@@ -217,15 +213,12 @@
 <body>
     <div class="container">
         <header>
-            <div class="header-left">
-                <div class="logo">
-                    <img src="logo.png" alt="Кинеограф">
-                </div>
-                <nav>
-                    <a href="#">Контакты</a>
-                </nav>
+            <div class="logo">
+                <img src="logo.png" alt="Кинеограф">
             </div>
-            <div class="header-right">
+            <div class="nav-links">
+                <a href="index.html">О школе</a>
+                <a href="#">Контакты</a>
                 <a href="index.html" class="nav-btn">Школа анимации</a>
             </div>
         </header>
@@ -239,7 +232,6 @@
             <div class="portfolio-grid">
                 <div class="portfolio-item">
                     <div class="video-container">
-                        <!-- ЗДЕСЬ ТЫ ВСТАВИШЬ СВОИ ССЫЛКИ -->
                         <iframe src="https://player.vimeo.com/video/824607814?autoplay=1&loop=1&background=1&muted=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
                     </div>
                     <div class="portfolio-info">
