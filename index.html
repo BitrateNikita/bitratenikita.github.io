@@ -4,23 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Кинеограф — студия анимации для детей</title>
+    <!-- =====================================================
+         🌈 ЦВЕТОВАЯ СХЕМА (меняй здесь — всё поменяется)
+         ===================================================== -->
     <style>
-        /* =====================================================
-           🌈 ЦВЕТОВАЯ СХЕМА (МЕНЯЙ ЗДЕСЬ — И ВСЁ ПОМЕНЯЕТСЯ)
-           ===================================================== */
         :root {
             --bg: #F9F6F0;              /* общий фон страницы */
-            --primary: #2C5F5F;          /* цвет кнопок и акцентов */
+            --primary: #2C5F5F;          /* главный цвет (кнопки, акценты) */
             --text: #2E2E2E;             /* цвет обычного текста */
-            --text-light: #ffffff;        /* цвет текста на тёмном фоне */
-            --card-bg: #ffffff;           /* фон карточек */
-            --hover: #1E4A4A;             /* цвет кнопок при наведении */
-            --section-bg-1: #f5efe7;       /* фон для первого блока */
-            --section-bg-2: #f0f0f0;       /* фон для второго блока */
+            --text-light: #ffffff;        /* текст на тёмном фоне */
+            --card-bg: rgba(255,255,255,0.6); /* фон карточек (полупрозрачный) */
+            --hover: #1E4A4A;             /* цвет при наведении (темнее primary) */
+            --section-bg-1: #f5efe7;       /* фон секции 1 */
+            --section-bg-2: #f0f0f0;       /* фон секции 2 */
             --footer-bg: #2C5F5F;          /* фон футера */
-            --footer-text: #ffffff;         /* цвет текста в футере */
+            --footer-text: #ffffff;         /* текст футера */
+            
+            /* стеклянные переменные */
+            --glass-bg: rgba(255,255,255,0.25);
+            --glass-border: rgba(255,255,255,0.3);
+            --glass-shadow: 0 8px 32px rgba(0,0,0,0.1);
         }
 
+        /* ===== СБРОС СТИЛЕЙ ===== */
         * {
             margin: 0;
             padding: 0;
@@ -38,79 +44,121 @@
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 100px;  /* ← отступы по бокам 100px */
+            padding: 0 100px;
         }
 
-        /* ===== ШАПКА (ЛИПКАЯ) ===== */
+        /* =====================================================
+           🧷 СТЕКЛЯННЫЙ ХЕДЕР
+           ===================================================== */
         header {
             position: sticky;
-            top: 0;
+            top: 20px;
             z-index: 1000;
-            background: var(--bg);
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 100px;
+        }
+
+        .header-glass {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
-            flex-wrap: wrap;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 15px 40px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 50px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            transition: 0.3s;
         }
 
-        /* ===== ЛОГОТИП (ТЕПЕРЬ ЭТО КНОПКА) ===== */
-        .logo {
-            margin-right: 150px;  /* прижимает логотип влево */
+        .header-glass:hover {
+            background: rgba(255,255,255,0.35);
         }
+
+        /* ===== ЛОГОТИП (ВСЕГДА ВЕДЁТ НА ГЛАВНУЮ) ===== */
         .logo a {
-            display: block;
             text-decoration: none;
-        }
-        .logo img {
-            height: 60px;
-            width: auto;
-            display: block;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
+            letter-spacing: 1px;
         }
 
-        /* ===== КНОПКИ В ШАПКЕ ===== */
+        /* ===== НАВИГАЦИЯ ===== */
         .nav-links {
             display: flex;
-            gap: 30px;
+            gap: 40px;
             align-items: center;
-            margin-left: auto;  /* ← сдвиг влево на 150px (по твоей просьбе) */
         }
 
         .nav-links a {
             text-decoration: none;
             color: var(--text);
             font-weight: 500;
-            transition: color 0.3s;
+            position: relative;
+            transition: 0.3s;
+            font-size: 1.1rem;
+        }
+
+        /* подчёркивание при наведении */
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: 0.3s;
         }
 
         .nav-links a:hover {
             color: var(--primary);
         }
 
-        /* главная кнопка "Портфолио для студий" */
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* ===== КНОПКА-ПЕРЕКЛЮЧАТЕЛЬ (ПОСТОЯННАЯ ШИРИНА) ===== */
         .nav-btn {
             background: var(--primary);
             color: var(--text-light) !important;
-            padding: 8px 20px;
+            padding: 10px 30px !important;
             border-radius: 30px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: 0.3s;
-            margin-left: 300px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(44,95,95,0.3);
+            transition: 0.3s !important;
+            min-width: 200px;           /* ← постоянная ширина */
+            text-align: center;
+            display: inline-block;
         }
 
         .nav-btn:hover {
             background: var(--hover);
             transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(44,95,95,0.4);
         }
 
-        /* ===== ГЛАВНЫЙ ЭКРАН ===== */
+        /* убираем подчёркивание у кнопки */
+        .nav-btn::after {
+            display: none !important;
+        }
+
+        /* =====================================================
+           🎬 ГЛАВНЫЙ ЭКРАН
+           ===================================================== */
         .hero {
             text-align: center;
             padding: 80px 20px;
             background: linear-gradient(135deg, var(--bg), #e0d9cf);
             border-radius: 0 0 50px 50px;
             margin-bottom: 60px;
+            margin-top: 20px;
         }
 
         .hero h1 {
@@ -133,7 +181,9 @@
             justify-content: center;
         }
 
-        /* ===== ОСНОВНЫЕ КНОПКИ ===== */
+        /* =====================================================
+           🔘 БАЗОВЫЕ КНОПКИ (с затемнением при клике)
+           ===================================================== */
         .btn {
             padding: 12px 30px;
             border: none;
@@ -147,6 +197,12 @@
 
         .btn:hover {
             transform: scale(1.05);
+        }
+
+        /* затемнение при клике (active) */
+        .btn:active {
+            opacity: 0.7;                /* ← эффект затемнения */
+            transform: scale(0.98);
         }
 
         .btn-primary {
@@ -169,14 +225,15 @@
             color: var(--text-light);
         }
 
-        /* ===== ЗАГОЛОВКИ СЕКЦИЙ ===== */
+        /* =====================================================
+           🧱 ЗАГОЛОВКИ СЕКЦИЙ
+           ===================================================== */
         .section-title {
             text-align: center;
             font-size: 2.2rem;
             margin-bottom: 40px;
         }
 
-        /* ===== ЦВЕТНЫЕ СЕКЦИИ ===== */
         .section-colored {
             padding: 60px 0;
             margin: 40px 0;
@@ -185,7 +242,9 @@
         .section-colored:nth-of-type(1) { background: var(--section-bg-1); }
         .section-colored:nth-of-type(2) { background: var(--section-bg-2); }
 
-        /* ===== КАРТОЧКИ ===== */
+        /* =====================================================
+           🃏 СТЕКЛЯННЫЕ КАРТОЧКИ
+           ===================================================== */
         .cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -195,97 +254,358 @@
 
         .card {
             background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             padding: 30px 20px;
             border-radius: 20px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             transition: 0.3s;
             text-align: center;
+            border: 1px solid rgba(255,255,255,0.3);
         }
 
         .card:hover {
-            transform: scale(1.05);
+            transform: translateY(-10px);
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            background: rgba(255,255,255,0.8);
         }
 
-        /* ===== БЛОК КОНТАКТОВ ===== */
-        .contacts {
+        /* иконка в верхней части карточки */
+        .card-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            /* временные заглушки — потом заменишь на свои иконки */
+        }
+
+        /* примеры иконок-заглушек (потом загрузишь свои) */
+        .card-icon-1 { background-image: url('https://via.placeholder.com/80?text=🎨'); }
+        .card-icon-2 { background-image: url('https://via.placeholder.com/80?text=✏️'); }
+        .card-icon-3 { background-image: url('https://via.placeholder.com/80?text=🎬'); }
+        .card-icon-4 { background-image: url('https://via.placeholder.com/80?text=⚙️'); }
+        .card-icon-5 { background-image: url('https://via.placeholder.com/80?text=🎭'); }
+        .card-icon-6 { background-image: url('https://via.placeholder.com/80?text=📽️'); }
+
+        .card h3 {
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .card p {
+            color: var(--text);
+            opacity: 0.9;
+        }
+
+        /* =====================================================
+           🗺️ КАРТА, АДРЕС, КОНТАКТЫ
+           ===================================================== */
+        .contacts-section {
             background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 60px 20px;
+            margin: 60px 0;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .contacts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .contact-info {
+            padding-right: 40px;
+        }
+
+        .contact-item {
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: var(--text-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .contact-text h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .contact-text p {
+            color: var(--text);
+            opacity: 0.8;
+        }
+
+        /* карта (яндекс.карты iframe) */
+        .map-container {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            height: 300px;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* =====================================================
+           🎯 ПРИЗЫВ К ДЕЙСТВИЮ
+           ===================================================== */
+        .cta-block {
+            background: var(--primary);
+            color: var(--text-light);
+            text-align: center;
             padding: 60px 20px;
             border-radius: 30px;
             margin: 60px 0;
-            text-align: center;
         }
 
-        .contact-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-top: 30px;
+        .cta-block h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
         }
 
-        .contact-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: var(--primary);
-            color: var(--text-light);
-            padding: 15px 30px;
+        .cta-block p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .cta-btn {
+            background: white;
+            color: var(--primary);
+            border: none;
+            padding: 15px 50px;
+            font-size: 1.3rem;
+            font-weight: 600;
             border-radius: 50px;
-            text-decoration: none;
-            font-size: 1.1rem;
+            cursor: pointer;
             transition: 0.3s;
         }
 
-        .contact-btn:hover {
-            background: var(--hover);
+        .cta-btn:hover {
             transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
 
-        /* ===== ФУТЕР ===== */
+        .cta-btn:active {
+            opacity: 0.7;
+        }
+
+        /* =====================================================
+           🦶 ФУТЕР
+           ===================================================== */
         footer {
-            text-align: left;              /* выравнивание текста по левому краю */
-            padding: 40px 20px 40px 150px; /* отступ слева 150px для всего футера */
+            text-align: center;
+            padding: 40px 0;
             background: var(--footer-bg);
             color: var(--footer-text);
             margin-top: 60px;
         }
 
-        /* логотип в футере */
         .footer-logo {
             margin-bottom: 15px;
-            margin-right: 150px;
         }
-        .footer-logo a {
-            display: inline-block;
-        }
+
         .footer-logo img {
             height: 50px;
             width: auto;
-            display: block;
         }
 
-        /* копирайт в футере */
         .footer-copyright {
             font-size: 0.9rem;
             opacity: 0.9;
         }
 
-        /* ===== АДАПТАЦИЯ ДЛЯ МОБИЛЬНЫХ ===== */
+        /* =====================================================
+           📱 МОДАЛЬНОЕ ОКНО (ПОПАП)
+           ===================================================== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 30px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            position: relative;
+            animation: slideUp 0.3s;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-header {
+            padding: 30px 30px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            color: var(--text);
+            font-size: 1.8rem;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #999;
+            transition: 0.3s;
+        }
+
+        .close-btn:hover {
+            color: #ff4444;
+        }
+
+        .modal-body {
+            padding: 10px 30px 30px;
+        }
+
+        /* ===== ФОРМА ОБРАТНОЙ СВЯЗИ ===== */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(44,95,95,0.1);
+        }
+
+        .form-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: var(--hover);
+            transform: scale(1.02);
+        }
+
+        .submit-btn:active {
+            opacity: 0.7;
+        }
+
+        /* сообщение об успешной отправке */
+        .success-message {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .success-message h3 {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .success-message p {
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .success-message button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+        }
+
+        /* =====================================================
+           📱 АДАПТАЦИЯ ПОД МОБИЛЬНЫЕ
+           ===================================================== */
         @media (max-width: 768px) {
             .container {
                 padding: 0 20px;
             }
 
             header {
+                padding: 0 20px;
+            }
+
+            .header-glass {
                 flex-direction: column;
                 gap: 15px;
+                padding: 15px 20px;
             }
 
             .nav-links {
-                margin-left: 0;  /* на мобильных убираем сдвиг */
                 flex-wrap: wrap;
                 justify-content: center;
+                gap: 20px;
+            }
+
+            .nav-btn {
+                min-width: 180px;
             }
 
             .hero h1 {
@@ -297,68 +617,77 @@
                 gap: 10px;
             }
 
-            .contact-buttons {
-                flex-direction: column;
-                align-items: center;
+            .contacts-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
             }
 
-            .contact-btn {
-                width: 100%;
-                justify-content: center;
+            .contact-info {
+                padding-right: 0;
             }
 
-            footer {
-                padding: 40px 20px;  /* на мобильных убираем большой отступ */
-                text-align: center;
+            .cta-block h2 {
+                font-size: 2rem;
+            }
+
+            .cta-btn {
+                padding: 12px 30px;
+                font-size: 1.1rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- ===== ШАПКА ===== -->
-        <header>
-            <!-- Логотип слева, ведёт на главную -->
+    <!-- =====================================================
+         🧷 ХЕДЕР
+         ===================================================== -->
+    <header>
+        <div class="header-glass">
+            <!-- логотип — всегда на главную -->
             <div class="logo">
-                <a href="index.html">
-                    <img src="logo.png" alt="Кинеограф">
-                </a>
+                <a href="index.html">КИНЕОГРАФ</a>
             </div>
-
-            <!-- Кнопки справа -->
             <div class="nav-links">
                 <a href="#">О школе</a>
-                <a href="#">Контакты</a>
-                <a href="portfolio.html" class="nav-btn">Портфолио для студий</a>
+                <a href="#contacts">Контакты</a>
+                <!-- кнопка-переключатель (постоянная ширина) -->
+                <a href="portfolio.html" class="nav-btn" id="toggleBtn">Портфолио для студий</a>
             </div>
-        </header>
+        </div>
+    </header>
 
-        <!-- ===== ГЛАВНЫЙ ЭКРАН ===== -->
+    <!-- =====================================================
+         🎬 ГЛАВНЫЙ ЭКРАН
+         ===================================================== -->
+    <div class="container">
         <section class="hero">
             <h1>Кинеограф - студия анимации для детей в Новороссийске</h1>
             <p>Учим создавать анимации с 8 лет с первого занятия</p>
             <div class="hero-buttons">
-                <!-- КНОПКА ЗАПИСАТЬСЯ - сюда вставишь ссылку позже -->
-                <a href="#" class="btn btn-primary">Записаться</a>
-                <!-- КНОПКА УЗНАТЬ БОЛЬШЕ - сюда вставишь ссылку позже -->
+                <a href="#" class="btn btn-primary" onclick="openModal(); return false;">Записаться</a>
                 <a href="#" class="btn btn-outline">Узнать больше</a>
             </div>
         </section>
 
-        <!-- ===== БЛОК 1: КАК ПРОХОДЯТ ЗАНЯТИЯ ===== -->
+        <!-- =====================================================
+             🃏 БЛОК 1: КАК ПРОХОДЯТ ЗАНЯТИЯ
+             ===================================================== -->
         <div class="section-colored">
             <div class="container">
                 <h2 class="section-title">Как проходят занятия</h2>
                 <div class="cards">
                     <div class="card">
+                        <div class="card-icon card-icon-1"></div>
                         <h3>Основы мультипликации</h3>
                         <p>12 принципов анимации, раскадровка, история</p>
                     </div>
                     <div class="card">
+                        <div class="card-icon card-icon-2"></div>
                         <h3>Создание персонажей</h3>
                         <p>Рисуем, лепим, придумываем характеры</p>
                     </div>
                     <div class="card">
+                        <div class="card-icon card-icon-3"></div>
                         <h3>Съёмка и монтаж</h3>
                         <p>Снимаем покадрово, монтируем, озвучиваем</p>
                     </div>
@@ -366,20 +695,25 @@
             </div>
         </div>
 
-        <!-- ===== БЛОК 2: ПОЧЕМУ МЫ ===== -->
+        <!-- =====================================================
+             🃏 БЛОК 2: ПОЧЕМУ МЫ
+             ===================================================== -->
         <div class="section-colored">
             <div class="container">
                 <h2 class="section-title">Почему мы</h2>
                 <div class="cards">
                     <div class="card">
+                        <div class="card-icon card-icon-4"></div>
                         <h3>Опыт в индустрии</h3>
                         <p>Senior Spine-аниматор с 8-летним стажем (MY.GAMES, Deus Craft)</p>
                     </div>
                     <div class="card">
+                        <div class="card-icon card-icon-5"></div>
                         <h3>Настоящая студия</h3>
                         <p>Профессиональное оборудование, свет, камеры</p>
                     </div>
                     <div class="card">
+                        <div class="card-icon card-icon-6"></div>
                         <h3>Маленькие группы</h3>
                         <p>До 6 человек, индивидуальный подход</p>
                     </div>
@@ -387,36 +721,166 @@
             </div>
         </div>
 
-        <!-- ===== БЛОК КОНТАКТОВ ===== -->
-        <section class="contacts">
-            <h2 class="section-title">Свяжитесь с нами</h2>
-            <div class="contact-buttons">
-                <!-- КНОПКА TELEGRAM - ссылка уже работает -->
-                <a href="https://t.me/BITRATEmotion" class="contact-btn" target="_blank">Telegram</a>
-                <!-- КНОПКА EMAIL - ссылка уже работает -->
-                <a href="mailto:bitrate.motiondesign@gmail.com" class="contact-btn" target="_blank">Email</a>
-                <!-- КНОПКА ARTSTATION - ссылка уже работает -->
-                <a href="https://artstation.com/nikitapetrov" class="contact-btn" target="_blank">ArtStation</a>
+        <!-- =====================================================
+             🗺️ КАРТА, АДРЕС, КОНТАКТЫ
+             ===================================================== -->
+        <section id="contacts" class="contacts-section">
+            <h2 class="section-title">Как нас найти</h2>
+            <div class="contacts-grid">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div class="contact-text">
+                            <h4>Адрес студии</h4>
+                            <p>г. Новороссийск, ул. Советов, 42<br>Творческое пространство "Кинеограф"</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div class="contact-text">
+                            <h4>Телефон</h4>
+                            <p>+7 (918) 646-88-22</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">✉️</div>
+                        <div class="contact-text">
+                            <h4>Email</h4>
+                            <p>bitrate.motiondesign@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📱</div>
+                        <div class="contact-text">
+                            <h4>Telegram</h4>
+                            <p>@BITRATEmotion</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="map-container">
+                    <!-- здесь будет карта (яндекс или гугл) -->
+                    <iframe src="https://yandex.ru/map-widget/v1/-/CCUzZJkqLB" allowfullscreen></iframe>
+                </div>
             </div>
         </section>
 
-        <!-- ===== ФУТЕР ===== -->
+        <!-- =====================================================
+             🎯 ПРИЗЫВ К ДЕЙСТВИЮ
+             ===================================================== -->
+        <div class="cta-block">
+            <h2>Успей записаться!</h2>
+            <p>Места в группах ограничены. Первое занятие — бесплатно</p>
+            <button class="cta-btn" onclick="openModal()">Записаться</button>
+        </div>
+
+        <!-- =====================================================
+             🦶 ФУТЕР
+             ===================================================== -->
         <footer>
-            <!-- Логотип в футере, ведёт на главную -->
             <div class="footer-logo">
                 <a href="index.html">
-                    <img src="logo.png" alt="Кинеограф">
+                    <img src="logo.png" alt="Кинеограф" style="height: 50px;">
                 </a>
             </div>
-            <!-- Копирайт -->
             <div class="footer-copyright">
                 © 2026 Кинеограф. Все права защищены.
             </div>
         </footer>
     </div>
+
+    <!-- =====================================================
+         📱 МОДАЛЬНОЕ ОКНО (ПОПАП)
+         ===================================================== -->
+    <div id="modalOverlay" class="modal-overlay" onclick="closeModalOutside(event)">
+        <div class="modal-content" id="modalContent">
+            <div class="modal-header">
+                <h2>Запись на занятие</h2>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="formContainer">
+                <form id="contactForm" onsubmit="handleSubmit(event)">
+                    <div class="form-group">
+                        <label for="name">Ваше имя *</label>
+                        <input type="text" id="name" name="name" required placeholder="Например: Иван Петров">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Телефон *</label>
+                        <input type="tel" id="phone" name="phone" required placeholder="+7 (999) 123-45-67">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="ivan@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Сообщение</label>
+                        <textarea id="message" name="message" placeholder="Ваш вопрос или пожелание..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn" id="submitBtn">Отправить заявку</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- =====================================================
+         🧠 СКРИПТЫ (логика работы)
+         ===================================================== -->
+    <script>
+        // ----- МОДАЛЬНОЕ ОКНО -----
+        function openModal() {
+            document.getElementById('modalOverlay').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal() {
+            document.getElementById('modalOverlay').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        function closeModalOutside(event) {
+            if (event.target === document.getElementById('modalOverlay')) {
+                closeModal();
+            }
+        }
+        
+        // ----- ОБРАБОТКА ФОРМЫ (пока демо) -----
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            if (!name || !phone) {
+                alert('Пожалуйста, заполните имя и телефон');
+                return;
+            }
+            
+            // здесь будет отправка на почту (formsubmit или emailjs)
+            console.log('Заявка:', { name, phone, email, message });
+            
+            // показываем сообщение об успехе
+            document.getElementById('formContainer').innerHTML = `
+                <div class="success-message">
+                    <h3>✓ Спасибо!</h3>
+                    <p>Ваша заявка отправлена. Я свяжусь с вами в ближайшее время.</p>
+                    <button onclick="closeModal()">Закрыть</button>
+                </div>
+            `;
+        }
+
+        // ----- КНОПКА-ПЕРЕКЛЮЧАТЕЛЬ (определяем страницу) -----
+        window.onload = function() {
+            const toggleBtn = document.getElementById('toggleBtn');
+            // если мы на странице портфолио (определяем по URL)
+            if (window.location.href.includes('portfolio.html')) {
+                toggleBtn.textContent = 'Школа анимации';
+                toggleBtn.href = 'index.html';
+            } else {
+                toggleBtn.textContent = 'Портфолио для студий';
+                toggleBtn.href = 'portfolio.html';
+            }
+        };
+    </script>
 </body>
 </html>
-
-
-
-
