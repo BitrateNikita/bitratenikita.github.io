@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кинеограф — студия анимации для детей</title>
+    
+    <!-- Подключение шрифта Montserrat -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <title>Кинеограф — студия анимации для геймдева</title>
+    
     <style>
         /* =====================================================
            🌈 ЦВЕТОВАЯ СХЕМА (меняй здесь — всё поменяется)
@@ -27,9 +30,35 @@
             --glass-border: rgba(255,255,255,0.3);
             --glass-shadow: 0 8px 32px rgba(0,0,0,0.1);
         }
+
+        /* ===== ЕДИНЫЙ ШРИФТ ДЛЯ ВСЕГО САЙТА ===== */
         html {
-          font-family: 'Montserrat', sans-serif;
+            font-family: 'Montserrat', sans-serif;
         }
+
+        /* ===== СБРОС СТИЛЕЙ ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: inherit;  /* наследует шрифт от html */
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        /* ДАЛЬШЕ ИДЁТ ВЕСЬ ОСТАЛЬНОЙ ТВОЙ CSS КОД */
+        /* ... */
+    </style>
+</head>
+<body>
+    <!-- Здесь начинается тело сайта -->
+    <!-- Весь HTML контент, кнопки, карточки и т.д. -->
+</body>
+</html>
 
         /* ===== СБРОС СТИЛЕЙ ===== */
         * {
@@ -971,5 +1000,6 @@
 </body>
 
 </html>
+
 
 
