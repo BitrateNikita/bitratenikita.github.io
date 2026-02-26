@@ -5,17 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Портфолио — Кинеограф</title>
     <style>
-        /* =====================================================
-           🌈 ЦВЕТОВАЯ СХЕМА (МЕНЯЙ ЗДЕСЬ)
-           ===================================================== */
+        /* ===== ЦВЕТОВАЯ СХЕМА (более тёмная, деловая) ===== */
         :root {
-            --bg: #1a1f2e;              /* тёмный фон для портфолио */
-            --primary: #3a6b8f;          /* синий акцент */
-            --text: #e0e0e0;             /* светлый текст */
+            --bg: #1a1f2e;
+            --primary: #3a6b8f;
+            --text: #e0e0e0;
             --text-light: #ffffff;
-            --card-bg: #252b3d;           /* фон карточек */
-            --hover: #4d7ca3;             /* при наведении */
-            --footer-bg: #1a1f2e;          /* фон футера */
+            --card-bg: #252b3d;
+            --hover: #4d7ca3;
+            --footer-bg: #1a1f2e;
             --footer-text: #e0e0e0;
         }
 
@@ -38,62 +36,63 @@
             padding: 0 100px;
         }
 
-        /* ===== ШАПКА ===== */
+        /* ===== ХЕДЕР (такой же, как на главной) ===== */
         header {
             position: sticky;
-            top: 0;
+            top: 20px;
             z-index: 1000;
-            background: var(--bg);
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 100px;
+        }
+
+        .header-glass {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
-            flex-wrap: wrap;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            padding: 15px 40px;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
         }
 
-        /* логотип-кнопка */
-        .logo {
-            margin-right: auto;
-        }
         .logo a {
-            display: block;
             text-decoration: none;
-        }
-        .logo img {
-            height: 60px;
-            width: auto;
-            filter: brightness(0.9) contrast(1.2);
-            display: block;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            letter-spacing: 1px;
         }
 
-        /* кнопки в шапке */
         .nav-links {
             display: flex;
-            gap: 30px;
+            gap: 40px;
             align-items: center;
-            margin-left: 150px;  /* ← сдвиг влево на 150px */
         }
 
         .nav-links a {
             text-decoration: none;
             color: var(--text);
             font-weight: 500;
-            transition: color 0.3s;
+            transition: 0.3s;
         }
 
         .nav-links a:hover {
-            color: var(--primary);
+            color: white;
         }
 
         .nav-btn {
             background: var(--primary);
-            color: var(--text-light) !important;
-            padding: 8px 20px;
+            color: white !important;
+            padding: 10px 30px !important;
             border-radius: 30px;
-            text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
+            min-width: 200px;
+            text-align: center;
             transition: 0.3s;
-            margin-left: 20px;
         }
 
         .nav-btn:hover {
@@ -101,19 +100,17 @@
             transform: scale(1.05);
         }
 
-        /* ===== ГЛАВНЫЙ ЭКРАН ПОРТФОЛИО ===== */
+        /* ===== ГЛАВНЫЙ ЭКРАН ===== */
         .hero {
             text-align: center;
-            padding: 60px 20px;
-            background: linear-gradient(135deg, #1f2537, #151a28);
-            border-radius: 0 0 50px 50px;
-            margin-bottom: 40px;
+            padding: 80px 20px;
+            margin-top: 20px;
         }
 
         .hero h1 {
             font-size: 2.5rem;
             margin-bottom: 20px;
-            color: #fff;
+            color: white;
         }
 
         .hero p {
@@ -140,18 +137,17 @@
         }
 
         .portfolio-item:hover {
-            transform: scale(1.02);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.4);
         }
 
-        /* ===== КОНТЕЙНЕР ДЛЯ ВИДЕО ===== */
         .video-container {
             position: relative;
             width: 100%;
-            padding-bottom: 56.25%; /* 16:9 пропорции */
+            padding-bottom: 56.25%;
             background: #000;
         }
 
-        /* ССЫЛКА НА ВИДЕО - МЕНЯТЬ ЗДЕСЬ 👇 */
         .video-container iframe {
             position: absolute;
             top: 0;
@@ -161,14 +157,13 @@
             border: none;
         }
 
-        /* информация под видео */
         .portfolio-info {
             padding: 20px;
         }
 
         .portfolio-info h3 {
             margin-bottom: 10px;
-            color: #fff;
+            color: white;
         }
 
         .portfolio-info p {
@@ -180,187 +175,8 @@
             color: var(--primary);
             text-decoration: none;
             font-weight: 600;
-            transition: color 0.3s;
         }
 
         .portfolio-link:hover {
             color: var(--hover);
-            text-decoration: underline;
-        }
-
-        /* ===== КНОПКА "ВСЕ РАБОТЫ" ===== */
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background: var(--primary);
-            color: var(--text-light);
-            text-decoration: none;
-            border-radius: 40px;
-            font-weight: 600;
-            transition: 0.3s;
-            margin: 20px 0;
-        }
-
-        .btn:hover {
-            background: var(--hover);
-            transform: scale(1.05);
-        }
-
-        /* ===== ФУТЕР ===== */
-        footer {
-            text-align: left;
-            padding: 40px 20px 40px 150px; /* отступ слева 150px */
-            background: var(--footer-bg);
-            color: var(--footer-text);
-            margin-top: 60px;
-            border-top: 1px solid #333;
-        }
-
-        .footer-logo {
-            margin-bottom: 15px;
-        }
-        .footer-logo a {
-            display: inline-block;
-        }
-        .footer-logo img {
-            height: 50px;
-            width: auto;
-            filter: brightness(0.9) contrast(1.2);
-        }
-
-        .footer-copyright {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-
-        /* ===== АДАПТАЦИЯ ===== */
-        @media (max-width: 768px) {
-            .container {
-                padding: 0 20px;
-            }
-
-            header {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .nav-links {
-                margin-left: 0;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .portfolio-grid {
-                grid-template-columns: 1fr;
-            }
-
-            footer {
-                padding: 40px 20px;
-                text-align: center;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <!-- ===== ШАПКА ===== -->
-        <header>
-            <div class="logo">
-                <a href="index.html">
-                    <img src="logo.png" alt="Кинеограф">
-                </a>
-            </div>
-            <div class="nav-links">
-                <a href="index.html">О школе</a>
-                <a href="#">Контакты</a>
-                <a href="index.html" class="nav-btn">Школа анимации</a>
-            </div>
-        </header>
-
-        <!-- ===== ГЛАВНЫЙ ЭКРАН ===== -->
-        <section class="hero">
-            <h1>2D-анимация для игр</h1>
-            <p>Senior Spine-аниматор с 8-летним опытом в геймдеве (MY.GAMES, Deus Craft, Game Forest). Создаю анимацию, которая работает на геймплей.</p>
-        </section>
-
-        <!-- ===== СЕТКА ПОРТФОЛИО ===== -->
-        <div class="container">
-            <div class="portfolio-grid">
-                <!-- Карточка Bat -->
-                <div class="portfolio-item">
-                    <div class="video-container">
-                        <!-- 👇 ССЫЛКА НА ВИДЕО BAT - ВСТАВЛЯТЬ СЮДА -->
-                        <iframe src="https://player.vimeo.com/video/824607814?autoplay=1&loop=1&background=1&muted=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-                    </div>
-                    <div class="portfolio-info">
-                        <h3>Bat</h3>
-                        <p>Анимация врага для игры Night Hunt</p>
-                        <!-- 👇 ССЫЛКА НА ARTSTATION BAT -->
-                        <a href="https://artstation.com/nikitapetrov" class="portfolio-link" target="_blank">Смотреть на ArtStation →</a>
-                    </div>
-                </div>
-
-                <!-- Карточка Awake Vampire -->
-                <div class="portfolio-item">
-                    <div class="video-container">
-                        <!-- 👇 ССЫЛКА НА ВИДЕО AWAKE VAMPIRE -->
-                        <iframe src="https://player.vimeo.com/video/824607815?autoplay=1&loop=1&background=1&muted=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-                    </div>
-                    <div class="portfolio-info">
-                        <h3>Awake Vampire</h3>
-                        <p>Персонажная анимация для Night Hunt</p>
-                        <a href="https://artstation.com/nikitapetrov" class="portfolio-link" target="_blank">Смотреть на ArtStation →</a>
-                    </div>
-                </div>
-
-                <!-- Карточка The Ghost Cart -->
-                <div class="portfolio-item">
-                    <div class="video-container">
-                        <!-- 👇 ССЫЛКА НА ВИДЕО GHOST CART -->
-                        <iframe src="https://player.vimeo.com/video/824607816?autoplay=1&loop=1&background=1&muted=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-                    </div>
-                    <div class="portfolio-info">
-                        <h3>The Ghost Cart</h3>
-                        <p>Анимация босса для Night Hunt</p>
-                        <a href="https://artstation.com/nikitapetrov" class="portfolio-link" target="_blank">Смотреть на ArtStation →</a>
-                    </div>
-                </div>
-
-                <!-- Карточка Diver -->
-                <div class="portfolio-item">
-                    <div class="video-container">
-                        <!-- 👇 ССЫЛКА НА ВИДЕО DIVER -->
-                        <iframe src="https://player.vimeo.com/video/824607817?autoplay=1&loop=1&background=1&muted=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-                    </div>
-                    <div class="portfolio-info">
-                        <h3>Diver</h3>
-                        <p>Анимация врага для Night Hunt</p>
-                        <a href="https://artstation.com/nikitapetrov" class="portfolio-link" target="_blank">Смотреть на ArtStation →</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- КНОПКА "ВСЕ РАБОТЫ" -->
-            <div style="text-align: center;">
-                <a href="https://artstation.com/nikitapetrov" class="btn" target="_blank">Все работы на ArtStation</a>
-            </div>
-        </div>
-
-        <!-- ===== ФУТЕР ===== -->
-        <footer>
-            <div class="footer-logo">
-                <a href="index.html">
-                    <img src="logo.png" alt="Кинеограф">
-                </a>
-            </div>
-            <div class="footer-copyright">
-                © 2026 Кинеограф. Все права защищены.
-            </div>
-        </footer>
-    </div>
-</body>
-</html>
+       
