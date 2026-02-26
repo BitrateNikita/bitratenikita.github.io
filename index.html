@@ -863,7 +863,10 @@
                 <button class="close-btn" onclick="closeModal()">&times;</button>
             </div>
             <div class="modal-body" id="formContainer">
-                <form id="contactForm" onsubmit="handleSubmit(event)">
+                <form action="https://formsubmit.co/kineograph@yandex.ru" method="POST">
+                    <input type="hidden" name="_subject" value="Новая заявка с сайта Кинеограф!">
+                    <input type="hidden" name="_template" value="table">
+                    
                     <div class="form-group">
                         <label for="name">Ваше имя *</label>
                         <input type="text" id="name" name="name" required placeholder="Например: Иван Петров">
@@ -880,7 +883,7 @@
                         <label for="message">Сообщение</label>
                         <textarea id="message" name="message" placeholder="Ваш вопрос или пожелание..."></textarea>
                     </div>
-                    <button type="submit" class="submit-btn" id="submitBtn">Отправить заявку</button>
+                    <button type="submit" class="submit-btn">Отправить заявку</button>
                 </form>
             </div>
         </div>
@@ -903,33 +906,7 @@
             }
         }
 
-        function handleSubmit(event) {
-            event.preventDefault();
-            
-            const name = document.getElementById('name').value;
-            const phone = document.getElementById('phone').value;
-            
-            if (!name || !phone) {
-                alert('Пожалуйста, заполните имя и телефон');
-                return;
-            }
-            
-            console.log('Заявка:', { 
-                name, 
-                phone, 
-                email: document.getElementById('email').value,
-                message: document.getElementById('message').value 
-            });
-            
-            document.getElementById('formContainer').innerHTML = `
-                <div class="success-message">
-                    <h3>✓ Спасибо!</h3>
-                    <p>Ваша заявка отправлена. Я свяжусь с вами в ближайшее время.</p>
-                    <button onclick="closeModal()">Закрыть</button>
-                </div>
-            `;
-        }
-
+        
         function moveCard(event, container) {
             const card = container.querySelector('.card');
             const rect = container.getBoundingClientRect();
