@@ -13,7 +13,6 @@
             --primary: #2C5F5F;          /* главный цвет (кнопки, акценты) */
             --text: #2E2E2E;             /* цвет обычного текста */
             --text-light: #ffffff;        /* текст на тёмном фоне */
-            --card-bg: rgba(255,255,255,0.6); /* фон карточек (полупрозрачный) */
             --hover: #1E4A4A;             /* цвет при наведении */
             --section-bg-1: #f5efe7;       /* запасной фон секции 1 */
             --section-bg-2: #f0f0f0;       /* запасной фон секции 2 */
@@ -44,16 +43,16 @@
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 100px;  /* ← отступы слева и справа по 100px */
+            padding: 0 100px;
         }
 
         /* =====================================================
            🧷 СТЕКЛЯННЫЙ ХЕДЕР
            ===================================================== */
         header {
-            position: sticky;      /* прилипает при скролле */
-            top: 20px;             /* отступ сверху */
-            z-index: 1000;          /* чтобы быть поверх всего */
+            position: sticky;
+            top: 20px;
+            z-index: 1000;
             width: 100%;
             max-width: 1400px;
             margin: 0 auto;
@@ -61,39 +60,37 @@
         }
 
         .header-glass {
-            display: flex;                     /* располагаем элементы в ряд */
-            justify-content: space-between;    /* лого слева, кнопки справа */
-            align-items: center;                /* выравниваем по центру */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             padding: 15px 40px;
-            background: var(--glass-bg);        /* полупрозрачный фон */
-            backdrop-filter: blur(10px);        /* размытие фона */
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border-radius: 50px;                /* скругленные углы */
+            border-radius: 50px;
             border: 1px solid var(--glass-border);
             box-shadow: var(--glass-shadow);
-            transition: 0.3s;                   /* плавность изменений */
+            transition: 0.3s;
         }
 
         .header-glass:hover {
-            background: rgba(255,255,255,0.35);  /* чуть плотнее при наведении */
+            background: rgba(255,255,255,0.35);
         }
 
-        /* ===== ЛОГОТИП (КАРТИНКА) ===== */
         .logo a {
-            display: block;          /* чтобы ссылка занимала весь блок */
-            text-decoration: none;   /* убираем подчеркивание */
+            display: block;
+            text-decoration: none;
         }
 
         .logo img {
-            height: 60px;             /* высота логотипа */
-            width: auto;              /* ширина подстраивается */
+            height: 60px;
+            width: auto;
             display: block;
         }
 
-        /* ===== НАВИГАЦИЯ ===== */
         .nav-links {
             display: flex;
-            gap: 40px;                /* расстояние между ссылками */
+            gap: 40px;
             align-items: center;
         }
 
@@ -101,21 +98,20 @@
             text-decoration: none;
             color: var(--text);
             font-weight: 500;
-            position: relative;        /* для подчеркивания */
+            position: relative;
             transition: 0.3s;
             font-size: 1.1rem;
         }
 
-        /* подчеркивание при наведении */
         .nav-links a::after {
             content: '';
             position: absolute;
             bottom: -5px;
             left: 0;
-            width: 0;                  /* изначально ширина 0 */
+            width: 0;
             height: 2px;
             background: var(--primary);
-            transition: 0.3s;           /* плавно появляется */
+            transition: 0.3s;
         }
 
         .nav-links a:hover {
@@ -123,10 +119,9 @@
         }
 
         .nav-links a:hover::after {
-            width: 100%;                /* подчеркивание на всю ширину */
+            width: 100%;
         }
 
-        /* ===== КНОПКА-ПЕРЕКЛЮЧАТЕЛЬ ===== */
         .nav-btn {
             background: var(--primary);
             color: var(--text-light) !important;
@@ -135,19 +130,19 @@
             font-weight: 600;
             box-shadow: 0 4px 15px rgba(44,95,95,0.3);
             transition: 0.3s !important;
-            min-width: 200px;            /* постоянная ширина */
+            min-width: 200px;
             text-align: center;
             display: inline-block;
         }
 
         .nav-btn:hover {
             background: var(--hover);
-            transform: scale(1.05);       /* увеличивается при наведении */
+            transform: scale(1.05);
             box-shadow: 0 6px 20px rgba(44,95,95,0.4);
         }
 
         .nav-btn::after {
-            display: none !important;     /* убираем подчеркивание */
+            display: none !important;
         }
 
         /* =====================================================
@@ -156,9 +151,9 @@
         .hero {
             text-align: center;
             padding: 80px 20px;
-            background-image: url('hero-bg.png');    /* фоновая картинка */
-            background-size: cover;                   /* растягивается на всю ширину */
-            background-position: center;               /* центрируется */
+            background-image: url('hero-bg.png');
+            background-size: cover;
+            background-position: center;
             border-radius: 0 0 50px 50px;
             margin-bottom: 60px;
             margin-top: 20px;
@@ -185,26 +180,23 @@
             justify-content: center;
         }
 
-        /* =====================================================
-           🔘 БАЗОВЫЕ КНОПКИ (с затемнением при клике)
-           ===================================================== */
         .btn {
             padding: 12px 30px;
             border: none;
             border-radius: 40px;
             font-weight: 600;
             cursor: pointer;
-            transition: 0.3s;           /* плавность всех изменений */
+            transition: 0.3s;
             text-decoration: none;
             display: inline-block;
         }
 
         .btn:hover {
-            transform: scale(1.05);       /* увеличение при наведении */
+            transform: scale(1.05);
         }
 
         .btn:active {
-            opacity: 0.7;                  /* затемнение при клике */
+            opacity: 0.7;
             transform: scale(0.98);
         }
 
@@ -228,16 +220,12 @@
             color: var(--text-light);
         }
 
-        /* =====================================================
-           🧱 ЗАГОЛОВКИ СЕКЦИЙ
-           ===================================================== */
         .section-title {
             text-align: center;
             font-size: 2.2rem;
             margin-bottom: 40px;
         }
 
-        /* ===== СЕКЦИИ С ФОНОМ ===== */
         .section-colored {
             padding: 60px 0;
             margin: 40px 0;
@@ -245,49 +233,89 @@
             background-position: center;
         }
 
-        /* фоновые картинки для каждой секции */
         .section-colored:nth-of-type(1) { background-image: url('section1-bg.png'); }
         .section-colored:nth-of-type(2) { background-image: url('section2-bg.png'); }
 
         /* =====================================================
-           🃏 СТЕКЛЯННЫЕ КАРТОЧКИ С 3D-ЭФФЕКТОМ
+           🃏 СТЕКЛЯННЫЕ КАРТОЧКИ С 3D-ЭФФЕКТОМ (НА ВЕСЬ РАЗМЕР)
            ===================================================== */
         .cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));  /* адаптивная сетка */
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
             margin: 40px 0;
-            perspective: 2000px;        /* глубина 3D-пространства */
+            perspective: 2000px;
         }
 
         .card-3d {
             width: 100%;
             height: 100%;
-            perspective: 2500px;        /* усиливаем 3D-эффект */
+            perspective: 2500px;
             cursor: pointer;
         }
 
         .card {
-            background: var(--card-bg);               /* стеклянный фон */
-            backdrop-filter: blur(10px);               /* размытие фона */
-            -webkit-backdrop-filter: blur(10px);
-            padding: 30px 20px;
-            border-radius: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: transform 0.1s ease-out;      /* плавный 3D-поворот */
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.3);
-            transform-style: preserve-3d;               /* сохраняем 3D */
             position: relative;
             width: 100%;
+            height: 350px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.1s ease-out;
+            transform-style: preserve-3d;
+        }
+
+        .card-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
             height: 100%;
+            padding: 30px 20px;
+            background: rgba(255,255,255,0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            text-align: center;
+            z-index: 2;
         }
 
-        .card:hover {
-            background: rgba(255,255,255,0.8);          /* плотнее при наведении */
+        .card-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
         }
 
-        /* световой блик, следующий за мышкой */
+        /* 👇 ЗДЕСЬ НАЗНАЧАЕШЬ КАРТИНКИ ДЛЯ КАЖДОЙ КАРТОЧКИ */
+        .card-bg-1 { background-image: url('card1-bg.jpg'); }
+        .card-bg-2 { background-image: url('card2-bg.jpg'); }
+        .card-bg-3 { background-image: url('card3-bg.jpg'); }
+        .card-bg-4 { background-image: url('card4-bg.jpg'); }
+        .card-bg-5 { background-image: url('card5-bg.jpg'); }
+        .card-bg-6 { background-image: url('card6-bg.jpg'); }
+
+        .card h3 {
+            margin-bottom: 10px;
+            color: white;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+            font-size: 1.5rem;
+        }
+
+        .card p {
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+            opacity: 0.95;
+        }
+
         .card::after {
             content: '';
             position: absolute;
@@ -302,50 +330,19 @@
             );
             opacity: 0;
             transition: opacity 0.2s;
-            pointer-events: none;        /* чтобы не мешал кликам */
-            border-radius: 20px;
+            pointer-events: none;
+            z-index: 3;
         }
 
         .card:hover::after {
-            opacity: 1;                   /* блик появляется при наведении */
-        }
-
-        /* ===== ИКОНКИ В КАРТОЧКАХ (ЗДЕСЬ МЕНЯТЬ КАРТИНКИ) ===== */
-        .card-icon {
-            width: 80px;                  /* размер иконки */
-            height: 80px;
-            margin: 0 auto 20px;           /* центрируем и отступ снизу */
-            background-size: contain;      /* картинка вписывается */
-            background-repeat: no-repeat;
-            background-position: center;
-        }
-
-        /* 👇 КАЖДАЯ КАРТОЧКА ПОЛУЧАЕТ СВОЮ КАРТИНКУ */
-        /* СЕЙЧАС ВЕЗДЕ СТОИТ card1.png КАК ЗАГЛУШКА */
-        .card-icon-1 { background-image: url('card1.png'); }  /* 1-я карточка */
-        .card-icon-2 { background-image: url('card1.png'); }  /* 2-я карточка */
-        .card-icon-3 { background-image: url('card1.png'); }  /* 3-я карточка */
-        .card-icon-4 { background-image: url('card1.png'); }  /* 4-я карточка */
-        .card-icon-5 { background-image: url('card1.png'); }  /* 5-я карточка */
-        .card-icon-6 { background-image: url('card1.png'); }  /* 6-я карточка */
-
-        /* потом заменишь card1.png на card2.png, card3.png и т.д. */
-
-        .card h3 {
-            margin-bottom: 10px;
-            color: var(--primary);
-        }
-
-        .card p {
-            color: var(--text);
-            opacity: 0.9;
+            opacity: 1;
         }
 
         /* =====================================================
            🗺️ КАРТА, АДРЕС, КОНТАКТЫ
            ===================================================== */
         .contacts-section {
-            background-image: url('contacts-bg.png');    /* фон секции */
+            background-image: url('contacts-bg.png');
             background-size: cover;
             background-position: center;
             backdrop-filter: blur(10px);
@@ -356,7 +353,7 @@
 
         .contacts-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;    /* две колонки: информация и карта */
+            grid-template-columns: 1fr 1fr;
             gap: 40px;
             margin-top: 40px;
         }
@@ -394,7 +391,6 @@
             opacity: 0.8;
         }
 
-        /* интерактивные ссылки */
         .contact-link {
             text-decoration: none;
             color: inherit;
@@ -404,14 +400,13 @@
 
         .contact-link:hover {
             color: var(--primary);
-            transform: translateX(5px);        /* сдвиг вправо при наведении */
+            transform: translateX(5px);
         }
 
         .contact-link:hover .contact-icon {
             background: var(--hover);
         }
 
-        /* карта */
         .map-container {
             border-radius: 20px;
             overflow: hidden;
@@ -510,7 +505,7 @@
             height: 100%;
             background: rgba(0,0,0,0.6);
             backdrop-filter: blur(5px);
-            display: none;                 /* скрыто по умолчанию */
+            display: none;
             justify-content: center;
             align-items: center;
             z-index: 2000;
@@ -525,7 +520,7 @@
             overflow-y: auto;
             box-shadow: 0 20px 40px rgba(0,0,0,0.3);
             position: relative;
-            animation: slideUp 0.3s;        /* анимация появления */
+            animation: slideUp 0.3s;
         }
 
         @keyframes slideUp {
@@ -556,14 +551,13 @@
         }
 
         .close-btn:hover {
-            color: #ff4444;                /* красный при наведении */
+            color: #ff4444;
         }
 
         .modal-body {
             padding: 10px 30px 30px;
         }
 
-        /* ===== ФОРМА ===== */
         .form-group {
             margin-bottom: 20px;
         }
@@ -644,9 +638,6 @@
             cursor: pointer;
         }
 
-        /* =====================================================
-           📱 АДАПТАЦИЯ ПОД МОБИЛЬНЫЕ
-           ===================================================== */
         @media (max-width: 768px) {
             .container {
                 padding: 0 20px;
@@ -657,7 +648,7 @@
             }
 
             .header-glass {
-                flex-direction: column;      /* все в колонку на мобильных */
+                flex-direction: column;
                 gap: 15px;
                 padding: 15px 20px;
             }
@@ -677,12 +668,12 @@
             }
 
             .hero-buttons {
-                flex-direction: column;      /* кнопки друг под другом */
+                flex-direction: column;
                 gap: 10px;
             }
 
             .contacts-grid {
-                grid-template-columns: 1fr;   /* одна колонка */
+                grid-template-columns: 1fr;
                 gap: 30px;
             }
 
@@ -702,12 +693,11 @@
     </style>
 </head>
 <body>
-    <!-- ===== ХЕДЕР ===== -->
     <header>
         <div class="header-glass">
             <div class="logo">
                 <a href="index.html">
-                    <img src="logo.png" alt="Кинеограф">   <!-- логотип -->
+                    <img src="logo.png" alt="Кинеограф">
                 </a>
             </div>
             <div class="nav-links">
@@ -719,7 +709,6 @@
     </header>
 
     <div class="container">
-        <!-- ===== ГЛАВНЫЙ ЭКРАН ===== -->
         <section class="hero">
             <h1>Кинеограф - студия анимации для детей в Новороссийске</h1>
             <p>Учим создавать анимации с 8 лет с первого занятия</p>
@@ -729,84 +718,82 @@
             </div>
         </section>
 
-        <!-- ===== БЛОК 1: КАК ПРОХОДЯТ ЗАНЯТИЯ (3D-КАРТОЧКИ) ===== -->
+        <!-- ===== БЛОК 1: КАК ПРОХОДЯТ ЗАНЯТИЯ ===== -->
         <div class="section-colored">
             <div class="container">
                 <h2 class="section-title">Как проходят занятия</h2>
                 <div class="cards">
-                    <!-- карточка 1 -->
                     <div class="card-3d" onmousemove="moveCard(event, this)" onmouseleave="resetCard(this)">
                         <div class="card" id="card1">
-                            <!-- 👇 ЗДЕСЬ КАРТИНКА card-icon-1 (сейчас card1.png) -->
-                            <div class="card-icon card-icon-1"></div>
-                            <h3>Основы мультипликации</h3>
-                            <p>12 принципов анимации, раскадровка, история</p>
+                            <div class="card-bg card-bg-1"></div>
+                            <div class="card-content">
+                                <h3>Основы мультипликации</h3>
+                                <p>12 принципов анимации, раскадровка, история</p>
+                            </div>
                         </div>
                     </div>
-                    <!-- карточка 2 -->
                     <div class="card-3d" onmousemove="moveCard(event, this)" onmouseleave="resetCard(this)">
                         <div class="card" id="card2">
-                            <!-- 👇 ЗДЕСЬ КАРТИНКА card-icon-2 (сейчас card1.png) -->
-                            <div class="card-icon card-icon-2"></div>
-                            <h3>Создание персонажей</h3>
-                            <p>Рисуем, лепим, придумываем характеры</p>
+                            <div class="card-bg card-bg-2"></div>
+                            <div class="card-content">
+                                <h3>Создание персонажей</h3>
+                                <p>Рисуем, лепим, придумываем характеры</p>
+                            </div>
                         </div>
                     </div>
-                    <!-- карточка 3 -->
                     <div class="card-3d" onmousemove="moveCard(event, this)" onmouseleave="resetCard(this)">
                         <div class="card" id="card3">
-                            <!-- 👇 ЗДЕСЬ КАРТИНКА card-icon-3 (сейчас card1.png) -->
-                            <div class="card-icon card-icon-3"></div>
-                            <h3>Съёмка и монтаж</h3>
-                            <p>Снимаем покадрово, монтируем, озвучиваем</p>
+                            <div class="card-bg card-bg-3"></div>
+                            <div class="card-content">
+                                <h3>Съёмка и монтаж</h3>
+                                <p>Снимаем покадрово, монтируем, озвучиваем</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- ===== БЛОК 2: ПОЧЕМУ МЫ (3D-КАРТОЧКИ) ===== -->
+        <!-- ===== БЛОК 2: ПОЧЕМУ МЫ ===== -->
         <div class="section-colored">
             <div class="container">
                 <h2 class="section-title">Почему мы</h2>
                 <div class="cards">
-                    <!-- карточка 4 -->
                     <div class="card-3d" onmousemove="moveCard(event, this)" onmouseleave="resetCard(this)">
                         <div class="card" id="card4">
-                            <!-- 👇 ЗДЕСЬ КАРТИНКА card-icon-4 (сейчас card1.png) -->
-                            <div class="card-icon card-icon-4"></div>
-                            <h3>Опыт в индустрии</h3>
-                            <p>Senior Spine-аниматор с 8-летним стажем (MY.GAMES, Deus Craft)</p>
+                            <div class="card-bg card-bg-4"></div>
+                            <div class="card-content">
+                                <h3>Опыт в индустрии</h3>
+                                <p>Senior Spine-аниматор с 8-летним стажем (MY.GAMES, Deus Craft)</p>
+                            </div>
                         </div>
                     </div>
-                    <!-- карточка 5 -->
                     <div class="card-3d" onmousemove="moveCard(event, this)" onmouseleave="resetCard(this)">
                         <div class="card" id="card5">
-                            <!-- 👇 ЗДЕСЬ КАРТИНКА card-icon-5 (сейчас card1.png) -->
-                            <div class="card-icon card-icon-5"></div>
-                            <h3>Настоящая студия</h3>
-                            <p>Профессиональное оборудование, свет, камеры</p>
+                            <div class="card-bg card-bg-5"></div>
+                            <div class="card-content">
+                                <h3>Настоящая студия</h3>
+                                <p>Профессиональное оборудование, свет, камеры</p>
+                            </div>
                         </div>
                     </div>
-                    <!-- карточка 6 -->
                     <div class="card-3d" onmousemove="moveCard(event, this)" onmouseleave="resetCard(this)">
                         <div class="card" id="card6">
-                            <!-- 👇 ЗДЕСЬ КАРТИНКА card-icon-6 (сейчас card1.png) -->
-                            <div class="card-icon card-icon-6"></div>
-                            <h3>Маленькие группы</h3>
-                            <p>До 6 человек, индивидуальный подход</p>
+                            <div class="card-bg card-bg-6"></div>
+                            <div class="card-content">
+                                <h3>Маленькие группы</h3>
+                                <p>До 6 человек, индивидуальный подход</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- ===== КАРТА, АДРЕС, КОНТАКТЫ ===== -->
         <section id="contacts" class="contacts-section">
             <h2 class="section-title">Как нас найти</h2>
             <div class="contacts-grid">
                 <div class="contact-info">
-                    <!-- Телефон (кликабельно) -->
                     <a href="tel:+79186468822" class="contact-link">
                         <div class="contact-item">
                             <div class="contact-icon">📞</div>
@@ -816,7 +803,6 @@
                             </div>
                         </div>
                     </a>
-                    <!-- Email (кликабельно) -->
                     <a href="mailto:bitrate.motiondesign@gmail.com" class="contact-link">
                         <div class="contact-item">
                             <div class="contact-icon">✉️</div>
@@ -826,7 +812,6 @@
                             </div>
                         </div>
                     </a>
-                    <!-- Telegram (кликабельно) -->
                     <a href="https://t.me/BITRATEmotion" target="_blank" class="contact-link">
                         <div class="contact-item">
                             <div class="contact-icon">📱</div>
@@ -836,7 +821,6 @@
                             </div>
                         </div>
                     </a>
-                    <!-- Адрес (кликабельно — Яндекс.Карты) -->
                     <a href="https://yandex.ru/maps/?text=Новороссийск+ул.+Советов+42" target="_blank" class="contact-link">
                         <div class="contact-item">
                             <div class="contact-icon">📍</div>
@@ -848,20 +832,17 @@
                     </a>
                 </div>
                 <div class="map-container">
-                    <!-- карта (Яндекс.Карты) -->
                     <iframe src="https://yandex.ru/map-widget/v1/-/CCUzZJkqLB" allowfullscreen></iframe>
                 </div>
             </div>
         </section>
 
-        <!-- ===== ПРИЗЫВ К ДЕЙСТВИЮ ===== -->
         <div class="cta-block">
             <h2>Успей записаться!</h2>
             <p>Места в группах ограничены. Первое занятие — бесплатно</p>
             <button class="cta-btn" onclick="openModal()">Записаться</button>
         </div>
 
-        <!-- ===== ФУТЕР ===== -->
         <footer>
             <div class="footer-logo">
                 <a href="index.html">
@@ -874,7 +855,6 @@
         </footer>
     </div>
 
-    <!-- ===== МОДАЛЬНОЕ ОКНО ===== -->
     <div id="modalOverlay" class="modal-overlay" onclick="closeModalOutside(event)">
         <div class="modal-content" id="modalContent">
             <div class="modal-header">
@@ -906,27 +886,24 @@
     </div>
 
     <script>
-        // ----- МОДАЛЬНОЕ ОКНО -----
         function openModal() {
-            document.getElementById('modalOverlay').style.display = 'flex';  // показываем
-            document.body.style.overflow = 'hidden';  // запрещаем скролл страницы
+            document.getElementById('modalOverlay').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
         }
         
         function closeModal() {
-            document.getElementById('modalOverlay').style.display = 'none';  // скрываем
-            document.body.style.overflow = 'auto';  // возвращаем скролл
+            document.getElementById('modalOverlay').style.display = 'none';
+            document.body.style.overflow = 'auto';
         }
         
         function closeModalOutside(event) {
-            // закрываем при клике на затемненный фон
             if (event.target === document.getElementById('modalOverlay')) {
                 closeModal();
             }
         }
 
-        // ----- ОБРАБОТКА ФОРМЫ (пока демо) -----
         function handleSubmit(event) {
-            event.preventDefault();  // отменяем перезагрузку страницы
+            event.preventDefault();
             
             const name = document.getElementById('name').value;
             const phone = document.getElementById('phone').value;
@@ -936,7 +913,6 @@
                 return;
             }
             
-            // здесь будет отправка на почту (позже подключим)
             console.log('Заявка:', { 
                 name, 
                 phone, 
@@ -944,7 +920,6 @@
                 message: document.getElementById('message').value 
             });
             
-            // показываем сообщение об успехе
             document.getElementById('formContainer').innerHTML = `
                 <div class="success-message">
                     <h3>✓ Спасибо!</h3>
@@ -954,34 +929,29 @@
             `;
         }
 
-        // ----- 3D-ЭФФЕКТ ДЛЯ КАРТОЧЕК -----
         function moveCard(event, container) {
             const card = container.querySelector('.card');
             const rect = container.getBoundingClientRect();
             
-            // вычисляем положение мыши относительно центра карточки
             const x = (event.clientX - rect.left) / rect.width - 0.5;
             const y = (event.clientY - rect.top) / rect.height - 0.5;
             
-            const rotY = x * 20;   // поворот по Y (влево-вправо)
-            const rotX = -y * 20;   // поворот по X (вверх-вниз)
+            const rotY = x * 20;
+            const rotX = -y * 20;
             
             card.style.transform = `rotateY(${rotY}deg) rotateX(${rotX}deg)`;
             
-            // для светового блика (позиция мыши в процентах)
             card.style.setProperty('--x', `${(event.clientX - rect.left) / rect.width * 100}%`);
             card.style.setProperty('--y', `${(event.clientY - rect.top) / rect.height * 100}%`);
         }
 
         function resetCard(container) {
             const card = container.querySelector('.card');
-            card.style.transform = 'rotateY(0deg) rotateX(0deg)';  // возвращаем в исходное
+            card.style.transform = 'rotateY(0deg) rotateX(0deg)';
         }
 
-        // ----- КНОПКА-ПЕРЕКЛЮЧАТЕЛЬ -----
         window.onload = function() {
             const toggleBtn = document.getElementById('toggleBtn');
-            // определяем, на какой мы странице
             if (window.location.href.includes('portfolio.html')) {
                 toggleBtn.textContent = 'Школа анимации';
                 toggleBtn.href = 'index.html';
