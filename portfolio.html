@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Портфолио — Кинеограф</title>
     <style>
-        /* ===== ЦВЕТОВАЯ СХЕМА (более тёмная, деловая) ===== */
         :root {
             --bg: #1a1f2e;
             --primary: #3a6b8f;
@@ -36,7 +35,7 @@
             padding: 0 100px;
         }
 
-        /* ===== ХЕДЕР (такой же, как на главной) ===== */
+        /* ===== ХЕДЕР (как на главной) ===== */
         header {
             position: sticky;
             top: 20px;
@@ -60,11 +59,14 @@
         }
 
         .logo a {
+            display: block;
             text-decoration: none;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: white;
-            letter-spacing: 1px;
+        }
+
+        .logo img {
+            height: 60px;
+            width: auto;
+            display: block;
         }
 
         .nav-links {
@@ -78,6 +80,7 @@
             color: var(--text);
             font-weight: 500;
             transition: 0.3s;
+            font-size: 1.1rem;
         }
 
         .nav-links a:hover {
@@ -205,9 +208,20 @@
         footer {
             text-align: center;
             padding: 40px 0;
-            background: var(--footer-bg);
+            background-image: url('footer-bg.png');
+            background-size: cover;
+            background-position: center;
             color: var(--footer-text);
             margin-top: 60px;
+        }
+
+        .footer-logo {
+            margin-bottom: 15px;
+        }
+
+        .footer-logo img {
+            height: 50px;
+            width: auto;
         }
 
         @media (max-width: 768px) {
@@ -245,7 +259,9 @@
     <header>
         <div class="header-glass">
             <div class="logo">
-                <a href="index.html">КИНЕОГРАФ</a>
+                <a href="index.html">
+                    <img src="logo.png" alt="Кинеограф">
+                </a>
             </div>
             <div class="nav-links">
                 <a href="index.html">О школе</a>
@@ -317,7 +333,7 @@
         <footer>
             <div class="footer-logo">
                 <a href="index.html">
-                    <img src="logo.png" alt="Кинеограф" style="height: 50px;">
+                    <img src="logo.png" alt="Кинеограф">
                 </a>
             </div>
             <div class="footer-copyright">
@@ -327,8 +343,13 @@
     </div>
 
     <script>
-        // кнопка-переключатель (для портфолио она уже ведёт на главную)
-        // дополнительной логики не требуется
+        window.onload = function() {
+            const toggleBtn = document.getElementById('toggleBtn');
+            if (window.location.href.includes('portfolio.html')) {
+                toggleBtn.textContent = 'Школа анимации';
+                toggleBtn.href = 'index.html';
+            }
+        };
     </script>
 </body>
 </html>
