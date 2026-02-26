@@ -864,8 +864,11 @@
             </div>
             <div class="modal-body" id="formContainer">
                 <form action="https://formsubmit.co/kineograph@yandex.ru" method="POST">
+                    <!-- Скрытые поля защиты -->
                     <input type="hidden" name="_subject" value="Новая заявка с сайта Кинеограф!">
                     <input type="hidden" name="_template" value="table">
+                    <input type="hidden" name="_url_ban_all" value="true">  <!-- блокирует все ссылки -->
+                    <input type="hidden" name="_blacklist" value="seo,раскрутка,крипта,казино,реклама,займ,деньги,заработок">  <!-- блокирует спам-слова -->
                     
                     <div class="form-group">
                         <label for="name">Ваше имя *</label>
