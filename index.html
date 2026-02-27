@@ -829,35 +829,36 @@
                     </div>
                 </div>
                 
-                <!-- ===== КАРТА 2ГИС ===== -->
-                <div class="map-container" id="dgis-map" style="height: 300px; width: 100%; border-radius: 20px;"></div>
+                <!-- ===== КАРТА (OpenFreeMap) ===== -->
+                <div class="map-container" id="free-map" style="height: 300px; width: 100%; border-radius: 20px;"></div>
 
-                <!-- Подключаем API 2ГИС -->
-                <script src="https://maps.api.2gis.ru/2.0/loader.js?pkg=full"></script>
+                <!-- Подключаем библиотеку MapLibre (легковесная, нейтральная) -->
+                <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
+                <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 
                 <script>
-                    // Функция создания карты 2ГИС
-                    function init2GISMap() {
+                    function initFreeMap() {
                         // Координаты твоей студии (ул. Алексея Матвейкина, 4)
                         var latitude = 44.6756646;
                         var longitude = 37.7752944;
 
-                        // Создаём карту
-                        var map = DG.map('dgis-map', {
-                            center: [latitude, longitude],
-                            zoom: 17,
-                            fullscreenControl: true  // кнопка на весь экран
+                        // Создаём карту с нейтральным стилем
+                        var map = new maplibregl.Map({
+                            container: 'free-map',
+                            style: 'https://tiles.openfreemap.org/styles/liberty', // нейтральный стиль
+                            center: [longitude, latitude],
+                            zoom: 17
                         });
 
                         // Добавляем маркер
-                        DG.marker([latitude, longitude]).addTo(map)
-                            .bindPopup('<b>Кинеограф</b><br>ул. Алексея Матвейкина, 4, каб. 8');
+                        new maplibregl.Marker()
+                            .setLngLat([longitude, latitude])
+                            .setPopup(new maplibregl.Popup().setHTML('<b>Кинеограф</b><br>ул. Алексея Матвейкина, 4, каб. 8'))
+                            .addTo(map);
                     }
 
-                    // Ждём загрузки API и запускаем
-                    DG.then(function() {
-                        init2GISMap();
-                    });
+                    // Ждём загрузки страницы и запускаем
+                    window.addEventListener('load', initFreeMap);
                 </script>
             </div>
         </section>
