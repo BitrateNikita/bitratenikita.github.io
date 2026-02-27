@@ -829,35 +829,35 @@
                     </div>
                 </div>
                 
-                <div class="map-container" id="leaflet-map" style="height: 300px; width: 100%; border-radius: 20px;"></div>
+                <!-- ===== КАРТА 2ГИС ===== -->
+                <div class="map-container" id="dgis-map" style="height: 300px; width: 100%; border-radius: 20px;"></div>
 
-                <!-- Подключаем CSS и JS для Leaflet -->
-                <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-                <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+                <!-- Подключаем API 2ГИС -->
+                <script src="https://maps.api.2gis.ru/2.0/loader.js?pkg=full"></script>
 
                 <script>
-                    // Эта функция выполнится после загрузки страницы
-                    function initLeafletMap() {
-                        // Координаты твоего дома (ул. Алексея Матвейкина, 4)
+                    // Функция создания карты 2ГИС
+                    function init2GISMap() {
+                        // Координаты твоей студии (ул. Алексея Матвейкина, 4)
                         var latitude = 44.6756646;
                         var longitude = 37.7752944;
 
-                        // Создаём карту и устанавливаем центр и масштаб
-                        var map = L.map('leaflet-map').setView([latitude, longitude], 17);
+                        // Создаём карту
+                        var map = DG.map('dgis-map', {
+                            center: [latitude, longitude],
+                            zoom: 17,
+                            fullscreenControl: true  // кнопка на весь экран
+                        });
 
-                        // Добавляем слой с картой (стиль "улицы")
-                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                        }).addTo(map);
-
-                        // Добавляем маркер в центр карты
-                        L.marker([latitude, longitude]).addTo(map)
-                            .bindPopup('<b>Кинеограф</b><br>ул. Алексея Матвейкина, 4, каб. 8')
-                            .openPopup();
+                        // Добавляем маркер
+                        DG.marker([latitude, longitude]).addTo(map)
+                            .bindPopup('<b>Кинеограф</b><br>ул. Алексея Матвейкина, 4, каб. 8');
                     }
 
-                    // Ждём, пока страница полностью загрузится, и запускаем функцию
-                    window.addEventListener('load', initLeafletMap);
+                    // Ждём загрузки API и запускаем
+                    DG.then(function() {
+                        init2GISMap();
+                    });
                 </script>
             </div>
         </section>
