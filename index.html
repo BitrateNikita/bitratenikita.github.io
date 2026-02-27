@@ -864,17 +864,41 @@
             </div>
             <div class="modal-body" id="formContainer">
                 <form action="https://formsubmit.co/kineograph@yandex.ru" method="POST">
-                    <!-- Скрытые поля защиты — временно отключены -->
+                    <!-- Скрытые поля -->
                     <input type="hidden" name="_subject" value="Новая заявка с сайта Кинеограф!">
                     <input type="hidden" name="_template" value="table">
-                    <!-- <input type="hidden" name="_url_ban_all" value="true"> -->
-                    <!-- <input type="hidden" name="_blacklist" value="seo,раскрутка,крипта,казино,реклама,займ,деньги,заработок"> -->
                     
+                    <!-- Имя родителя -->
                     <div class="form-group">
                         <label for="name">Ваше имя *</label>
-                        <input type="text" id="name" name="name" required placeholder="Например: Иван Петров">
+                        <input type="text" id="name" name="name" required placeholder="Например: Микки Аниматоров">
                     </div>
-                    <!-- остальные поля... -->
+                    
+                    <!-- Возраст ребёнка -->
+                    <div class="form-group">
+                        <label for="child-age">Возраст ребёнка *</label>
+                        <input type="number" id="child-age" name="child_age" required min="5" max="18" placeholder="Например: 8">
+                    </div>
+                    
+                    <!-- Телефон -->
+                    <div class="form-group">
+                        <label for="phone">Телефон *</label>
+                        <input type="tel" id="phone" name="phone" required placeholder="+7 (999) 123-45-67">
+                    </div>
+                    
+                    <!-- Email (необязательно) -->
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="ivan@example.com">
+                    </div>
+                    
+                    <!-- Сообщение -->
+                    <div class="form-group">
+                        <label for="message">Сообщение</label>
+                        <textarea id="message" name="message" placeholder="Ваш вопрос или пожелание..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Отправить заявку</button>
                 </form>
             </div>
         </div>
