@@ -11,10 +11,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
+        /* ===== ФИОЛЕТОВАЯ ТЕМА ===== */
         :root {
             --bg: #AEBAFF;
             --primary: #E8551A;
-            --secondary: #AEBAFF;
+            --secondary: #FFF4AB;  /* светло-желтый для подсветки */
             --text: #2E2E2E;
             --text-light: #ffffff;
             --hover: #C44A15;
@@ -136,7 +137,8 @@
         }
 
         .nav-btn:hover {
-            background: var(--hover) !important;
+            background: var(--secondary) !important;  /* светло-желтый */
+            color: var(--text) !important;            /* текст темный */
             transform: scale(1.05);
         }
 
@@ -148,7 +150,9 @@
         .hero {
             text-align: center;
             padding: 80px 20px;
-            background: var(--bg);
+            background-image: url('section1-bg.png');
+            background-size: cover;
+            background-position: center;
             border-radius: 0 0 50px 50px;
             margin-bottom: 60px;
             margin-top: 20px;
@@ -157,23 +161,28 @@
         .hero h1 {
             font-size: 2.5rem;
             margin-bottom: 20px;
+            color: var(--text);
+            text-shadow: 2px 2px 5px rgba(255,255,255,0.5);
         }
 
         .hero p {
             font-size: 1.2rem;
             max-width: 800px;
             margin: 0 auto;
+            color: var(--text);
         }
 
         .section-title {
             text-align: center;
             font-size: 2.2rem;
             margin-bottom: 40px;
+            color: var(--text);
         }
 
         .section-colored {
             padding: 60px 0;
             margin: 40px 0;
+            background-image: url('section2-bg.png');
             background-size: cover;
             background-position: center;
             border-radius: 30px;
@@ -206,7 +215,7 @@
         .video-container {
             position: relative;
             width: 100%;
-            padding-bottom: 56.25%; /* 16:9 */
+            padding-bottom: 56.25%;
             background: #000;
         }
 
@@ -244,6 +253,109 @@
 
         .card-link:hover {
             color: var(--hover);
+        }
+
+        /* ===== 3D-КАРТОЧКИ ДЛЯ КАРЬЕРНОГО ПУТИ ===== */
+        .cards-3d {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+            perspective: 2000px;
+        }
+
+        .card-3d {
+            width: 100%;
+            height: 100%;
+            perspective: 2500px;
+            cursor: pointer;
+        }
+
+        .card-3d .card {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.1s ease-out;
+            transform-style: preserve-3d;
+            background: transparent;
+        }
+
+        .card-3d .card-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 30px 20px;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            z-index: 2;
+            border-radius: 20px;
+        }
+
+        .card-3d .card-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+            opacity: 0.3;
+        }
+
+        /* 👇 ЗАГЛУШКИ ДЛЯ КАРТОЧЕК */
+        .card-bg-1 { background-image: url('contacts-bg.png'); }
+        .card-bg-2 { background-image: url('contacts-bg.png'); }
+        .card-bg-3 { background-image: url('contacts-bg.png'); }
+        .card-bg-4 { background-image: url('contacts-bg.png'); }
+        .card-bg-5 { background-image: url('contacts-bg.png'); }
+        .card-bg-6 { background-image: url('contacts-bg.png'); }
+
+        .card-3d h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: white;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+        }
+
+        .card-3d p {
+            font-size: 1rem;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .card-3d .card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(
+                circle at var(--x, 50%) var(--y, 50%),
+                rgba(255,255,255,0.3) 0%,
+                transparent 60%
+            );
+            opacity: 0;
+            transition: opacity 0.2s;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        .card-3d .card:hover::after {
+            opacity: 1;
         }
 
         /* ===== КОНТАКТЫ ===== */
@@ -371,7 +483,7 @@
             <p>Senior Spine-аниматор с 8-летним опытом в геймдеве (MY.GAMES, Deus Craft, Game Forest)</p>
         </section>
 
-        <!-- ===== БЛОК ПОРТФОЛИО ===== -->
+        <!-- ===== БЛОК ПОРТФОЛИО (ВИДЕО) ===== -->
         <section id="portfolio" class="section-colored">
             <div class="container">
                 <h2 class="section-title">Проекты</h2>
@@ -410,36 +522,39 @@
             </div>
         </section>
 
-        <!-- ===== БЛОК КАРЬЕРНЫЙ ПУТЬ ===== -->
+        <!-- ===== БЛОК КАРЬЕРНЫЙ ПУТЬ (3D-КАРТОЧКИ) ===== -->
         <section id="experience" class="section-colored">
             <div class="container">
                 <h2 class="section-title">Карьерный путь</h2>
-                <div class="cards">
-                    <div class="card">
-                        <div class="video-container">
-                            <iframe src="https://player.vimeo.com/video/824607814?autoplay=1&loop=1&background=1&muted=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-                        </div>
-                        <div class="card-info">
-                            <h3>MY.GAMES</h3>
-                            <p>Lead Motion Designer • 2019–2022</p>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="video-container">
-                            <iframe src="https://player.vimeo.com/video/824607815?autoplay=1&loop=1&background=1&muted=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-                        </div>
-                        <div class="card-info">
-                            <h3>Deus Craft</h3>
-                            <p>Senior Spine Animator • 2022–2024</p>
+                <div class="cards-3d">
+                    <!-- MY.GAMES -->
+                    <div class="card-3d" onmousemove="moveCard(event, this)" onmouseleave="resetCard(this)">
+                        <div class="card">
+                            <div class="card-bg card-bg-1"></div>
+                            <div class="card-content">
+                                <h3>MY.GAMES</h3>
+                                <p>Lead Motion Designer<br>2019–2022</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="card">
-                        <div class="video-container">
-                            <iframe src="https://player.vimeo.com/video/824607816?autoplay=1&loop=1&background=1&muted=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                    <!-- Deus Craft -->
+                    <div class="card-3d" onmousemove="moveCard(event, this)" onmouseleave="resetCard(this)">
+                        <div class="card">
+                            <div class="card-bg card-bg-2"></div>
+                            <div class="card-content">
+                                <h3>Deus Craft</h3>
+                                <p>Senior Spine Animator<br>2022–2024</p>
+                            </div>
                         </div>
-                        <div class="card-info">
-                            <h3>Game Forest</h3>
-                            <p>Senior Animator • 2024–н.в.</p>
+                    </div>
+                    <!-- Game Forest -->
+                    <div class="card-3d" onmousemove="moveCard(event, this)" onmouseleave="resetCard(this)">
+                        <div class="card">
+                            <div class="card-bg card-bg-3"></div>
+                            <div class="card-content">
+                                <h3>Game Forest</h3>
+                                <p>Senior Animator<br>2024–н.в.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -467,5 +582,28 @@
             © 2026 Кинеограф. Все права защищены.
         </div>
     </footer>
+
+    <script>
+        function moveCard(event, container) {
+            const card = container.querySelector('.card');
+            const rect = container.getBoundingClientRect();
+            
+            const x = (event.clientX - rect.left) / rect.width - 0.5;
+            const y = (event.clientY - rect.top) / rect.height - 0.5;
+            
+            const rotY = x * 20;
+            const rotX = -y * 20;
+            
+            card.style.transform = `rotateY(${rotY}deg) rotateX(${rotX}deg)`;
+            
+            card.style.setProperty('--x', `${(event.clientX - rect.left) / rect.width * 100}%`);
+            card.style.setProperty('--y', `${(event.clientY - rect.top) / rect.height * 100}%`);
+        }
+
+        function resetCard(container) {
+            const card = container.querySelector('.card');
+            card.style.transform = 'rotateY(0deg) rotateX(0deg)';
+        }
+    </script>
 </body>
 </html>

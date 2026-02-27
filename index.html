@@ -55,7 +55,7 @@
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 100px;
+            padding: 100px 100px 0 100px;  /* ← верх 100px, остальное как было */
             width: 100%;
         }
 
@@ -168,7 +168,7 @@
             background-image: url('hero-bg.png');
             background-size: cover;
             background-position: center;
-            border-radius: 0 0 50px 50px;
+            border-radius: 30 30 30px 30px;
             margin-bottom: 60px;
             margin-top: 20px;
         }
@@ -245,6 +245,7 @@
             margin: 40px 0;
             background-size: cover;
             background-position: center;
+            border-radius: 30px;
         }
 
         .section-colored:nth-of-type(1) { background-image: url('section1-bg.png'); }
@@ -950,16 +951,7 @@
             card.style.transform = 'rotateY(0deg) rotateX(0deg)';
         }
 
-        window.onload = function() {
-            const toggleBtn = document.getElementById('toggleBtn');
-            if (window.location.href.includes('portfolio.html')) {
-                toggleBtn.textContent = 'Школа анимации';
-                toggleBtn.href = 'index.html';
-            } else {
-                toggleBtn.textContent = 'Портфолио для студий';
-                toggleBtn.href = 'portfolio.html';
-            }
-        };
+
     </script>
 </body>
 </html>
