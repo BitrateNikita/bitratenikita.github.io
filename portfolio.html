@@ -13,12 +13,15 @@
     <style>
         /* ===== ФИОЛЕТОВАЯ ТЕМА ===== */
         :root {
-            --bg: #AEBAFF;              /* фиолетовый фон */
-            --primary: #E8551A;          /* оранжевый (акцент) */
-            --text: #2E2E2E;             /* текст */
+            --bg: #AEBAFF;
+            --primary: #E8551A;
+            --secondary: #AEBAFF;
+            --text: #2E2E2E;
             --text-light: #ffffff;
             --hover: #C44A15;
             --card-bg: rgba(255,255,255,0.2);
+            --section-bg-1: rgba(255,255,255,0.3);
+            --section-bg-2: rgba(255,255,255,0.2);
             --footer-bg: #AEBAFF;
             --footer-text: #2E2E2E;
             
@@ -65,9 +68,15 @@
             padding: 15px 40px;
             background: var(--glass-bg);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border-radius: 50px;
             border: 1px solid var(--glass-border);
             box-shadow: var(--glass-shadow);
+            transition: 0.3s;
+        }
+
+        .header-glass:hover {
+            background: rgba(255,255,255,0.35);
         }
 
         .logo a {
@@ -78,14 +87,13 @@
         .logo img {
             height: 60px;
             width: auto;
+            display: block;
         }
 
-        /* ===== НАВИГАЦИЯ ===== */
         .nav-links {
             display: flex;
             gap: 40px;
             align-items: center;
-            flex-wrap: wrap;
         }
 
         .nav-links a {
@@ -116,7 +124,6 @@
             width: 100%;
         }
 
-        /* ===== КНОПКА-ПЕРЕКЛЮЧАТЕЛЬ ===== */
         .nav-btn {
             background: var(--primary);
             color: var(--text-light) !important;
@@ -145,6 +152,7 @@
             background: var(--bg);
             border-radius: 0 0 50px 50px;
             margin-bottom: 60px;
+            margin-top: 20px;
         }
 
         .hero h1 {
@@ -158,20 +166,24 @@
             margin: 0 auto;
         }
 
-        /* ===== КАРТОЧКИ ПОРТФОЛИО ===== */
-        .portfolio-section {
-            padding: 60px 0;
-        }
-
         .section-title {
             text-align: center;
             font-size: 2.2rem;
             margin-bottom: 40px;
         }
 
-        .portfolio-grid {
+        .section-colored {
+            padding: 60px 0;
+            margin: 40px 0;
+            background-size: cover;
+            background-position: center;
+            border-radius: 30px;  /* ← закругление как на главной */
+        }
+
+        /* ===== КАРТОЧКИ С 3D-ЭФФЕКТОМ ===== */
+        .cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
             margin: 40px 0;
             perspective: 2000px;
@@ -190,6 +202,7 @@
             height: 300px;
             border-radius: 20px;
             overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             transition: transform 0.1s ease-out;
             transform-style: preserve-3d;
         }
@@ -203,6 +216,7 @@
             padding: 30px 20px;
             background: rgba(255,255,255,0.2);
             backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
             border: 1px solid rgba(255,255,255,0.3);
             display: flex;
             flex-direction: column;
@@ -210,6 +224,7 @@
             justify-content: center;
             text-align: center;
             z-index: 2;
+            border-radius: 20px;
         }
 
         .card-bg {
@@ -224,32 +239,58 @@
             opacity: 0.3;
         }
 
-        .card-bg-1 { background-image: url('mygames-bg.png'); }
-        .card-bg-2 { background-image: url('deuscraft-bg.png'); }
-        .card-bg-3 { background-image: url('gameforest-bg.png'); }
-        .card-bg-4 { background-image: url('astrum-bg.png'); }
-        .card-bg-5 { background-image: url('redrift-bg.png'); }
-        .card-bg-6 { background-image: url('it-territory-bg.png'); }
+        /* 👇 ЗАГЛУШКИ (все используют contacts-bg.png) */
+        .card-bg-1 { background-image: url('contacts-bg.png'); }
+        .card-bg-2 { background-image: url('contacts-bg.png'); }
+        .card-bg-3 { background-image: url('contacts-bg.png'); }
+        .card-bg-4 { background-image: url('contacts-bg.png'); }
+        .card-bg-5 { background-image: url('contacts-bg.png'); }
+        .card-bg-6 { background-image: url('contacts-bg.png'); }
 
         .card h3 {
             font-size: 1.8rem;
             margin-bottom: 10px;
-            color: var(--text);
+            color: white;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
         }
 
         .card p {
             font-size: 1rem;
-            opacity: 0.9;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(
+                circle at var(--x, 50%) var(--y, 50%),
+                rgba(255,255,255,0.3) 0%,
+                transparent 60%
+            );
+            opacity: 0;
+            transition: opacity 0.2s;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        .card:hover::after {
+            opacity: 1;
         }
 
         /* ===== КОНТАКТЫ ===== */
         .contacts-section {
-            background: rgba(255,255,255,0.2);
+            background-image: url('contacts-bg.png');
+            background-size: cover;
+            background-position: center;
             backdrop-filter: blur(10px);
             border-radius: 30px;
             padding: 60px 20px;
             margin: 60px 0;
-            text-align: center;
         }
 
         .contact-buttons {
@@ -266,6 +307,8 @@
             padding: 15px 30px;
             border-radius: 50px;
             text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
             transition: 0.3s;
             display: inline-flex;
             align-items: center;
@@ -277,17 +320,30 @@
             transform: scale(1.05);
         }
 
+        /* ===== ФУТЕР ===== */
         footer {
             text-align: center;
             padding: 40px 0;
-            background: var(--footer-bg);
+            background-image: url('footer-bg.png');
+            background-size: cover;
+            background-position: center;
             color: var(--footer-text);
             margin-top: 60px;
+            border-radius: 30px 30px 0 0;
+        }
+
+        .footer-logo {
+            margin-bottom: 15px;
         }
 
         .footer-logo img {
             height: 50px;
             width: auto;
+        }
+
+        .footer-copyright {
+            font-size: 0.9rem;
+            opacity: 0.9;
         }
 
         @media (max-width: 768px) {
@@ -306,6 +362,7 @@
             }
 
             .nav-links {
+                flex-wrap: wrap;
                 justify-content: center;
                 gap: 20px;
             }
@@ -351,67 +408,71 @@
         </section>
 
         <!-- ===== БЛОК ПОРТФОЛИО ===== -->
-        <section id="portfolio" class="portfolio-section">
-            <h2 class="section-title">Проекты</h2>
-            <div class="portfolio-grid">
-                <div class="card-3d" onmousemove="moveCard(event, this)" onmouseleave="resetCard(this)">
-                    <div class="card">
-                        <div class="card-bg card-bg-1"></div>
-                        <div class="card-content">
-                            <h3>Night Hunt</h3>
-                            <p>Персонажная анимация</p>
+        <section id="portfolio" class="section-colored">
+            <div class="container">
+                <h2 class="section-title">Проекты</h2>
+                <div class="cards">
+                    <div class="card-3d" onmousemove="moveCard(event, this)" onmouseleave="resetCard(this)">
+                        <div class="card">
+                            <div class="card-bg card-bg-1"></div>
+                            <div class="card-content">
+                                <h3>Night Hunt</h3>
+                                <p>Персонажная анимация</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="card-3d" onmousemove="moveCard(event, this)" onmouseleave="resetCard(this)">
-                    <div class="card">
-                        <div class="card-bg card-bg-2"></div>
-                        <div class="card-content">
-                            <h3>Gummy Drop</h3>
-                            <p>Анимация контента</p>
+                    <div class="card-3d" onmousemove="moveCard(event, this)" onmouseleave="resetCard(this)">
+                        <div class="card">
+                            <div class="card-bg card-bg-2"></div>
+                            <div class="card-content">
+                                <h3>Gummy Drop</h3>
+                                <p>Анимация контента</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="card-3d" onmousemove="moveCard(event, this)" onmouseleave="resetCard(this)">
-                    <div class="card">
-                        <div class="card-bg card-bg-3"></div>
-                        <div class="card-content">
-                            <h3>Grand Hotel Mania</h3>
-                            <p>Персонажи, UI, VFX</p>
+                    <div class="card-3d" onmousemove="moveCard(event, this)" onmouseleave="resetCard(this)">
+                        <div class="card">
+                            <div class="card-bg card-bg-3"></div>
+                            <div class="card-content">
+                                <h3>Grand Hotel Mania</h3>
+                                <p>Персонажи, UI, VFX</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ===== БЛОК ОПЫТ (ROADMAP) ===== -->
-        <section id="experience" class="portfolio-section">
-            <h2 class="section-title">Карьерный путь</h2>
-            <div class="portfolio-grid">
-                <div class="card-3d" onmousemove="moveCard(event, this)" onmouseleave="resetCard(this)">
-                    <div class="card">
-                        <div class="card-bg card-bg-4"></div>
-                        <div class="card-content">
-                            <h3>MY.GAMES</h3>
-                            <p>Lead Motion Designer • 2019–2022</p>
+        <!-- ===== БЛОК ОПЫТ ===== -->
+        <section id="experience" class="section-colored">
+            <div class="container">
+                <h2 class="section-title">Карьерный путь</h2>
+                <div class="cards">
+                    <div class="card-3d" onmousemove="moveCard(event, this)" onmouseleave="resetCard(this)">
+                        <div class="card">
+                            <div class="card-bg card-bg-4"></div>
+                            <div class="card-content">
+                                <h3>MY.GAMES</h3>
+                                <p>Lead Motion Designer • 2019–2022</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="card-3d" onmousemove="moveCard(event, this)" onmouseleave="resetCard(this)">
-                    <div class="card">
-                        <div class="card-bg card-bg-5"></div>
-                        <div class="card-content">
-                            <h3>Deus Craft</h3>
-                            <p>Senior Spine Animator • 2022–2024</p>
+                    <div class="card-3d" onmousemove="moveCard(event, this)" onmouseleave="resetCard(this)">
+                        <div class="card">
+                            <div class="card-bg card-bg-5"></div>
+                            <div class="card-content">
+                                <h3>Deus Craft</h3>
+                                <p>Senior Spine Animator • 2022–2024</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="card-3d" onmousemove="moveCard(event, this)" onmouseleave="resetCard(this)">
-                    <div class="card">
-                        <div class="card-bg card-bg-6"></div>
-                        <div class="card-content">
-                            <h3>Game Forest</h3>
-                            <p>Senior Animator • 2024–н.в.</p>
+                    <div class="card-3d" onmousemove="moveCard(event, this)" onmouseleave="resetCard(this)">
+                        <div class="card">
+                            <div class="card-bg card-bg-6"></div>
+                            <div class="card-content">
+                                <h3>Game Forest</h3>
+                                <p>Senior Animator • 2024–н.в.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -448,7 +509,13 @@
             const x = (event.clientX - rect.left) / rect.width - 0.5;
             const y = (event.clientY - rect.top) / rect.height - 0.5;
             
-            card.style.transform = `rotateY(${x * 20}deg) rotateX(${-y * 20}deg)`;
+            const rotY = x * 20;
+            const rotX = -y * 20;
+            
+            card.style.transform = `rotateY(${rotY}deg) rotateX(${rotX}deg)`;
+            
+            card.style.setProperty('--x', `${(event.clientX - rect.left) / rect.width * 100}%`);
+            card.style.setProperty('--y', `${(event.clientY - rect.top) / rect.height * 100}%`);
         }
 
         function resetCard(container) {
