@@ -125,8 +125,8 @@
         }
 
         .nav-btn {
-            background: var(--primary);
-            color: var(--text-light) !important;
+            background: var(--bg);
+            color: var(--text) !important;
             padding: 10px 30px !important;
             border-radius: 30px;
             font-weight: 600;
@@ -137,9 +137,10 @@
         }
 
         .nav-btn:hover {
-            background: var(--secondary) !important;  /* светло-желтый */
-            color: var(--text) !important;            /* текст темный */
+            background: var(--primary) !important;  /* ← оранжевый */
+            color: var(--text-light) !important;    /* белый текст */
             transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
         }
 
         .nav-btn::after {
@@ -252,7 +253,7 @@
         }
 
         .card-link:hover {
-            color: var(--hover);
+            color: var(--secondary);  /* вместо var(--primary) */
         }
 
         /* ===== 3D-КАРТОЧКИ ДЛЯ КАРЬЕРНОГО ПУТИ ===== */
