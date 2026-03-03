@@ -1,0 +1,36 @@
+Bat.png
+size:1024,512
+filter:Linear,Linear
+scale:0.5
+hair
+bounds:284,65,48,71
+offsets:1,1,50,73
+head
+bounds:187,138,156,171
+head_armored
+bounds:846,286,156,209
+leg l
+bounds:345,180,23,25
+offsets:1,1,25,27
+leg l_armored
+bounds:442,288,25,23
+offsets:1,1,27,25
+leg r
+bounds:2,2,23,26
+offsets:1,1,25,29
+leg r_armored
+bounds:284,38,23,25
+offsets:1,1,25,27
+tail
+bounds:187,30,95,106
+tail_armored
+bounds:345,207,95,104
+wing l
+bounds:2,311,278,184
+wing l_armored
+bounds:2,30,279,183
+rotate:90
+wing r
+bounds:282,313,280,182
+wing r_armored
+bounds:564,314,280,181
