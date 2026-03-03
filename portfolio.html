@@ -587,71 +587,123 @@
             </div>
         </section>
 
-        <script>
-        // Создаём плеер для Bat с твоими реальными файлами
-        const player = new spine.SpinePlayer("bat-player", {
-            // Пути к твоим файлам на GitHub
-            skeleton: "/spine/bat/bat.json",
-            atlas: "/spine/bat/bat.atlas",
-            
-            // Анимации из твоего проекта (точно как на скриншоте)
-            animation: "idle",
-            animations: ["idle", "walk", "attack", "death"],
-            
-            // Скины из твоего проекта (точно как на скриншоте)
-            skins: ["Armored", "Classic"],
-            skin: "Armored",  // Стартовый скин
-            
-            showControls: true,
-            backgroundColor: "#1e2333",
-            premultipliedAlpha: true,
-            defaultMix: 0.25,  // Плавность переходов
-            
-            success: function(player) {
-                console.log("Bat успешно загружен!");
-                window.batPlayer = player;
+        <!-- ===== БЛОК ИНТЕРАКТИВНОЙ АНИМАЦИИ ===== -->
+        <section class="section-colored" style="background: linear-gradient(135deg, #1a1f2e, #2a2f3e);">
+            <div class="container">
+                <h2 class="section-title" style="color: white;">🦇 Живая анимация</h2>
+                <p style="text-align: center; color: #b0b7cc; margin-bottom: 40px;">Переключай анимации и скины прямо в браузере</p>
                 
-                // Активируем первую кнопку анимации
-                document.querySelector('#animation-buttons .btn').classList.add('active');
-                // Активируем первую кнопку скина
-                document.querySelector('#skin-buttons .btn').classList.add('active');
-            },
-            
-            error: function(error) {
-                console.error("Ошибка загрузки Bat:", error);
-                document.getElementById('bat-player').innerHTML = '<div style="color: red; padding: 20px;">Ошибка загрузки. Проверь пути к файлам.</div>';
-            }
-        });
+                <!-- Контейнер для плеера -->
+                <div id="bat-player" style="width: 100%; height: 500px; background: #1e2333; border-radius: 20px; overflow: hidden; margin-bottom: 30px;"></div>
+                
+                <!-- Панель управления -->
+                <div style="background: rgba(0,0,0,0.3); border-radius: 20px; padding: 30px;">
+                    
+                    <!-- Кнопки анимаций -->
+                    <div style="margin-bottom: 30px;">
+                        <h3 style="color: white; margin-bottom: 20px; font-size: 1.3rem; border-left: 4px solid #AEBAFF; padding-left: 15px;">🎬 Анимации</h3>
+                        <div style="display: flex; gap: 15px; flex-wrap: wrap;" id="animation-buttons">
+                            <button class="btn" style="background: #2d3345; color: white; border: 1px solid rgba(255,255,255,0.1);" onclick="playAnim('idle')">Idle</button>
+                            <button class="btn" style="background: #2d3345; color: white; border: 1px solid rgba(255,255,255,0.1);" onclick="playAnim('walk')">Walk</button>
+                            <button class="btn" style="background: #2d3345; color: white; border: 1px solid rgba(255,255,255,0.1);" onclick="playAnim('attack')">Attack</button>
+                            <button class="btn" style="background: #2d3345; color: white; border: 1px solid rgba(255,255,255,0.1);" onclick="playAnim('death')">Death</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Кнопки скинов -->
+                    <div>
+                        <h3 style="color: white; margin-bottom: 20px; font-size: 1.3rem; border-left: 4px solid #2C5F5F; padding-left: 15px;">👕 Скины</h3>
+                        <div style="display: flex; gap: 15px; flex-wrap: wrap;" id="skin-buttons">
+                            <button class="btn" style="background: #2C5F5F; color: white;" onclick="setSkin('Armored')">Armored</button>
+                            <button class="btn" style="background: #2C5F5F; color: white;" onclick="setSkin('Classic')">Classic</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         
-        // Функция переключения анимации
-        function playAnim(animName) {
-            const player = window.batPlayer;
-            if (!player) return;
-            
-            document.querySelectorAll('#animation-buttons .btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-            
-            player.setAnimation(animName, true);
-        }
+        <!-- Подключаем Spine Web Player -->
+        <script src="https://unpkg.com/@esotericsoftware/spine-player@4.2.*/dist/iife/spine-player.min.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/@esotericsoftware/spine-player@4.2.*/dist/spine-player.min.css">
         
-        // Функция переключения скина
-        function setSkin(skinName) {
-            const player = window.batPlayer;
-            if (!player) return;
-            
-            document.querySelectorAll('#skin-buttons .btn').forEach(btn => {
-                btn.classList.remove('active');
+        <script>
+            // Создаём плеер для Bat с твоими реальными файлами
+            const player = new spine.SpinePlayer("bat-player", {
+                // Пути к твоим файлам на GitHub
+                skeleton: "/spine/bat/Bat.json",
+                atlas: "/spine/bat/Bat.atlas",
+                
+                // Анимации из твоего проекта
+                animation: "idle",
+                animations: ["idle", "walk", "attack", "death"],
+                
+                // Скины из твоего проекта
+                skins: ["Armored", "Classic"],
+                skin: "Armored",
+                
+                showControls: true,
+                backgroundColor: "#1e2333",
+                premultipliedAlpha: true,
+                defaultMix: 0.25,
+                
+                success: function(player) {
+                    console.log("Bat успешно загружен!");
+                    window.batPlayer = player;
+                    
+                    // Активируем первую кнопку анимации
+                    document.querySelector('#animation-buttons .btn')?.classList.add('active');
+                    document.querySelector('#skin-buttons .btn')?.classList.add('active');
+                },
+                
+                error: function(error) {
+                    console.error("Ошибка загрузки Bat:", error);
+                    document.getElementById('bat-player').innerHTML = '<div style="color: red; padding: 20px;">Ошибка загрузки. Проверь пути к файлам.</div>';
+                }
             });
-            event.target.classList.add('active');
             
-            if (player.skeleton) {
-                player.skeleton.setSkinByName(skinName);
-                player.skeleton.setSlotsToSetupPose();
+            // Функция переключения анимации
+            function playAnim(animName) {
+                const player = window.batPlayer;
+                if (!player) return;
+                
+                document.querySelectorAll('#animation-buttons .btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                event.target.classList.add('active');
+                
+                player.setAnimation(animName, true);
             }
-        }
-    </script>
+            
+            // Функция переключения скина
+            function setSkin(skinName) {
+                const player = window.batPlayer;
+                if (!player) return;
+                
+                document.querySelectorAll('#skin-buttons .btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                event.target.classList.add('active');
+                
+                if (player.skeleton) {
+                    player.skeleton.setSkinByName(skinName);
+                    player.skeleton.setSlotsToSetupPose();
+                }
+            }
+        </script>
+        
+        <!-- Стили для активных кнопок -->
+        <style>
+            #animation-buttons .btn.active {
+                background: #AEBAFF !important;
+                color: #1a1f2e !important;
+                box-shadow: 0 0 20px rgba(174,186,255,0.5);
+            }
+            
+            #skin-buttons .btn.active {
+                background: #3a8f8f !important;
+                box-shadow: 0 0 20px rgba(44,95,95,0.5);
+            }
+        </style>
         
         <!-- ===== КОНТАКТЫ ===== -->
         <section id="contacts" class="contacts-section">
@@ -700,5 +752,6 @@
 </body>
 
 </html>
+
 
 
