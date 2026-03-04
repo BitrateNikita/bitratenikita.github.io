@@ -1,0 +1,66 @@
+CorruptedPriestBoss.png
+size:2048,2048
+filter:Linear,Linear
+pma:true
+scale:0.5
+Body
+bounds:100,366,668,711
+Chain 1
+bounds:1754,19,271,381
+rotate:180
+Chain 2
+bounds:3,494,109,583
+Chain 3
+bounds:553,7,128,268
+rotate:90
+Coat 1_1
+bounds:569,247,277,705
+rotate:90
+Coat 2_1
+bounds:1067,176,193,600
+rotate:270
+Coat_back
+bounds:740,424,653,534
+rotate:270
+Collar
+bounds:359,75,372,288
+Head
+bounds:1779,403,266,418
+rotate:180
+Left arm_1
+bounds:1919,831,126,135
+Left arm_2
+bounds:1560,473,395,604
+Left leg
+bounds:1560,906,149,171
+offsets:1,12,151,183
+Right hand 1
+bounds:183,12,163,165
+offsets:0,0,170,165
+Right hand item
+bounds:3,180,232,353
+rotate:90
+Right leg
+bounds:3,20,157,177
+offsets:1,0,159,177
+rotate:90
+Right shoulder
+bounds:1576,227,177,244
+offsets:1,1,178,245
+Shadow
+bounds:1276,342,735,281
+offsets:22,9,774,309
+rotate:90
+Sphere 1
+bounds:1067,47,163,249
+offsets:1,1,165,251
+rotate:90
+Sphere 2
+bounds:1756,128,154,272
+offsets:1,1,155,274
+Sphere 3
+bounds:824,129,171,240
+rotate:90
+Tabard
+bounds:1319,3,181,198
+rotate:90
