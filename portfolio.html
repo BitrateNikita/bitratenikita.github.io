@@ -590,120 +590,292 @@
         <!-- ===== БЛОК ИНТЕРАКТИВНОЙ АНИМАЦИИ ===== -->
         <section class="section-colored" style="background: linear-gradient(135deg, #1a1f2e, #2a2f3e);">
             <div class="container">
-                <h2 class="section-title" style="color: white;">🦇 Живая анимация</h2>
-                <p style="text-align: center; color: #b0b7cc; margin-bottom: 40px;">Переключай анимации и скины прямо в браузере</p>
+                <h2 class="section-title" style="color: white;">🎮 Живые анимации</h2>
+                <p style="text-align: center; color: #b0b7cc; margin-bottom: 40px;">Выбери персонажа и управляй анимациями</p>
+                
+                <!-- Категории -->
+                <div style="display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap;" id="category-tabs">
+                    <button class="category-btn active" onclick="filterCharacters('all')">Все</button>
+                    <button class="category-btn" onclick="filterCharacters('vampire')">Вампиры</button>
+                    <button class="category-btn" onclick="filterCharacters('boss')">Боссы</button>
+                    <button class="category-btn" onclick="filterCharacters('monster')">Монстры</button>
+                </div>
+                
+                <!-- Сетка персонажей -->
+                <div class="character-grid" id="character-grid"></div>
                 
                 <!-- Контейнер для плеера -->
-                <div id="bat-player" style="width: 100%; height: 500px; background: #1e2333; border-radius: 20px; overflow: hidden; margin-bottom: 30px;"></div>
+                <div id="bat-player" style="width: 100%; height: 500px; background: #1e2333; border-radius: 20px; overflow: hidden; margin: 30px 0;"></div>
                 
-                <!-- Панель управления -->
-                <div style="background: rgba(0,0,0,0.3); border-radius: 20px; padding: 30px;">
-                    
-                    <!-- Кнопки анимаций -->
-                    <div style="margin-bottom: 30px;">
-                        <h3 style="color: white; margin-bottom: 20px; font-size: 1.3rem; border-left: 4px solid #AEBAFF; padding-left: 15px;">🎬 Анимации</h3>
-                        <div style="display: flex; gap: 15px; flex-wrap: wrap;" id="animation-buttons">
-                            <button class="btn" style="background: #2d3345; color: white; border: 1px solid rgba(255,255,255,0.1);" onclick="playAnim('idle')">Idle</button>
-                            <button class="btn" style="background: #2d3345; color: white; border: 1px solid rgba(255,255,255,0.1);" onclick="playAnim('walk')">Walk</button>
-                            <button class="btn" style="background: #2d3345; color: white; border: 1px solid rgba(255,255,255,0.1);" onclick="playAnim('attack')">Attack</button>
-                            <button class="btn" style="background: #2d3345; color: white; border: 1px solid rgba(255,255,255,0.1);" onclick="playAnim('death')">Death</button>
-                        </div>
-                    </div>
-                    
-                    <!-- Кнопки скинов -->
-                    <div>
-                        <h3 style="color: white; margin-bottom: 20px; font-size: 1.3rem; border-left: 4px solid #2C5F5F; padding-left: 15px;">👕 Скины</h3>
-                        <div style="display: flex; gap: 15px; flex-wrap: wrap;" id="skin-buttons">
-                            <button class="btn" style="background: #2C5F5F; color: white;" onclick="setSkin('Armored')">Armored</button>
-                            <button class="btn" style="background: #2C5F5F; color: white;" onclick="setSkin('Classic')">Classic</button>
-                        </div>
-                    </div>
-                </div>
+                <!-- Динамические кнопки анимаций и скинов -->
+                <div id="animation-controls" style="background: rgba(0,0,0,0.3); border-radius: 20px; padding: 30px;"></div>
             </div>
         </section>
-        
+
         <!-- Подключаем Spine Web Player -->
         <script src="https://unpkg.com/@esotericsoftware/spine-player@4.2.*/dist/iife/spine-player.min.js"></script>
         <link rel="stylesheet" href="https://unpkg.com/@esotericsoftware/spine-player@4.2.*/dist/spine-player.min.css">
-        
-        <script>
-            // Создаём плеер для Bat с твоими реальными файлами
-            const player = new spine.SpinePlayer("bat-player", {
-                // Пути к твоим файлам на GitHub
-                skeleton: "/spine/bat/Bat.json",
-                atlas: "/spine/bat/Bat.atlas",
-                
-                // Анимации из твоего проекта
-                animation: "idle",
-                animations: ["idle", "walk", "attack", "death"],
-                
-                // Скины из твоего проекта
-                skins: ["Armored", "Classic"],
-                skin: "Armored",
-                
-                showControls: true,
-                backgroundColor: "#1e2333",
-                premultipliedAlpha: true,
-                defaultMix: 0.25,
-                
-                success: function(player) {
-                    console.log("Bat успешно загружен!");
-                    window.batPlayer = player;
-                    
-                    // Активируем первую кнопку анимации
-                    document.querySelector('#animation-buttons .btn')?.classList.add('active');
-                    document.querySelector('#skin-buttons .btn')?.classList.add('active');
-                },
-                
-                error: function(error) {
-                    console.error("Ошибка загрузки Bat:", error);
-                    document.getElementById('bat-player').innerHTML = '<div style="color: red; padding: 20px;">Ошибка загрузки. Проверь пути к файлам.</div>';
-                }
-            });
-            
-            // Функция переключения анимации
-            function playAnim(animName) {
-                const player = window.batPlayer;
-                if (!player) return;
-                
-                document.querySelectorAll('#animation-buttons .btn').forEach(btn => {
-                    btn.classList.remove('active');
-                });
-                event.target.classList.add('active');
-                
-                player.setAnimation(animName, true);
-            }
-            
-            // Функция переключения скина
-            function setSkin(skinName) {
-                const player = window.batPlayer;
-                if (!player) return;
-                
-                document.querySelectorAll('#skin-buttons .btn').forEach(btn => {
-                    btn.classList.remove('active');
-                });
-                event.target.classList.add('active');
-                
-                if (player.skeleton) {
-                    player.skeleton.setSkinByName(skinName);
-                    player.skeleton.setSlotsToSetupPose();
-                }
-            }
-        </script>
-        
-        <!-- Стили для активных кнопок -->
+
         <style>
-            #animation-buttons .btn.active {
-                background: #AEBAFF !important;
-                color: #1a1f2e !important;
-                box-shadow: 0 0 20px rgba(174,186,255,0.5);
+            .category-btn {
+                padding: 8px 25px;
+                border-radius: 30px;
+                background: rgba(255,255,255,0.1);
+                color: white;
+                border: 1px solid rgba(255,255,255,0.2);
+                cursor: pointer;
+                transition: 0.3s;
+                font-size: 0.95rem;
+            }
+            .category-btn.active {
+                background: var(--primary);
+                color: white;
+                border-color: var(--primary);
             }
             
-            #skin-buttons .btn.active {
-                background: #3a8f8f !important;
-                box-shadow: 0 0 20px rgba(44,95,95,0.5);
+            .character-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+                gap: 15px;
+                margin-bottom: 30px;
+                max-height: 300px;
+                overflow-y: auto;
+                padding: 15px;
+                background: rgba(0,0,0,0.2);
+                border-radius: 20px;
+                scrollbar-width: thin;
+            }
+            
+            .character-card {
+                text-align: center;
+                padding: 12px 8px;
+                border-radius: 15px;
+                background: rgba(255,255,255,0.05);
+                cursor: pointer;
+                transition: 0.3s;
+                border: 2px solid transparent;
+            }
+            .character-card:hover {
+                background: rgba(255,255,255,0.15);
+                transform: translateY(-3px);
+            }
+            .character-card.active {
+                border-color: var(--primary);
+                background: rgba(255,255,255,0.2);
+            }
+            .character-card img {
+                width: 60px;
+                height: 60px;
+                object-fit: contain;
+                margin-bottom: 8px;
+                border-radius: 10px;
+                background: rgba(0,0,0,0.3);
+            }
+            .character-card span {
+                display: block;
+                font-size: 0.8rem;
+                color: white;
+                word-break: break-word;
+            }
+            
+            .control-buttons {
+                display: flex;
+                gap: 15px;
+                flex-wrap: wrap;
+                margin-bottom: 20px;
+            }
+            .control-btn {
+                background: #2d3345;
+                color: white;
+                border: none;
+                padding: 10px 25px;
+                border-radius: 40px;
+                font-weight: 500;
+                cursor: pointer;
+                transition: 0.3s;
+                border: 1px solid rgba(255,255,255,0.1);
+            }
+            .control-btn.active {
+                background: var(--primary);
+                color: white;
+            }
+            .control-btn:hover {
+                transform: scale(1.05);
+                background: #3a4055;
+            }
+            
+            .section-title.control-section {
+                font-size: 1.2rem;
+                margin: 20px 0 15px;
+                color: white;
+                border-left: 4px solid var(--primary);
+                padding-left: 15px;
             }
         </style>
+
+        <script>
+            // Данные о персонажах (категории и пути к файлам)
+            const characters = {
+                AwakeVampire: { category: 'vampire', name: 'Awake Vampire' },
+                Bat: { category: 'monster', name: 'Bat' },
+                Boss: { category: 'boss', name: 'Boss' },
+                Catapult: { category: 'monster', name: 'Catapult' },
+                'Corrupted Priest Boss': { category: 'boss', name: 'Corrupted Priest Boss' },
+                Diver: { category: 'monster', name: 'Diver' },
+                'Evil book': { category: 'monster', name: 'Evil Book' },
+                Ghost: { category: 'monster', name: 'Ghost' },
+                HeavyVampire: { category: 'vampire', name: 'Heavy Vampire' },
+                // Добавь остальных персонажей по мере загрузки
+            };
+            
+            // Соответствие ключей персонажей именам файлов иконок
+            const iconMap = {
+                'AwakeVampire': 'AwakeVampire',
+                'Bat': 'Bat-Armored',
+                'Boss': 'Boss',
+                'Catapult': 'Catapult',
+                'Corrupted Priest Boss': 'Corrupted Priest Boss',
+                'Diver': 'Driver', // в твоём списке есть Driver.png
+                'Evil book': 'Evil book',
+                'Ghost': 'Ghost',
+                'HeavyVampire': 'HeavyVampire',
+            };
+            
+            let currentPlayer = null;
+            let currentCharacter = 'Bat';
+            
+            // Функция для отображения сетки персонажей
+            function renderCharacterGrid(filter = 'all') {
+                const grid = document.getElementById('character-grid');
+                grid.innerHTML = '';
+                
+                Object.entries(characters).forEach(([key, char]) => {
+                    if (filter === 'all' || char.category === filter) {
+                        const card = document.createElement('div');
+                        card.className = `character-card ${key === currentCharacter ? 'active' : ''}`;
+                        card.onclick = () => loadCharacter(key);
+                        
+                        const iconFile = iconMap[key] || key;
+                        const iconPath = `icons/${iconFile}.png`;
+                        
+                        card.innerHTML = `
+                            <img src="${iconPath}" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'60\\' height=\\'60\\'><rect width=\\'60\\' height=\\'60\\' fill=\\'%232d3345\\'/><text x=\\'30\\' y=\\'35\\' font-size=\\'12\\' fill=\\'white\\' text-anchor=\\'middle\\'>${char.name[0]}</text></svg>'">
+                            <span>${char.name}</span>
+                        `;
+                        grid.appendChild(card);
+                    }
+                });
+            }
+            
+            // Функция загрузки персонажа в плеер
+            function loadCharacter(charKey) {
+                currentCharacter = charKey;
+                
+                // Обновляем активный класс в сетке
+                document.querySelectorAll('.character-card').forEach(card => {
+                    card.classList.remove('active');
+                });
+                if (event && event.target) {
+                    const card = event.target.closest('.character-card');
+                    if (card) card.classList.add('active');
+                }
+                
+                // Если плеер уже существует, уничтожаем его
+                if (currentPlayer) {
+                    currentPlayer.destroy();
+                }
+                
+                // Создаём новый плеер
+                currentPlayer = new spine.SpinePlayer("bat-player", {
+                    skeleton: `/spine/${charKey}/${charKey}.json`,
+                    atlas: `/spine/${charKey}/${charKey}.atlas`,
+                    showControls: false,
+                    backgroundColor: "#1e2333",
+                    premultipliedAlpha: true,
+                    defaultMix: 0.25,
+                    
+                    success: function(player) {
+                        console.log(`Загружен персонаж: ${charKey}`);
+                        
+                        // Получаем списки анимаций и скинов из загруженного скелета
+                        const animations = player.skeleton.data.animations.map(a => a.name);
+                        const skins = player.skeleton.data.skins.map(s => s.name);
+                        
+                        // Создаём кнопки управления
+                        createControlButtons(animations, skins);
+                    }
+                });
+            }
+            
+            // Функция создания кнопок анимаций и скинов
+            function createControlButtons(animations, skins) {
+                const controls = document.getElementById('animation-controls');
+                
+                let html = '';
+                
+                // Кнопки анимаций
+                html += '<div class="section-title control-section">🎬 Анимации</div>';
+                html += '<div class="control-buttons" id="anim-buttons">';
+                animations.forEach(anim => {
+                    html += `<button class="control-btn" onclick="playAnimation('${anim}')">${anim}</button>`;
+                });
+                html += '</div>';
+                
+                // Кнопки скинов (если есть)
+                if (skins.length > 0) {
+                    html += '<div class="section-title control-section">👕 Скины</div>';
+                    html += '<div class="control-buttons" id="skin-buttons">';
+                    skins.forEach(skin => {
+                        html += `<button class="control-btn" onclick="setSkin('${skin}')">${skin}</button>`;
+                    });
+                    html += '</div>';
+                }
+                
+                controls.innerHTML = html;
+            }
+            
+            // Функция воспроизведения анимации
+            function playAnimation(animName) {
+                if (!currentPlayer) return;
+                
+                // Обновляем активный класс
+                document.querySelectorAll('#anim-buttons .control-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                event.target.classList.add('active');
+                
+                currentPlayer.setAnimation(animName, true);
+            }
+            
+            // Функция смены скина
+            function setSkin(skinName) {
+                if (!currentPlayer || !currentPlayer.skeleton) return;
+                
+                document.querySelectorAll('#skin-buttons .control-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                event.target.classList.add('active');
+                
+                currentPlayer.skeleton.setSkinByName(skinName);
+                currentPlayer.skeleton.setSlotsToSetupPose();
+            }
+            
+            // Функция фильтрации по категориям
+            function filterCharacters(category) {
+                document.querySelectorAll('.category-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                event.target.classList.add('active');
+                
+                renderCharacterGrid(category);
+            }
+            
+            // Инициализация при загрузке страницы
+            window.onload = function() {
+                renderCharacterGrid('all');
+                loadCharacter('Bat');
+            };
+        </script>
         
         <!-- ===== КОНТАКТЫ ===== -->
         <section id="contacts" class="contacts-section">
