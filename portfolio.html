@@ -816,7 +816,7 @@
                 });
             }
 
-            // Функция создания кнопок анимаций и скинов
+            // Функция создания кнопок анимаций и скинов (исправленная)
             function createControlButtons(animations, skins) {
                 const controls = document.getElementById('animation-controls');
                 let html = '';
@@ -826,7 +826,8 @@
                 html += '<div class="control-buttons" id="anim-buttons">';
                 animations.forEach((anim, index) => {
                     const isActive = index === 0 ? 'active' : '';
-                    html += `<button class="control-btn ${isActive}" onclick="playAnimation('${anim}')">${anim}</button>`;
+                    // 👇 Передаём this через onclick
+                    html += `<button class="control-btn ${isActive}" onclick="playAnimation('${anim}', this)">${anim}</button>`;
                 });
                 html += '</div>';
 
@@ -835,7 +836,8 @@
                     html += '<div class="section-title control-section">👕 Скины</div>';
                     html += '<div class="control-buttons" id="skin-buttons">';
                     skins.forEach(skin => {
-                        html += `<button class="control-btn" onclick="setSkin('${skin}')">${skin}</button>`;
+                        // 👇 Передаём this через onclick
+                        html += `<button class="control-btn" onclick="setSkin('${skin}', this)">${skin}</button>`;
                     });
                     html += '</div>';
                 }
@@ -843,26 +845,26 @@
                 controls.innerHTML = html;
             }
 
-            // Функция воспроизведения анимации
-            function playAnimation(animName) {
+            // Функция воспроизведения анимации (исправленная)
+            function playAnimation(animName, btnElement) {
                 if (!currentPlayer) return;
 
                 document.querySelectorAll('#anim-buttons .control-btn').forEach(btn => {
                     btn.classList.remove('active');
                 });
-                event.target.classList.add('active');
+                btnElement.classList.add('active');
 
                 currentPlayer.setAnimation(animName, true);
             }
 
-            // Функция смены скина
-            function setSkin(skinName) {
+            // Функция смены скина (исправленная)
+            function setSkin(skinName, btnElement) {
                 if (!currentPlayer || !currentPlayer.skeleton) return;
 
                 document.querySelectorAll('#skin-buttons .control-btn').forEach(btn => {
                     btn.classList.remove('active');
                 });
-                event.target.classList.add('active');
+                btnElement.classList.add('active');
 
                 currentPlayer.skeleton.setSkinByName(skinName);
                 currentPlayer.skeleton.setSlotsToSetupPose();
