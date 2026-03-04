@@ -1,0 +1,33 @@
+EvilBook.png
+	size: 2048, 1024
+	filter: Linear, Linear
+	pma: true
+Bookmark1
+	bounds: 934, 280, 72, 216
+	rotate: 90
+Bookmark2
+	bounds: 1681, 45, 74, 237
+	rotate: 90
+Eye
+	bounds: 1598, 488, 355, 262
+	offsets: 1, 1, 357, 264
+	rotate: 90
+Left book teeth
+	bounds: 1162, 193, 189, 355
+	offsets: 0, 1, 190, 356
+	rotate: 90
+Left book1
+	bounds: 934, 355, 338, 488
+Light
+	bounds: 3, 3, 928, 840
+	offsets: 73, 97, 1067, 963
+Page vfx
+	bounds: 1600, 121, 229, 364
+Right book teeth
+	bounds: 934, 11, 179, 350
+	rotate: 90
+Right book1
+	bounds: 1275, 362, 322, 481
+Tongue
+	bounds: 1299, 65, 132, 397
+	rotate: 90

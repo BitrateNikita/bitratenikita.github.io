@@ -1,0 +1,31 @@
+Diver.png
+size:2048,512
+filter:Linear,Linear
+pma:true
+Armor
+bounds:1241,13,321,194
+rotate:90
+Baloon
+bounds:1061,31,177,303
+Body
+bounds:340,11,284,323
+Head
+bounds:3,3,334,331
+offsets:11,1,347,333
+Hose
+bounds:1541,110,165,224
+Left arm
+bounds:1438,83,106,251
+Left leg
+bounds:1698,171,100,163
+rotate:180
+Right arm
+bounds:595,86,248,463
+offsets:60,0,308,463
+rotate:270
+Right leg
+bounds:853,225,109,174
+rotate:90
+Stic
+bounds:1785,184,95,150
+offsets:0,313,308,463

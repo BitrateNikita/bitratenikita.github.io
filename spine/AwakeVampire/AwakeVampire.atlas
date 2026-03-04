@@ -1,23 +1,23 @@
 AwakeVampire.png
-size:946,343
-filter:Linear,Linear
-pma:true
+	size: 946, 343
+	filter: Linear, Linear
+	pma: true
 Body
-bounds:326,19,261,322
+	bounds: 326, 19, 261, 322
 Head 2
-bounds:2,52,347,289
+	bounds: 2, 52, 347, 289
 Left arm
-bounds:722,88,109,253
-rotate:180
+	bounds: 722, 88, 109, 253
+	rotate: 180
 Left leg
-bounds:772,2,104,163
-rotate:270
+	bounds: 772, 2, 104, 163
+	rotate: 270
 Right arm
-bounds:589,33,136,301
+	bounds: 589, 33, 136, 301
 Right leg
-bounds:833,163,111,178
+	bounds: 833, 163, 111, 178
 ear l
-bounds:2,72,68,85
+	bounds: 2, 72, 68, 85
 ear r
-bounds:217,6,125,77
-offsets:3,0,128,77
+	bounds: 217, 6, 125, 77
+	offsets: 3, 0, 128, 77

@@ -1,0 +1,21 @@
+HeavyVampire.png
+	size: 2048, 512
+	filter: Linear, Linear
+	pma: true
+Body
+	bounds: 1535, 63, 329, 323
+	rotate: 90
+Head
+	bounds: 1072, 3, 389, 460
+	rotate: 270
+Left arm
+	bounds: 547, 106, 286, 554
+	rotate: 90
+Left leg
+	bounds: 1779, 284, 108, 149
+	rotate: 270
+Right arm
+	bounds: 3, 108, 284, 561
+	rotate: 90
+Right leg
+	bounds: 1922, 243, 108, 149

@@ -1,38 +1,38 @@
 Bat.png
-size:1960,647
-filter:Linear,Linear
-pma:true
+	size: 1960, 647
+	filter: Linear, Linear
+	pma: true
 hair
-bounds:2,504,95,141
-offsets:3,2,100,145
+	bounds: 2, 504, 95, 141
+	offsets: 3, 2, 100, 145
 head
-bounds:201,2,312,341
-rotate:270
+	bounds: 201, 2, 312, 341
+	rotate: 270
 head_armored
-bounds:694,12,311,417
-rotate:270
+	bounds: 694, 12, 311, 417
+	rotate: 270
 leg l
-bounds:99,495,45,49
-offsets:2,2,49,53
+	bounds: 99, 495, 45, 49
+	offsets: 2, 2, 49, 53
 leg l_armored
-bounds:99,546,49,45
-offsets:2,2,53,49
+	bounds: 99, 546, 49, 45
+	offsets: 2, 2, 53, 49
 leg r
-bounds:99,593,45,52
-offsets:2,2,49,57
+	bounds: 99, 593, 45, 52
+	offsets: 2, 2, 49, 57
 leg r_armored
-bounds:2,453,44,49
-offsets:3,2,50,53
+	bounds: 2, 453, 44, 49
+	offsets: 3, 2, 50, 53
 tail
-bounds:2,92,190,211
+	bounds: 2, 92, 190, 211
 tail_armored
-bounds:493,20,190,208
+	bounds: 493, 20, 190, 208
 wing l
-bounds:1036,278,555,367
+	bounds: 1036, 278, 555, 367
 wing l_armored
-bounds:1593,87,558,365
-rotate:90
+	bounds: 1593, 87, 558, 365
+	rotate: 90
 wing r
-bounds:2,282,560,363
+	bounds: 2, 282, 560, 363
 wing r_armored
-bounds:474,283,560,362
+	bounds: 474, 283, 560, 362

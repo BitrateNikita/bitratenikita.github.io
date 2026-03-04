@@ -1,0 +1,24 @@
+Ghost.png
+	size: 2048, 512
+	filter: Linear, Linear
+	pma: true
+Body
+	bounds: 914, 80, 329, 595
+	rotate: 90
+Chain left
+	bounds: 76, 83, 70, 326
+Chain right
+	bounds: 3, 41, 72, 368
+	offsets: 0, 18, 72, 386
+Hair
+	bounds: 149, 169, 240, 762
+	rotate: 90
+Head
+	bounds: 1427, 3, 406, 386
+	rotate: 270
+Left arm
+	bounds: 1694, 254, 155, 261
+	rotate: 270
+Right arm
+	bounds: 701, 12, 165, 243
+	rotate: 90
