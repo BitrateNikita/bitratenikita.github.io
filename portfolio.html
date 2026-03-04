@@ -714,61 +714,49 @@
         </style>
 
         <script>
-            // Данные о персонажах (категории и пути к файлам)
+            // Данные о персонажах (категории и названия)
             const characters = {
                 AwakeVampire: { category: 'vampire', name: 'Awake Vampire' },
                 Bat: { category: 'monster', name: 'Bat' },
                 Boss: { category: 'boss', name: 'Boss' },
                 Catapult: { category: 'monster', name: 'Catapult' },
-                'Corrupted Priest Boss': { category: 'boss', name: 'Corrupted Priest Boss' },
+                CorruptedPriestBoss: { category: 'boss', name: 'Corrupted Priest Boss' },
                 Diver: { category: 'monster', name: 'Diver' },
-                'Evil book': { category: 'monster', name: 'Evil Book' },
+                EvilBook: { category: 'monster', name: 'Evil Book' },
                 Ghost: { category: 'monster', name: 'Ghost' },
                 HeavyVampire: { category: 'vampire', name: 'Heavy Vampire' },
             };
-            
+
             // Соответствие ключей персонажей именам файлов иконок
             const iconMap = {
                 'AwakeVampire': 'AwakeVampire',
                 'Bat': 'Bat-Armored',
                 'Boss': 'Boss',
                 'Catapult': 'Catapult',
-                'Corrupted Priest Boss': 'Corrupted Priest Boss',
-                'Diver': 'Driver', // важно: у тебя файл Driver.png, а не Diver.png
-                'Evil book': 'Evil book',
+                'CorruptedPriestBoss': 'CorruptedPriestBoss',
+                'Diver': 'Diver',
+                'EvilBook': 'EvilBook',
                 'Ghost': 'Ghost',
                 'HeavyVampire': 'HeavyVampire',
             };
-            
+
             let currentPlayer = null;
             let currentCharacter = 'Bat';
-            
-            // Функция для определения правильного расширения .atlas (с .txt или без)
-            function getAtlasPath(charKey) {
-                // Список персонажей, у которых .atlas.txt (все, кроме AwakeVampire и Bat?)
-                const needsTxt = ['Boss', 'Catapult', 'Corrupted Priest Boss', 'Diver', 'Evil book', 'Ghost', 'HeavyVampire'];
-                
-                if (needsTxt.includes(charKey)) {
-                    return `/spine/${charKey}/${charKey}.atlas.txt`;
-                } else {
-                    return `/spine/${charKey}/${charKey}.atlas`;
-                }
-            }
-            
+
             // Функция для отображения сетки персонажей
             function renderCharacterGrid(filter = 'all') {
                 const grid = document.getElementById('character-grid');
                 grid.innerHTML = '';
-                
+
                 Object.entries(characters).forEach(([key, char]) => {
                     if (filter === 'all' || char.category === filter) {
                         const card = document.createElement('div');
                         card.className = `character-card ${key === currentCharacter ? 'active' : ''}`;
                         card.onclick = () => loadCharacter(key);
-                        
+
                         const iconFile = iconMap[key] || key;
                         const iconPath = `icons/${iconFile}.png`;
-                        
+
                         card.innerHTML = `
                             <img src="${iconPath}" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'60\\' height=\\'60\\'><rect width=\\'60\\' height=\\'60\\' fill=\\'%232d3345\\'/><text x=\\'30\\' y=\\'35\\' font-size=\\'12\\' fill=\\'white\\' text-anchor=\\'middle\\'>${char.name[0]}</text></svg>'">
                             <span>${char.name}</span>
@@ -777,11 +765,11 @@
                     }
                 });
             }
-            
+
             // Функция загрузки персонажа в плеер
             function loadCharacter(charKey) {
                 currentCharacter = charKey;
-                
+
                 // Обновляем активный класс в сетке
                 document.querySelectorAll('.character-card').forEach(card => {
                     card.classList.remove('active');
@@ -790,53 +778,49 @@
                     const card = event.target.closest('.character-card');
                     if (card) card.classList.add('active');
                 }
-                
-                // Если плеер уже существует, уничтожаем его
+
+                // Уничтожаем старый плеер, если он есть
                 if (currentPlayer) {
                     currentPlayer.destroy();
                 }
-                
-                // Определяем путь к atlas (с .txt или без)
-                const atlasPath = getAtlasPath(charKey);
-                
-                // Создаём новый плеер
+
+                // Создаём новый плеер с прямыми путями к файлам
                 currentPlayer = new spine.SpinePlayer("bat-player", {
                     skeleton: `/spine/${charKey}/${charKey}.json`,
-                    atlas: atlasPath,
+                    atlas: `/spine/${charKey}/${charKey}.atlas`,
                     showControls: false,
                     backgroundColor: "#1e2333",
                     premultipliedAlpha: true,
                     defaultMix: 0.25,
-                    
+
                     success: function(player) {
                         console.log(`Загружен персонаж: ${charKey}`);
-                        
+
                         // Получаем списки анимаций и скинов из загруженного скелета
                         const animations = player.skeleton.data.animations.map(a => a.name);
                         const skins = player.skeleton.data.skins.map(s => s.name);
-                        
+
                         // Запускаем первую анимацию с зацикливанием
                         if (animations.length > 0) {
                             player.setAnimation(animations[0], true);
                         }
-                        
+
                         // Создаём кнопки управления
                         createControlButtons(animations, skins);
                     },
-                    
+
                     error: function(error) {
                         console.error("Ошибка загрузки:", error);
                         document.getElementById('bat-player').innerHTML = '<div style="color: red; padding: 20px;">Ошибка загрузки. Проверь пути к файлам.</div>';
                     }
                 });
             }
-            
+
             // Функция создания кнопок анимаций и скинов
             function createControlButtons(animations, skins) {
                 const controls = document.getElementById('animation-controls');
-                
                 let html = '';
-                
+
                 // Кнопки анимаций
                 html += '<div class="section-title control-section">🎬 Анимации</div>';
                 html += '<div class="control-buttons" id="anim-buttons">';
@@ -845,7 +829,7 @@
                     html += `<button class="control-btn ${isActive}" onclick="playAnimation('${anim}')">${anim}</button>`;
                 });
                 html += '</div>';
-                
+
                 // Кнопки скинов (если есть)
                 if (skins.length > 0) {
                     html += '<div class="section-title control-section">👕 Скины</div>';
@@ -855,46 +839,45 @@
                     });
                     html += '</div>';
                 }
-                
+
                 controls.innerHTML = html;
             }
-            
+
             // Функция воспроизведения анимации
             function playAnimation(animName) {
                 if (!currentPlayer) return;
-                
-                // Обновляем активный класс
+
                 document.querySelectorAll('#anim-buttons .control-btn').forEach(btn => {
                     btn.classList.remove('active');
                 });
                 event.target.classList.add('active');
-                
+
                 currentPlayer.setAnimation(animName, true);
             }
-            
+
             // Функция смены скина
             function setSkin(skinName) {
                 if (!currentPlayer || !currentPlayer.skeleton) return;
-                
+
                 document.querySelectorAll('#skin-buttons .control-btn').forEach(btn => {
                     btn.classList.remove('active');
                 });
                 event.target.classList.add('active');
-                
+
                 currentPlayer.skeleton.setSkinByName(skinName);
                 currentPlayer.skeleton.setSlotsToSetupPose();
             }
-            
+
             // Функция фильтрации по категориям
             function filterCharacters(category) {
                 document.querySelectorAll('.category-btn').forEach(btn => {
                     btn.classList.remove('active');
                 });
                 event.target.classList.add('active');
-                
+
                 renderCharacterGrid(category);
             }
-            
+
             // Инициализация при загрузке страницы
             window.onload = function() {
                 renderCharacterGrid('all');
