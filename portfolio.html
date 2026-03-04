@@ -734,21 +734,23 @@
                 currentCharacterId = characterId;
                 const container = document.getElementById('spine-player-container');
                 
-                // Показываем заглушку загрузки
-                container.innerHTML = '<div style="color: white; text-align: center; padding: 100px;">Загрузка...</div>';
+                // Полностью очищаем контейнер перед загрузкой нового плеера
+                container.innerHTML = '';
                 
                 // Уничтожаем старый плеер если есть
                 if (currentPlayer) {
-                    try { currentPlayer.destroy(); } catch(e) {}
+                    try { 
+                        currentPlayer.destroy(); 
+                    } catch(e) {}
                     currentPlayer = null;
                 }
-        
+            
                 // Формируем пути к файлам
                 const skeletonPath = `/spine/${characterId}/${characterId}.json`;
                 const atlasPath = `/spine/${characterId}/${characterId}.atlas`;
-        
+            
                 console.log('Загружаем:', skeletonPath);
-        
+            
                 // Создаём новый плеер
                 currentPlayer = new spine.SpinePlayer("spine-player-container", {
                     skeleton: skeletonPath,
@@ -757,7 +759,7 @@
                     backgroundColor: "#1e2333",
                     premultipliedAlpha: true,
                     defaultMix: 0.25,
-        
+            
                     success: function(player) {
                         console.log('Успешно загружен:', characterId);
                         
@@ -778,7 +780,7 @@
                             card.classList.toggle('active', card.dataset.id === characterId);
                         });
                     },
-        
+            
                     error: function(error) {
                         console.error('Ошибка загрузки:', characterId, error);
                         container.innerHTML = '<div style="color: red; text-align: center; padding: 100px;">Ошибка загрузки. Проверь пути к файлам.</div>';
@@ -916,6 +918,7 @@
 </body>
 
 </html>
+
 
 
 
