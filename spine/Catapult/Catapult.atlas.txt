@@ -1,0 +1,36 @@
+Catapult.png
+size:2048,2048
+filter:Linear,Linear
+pma:true
+Base
+bounds:327,539,659,696
+offsets:0,38,659,734
+Hank
+bounds:379,349,308,188
+offsets:1,2,310,191
+Lever down
+bounds:1813,922,313,208
+rotate:90
+Lever2
+bounds:3,3,445,1232
+Light
+bounds:1737,587,232,232
+offsets:1,30,255,263
+Projectile
+bounds:1434,822,413,376
+offsets:1,1,415,378
+rotate:90
+Projectile shadow
+bounds:989,381,351,244
+offsets:7,18,369,264
+Shield
+bounds:989,628,607,442
+offsets:1,1,610,448
+rotate:90
+Wheel
+bounds:1434,489,300,330
+offsets:2,1,303,332
+volume
+bounds:641,232,442,192
+volume2
+bounds:1348,352,442,194

@@ -1,0 +1,739 @@
+Boss.png
+size:4096,4096
+filter:Linear,Linear
+pma:true
+scale:0.4
+Arm
+bounds:12,2147,63,145
+offsets:0,0,63,151
+Bell 1_
+bounds:1443,2402,266,364
+Bell 2
+bounds:1879,2349,190,118
+Bell 3_
+bounds:92,2222,54,73
+Bell shadow
+bounds:1889,2491,275,181
+offsets:1,1,277,183
+rotate:90
+Blade
+bounds:977,1771,995,463
+offsets:0,1,995,464
+rotate:90
+Body
+bounds:3908,2503,159,263
+Guitar
+bounds:1713,2470,296,173
+rotate:90
+Hair
+bounds:898,2127,48,74
+rotate:90
+Line 1
+bounds:4034,2695,55,71
+Line 2
+bounds:4013,1967,80,29
+Novice
+bounds:3908,2244,148,257
+Novice 2
+bounds:3909,1984,148,257
+Shadow
+bounds:3959,1504,90,206
+Shadow n
+bounds:2082,2153,143,83
+offsets:3,2,148,88
+Shadow n2
+bounds:830,2178,143,83
+offsets:2,2,148,88
+Shadow r
+bounds:2082,2239,166,103
+offsets:15,9,190,121
+wheel l/wheel l_00000
+bounds:3,1417,199,209
+offsets:1,1,204,211
+rotate:90
+wheel l/wheel l_00001
+bounds:2073,2345,200,209
+offsets:1,1,204,211
+wheel l/wheel l_00002
+bounds:3296,2137,201,207
+offsets:1,2,204,211
+wheel l/wheel l_00003
+bounds:835,958,201,205
+offsets:1,3,204,211
+rotate:90
+wheel l/wheel l_00004
+bounds:2657,900,202,203
+offsets:1,4,204,211
+rotate:90
+wheel l/wheel l_00005
+bounds:615,391,202,199
+offsets:1,6,204,211
+wheel l/wheel l_00006
+bounds:2881,97,202,193
+offsets:1,10,204,211
+wheel l/wheel l_00007
+bounds:3299,293,203,197
+offsets:1,7,204,211
+wheel l/wheel l_00008
+bounds:618,593,202,201
+offsets:1,5,204,211
+wheel l/wheel l_00009
+bounds:3069,696,201,203
+offsets:1,4,204,211
+rotate:90
+wheel l/wheel l_00010
+bounds:3092,2137,201,207
+offsets:1,2,204,211
+wheel l/wheel l_00011
+bounds:2256,1715,200,208
+offsets:1,1,204,211
+wheel l/wheel l_00012
+bounds:3697,2557,200,209
+offsets:1,1,204,211
+wheel l/wheel l_00013
+bounds:3494,2557,200,209
+offsets:1,1,204,211
+wheel l/wheel l_00014
+bounds:2053,1715,200,208
+offsets:1,1,204,211
+wheel l/wheel l_00015
+bounds:2888,2137,201,207
+offsets:1,2,204,211
+wheel l/wheel l_00016
+bounds:3277,900,201,204
+offsets:1,3,204,211
+rotate:90
+wheel l/wheel l_00017
+bounds:413,600,202,201
+offsets:1,5,204,211
+wheel l/wheel l_00018
+bounds:2060,293,203,197
+offsets:1,7,204,211
+wheel l/wheel l_00019
+bounds:1640,85,196,193
+offsets:1,8,204,211
+wheel l/wheel l_00020
+bounds:413,395,202,199
+offsets:1,6,204,211
+rotate:90
+wheel l/wheel l_00021
+bounds:2451,900,202,203
+offsets:1,4,204,211
+rotate:90
+wheel l/wheel l_00022
+bounds:627,1001,201,205
+offsets:1,3,204,211
+rotate:90
+wheel l/wheel l_00023
+bounds:2684,2137,201,207
+offsets:1,2,204,211
+wheel l/wheel l_00024
+bounds:3291,2557,200,209
+offsets:1,1,204,211
+wheel l/wheel l_00025
+bounds:1613,1424,199,209
+offsets:1,1,204,211
+rotate:90
+wheel l/wheel l_00026
+bounds:3088,2557,200,209
+offsets:1,1,204,211
+wheel l/wheel l_00027
+bounds:2480,2137,201,207
+offsets:1,2,204,211
+wheel l/wheel l_00028
+bounds:419,1008,201,205
+offsets:1,3,204,211
+rotate:90
+wheel l/wheel l_00029
+bounds:1886,900,202,203
+offsets:1,4,204,211
+rotate:90
+wheel l/wheel l_00030
+bounds:208,398,202,199
+offsets:1,6,204,211
+wheel l/wheel l_00031
+bounds:3896,97,196,193
+offsets:1,10,204,211
+wheel l/wheel l_00032
+bounds:413,192,202,196
+offsets:1,7,204,211
+wheel l/wheel l_00033
+bounds:1865,493,202,200
+offsets:1,5,204,211
+wheel l/wheel l_00034
+bounds:2496,696,201,203
+offsets:1,4,204,211
+rotate:90
+wheel l/wheel l_00035
+bounds:2276,2137,201,207
+offsets:1,2,204,211
+wheel l/wheel l_00036
+bounds:1646,1838,200,208
+offsets:1,1,204,211
+wheel l/wheel l_00037
+bounds:2885,2557,200,209
+offsets:1,1,204,211
+wheel l/wheel l_00038
+bounds:1847,1499,199,209
+offsets:1,1,204,211
+wheel l/wheel l_00039
+bounds:1850,1923,200,208
+offsets:1,1,204,211
+wheel l/wheel l_00040
+bounds:1443,2192,201,207
+offsets:1,2,204,211
+wheel l/wheel l_00041
+bounds:3070,900,201,204
+offsets:1,3,204,211
+rotate:90
+wheel l/wheel l_00042
+bounds:208,600,202,201
+offsets:1,5,204,211
+wheel l/wheel l_00043
+bounds:1435,206,202,197
+offsets:1,7,204,211
+wheel l/wheel l_00044
+bounds:3492,96,199,194
+offsets:1,8,204,211
+wheel l/wheel l_00045
+bounds:3,398,202,199
+offsets:1,6,204,211
+wheel l/wheel l_00046
+bounds:1455,812,202,202
+offsets:1,4,204,211
+wheel l/wheel l_00047
+bounds:211,1008,201,205
+offsets:1,3,204,211
+rotate:90
+wheel l/wheel l_00048
+bounds:1675,2260,201,207
+offsets:1,2,204,211
+wheel l/wheel l_00049
+bounds:3706,1925,200,208
+offsets:1,1,204,211
+wheel l/wheel l_00050
+bounds:3747,1511,199,209
+offsets:1,1,204,211
+rotate:90
+wheel l/wheel l_00051
+bounds:2682,2557,200,209
+offsets:1,1,204,211
+wheel l/wheel l_00052
+bounds:3704,2347,201,207
+offsets:1,2,204,211
+wheel l/wheel l_00053
+bounds:2258,1308,201,206
+offsets:1,2,204,211
+rotate:90
+wheel l/wheel l_00054
+bounds:1249,955,202,203
+offsets:1,4,204,211
+rotate:90
+wheel l/wheel l_00055
+bounds:1436,406,202,199
+offsets:1,6,204,211
+wheel l/wheel l_00056
+bounds:2060,97,203,193
+offsets:1,10,204,211
+wheel l/wheel l_00057
+bounds:208,196,202,196
+offsets:1,7,204,211
+wheel l/wheel l_00058
+bounds:2702,494,202,200
+offsets:1,5,204,211
+wheel l/wheel l_00059
+bounds:2290,696,201,203
+offsets:1,4,204,211
+rotate:90
+wheel l/wheel l_00060
+bounds:2049,1309,201,206
+offsets:1,2,204,211
+rotate:90
+wheel l/wheel l_00061
+bounds:1256,1160,200,207
+offsets:1,2,204,211
+rotate:90
+wheel l/wheel l_00062
+bounds:2479,2557,200,209
+offsets:1,1,204,211
+wheel l/wheel l_00063
+bounds:3535,1511,199,209
+offsets:1,1,204,211
+rotate:90
+wheel l/wheel l_00064
+bounds:3503,1925,200,208
+offsets:1,1,204,211
+wheel l/wheel l_00065
+bounds:3500,2347,201,207
+offsets:1,2,204,211
+wheel l/wheel l_00066
+bounds:3,1010,201,205
+offsets:1,3,204,211
+rotate:90
+wheel l/wheel l_00067
+bounds:3,602,202,201
+offsets:1,5,204,211
+wheel l/wheel l_00068
+bounds:820,349,203,198
+offsets:1,6,204,211
+wheel l/wheel l_00069
+bounds:1846,96,199,193
+offsets:1,9,204,211
+wheel l/wheel l_00070
+bounds:1855,292,202,198
+offsets:1,6,204,211
+wheel l/wheel l_00071
+bounds:1673,887,202,202
+offsets:1,4,204,211
+wheel l/wheel l_00072
+bounds:1465,1017,201,205
+offsets:1,3,204,211
+rotate:90
+wheel l/wheel l_00073
+bounds:3296,2347,201,207
+offsets:1,2,204,211
+wheel l/wheel l_00074
+bounds:3300,1925,200,208
+offsets:1,1,204,211
+wheel l/wheel l_00075
+bounds:3323,1511,199,209
+offsets:1,1,204,211
+rotate:90
+wheel l/wheel l_00076
+bounds:2276,2557,200,209
+offsets:1,1,204,211
+wheel l/wheel l_00077
+bounds:3092,2347,201,207
+offsets:1,2,204,211
+wheel l/wheel l_00078
+bounds:1260,1363,201,206
+offsets:1,2,204,211
+rotate:90
+wheel l/wheel l_00079
+bounds:2084,696,201,203
+offsets:1,4,204,211
+rotate:90
+wheel l/wheel l_00080
+bounds:1650,481,202,199
+offsets:1,6,204,211
+wheel l/wheel l_00081
+bounds:1226,149,202,195
+offsets:1,8,204,211
+wheel l/wheel l_00082
+bounds:618,185,203,195
+offsets:1,8,204,211
+rotate:90
+wheel l/wheel l_00083
+bounds:3727,493,202,199
+offsets:1,6,204,211
+wheel l/wheel l_00084
+bounds:1043,957,202,203
+offsets:1,4,204,211
+rotate:90
+wheel l/wheel l_00085
+bounds:1051,1365,201,206
+offsets:1,2,204,211
+rotate:90
+wheel l/wheel l_00086
+bounds:1046,1162,200,207
+offsets:1,2,204,211
+rotate:90
+wheel l/wheel l_00087
+bounds:2073,2557,200,209
+offsets:1,1,204,211
+wheel l/wheel l_00088
+bounds:3111,1511,199,209
+offsets:1,1,204,211
+rotate:90
+wheel l/wheel l_00089
+bounds:3097,1926,200,208
+offsets:1,1,204,211
+wheel l/wheel l_00090
+bounds:2888,2347,201,207
+offsets:1,2,204,211
+wheel l/wheel l_00091
+bounds:1678,1092,201,205
+offsets:1,3,204,211
+rotate:90
+wheel l/wheel l_00092
+bounds:3689,899,202,202
+offsets:1,4,204,211
+wheel l/wheel l_00093
+bounds:3094,293,202,198
+offsets:1,6,204,211
+wheel l/wheel l_00094
+bounds:2676,97,202,193
+offsets:1,9,204,211
+wheel l/wheel l_00095
+bounds:2889,293,202,198
+offsets:1,6,204,211
+wheel l/wheel l_00096
+bounds:3484,899,202,202
+offsets:1,4,204,211
+wheel l/wheel l_00097
+bounds:3715,1104,201,205
+offsets:1,3,204,211
+rotate:90
+wheel l/wheel l_00098
+bounds:2684,2347,201,207
+offsets:1,2,204,211
+wheel l/wheel l_00099
+bounds:2894,1926,200,208
+offsets:1,1,204,211
+wheel l/wheel l_00100
+bounds:2899,1512,199,209
+offsets:1,1,204,211
+rotate:90
+wheel r/wheel r_00000
+bounds:2687,1512,199,209
+offsets:4,1,204,211
+rotate:90
+wheel r/wheel r_00001
+bounds:2475,1512,199,209
+offsets:4,1,204,211
+rotate:90
+wheel r/wheel r_00002
+bounds:836,1162,200,207
+offsets:3,2,204,211
+rotate:90
+wheel r/wheel r_00003
+bounds:3507,1104,201,205
+offsets:2,3,204,211
+rotate:90
+wheel r/wheel r_00004
+bounds:1878,696,201,203
+offsets:2,4,204,211
+rotate:90
+wheel r/wheel r_00005
+bounds:3522,493,202,199
+offsets:1,6,204,211
+wheel r/wheel r_00006
+bounds:3086,97,201,193
+offsets:2,10,204,211
+wheel r/wheel r_00007
+bounds:1641,281,202,197
+offsets:1,7,204,211
+wheel r/wheel r_00008
+bounds:1445,608,202,201
+offsets:1,5,204,211
+wheel r/wheel r_00009
+bounds:2863,697,201,203
+offsets:2,4,204,211
+rotate:90
+wheel r/wheel r_00010
+bounds:633,1205,200,207
+offsets:3,2,204,211
+wheel r/wheel r_00011
+bounds:2691,1926,200,208
+offsets:3,1,204,211
+wheel r/wheel r_00012
+bounds:2263,1512,199,209
+offsets:4,1,204,211
+rotate:90
+wheel r/wheel r_00013
+bounds:2051,1513,199,209
+offsets:4,1,204,211
+rotate:90
+wheel r/wheel r_00014
+bounds:2488,1926,200,208
+offsets:3,1,204,211
+wheel r/wheel r_00015
+bounds:423,1212,200,207
+offsets:3,2,204,211
+rotate:90
+wheel r/wheel r_00016
+bounds:2092,900,201,204
+offsets:2,3,204,211
+rotate:90
+wheel r/wheel r_00017
+bounds:1660,683,202,201
+offsets:1,5,204,211
+wheel r/wheel r_00018
+bounds:3710,293,202,197
+offsets:1,7,204,211
+wheel r/wheel r_00019
+bounds:3,3,195,193
+offsets:8,8,204,211
+wheel r/wheel r_00020
+bounds:3317,493,202,199
+offsets:1,6,204,211
+wheel r/wheel r_00021
+bounds:1239,751,201,203
+offsets:2,4,204,211
+rotate:90
+wheel r/wheel r_00022
+bounds:3299,1104,201,205
+offsets:2,3,204,211
+rotate:90
+wheel r/wheel r_00023
+bounds:213,1212,200,207
+offsets:3,2,204,211
+rotate:90
+wheel r/wheel r_00024
+bounds:1401,1567,199,209
+offsets:4,1,204,211
+rotate:90
+wheel r/wheel r_00025
+bounds:1189,1569,199,209
+offsets:4,1,204,211
+rotate:90
+wheel r/wheel r_00026
+bounds:977,1569,199,209
+offsets:4,1,204,211
+rotate:90
+wheel r/wheel r_00027
+bounds:3,1214,200,207
+offsets:3,2,204,211
+rotate:90
+wheel r/wheel r_00028
+bounds:3091,1104,201,205
+offsets:2,3,204,211
+rotate:90
+wheel r/wheel r_00029
+bounds:1033,753,201,203
+offsets:2,4,204,211
+rotate:90
+wheel r/wheel r_00030
+bounds:1026,347,201,199
+offsets:2,6,204,211
+wheel r/wheel r_00031
+bounds:1431,10,195,193
+offsets:8,10,204,211
+wheel r/wheel r_00032
+bounds:3894,900,201,196
+offsets:2,7,204,211
+rotate:90
+wheel r/wheel r_00033
+bounds:2070,493,201,200
+offsets:2,5,204,211
+wheel r/wheel r_00034
+bounds:827,754,201,203
+offsets:2,4,204,211
+rotate:90
+wheel r/wheel r_00035
+bounds:2480,2347,201,207
+offsets:2,2,204,211
+wheel r/wheel r_00036
+bounds:2285,1926,200,208
+offsets:3,1,204,211
+wheel r/wheel r_00037
+bounds:1645,1626,199,209
+offsets:4,1,204,211
+wheel r/wheel r_00038
+bounds:1849,1711,199,209
+offsets:4,1,204,211
+wheel r/wheel r_00039
+bounds:2082,1926,200,208
+offsets:3,1,204,211
+wheel r/wheel r_00040
+bounds:2276,2347,201,207
+offsets:2,2,204,211
+wheel r/wheel r_00041
+bounds:2863,901,201,204
+offsets:2,3,204,211
+rotate:90
+wheel r/wheel r_00042
+bounds:1027,549,201,201
+offsets:2,5,204,211
+wheel r/wheel r_00043
+bounds:3505,293,202,197
+offsets:1,7,204,211
+wheel r/wheel r_00044
+bounds:3290,96,199,194
+offsets:4,8,204,211
+wheel r/wheel r_00045
+bounds:3112,494,202,199
+offsets:1,6,204,211
+wheel r/wheel r_00046
+bounds:3890,695,201,202
+offsets:2,4,204,211
+rotate:90
+wheel r/wheel r_00047
+bounds:2243,1104,201,205
+offsets:2,3,204,211
+rotate:90
+wheel r/wheel r_00048
+bounds:1468,1221,200,207
+offsets:3,2,204,211
+rotate:90
+wheel r/wheel r_00049
+bounds:1443,1981,200,208
+offsets:3,1,204,211
+wheel r/wheel r_00050
+bounds:3873,1713,199,209
+offsets:4,1,204,211
+wheel r/wheel r_00051
+bounds:3671,1713,199,209
+offsets:4,1,204,211
+wheel r/wheel r_00052
+bounds:1825,1296,200,207
+offsets:3,2,204,211
+rotate:90
+wheel r/wheel r_00053
+bounds:842,1365,201,206
+offsets:2,2,204,211
+rotate:90
+wheel r/wheel r_00054
+bounds:621,797,201,203
+offsets:2,4,204,211
+rotate:90
+wheel r/wheel r_00055
+bounds:2907,494,202,199
+offsets:1,6,204,211
+wheel r/wheel r_00056
+bounds:2471,97,202,193
+offsets:1,10,204,211
+wheel r/wheel r_00057
+bounds:3,199,202,196
+offsets:1,7,204,211
+wheel r/wheel r_00058
+bounds:1231,548,202,200
+offsets:1,5,204,211
+wheel r/wheel r_00059
+bounds:415,804,201,203
+offsets:2,4,204,211
+rotate:90
+wheel r/wheel r_00060
+bounds:633,1415,201,206
+offsets:2,2,204,211
+rotate:90
+wheel r/wheel r_00061
+bounds:3727,1308,200,207
+offsets:3,2,204,211
+rotate:90
+wheel r/wheel r_00062
+bounds:3469,1713,199,209
+offsets:4,1,204,211
+wheel r/wheel r_00063
+bounds:3267,1713,199,209
+offsets:4,1,204,211
+wheel r/wheel r_00064
+bounds:1647,2049,200,208
+offsets:3,1,204,211
+wheel r/wheel r_00065
+bounds:3517,1308,200,207
+offsets:3,2,204,211
+rotate:90
+wheel r/wheel r_00066
+bounds:2883,1105,201,205
+offsets:2,3,204,211
+rotate:90
+wheel r/wheel r_00067
+bounds:823,550,201,201
+offsets:2,5,204,211
+wheel r/wheel r_00068
+bounds:2684,293,202,198
+offsets:1,6,204,211
+wheel r/wheel r_00069
+bounds:3694,97,199,193
+offsets:4,9,204,211
+wheel r/wheel r_00070
+bounds:2479,293,202,198
+offsets:1,6,204,211
+wheel r/wheel r_00071
+bounds:3685,695,201,202
+offsets:2,4,204,211
+rotate:90
+wheel r/wheel r_00072
+bounds:2675,1105,201,205
+offsets:2,3,204,211
+rotate:90
+wheel r/wheel r_00073
+bounds:3307,1308,200,207
+offsets:3,2,204,211
+rotate:90
+wheel r/wheel r_00074
+bounds:1879,2134,200,208
+offsets:3,1,204,211
+wheel r/wheel r_00075
+bounds:3065,1714,199,209
+offsets:4,1,204,211
+wheel r/wheel r_00076
+bounds:2863,1714,199,209
+offsets:4,1,204,211
+wheel r/wheel r_00077
+bounds:3097,1308,200,207
+offsets:3,2,204,211
+rotate:90
+wheel r/wheel r_00078
+bounds:424,1415,201,206
+offsets:2,2,204,211
+rotate:90
+wheel r/wheel r_00079
+bounds:209,804,201,203
+offsets:2,4,204,211
+rotate:90
+wheel r/wheel r_00080
+bounds:2479,494,202,199
+offsets:1,6,204,211
+wheel r/wheel r_00081
+bounds:1021,149,202,195
+offsets:1,8,204,211
+wheel r/wheel r_00082
+bounds:816,151,202,195
+offsets:1,8,204,211
+wheel r/wheel r_00083
+bounds:2274,494,202,199
+offsets:1,6,204,211
+wheel r/wheel r_00084
+bounds:3,806,201,203
+offsets:2,4,204,211
+rotate:90
+wheel r/wheel r_00085
+bounds:215,1415,201,206
+offsets:2,2,204,211
+rotate:90
+wheel r/wheel r_00086
+bounds:2887,1309,200,207
+offsets:3,2,204,211
+rotate:90
+wheel r/wheel r_00087
+bounds:2661,1714,199,209
+offsets:4,1,204,211
+wheel r/wheel r_00088
+bounds:2459,1714,199,209
+offsets:4,1,204,211
+wheel r/wheel r_00089
+bounds:3703,2136,200,208
+offsets:3,1,204,211
+wheel r/wheel r_00090
+bounds:2677,1309,200,207
+offsets:3,2,204,211
+rotate:90
+wheel r/wheel r_00091
+bounds:2467,1105,201,205
+offsets:2,3,204,211
+rotate:90
+wheel r/wheel r_00092
+bounds:3480,695,201,202
+offsets:2,4,204,211
+rotate:90
+wheel r/wheel r_00093
+bounds:2274,293,202,198
+offsets:1,6,204,211
+wheel r/wheel r_00094
+bounds:2266,97,202,193
+offsets:1,9,204,211
+wheel r/wheel r_00095
+bounds:1230,347,202,198
+offsets:1,6,204,211
+wheel r/wheel r_00096
+bounds:3275,696,201,202
+offsets:2,4,204,211
+rotate:90
+wheel r/wheel r_00097
+bounds:2035,1105,201,205
+offsets:2,3,204,211
+rotate:90
+wheel r/wheel r_00098
+bounds:2467,1309,200,207
+offsets:3,2,204,211
+rotate:90
+wheel r/wheel r_00099
+bounds:3500,2136,200,208
+offsets:3,1,204,211
+wheel r/wheel r_00100
+bounds:1443,1769,199,209
+offsets:4,1,204,211
+Лайн копия 3
+bounds:3,1618,972,1148
