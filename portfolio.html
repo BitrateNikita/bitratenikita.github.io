@@ -767,51 +767,60 @@
             }
 
             // Функция загрузки персонажа в плеер
-            function loadCharacter(charKey) {
-                currentCharacter = charKey;
-
-                // Обновляем активный класс в сетке
-                document.querySelectorAll('.character-card').forEach(card => {
-                    card.classList.remove('active');
-                });
-                if (event && event.target) {
-                    const card = event.target.closest('.character-card');
-                    if (card) card.classList.add('active');
-                }
-
-                // Уничтожаем старый плеер, если он есть
+            function loadCharacter(characterId) {
+                currentCharacterId = characterId;
+                const container = document.getElementById('spine-player-container');
+                
+                // Полностью очищаем контейнер
+                container.innerHTML = '';
+                
+                // Уничтожаем старый плеер если есть
                 if (currentPlayer) {
-                    currentPlayer.destroy();
+                    try { currentPlayer.destroy(); } catch(e) {}
+                    currentPlayer = null;
                 }
 
-                // Создаём новый плеер с прямыми путями к файлам
-                currentPlayer = new spine.SpinePlayer("bat-player", {
-                    skeleton: `/spine/${charKey}/${charKey}.json`,
-                    atlas: `/spine/${charKey}/${charKey}.atlas`,
+                // Формируем пути к файлам
+                const skeletonPath = `/spine/${characterId}/${characterId}.json`;
+                const atlasPath = `/spine/${characterId}/${characterId}.atlas`;
+
+                console.log('Загружаем:', skeletonPath);
+
+                // Создаём новый плеер
+                currentPlayer = new spine.SpinePlayer("spine-player-container", {
+                    skeleton: skeletonPath,
+                    atlas: atlasPath,
                     showControls: false,
                     backgroundColor: "#1e2333",
                     premultipliedAlpha: true,
                     defaultMix: 0.25,
+                    preserveViewport: true,        // ← вот это ключевое!
+                    scale: 1,                       // натуральный размер из Spine
 
                     success: function(player) {
-                        console.log(`Загружен персонаж: ${charKey}`);
-
-                        // Получаем списки анимаций и скинов из загруженного скелета
+                        console.log('Успешно загружен:', characterId);
+                        
+                        // Получаем анимации и скины
                         const animations = player.skeleton.data.animations.map(a => a.name);
                         const skins = player.skeleton.data.skins.map(s => s.name);
-
-                        // Запускаем первую анимацию с зацикливанием
+                        
+                        // Запускаем первую анимацию
                         if (animations.length > 0) {
                             player.setAnimation(animations[0], true);
                         }
-
+                        
                         // Создаём кнопки управления
-                        createControlButtons(animations, skins);
+                        updateControls(animations, skins);
+                        
+                        // Обновляем активный класс в сетке
+                        document.querySelectorAll('.character-card').forEach(card => {
+                            card.classList.toggle('active', card.dataset.id === characterId);
+                        });
                     },
 
                     error: function(error) {
-                        console.error("Ошибка загрузки:", error);
-                        document.getElementById('bat-player').innerHTML = '<div style="color: red; padding: 20px;">Ошибка загрузки. Проверь пути к файлам.</div>';
+                        console.error('Ошибка загрузки:', characterId, error);
+                        container.innerHTML = '<div style="color: red; text-align: center; padding: 100px;">Ошибка загрузки. Проверь пути к файлам.</div>';
                     }
                 });
             }
