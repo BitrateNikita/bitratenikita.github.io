@@ -587,7 +587,7 @@
             </div>
         </section>
 
-<!-- ===== БЛОК ИНТЕРАКТИВНОЙ АНИМАЦИИ ===== -->
+        <!-- ===== БЛОК ИНТЕРАКТИВНОЙ АНИМАЦИИ ===== -->
         <section class="section-colored" style="background: linear-gradient(135deg, #1a1f2e, #2a2f3e);">
             <div class="container">
                 <h2 class="section-title" style="color: white;">🎮 Живые анимации</h2>
@@ -595,27 +595,27 @@
                 
                 <!-- Категории -->
                 <div style="display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap;" id="category-tabs">
-                    <button class="category-btn active" data-category="all">Все</button>
-                    <button class="category-btn" data-category="vampire">Вампиры</button>
-                    <button class="category-btn" data-category="boss">Боссы</button>
-                    <button class="category-btn" data-category="monster">Монстры</button>
+                    <button class="category-btn active" onclick="filterCharacters('all')">Все</button>
+                    <button class="category-btn" onclick="filterCharacters('vampire')">Вампиры</button>
+                    <button class="category-btn" onclick="filterCharacters('boss')">Боссы</button>
+                    <button class="category-btn" onclick="filterCharacters('monster')">Монстры</button>
                 </div>
                 
                 <!-- Сетка персонажей -->
                 <div class="character-grid" id="character-grid"></div>
                 
                 <!-- Контейнер для плеера -->
-                <div id="spine-player-container" style="width: 100%; height: 500px; background: #1e2333; border-radius: 20px; overflow: hidden; margin: 30px 0;"></div>
+                <div id="bat-player" style="width: 100%; height: 500px; background: #1e2333; border-radius: 20px; overflow: hidden; margin: 30px 0;"></div>
                 
                 <!-- Динамические кнопки анимаций и скинов -->
                 <div id="animation-controls" style="background: rgba(0,0,0,0.3); border-radius: 20px; padding: 30px;"></div>
             </div>
         </section>
-        
+
         <!-- Подключаем Spine Web Player -->
         <script src="https://unpkg.com/@esotericsoftware/spine-player@4.2.*/dist/iife/spine-player.min.js"></script>
         <link rel="stylesheet" href="https://unpkg.com/@esotericsoftware/spine-player@4.2.*/dist/spine-player.min.css">
-        
+
         <style>
             .category-btn {
                 padding: 8px 25px;
@@ -628,9 +628,9 @@
                 font-size: 0.95rem;
             }
             .category-btn.active {
-                background: #E8551A;
+                background: var(--primary);
                 color: white;
-                border-color: #E8551A;
+                border-color: var(--primary);
             }
             
             .character-grid {
@@ -643,6 +643,7 @@
                 padding: 15px;
                 background: rgba(0,0,0,0.2);
                 border-radius: 20px;
+                scrollbar-width: thin;
             }
             
             .character-card {
@@ -659,7 +660,7 @@
                 transform: translateY(-3px);
             }
             .character-card.active {
-                border-color: #E8551A;
+                border-color: var(--primary);
                 background: rgba(255,255,255,0.2);
             }
             .character-card img {
@@ -674,6 +675,7 @@
                 display: block;
                 font-size: 0.8rem;
                 color: white;
+                word-break: break-word;
             }
             
             .control-buttons {
@@ -694,7 +696,7 @@
                 border: 1px solid rgba(255,255,255,0.1);
             }
             .control-btn.active {
-                background: #E8551A;
+                background: var(--primary);
                 color: white;
             }
             .control-btn:hover {
@@ -706,51 +708,84 @@
                 font-size: 1.2rem;
                 margin: 20px 0 15px;
                 color: white;
-                border-left: 4px solid #E8551A;
+                border-left: 4px solid var(--primary);
                 padding-left: 15px;
             }
         </style>
-        
+
         <script>
-        (function() {
-            // Данные о персонажах
-            const characters = [
-                { id: 'AwakeVampire', name: 'Awake Vampire', category: 'vampire', icon: 'AwakeVampire' },
-                { id: 'Bat', name: 'Bat', category: 'monster', icon: 'Bat-Armored' },
-                { id: 'Boss', name: 'Boss', category: 'boss', icon: 'Boss' },
-                { id: 'Catapult', name: 'Catapult', category: 'monster', icon: 'Catapult' },
-                { id: 'CorruptedPriestBoss', name: 'Corrupted Priest Boss', category: 'boss', icon: 'CorruptedPriestBoss' },
-                { id: 'Diver', name: 'Diver', category: 'monster', icon: 'Diver' },
-                { id: 'EvilBook', name: 'Evil Book', category: 'monster', icon: 'EvilBook' },
-                { id: 'Ghost', name: 'Ghost', category: 'monster', icon: 'Ghost' },
-                { id: 'HeavyVampire', name: 'Heavy Vampire', category: 'vampire', icon: 'HeavyVampire' },
-            ];
-        
+            // Данные о персонажах (категории и названия)
+            const characters = {
+                AwakeVampire: { category: 'vampire', name: 'Awake Vampire' },
+                Bat: { category: 'monster', name: 'Bat' },
+                Boss: { category: 'boss', name: 'Boss' },
+                Catapult: { category: 'monster', name: 'Catapult' },
+                CorruptedPriestBoss: { category: 'boss', name: 'Corrupted Priest Boss' },
+                Diver: { category: 'monster', name: 'Diver' },
+                EvilBook: { category: 'monster', name: 'Evil Book' },
+                Ghost: { category: 'monster', name: 'Ghost' },
+                HeavyVampire: { category: 'vampire', name: 'Heavy Vampire' },
+            };
+
+            // Соответствие ключей персонажей именам файлов иконок
+            const iconMap = {
+                'AwakeVampire': 'AwakeVampire',
+                'Bat': 'Bat-Armored',
+                'Boss': 'Boss',
+                'Catapult': 'Catapult',
+                'CorruptedPriestBoss': 'CorruptedPriestBoss',
+                'Diver': 'Diver',
+                'EvilBook': 'EvilBook',
+                'Ghost': 'Ghost',
+                'HeavyVampire': 'HeavyVampire',
+            };
+
             let currentPlayer = null;
-            let currentCharacterId = 'Bat';
-        
+            let currentCharacter = 'Bat';
+
+            // Функция для отображения сетки персонажей
+            function renderCharacterGrid(filter = 'all') {
+                const grid = document.getElementById('character-grid');
+                grid.innerHTML = '';
+
+                Object.entries(characters).forEach(([key, char]) => {
+                    if (filter === 'all' || char.category === filter) {
+                        const card = document.createElement('div');
+                        card.className = `character-card ${key === currentCharacter ? 'active' : ''}`;
+                        card.onclick = () => loadCharacter(key);
+
+                        const iconFile = iconMap[key] || key;
+                        const iconPath = `icons/${iconFile}.png`;
+
+                        card.innerHTML = `
+                            <img src="${iconPath}" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'60\\' height=\\'60\\'><rect width=\\'60\\' height=\\'60\\' fill=\\'%232d3345\\'/><text x=\\'30\\' y=\\'35\\' font-size=\\'12\\' fill=\\'white\\' text-anchor=\\'middle\\'>${char.name[0]}</text></svg>'">
+                            <span>${char.name}</span>
+                        `;
+                        grid.appendChild(card);
+                    }
+                });
+            }
+
             // Функция загрузки персонажа
             function loadCharacter(characterId) {
                 currentCharacterId = characterId;
                 const container = document.getElementById('spine-player-container');
                 
-                // Полностью очищаем контейнер перед загрузкой нового плеера
+                // Полностью очищаем контейнер
                 container.innerHTML = '';
                 
                 // Уничтожаем старый плеер если есть
                 if (currentPlayer) {
-                    try { 
-                        currentPlayer.destroy(); 
-                    } catch(e) {}
+                    try { currentPlayer.destroy(); } catch(e) {}
                     currentPlayer = null;
                 }
-            
+
                 // Формируем пути к файлам
                 const skeletonPath = `/spine/${characterId}/${characterId}.json`;
                 const atlasPath = `/spine/${characterId}/${characterId}.atlas`;
-            
+
                 console.log('Загружаем:', skeletonPath);
-            
+
                 // Создаём новый плеер
                 currentPlayer = new spine.SpinePlayer("spine-player-container", {
                     skeleton: skeletonPath,
@@ -759,7 +794,9 @@
                     backgroundColor: "#1e2333",
                     premultipliedAlpha: true,
                     defaultMix: 0.25,
-            
+                    preserveViewport: true,        // ← вот это ключевое!
+                    scale: 1,                       // натуральный размер из Spine
+
                     success: function(player) {
                         console.log('Успешно загружен:', characterId);
                         
@@ -780,95 +817,83 @@
                             card.classList.toggle('active', card.dataset.id === characterId);
                         });
                     },
-            
+
                     error: function(error) {
                         console.error('Ошибка загрузки:', characterId, error);
                         container.innerHTML = '<div style="color: red; text-align: center; padding: 100px;">Ошибка загрузки. Проверь пути к файлам.</div>';
                     }
                 });
             }
-        
-            // Обновление кнопок управления
-            function updateControls(animations, skins) {
+
+            // Функция создания кнопок анимаций и скинов (исправленная)
+            function createControlButtons(animations, skins) {
                 const controls = document.getElementById('animation-controls');
                 let html = '';
-        
+
                 // Кнопки анимаций
                 html += '<div class="section-title control-section">🎬 Анимации</div>';
                 html += '<div class="control-buttons" id="anim-buttons">';
                 animations.forEach((anim, index) => {
                     const isActive = index === 0 ? 'active' : '';
-                    html += `<button class="control-btn ${isActive}" data-anim="${anim}">${anim}</button>`;
+                    // 👇 Передаём this через onclick
+                    html += `<button class="control-btn ${isActive}" onclick="playAnimation('${anim}', this)">${anim}</button>`;
                 });
                 html += '</div>';
-        
-                // Кнопки скинов
+
+                // Кнопки скинов (если есть)
                 if (skins.length > 0) {
                     html += '<div class="section-title control-section">👕 Скины</div>';
                     html += '<div class="control-buttons" id="skin-buttons">';
                     skins.forEach(skin => {
-                        html += `<button class="control-btn" data-skin="${skin}">${skin}</button>`;
+                        // 👇 Передаём this через onclick
+                        html += `<button class="control-btn" onclick="setSkin('${skin}', this)">${skin}</button>`;
                     });
                     html += '</div>';
                 }
-        
+
                 controls.innerHTML = html;
-        
-                // Навешиваем обработчики
+            }
+
+            // Функция воспроизведения анимации (исправленная)
+            function playAnimation(animName, btnElement) {
+                if (!currentPlayer) return;
+
                 document.querySelectorAll('#anim-buttons .control-btn').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        if (!currentPlayer) return;
-                        document.querySelectorAll('#anim-buttons .control-btn').forEach(b => b.classList.remove('active'));
-                        this.classList.add('active');
-                        currentPlayer.setAnimation(this.dataset.anim, true);
-                    });
+                    btn.classList.remove('active');
                 });
-        
+                btnElement.classList.add('active');
+
+                currentPlayer.setAnimation(animName, true);
+            }
+
+            // Функция смены скина (исправленная)
+            function setSkin(skinName, btnElement) {
+                if (!currentPlayer || !currentPlayer.skeleton) return;
+
                 document.querySelectorAll('#skin-buttons .control-btn').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        if (!currentPlayer || !currentPlayer.skeleton) return;
-                        document.querySelectorAll('#skin-buttons .control-btn').forEach(b => b.classList.remove('active'));
-                        this.classList.add('active');
-                        currentPlayer.skeleton.setSkinByName(this.dataset.skin);
-                        currentPlayer.skeleton.setSlotsToSetupPose();
-                    });
+                    btn.classList.remove('active');
                 });
+                btnElement.classList.add('active');
+
+                currentPlayer.skeleton.setSkinByName(skinName);
+                currentPlayer.skeleton.setSlotsToSetupPose();
             }
-        
-            // Отрисовка сетки персонажей
-            function renderGrid(category = 'all') {
-                const grid = document.getElementById('character-grid');
-                grid.innerHTML = '';
-        
-                characters.filter(char => category === 'all' || char.category === category).forEach(char => {
-                    const card = document.createElement('div');
-                    card.className = `character-card ${char.id === currentCharacterId ? 'active' : ''}`;
-                    card.dataset.id = char.id;
-                    card.onclick = () => loadCharacter(char.id);
-        
-                    card.innerHTML = `
-                        <img src="icons/${char.icon}.png" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'60\\' height=\\'60\\'><rect width=\\'60\\' height=\\'60\\' fill=\\'%232d3345\\'/><text x=\\'30\\' y=\\'35\\' font-size=\\'12\\' fill=\\'white\\' text-anchor=\\'middle\\'>${char.name[0]}</text></svg>'">
-                        <span>${char.name}</span>
-                    `;
-                    grid.appendChild(card);
+
+            // Функция фильтрации по категориям
+            function filterCharacters(category) {
+                document.querySelectorAll('.category-btn').forEach(btn => {
+                    btn.classList.remove('active');
                 });
+                event.target.classList.add('active');
+
+                renderCharacterGrid(category);
             }
-        
-            // Фильтрация по категориям
-            document.querySelectorAll('.category-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    renderGrid(this.dataset.category);
-                });
-            });
-        
-            // Старт
+
+            // Инициализация при загрузке страницы
             window.onload = function() {
-                renderGrid('all');
+                renderCharacterGrid('all');
                 loadCharacter('Bat');
             };
-        })();
         </script>
         
         <!-- ===== КОНТАКТЫ ===== -->
@@ -918,10 +943,6 @@
 </body>
 
 </html>
-
-
-
-
 
 
 
