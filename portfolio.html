@@ -601,10 +601,10 @@
                     <button class="category-btn" onclick="filterCharacters('monster', this)">Монстры</button>
                 </div>
                 
-                <!-- Сетка персонажей -->
-                <div class="character-grid" id="character-grid"></div>
+                <!-- Горизонтальный скролл персонажей -->
+                <div class="character-scroll" id="character-scroll"></div>
                 
-                <!-- Контейнер для плеера (имя совпадает с кодом) -->
+                <!-- Контейнер для плеера -->
                 <div id="bat-player" style="width: 100%; height: 500px; background: #1e2333; border-radius: 20px; overflow: hidden; margin: 30px 0;"></div>
                 
                 <!-- Динамические кнопки анимаций и скинов -->
@@ -633,47 +633,57 @@
                 border-color: var(--primary);
             }
             
-            .character-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            /* Горизонтальный скролл */
+            .character-scroll {
+                display: flex;
                 gap: 15px;
-                margin-bottom: 30px;
-                max-height: 300px;
-                overflow-y: auto;
-                padding: 15px;
-                background: rgba(0,0,0,0.2);
-                border-radius: 20px;
+                overflow-x: auto;
+                padding: 10px 0 20px;
+                margin-bottom: 20px;
                 scrollbar-width: thin;
+                scrollbar-color: var(--primary) rgba(255,255,255,0.1);
+            }
+            .character-scroll::-webkit-scrollbar {
+                height: 6px;
+            }
+            .character-scroll::-webkit-scrollbar-track {
+                background: rgba(255,255,255,0.1);
+                border-radius: 10px;
+            }
+            .character-scroll::-webkit-scrollbar-thumb {
+                background: var(--primary);
+                border-radius: 10px;
             }
             
-            .character-card {
+            .scroll-item {
+                flex: 0 0 auto;
+                width: 80px;
                 text-align: center;
-                padding: 12px 8px;
-                border-radius: 15px;
-                background: rgba(255,255,255,0.05);
                 cursor: pointer;
                 transition: 0.3s;
+                padding: 8px 5px;
+                border-radius: 15px;
                 border: 2px solid transparent;
             }
-            .character-card:hover {
+            .scroll-item:hover {
                 background: rgba(255,255,255,0.15);
                 transform: translateY(-3px);
             }
-            .character-card.active {
+            .scroll-item.active {
                 border-color: var(--primary);
                 background: rgba(255,255,255,0.2);
             }
-            .character-card img {
+            .scroll-item img {
                 width: 60px;
                 height: 60px;
                 object-fit: contain;
-                margin-bottom: 8px;
                 border-radius: 10px;
                 background: rgba(0,0,0,0.3);
+                margin-bottom: 5px;
             }
-            .character-card span {
+            .scroll-item span {
                 display: block;
-                font-size: 0.8rem;
+                font-size: 0.7rem;
                 color: white;
                 word-break: break-word;
             }
@@ -731,22 +741,22 @@
             let currentPlayer = null;
             let currentCharacterId = 'Bat';
 
-            // Отрисовка сетки персонажей
-            function renderCharacterGrid(category = 'all') {
-                const grid = document.getElementById('character-grid');
-                grid.innerHTML = '';
+            // Отрисовка горизонтального скролла
+            function renderCharacterScroll(category = 'all') {
+                const scroll = document.getElementById('character-scroll');
+                scroll.innerHTML = '';
 
                 characters.filter(char => category === 'all' || char.category === category).forEach(char => {
-                    const card = document.createElement('div');
-                    card.className = `character-card ${char.id === currentCharacterId ? 'active' : ''}`;
-                    card.dataset.id = char.id;
-                    card.onclick = () => loadCharacter(char.id);
+                    const item = document.createElement('div');
+                    item.className = `scroll-item ${char.id === currentCharacterId ? 'active' : ''}`;
+                    item.dataset.id = char.id;
+                    item.onclick = () => loadCharacter(char.id);
 
-                    card.innerHTML = `
+                    item.innerHTML = `
                         <img src="icons/${char.icon}.png" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'60\\' height=\\'60\\'><rect width=\\'60\\' height=\\'60\\' fill=\\'%232d3345\\'/><text x=\\'30\\' y=\\'35\\' font-size=\\'12\\' fill=\\'white\\' text-anchor=\\'middle\\'>${char.name[0]}</text></svg>'">
                         <span>${char.name}</span>
                     `;
-                    grid.appendChild(card);
+                    scroll.appendChild(item);
                 });
             }
 
@@ -755,22 +765,18 @@
                 currentCharacterId = characterId;
                 const container = document.getElementById('bat-player');
                 
-                // Очищаем контейнер
                 container.innerHTML = '';
                 
-                // Уничтожаем старый плеер
                 if (currentPlayer) {
                     try { currentPlayer.destroy(); } catch(e) {}
                     currentPlayer = null;
                 }
 
-                // Пути к файлам
                 const skeletonPath = `/spine/${characterId}/${characterId}.json`;
                 const atlasPath = `/spine/${characterId}/${characterId}.atlas`;
 
                 console.log('Загружаем:', skeletonPath);
 
-                // Создаём новый плеер
                 currentPlayer = new spine.SpinePlayer("bat-player", {
                     skeleton: skeletonPath,
                     atlas: atlasPath,
@@ -778,27 +784,23 @@
                     backgroundColor: "#1e2333",
                     premultipliedAlpha: true,
                     defaultMix: 0.25,
-                    preserveViewport: true,  // сохраняем родной размер
-                    scale: 1,                 // натуральный масштаб
+                    preserveViewport: true,
+                    scale: 1,
 
                     success: function(player) {
                         console.log('Успешно загружен:', characterId);
                         
-                        // Получаем анимации и скины
                         const animations = player.skeleton.data.animations.map(a => a.name);
                         const skins = player.skeleton.data.skins.map(s => s.name);
                         
-                        // Запускаем первую анимацию
                         if (animations.length > 0) {
                             player.setAnimation(animations[0], true);
                         }
                         
-                        // Создаём кнопки управления
                         createControlButtons(animations, skins);
                         
-                        // Обновляем активный класс в сетке
-                        document.querySelectorAll('.character-card').forEach(card => {
-                            card.classList.toggle('active', card.dataset.id === characterId);
+                        document.querySelectorAll('.scroll-item').forEach(item => {
+                            item.classList.toggle('active', item.dataset.id === characterId);
                         });
                     },
 
@@ -814,7 +816,6 @@
                 const controls = document.getElementById('animation-controls');
                 let html = '';
 
-                // Кнопки анимаций
                 html += '<div class="section-title control-section">🎬 Анимации</div>';
                 html += '<div class="control-buttons" id="anim-buttons">';
                 animations.forEach((anim, index) => {
@@ -823,7 +824,6 @@
                 });
                 html += '</div>';
 
-                // Кнопки скинов
                 if (skins.length > 0) {
                     html += '<div class="section-title control-section">👕 Скины</div>';
                     html += '<div class="control-buttons" id="skin-buttons">';
@@ -840,10 +840,9 @@
             window.filterCharacters = function(category, btn) {
                 document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-                renderCharacterGrid(category);
+                renderCharacterScroll(category);
             };
 
-            // Воспроизведение анимации
             window.playAnimation = function(animName, btn) {
                 if (!currentPlayer) return;
 
@@ -852,7 +851,6 @@
                 currentPlayer.setAnimation(animName, true);
             };
 
-            // Смена скина
             window.setSkin = function(skinName, btn) {
                 if (!currentPlayer || !currentPlayer.skeleton) return;
 
@@ -865,7 +863,7 @@
 
             // Инициализация
             window.onload = function() {
-                renderCharacterGrid('all');
+                renderCharacterScroll('all');
                 loadCharacter('Bat');
             };
         })();
