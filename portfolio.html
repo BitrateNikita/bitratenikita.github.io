@@ -508,7 +508,79 @@
                 justify-content: center;
             }
         }
+
+        /* ===== ГОРИЗОНТАЛЬНАЯ КАРУСЕЛЬ ===== */
+        .project-carousel {
+            width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary) rgba(255,255,255,0.1);
+            margin-bottom: 20px;
+            padding: 10px 0 20px;
+        }
+
+        .project-carousel::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .project-carousel::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+        }
+
+        .project-carousel::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 20px;
+            width: max-content;
+        }
+
+        .carousel-item {
+            flex: 0 0 calc(100vw - 120px); /* Ширина карточки на мобильных */
+            scroll-snap-align: start;
+            transition: 0.3s;
+        }
+
+        @media (min-width: 768px) {
+            .carousel-item {
+                flex: 0 0 calc(33.333% - 20px); /* На планшетах и ПК по 3 в ряд */
+            }
+        }
+
+        /* Индикаторы (точки) */
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .carousel-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .carousel-dot.active {
+            background: var(--primary);
+            width: 20px;
+            border-radius: 10px;
+        }
+
     </style>
+
+
+
 </head>
 <body>
     <header>
@@ -974,6 +1046,51 @@
             card.style.transform = 'rotateY(0deg) rotateX(0deg)';
         }
     </script>
+
+
+    <script>
+        // Карусель проектов
+        function initCarousel() {
+            const track = document.getElementById('project-track');
+            const dotsContainer = document.getElementById('carousel-dots');
+            if (!track || !dotsContainer) return;
+            
+            const items = track.children;
+            const dots = [];
+            
+            // Создаём точки
+            for (let i = 0; i < items.length; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+                dot.onclick = () => {
+                    track.scrollTo({
+                        left: items[i].offsetLeft - track.offsetLeft,
+                        behavior: 'smooth'
+                    });
+                };
+                dotsContainer.appendChild(dot);
+                dots.push(dot);
+            }
+            
+            // Обновляем активную точку при скролле
+            track.addEventListener('scroll', () => {
+                const scrollPosition = track.scrollLeft;
+                let activeIndex = 0;
+                for (let i = 0; i < items.length; i++) {
+                    if (items[i].offsetLeft - track.offsetLeft <= scrollPosition + 50) {
+                        activeIndex = i;
+                    }
+                }
+                
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === activeIndex);
+                });
+            });
+        }
+        
+        window.addEventListener('load', initCarousel);
+    </script>
+
 </body>
 
 </html>
