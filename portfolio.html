@@ -487,12 +487,18 @@
             width: 100%;
             overflow-x: auto;
             overflow-y: hidden;
-            scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
             scrollbar-width: thin;
             scrollbar-color: var(--primary) rgba(255,255,255,0.1);
             margin-bottom: 20px;
             padding: 10px 0 20px;
+            cursor: grab;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .project-carousel:active {
+            cursor: grabbing;
         }
 
         .project-carousel::-webkit-scrollbar {
@@ -517,7 +523,6 @@
 
         .carousel-item {
             flex: 0 0 calc(100vw - 120px);
-            scroll-snap-align: start;
             transition: 0.3s;
         }
 
