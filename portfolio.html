@@ -92,7 +92,7 @@
                 font-size: 0.9rem;
             }
         }
-        
+
 
         .header-glass {
             display: flex;
@@ -534,70 +534,80 @@
             <p>Senior Spine-аниматор с 8-летним опытом в геймдеве (MY.GAMES, Deus Craft, Game Forest)</p>
         </section>
 
-               <!-- ===== БЛОК ПОРТФОЛИО (ВИДЕО) ===== -->
-        <section id="portfolio" class="section-colored">
-            <div class="container">
-                <h2 class="section-title">Проекты</h2>
-                <div class="cards">
-                    <!-- Awake Vampire -->
-                    <div class="card">
-                        <div class="video-container">
-                            <iframe src="https://vkvideo.ru/video_ext.php?oid=-64982343&id=456239124&hash=e4f2207623026658&hd=3&autoplay=1&muted=1&loop=1&hd=3" 
-                                    width="100%" 
-                                    height="100%" 
-                                    allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" 
-                                    frameborder="0" 
-                                    allowfullscreen>
-                            </iframe>
+                <!-- ===== БЛОК ПОРТФОЛИО (ГОРИЗОНТАЛЬНЫЙ СВАЙП) ===== -->
+                <section id="portfolio" class="section-colored">
+                    <div class="container">
+                        <h2 class="section-title">Проекты</h2>
+                        
+                        <!-- Горизонтальная карусель -->
+                        <div class="project-carousel">
+                            <div class="carousel-track" id="project-track">
+                                <!-- Bat -->
+                                <div class="carousel-item">
+                                    <div class="card">
+                                        <div class="video-container">
+                                            <iframe src="https://vkvideo.ru/video_ext.php?oid=-64982343&id=456239125&hash=1731c63dca427705&hd=3&autoplay=1&muted=1&loop=1" 
+                                                    width="100%" 
+                                                    height="100%" 
+                                                    allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" 
+                                                    frameborder="0" 
+                                                    allowfullscreen>
+                                            </iframe>
+                                        </div>
+                                        <div class="card-info">
+                                            <h3>Bat</h3>
+                                            <p>Серия анимаций<br><small>3 animations: Walk, Idle, Attack</small></p>
+                                            <a href="https://www.artstation.com/artwork/0lGOlK" class="card-link" target="_blank">Смотреть на ArtStation →</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Awake Vampire -->
+                                <div class="carousel-item">
+                                    <div class="card">
+                                        <div class="video-container">
+                                            <iframe src="https://vkvideo.ru/video_ext.php?oid=-64982343&id=456239124&hash=e4f2207623026658&hd=3&autoplay=1&muted=1&loop=1" 
+                                                    width="100%" 
+                                                    height="100%" 
+                                                    allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" 
+                                                    frameborder="0" 
+                                                    allowfullscreen>
+                                            </iframe>
+                                        </div>
+                                        <div class="card-info">
+                                            <h3>Awake Vampire</h3>
+                                            <p>Серия анимаций<br><small>3 animations: Walk, Idle, Attack</small></p>
+                                            <a href="https://www.artstation.com/artwork/DLPlaE" class="card-link" target="_blank">Смотреть на ArtStation →</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- The Ghost Cart -->
+                                <div class="carousel-item">
+                                    <div class="card">
+                                        <div class="video-container">
+                                            <iframe src="https://vkvideo.ru/video_ext.php?oid=-64982343&id=456239126&hash=7c5b80813c4c73bc&hd=3&autoplay=1&muted=1&loop=1" 
+                                                    width="100%" 
+                                                    height="100%" 
+                                                    allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" 
+                                                    frameborder="0" 
+                                                    allowfullscreen>
+                                            </iframe>
+                                        </div>
+                                        <div class="card-info">
+                                            <h3>The Ghost Cart</h3>
+                                            <p>Серия анимаций босса<br><small>4 animations: Walk, Idle, Attack, Death</small></p>
+                                            <a href="https://www.artstation.com/artwork/WXOo3G" class="card-link" target="_blank">Смотреть на ArtStation →</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="card-info">
-                            <h3>Awake Vampire</h3>
-                            <p>Серия анимаций для мобильной игры Night Hunt<br>
-                            <small>3 animations: Walk, Idle, Attack</small></p>
-                            <a href="https://www.artstation.com/artwork/DLPlaE" class="card-link" target="_blank">Смотреть на ArtStation →</a>
-                        </div>
+                        
+                        <!-- Индикаторы прокрутки (точки) -->
+                        <div class="carousel-dots" id="carousel-dots"></div>
                     </div>
-                    
-                    <!-- Bat -->
-                    <div class="card">
-                        <div class="video-container">
-                            <iframe src="https://vkvideo.ru/video_ext.php?oid=-64982343&id=456239125&hash=1731c63dca427705&hd=3&autoplay=1&muted=1&loop=1&hd=3" 
-                                    width="100%" 
-                                    height="100%" 
-                                    allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" 
-                                    frameborder="0" 
-                                    allowfullscreen>
-                            </iframe>
-                        </div>
-                        <div class="card-info">
-                            <h3>Bat</h3>
-                            <p>Серия анимаций для мобильной игры Night Hunt<br>
-                            <small>3 animations: Walk, Idle, Attack</small></p>
-                            <a href="https://www.artstation.com/artwork/0lGOlK" class="card-link" target="_blank">Смотреть на ArtStation →</a>
-                        </div>
-                    </div>
-                    
-                    <!-- The Ghost Cart -->
-                    <div class="card">
-                        <div class="video-container">
-                            <iframe src="https://vkvideo.ru/video_ext.php?oid=-64982343&id=456239126&hash=7c5b80813c4c73bc&hd=3&autoplay=1&muted=1&loop=1&hd=3" 
-                                    width="100%" 
-                                    height="100%" 
-                                    allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" 
-                                    frameborder="0" 
-                                    allowfullscreen>
-                            </iframe>
-                        </div>
-                        <div class="card-info">
-                            <h3>The Ghost Cart</h3>
-                            <p>Серия анимаций босса для мобильной игры Night Hunt<br>
-                            <small>4 animations: Walk, Idle, Attack, Death</small></p>
-                            <a href="https://www.artstation.com/artwork/WXOo3G" class="card-link" target="_blank">Смотреть на ArtStation →</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+                </section>
 
         <!-- ===== БЛОК КАРЬЕРНЫЙ ПУТЬ (3D-КАРТОЧКИ) ===== -->
         <section id="experience" class="section-colored">
