@@ -1195,71 +1195,99 @@
 
     <script>
         // КАРУСЕЛЬ — ЕДИНСТВЕННЫЙ РАБОЧИЙ СКРИПТ
-        (function() {
-            const track = document.getElementById('project-track');
-            if (!track) return;
-            
-            const items = track.children;
-            if (items.length === 0) return;
-            
-            let dotsContainer = document.getElementById('carousel-dots');
-            if (!dotsContainer) {
-                dotsContainer = document.createElement('div');
-                dotsContainer.className = 'carousel-dots';
-                dotsContainer.id = 'carousel-dots';
-                track.parentElement.appendChild(dotsContainer);
-            }
-            dotsContainer.innerHTML = '';
-            
-            const dots = [];
-            
-            // Создаём точки
+    (function() {
+        const track = document.getElementById('project-track');
+        if (!track) return;
+
+        const items = track.children;
+        if (items.length === 0) return;
+
+        // ===== КОНТЕЙНЕР ДЛЯ ТОЧЕК =====
+        let dotsContainer = document.getElementById('carousel-dots');
+        if (!dotsContainer) {
+            dotsContainer = document.createElement('div');
+            dotsContainer.className = 'carousel-dots';
+            dotsContainer.id = 'carousel-dots';
+            track.parentElement.appendChild(dotsContainer);
+        }
+        dotsContainer.innerHTML = '';
+
+        const dots = [];
+
+        // ===== СОЗДАЁМ ТОЧКИ =====
+        for (let i = 0; i < items.length; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+            dot.dataset.index = i;
+
+            dot.addEventListener('click', function() {
+                const index = parseInt(this.dataset.index);
+                items[index].scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'nearest',
+                    inline: 'start'
+                });
+            });
+
+            dotsContainer.appendChild(dot);
+            dots.push(dot);
+        }
+
+        // ===== ОБНОВЛЕНИЕ ТОЧЕК ПРИ СКРОЛЛЕ =====
+        function updateActiveDot() {
+            const containerRect = track.getBoundingClientRect();
+            const containerCenter = containerRect.left + containerRect.width / 2;
+
+            let activeIndex = 0;
+            let minDistance = Infinity;
+
             for (let i = 0; i < items.length; i++) {
-                const dot = document.createElement('div');
-                dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-                dot.dataset.index = i;
-                
-                dot.addEventListener('click', function() {
-                    const index = parseInt(this.dataset.index);
-                    items[index].scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'nearest',
-                        inline: 'start'
-                    });
-                });
-                
-                dotsContainer.appendChild(dot);
-                dots.push(dot);
-            }
-            
-            // Обновление точек при скролле
-            function updateDots() {
-                const containerRect = track.getBoundingClientRect();
-                const containerCenter = containerRect.left + containerRect.width / 2;
-                
-                let activeIndex = 0;
-                let minDistance = Infinity;
-                
-                for (let i = 0; i < items.length; i++) {
-                    const itemRect = items[i].getBoundingClientRect();
-                    const itemCenter = itemRect.left + itemRect.width / 2;
-                    const distance = Math.abs(itemCenter - containerCenter);
-                    
-                    if (distance < minDistance) {
-                        minDistance = distance;
-                        activeIndex = i;
-                    }
+                const itemRect = items[i].getBoundingClientRect();
+                const itemCenter = itemRect.left + itemRect.width / 2;
+                const distance = Math.abs(itemCenter - containerCenter);
+
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    activeIndex = i;
                 }
-                
-                dots.forEach((dot, i) => {
-                    dot.classList.toggle('active', i === activeIndex);
-                });
             }
-            
-            track.addEventListener('scroll', updateDots);
-            updateDots(); // один раз при загрузке
-        })();
-    </script>
+
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === activeIndex);
+            });
+        }
+
+        track.addEventListener('scroll', updateActiveDot);
+        updateActiveDot();
+
+        // ===== ПЕРЕТАСКИВАНИЕ МЫШКОЙ (drag to scroll) =====
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        track.addEventListener('mousedown', (e) => {
+            isDown = true;
+            startX = e.pageX - track.offsetLeft;
+            scrollLeft = track.scrollLeft;
+        });
+
+        track.addEventListener('mouseleave', () => {
+            isDown = false;
+        });
+
+        track.addEventListener('mouseup', () => {
+            isDown = false;
+        });
+
+        track.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - track.offsetLeft;
+            const walk = (x - startX) * 2;
+            track.scrollLeft = scrollLeft - walk;
+        });
+    })();
+</script>
 
 </body>
 
