@@ -596,14 +596,14 @@
 
         .project-card {
             flex: 0 0 calc(85vw - 40px);
-            scroll-snap-align: start;
+            scroll-snap-align: center;  /* ← центрирование */
             transition: 0.2s;
             scroll-snap-stop: always;
         }
 
         @media (min-width: 768px) {
             .project-card {
-                flex: 0 0 calc(70% - 20px); /* ПК: полторы карточки */
+                flex: 0 0 calc(70% - 20px);
             }
         }
 
