@@ -15,7 +15,7 @@
         :root {
             --bg: #AEBAFF;
             --primary: #E8551A;
-            --secondary: #FFF4AB;  /* светло-желтый для подсветки */
+            --secondary: #FFF4AB;   /* светло-желтый для подсветки */
             --text: #2E2E2E;
             --text-light: #ffffff;
             --hover: #C44A15;
@@ -46,11 +46,11 @@
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 50px 100px 0 100px;  /* ← верх 50px, остальное как было */
+            padding: 50px 100px 0 100px;
             width: 100%;
         }
 
-        /* ===== ХЕДЕР ===== */
+        /* ===== ХЕДЕР С БУРГЕР-МЕНЮ ===== */
         header {
             position: sticky;
             top: 20px;
@@ -60,39 +60,6 @@
             margin: 0 auto;
             padding: 0 100px;
         }
-
-        /* ===== МОБИЛЬНАЯ АДАПТАЦИЯ ХЕДЕРА ===== */
-        @media (max-width: 768px) {
-            header {
-                padding: 0 15px;
-            }
-            
-            .header-glass {
-                padding: 10px 15px;
-                gap: 10px;
-            }
-            
-            .logo img {
-                height: 40px; /* уменьшаем логотип на мобильных */
-            }
-            
-            .nav-links {
-                gap: 15px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .nav-links a {
-                font-size: 0.9rem;
-            }
-            
-            .nav-btn {
-                min-width: 160px;
-                padding: 8px 15px !important;
-                font-size: 0.9rem;
-            }
-        }
-
 
         .header-glass {
             display: flex;
@@ -106,10 +73,7 @@
             border: 1px solid var(--glass-border);
             box-shadow: var(--glass-shadow);
             transition: 0.3s;
-        }
-
-        .header-glass:hover {
-            background: rgba(255,255,255,0.35);
+            position: relative;
         }
 
         .logo a {
@@ -123,6 +87,7 @@
             display: block;
         }
 
+        /* Десктопная навигация */
         .nav-links {
             display: flex;
             gap: 40px;
@@ -158,7 +123,7 @@
         }
 
         .nav-btn {
-            background: #E8551A;              /* оранжевый */
+            background: #E8551A;
             color: var(--text-light) !important;
             padding: 10px 30px !important;
             border-radius: 30px;
@@ -170,7 +135,7 @@
         }
 
         .nav-btn:hover {
-            background: #FF7A3D !important;    /* светлее оранжевый */
+            background: #FF7A3D !important;
             color: var(--text-light) !important;
             transform: scale(1.05);
         }
@@ -179,6 +144,107 @@
             display: none !important;
         }
 
+        /* Бургер-кнопка (скрыта на десктопе) */
+        .burger-menu {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1001;
+        }
+
+        .burger-menu span {
+            width: 30px;
+            height: 3px;
+            background: var(--text);
+            border-radius: 3px;
+            transition: 0.3s;
+        }
+
+        /* Мобильное меню (скрыто по умолчанию) */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 100px 40px 40px;
+            flex-direction: column;
+            gap: 30px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .mobile-nav.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .mobile-nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-align: center;
+            padding: 15px;
+            border-radius: 30px;
+            transition: 0.3s;
+        }
+
+        .mobile-nav a:hover {
+            background: var(--primary);
+            color: var(--text-light);
+        }
+
+        .mobile-nav .nav-btn {
+            min-width: auto;
+            width: 100%;
+            font-size: 1.5rem;
+            padding: 15px !important;
+        }
+
+        /* ===== МОБИЛЬНАЯ АДАПТАЦИЯ ===== */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            header {
+                padding: 0 15px;
+            }
+
+            .header-glass {
+                padding: 10px 15px;
+            }
+
+            .logo img {
+                height: 40px;
+            }
+
+            /* Прячем десктопную навигацию */
+            .nav-links {
+                display: none;
+            }
+
+            /* Показываем бургер */
+            .burger-menu {
+                display: flex;
+            }
+
+            /* Показываем мобильное меню когда активно */
+            .mobile-nav {
+                display: flex;
+            }
+        }
+
+        /* Остальные стили (секции, карточки, карусель) оставляем как есть */
         /* ===== ГЛАВНЫЙ ЭКРАН ===== */
         .hero {
             text-align: center;
@@ -186,7 +252,7 @@
             background-image: url('section1-bg.png');
             background-size: cover;
             background-position: center;
-            border-radius: 30px 30px 30px 30px;
+            border-radius: 30px;
             margin-bottom: 60px;
             margin-top: 20px;
         }
@@ -212,12 +278,10 @@
             color: var(--text);
         }
 
-        /* ===== ГРАДИЕНТНЫЙ ФОН ДЛЯ ВСЕХ БЛОКОВ ===== */
-        /* ===== МЯГКИЕ ГРАДИЕНТЫ ДЛЯ ВСЕХ БЛОКОВ ===== */
+        /* ===== ГРАДИЕНТЫ ===== */
         .section-colored {
             padding: 60px 0;
             margin: 40px 0;
-            /* background-image: url('section1-bg.png');  ← временно отключено */
             background: linear-gradient(135deg, #fad0c4 0%, #ffd1ff 50%, #a1c4fd 100%);
             background-size: cover;
             background-position: center;
@@ -229,7 +293,6 @@
         }
 
         .contacts-section {
-            /* background-image: url('contacts-bg.png');  ← временно отключено */
             background: linear-gradient(135deg, #aa4b6b 0%, #6b4b8b 50%, #3b1e4b 100%);
             background-size: cover;
             background-position: center;
@@ -303,10 +366,10 @@
         }
 
         .card-link:hover {
-            color: var(--secondary);  /* вместо var(--primary) */
+            color: var(--secondary);
         }
 
-        /* ===== 3D-КАРТОЧКИ ДЛЯ КАРЬЕРНОГО ПУТИ ===== */
+        /* ===== 3D-КАРТОЧКИ ===== */
         .cards-3d {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -343,7 +406,6 @@
             padding: 30px 20px;
             background: rgba(255,255,255,0.2);
             backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
             border: 1px solid rgba(255,255,255,0.3);
             display: flex;
             flex-direction: column;
@@ -366,60 +428,7 @@
             opacity: 0.3;
         }
 
-        /* 👇 ЗАГЛУШКИ ДЛЯ КАРТОЧЕК */
-        .card-bg-1 { background-image: url('contacts-bg.png'); }
-        .card-bg-2 { background-image: url('contacts-bg.png'); }
-        .card-bg-3 { background-image: url('contacts-bg.png'); }
-        .card-bg-4 { background-image: url('contacts-bg.png'); }
-        .card-bg-5 { background-image: url('contacts-bg.png'); }
-        .card-bg-6 { background-image: url('contacts-bg.png'); }
-
-        .card-3d h3 {
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-            color: white;
-            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
-        }
-
-        .card-3d p {
-            font-size: 1rem;
-            color: white;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-        }
-
-        .card-3d .card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(
-                circle at var(--x, 50%) var(--y, 50%),
-                rgba(255,255,255,0.3) 0%,
-                transparent 60%
-            );
-            opacity: 0;
-            transition: opacity 0.2s;
-            pointer-events: none;
-            z-index: 3;
-        }
-
-        .card-3d .card:hover::after {
-            opacity: 1;
-        }
-
         /* ===== КОНТАКТЫ ===== */
-        .contacts-section {
-            background-image: url('contacts-bg.png');
-            background-size: cover;
-            background-position: center;
-            backdrop-filter: blur(10px);
-            border-radius: 30px;
-            padding: 60px 20px;
-            margin: 60px 0;
-        }
-
         .contact-buttons {
             display: flex;
             justify-content: center;
@@ -473,42 +482,6 @@
             opacity: 0.9;
         }
 
-        @media (max-width: 768px) {
-            .container {
-                padding: 0 20px;
-            }
-
-            header {
-                padding: 0 20px;
-            }
-
-            .header-glass {
-                flex-direction: column;
-                gap: 15px;
-                padding: 15px 20px;
-            }
-
-            .nav-links {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 20px;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .contact-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .contact-btn {
-                width: 100%;
-                justify-content: center;
-            }
-        }
-
         /* ===== ГОРИЗОНТАЛЬНАЯ КАРУСЕЛЬ ===== */
         .project-carousel {
             width: 100%;
@@ -543,18 +516,17 @@
         }
 
         .carousel-item {
-            flex: 0 0 calc(100vw - 120px); /* Ширина карточки на мобильных */
+            flex: 0 0 calc(100vw - 120px);
             scroll-snap-align: start;
             transition: 0.3s;
         }
 
         @media (min-width: 768px) {
             .carousel-item {
-                flex: 0 0 calc(33.333% - 20px); /* На планшетах и ПК по 3 в ряд */
+                flex: 0 0 calc(33.333% - 20px);
             }
         }
 
-        /* Индикаторы (точки) */
         .carousel-dots {
             display: flex;
             justify-content: center;
@@ -577,6 +549,22 @@
             border-radius: 10px;
         }
 
+        /* ===== МОБИЛЬНЫЕ ПОПРАВКИ ДЛЯ КОНТАКТОВ ===== */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .contact-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .contact-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
     </style>
 
 
@@ -590,12 +578,29 @@
                     <img src="logo.png" alt="Кинеограф">
                 </a>
             </div>
+            
+            <!-- Десктопная навигация -->
             <div class="nav-links">
                 <a href="#portfolio">Портфолио</a>
                 <a href="#experience">Опыт</a>
                 <a href="#contacts">Контакты</a>
                 <a href="index.html" class="nav-btn">Школа анимации</a>
             </div>
+
+            <!-- Бургер-кнопка (только на мобильных) -->
+            <div class="burger-menu" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <!-- Мобильное меню (выпадающее) -->
+        <div class="mobile-nav" id="mobileMenu">
+            <a href="#portfolio" onclick="toggleMobileMenu()">Портфолио</a>
+            <a href="#experience" onclick="toggleMobileMenu()">Опыт</a>
+            <a href="#contacts" onclick="toggleMobileMenu()">Контакты</a>
+            <a href="index.html" class="nav-btn" onclick="toggleMobileMenu()">Школа анимации</a>
         </div>
     </header>
 
@@ -1090,6 +1095,28 @@
         
         window.addEventListener('load', initCarousel);
     </script>
+
+    <script>
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobileMenu');
+        menu.classList.toggle('active');
+        
+        // Блокируем прокрутку страницы когда меню открыто
+        if (menu.classList.contains('active')) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+    }
+
+    // Закрываем меню при клике на ссылку
+    document.querySelectorAll('.mobile-nav a').forEach(link => {
+        link.addEventListener('click', () => {
+            document.getElementById('mobileMenu').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+    });
+</script>
 
 </body>
 
