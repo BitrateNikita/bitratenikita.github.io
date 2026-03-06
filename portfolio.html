@@ -179,13 +179,30 @@
             color: var(--text);
         }
 
+        /* ===== ГРАДИЕНТНЫЙ ФОН ДЛЯ ВСЕХ БЛОКОВ ===== */
         .section-colored {
             padding: 60px 0;
             margin: 40px 0;
-            background-image: url('section2-bg.png');
+            /* background-image: url('section1-bg.png');  ← временно отключено */
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             background-size: cover;
             background-position: center;
             border-radius: 30px;
+        }
+
+        .section-colored:nth-of-type(2) {
+            background: linear-gradient(135deg, #845ec2 0%, #5b3b8c 100%);
+        }
+
+        .contacts-section {
+            /* background-image: url('contacts-bg.png');  ← временно отключено */
+            background: linear-gradient(135deg, #5b3b8c 0%, #392b5f 100%);
+            background-size: cover;
+            background-position: center;
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 60px 20px;
+            margin: 60px 0;
         }
 
         /* ===== КАРТОЧКИ С ВИДЕО ===== */
