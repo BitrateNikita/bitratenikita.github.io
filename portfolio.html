@@ -1194,19 +1194,24 @@
 
 
     <script>
-        // Карусель проектов (АБСОЛЮТНО РАБОЧАЯ ВЕРСИЯ)
-        function initCarousel() {
+        // КАРУСЕЛЬ — ЕДИНСТВЕННЫЙ РАБОЧИЙ СКРИПТ
+        (function() {
             const track = document.getElementById('project-track');
-            const dotsContainer = document.getElementById('carousel-dots');
-            
-            // Если нет карусели — выходим
-            if (!track || !dotsContainer) return;
+            if (!track) return;
             
             const items = track.children;
-            const dots = [];
+            if (items.length === 0) return;
             
-            // Очищаем контейнер с точками
+            let dotsContainer = document.getElementById('carousel-dots');
+            if (!dotsContainer) {
+                dotsContainer = document.createElement('div');
+                dotsContainer.className = 'carousel-dots';
+                dotsContainer.id = 'carousel-dots';
+                track.parentElement.appendChild(dotsContainer);
+            }
             dotsContainer.innerHTML = '';
+            
+            const dots = [];
             
             // Создаём точки
             for (let i = 0; i < items.length; i++) {
@@ -1214,41 +1219,31 @@
                 dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
                 dot.dataset.index = i;
                 
-                // Клик по точке — переходим к нужному видео
                 dot.addEventListener('click', function() {
                     const index = parseInt(this.dataset.index);
-                    const item = items[index];
-                    
-                    // Вычисляем позицию скролла
-                    const scrollLeft = item.offsetLeft - track.offsetLeft;
-                    
-                    // Плавная прокрутка
-                    track.scrollTo({
-                        left: scrollLeft,
-                        behavior: 'smooth'
+                    items[index].scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'nearest',
+                        inline: 'start'
                     });
-                    
-                    // Обновляем активную точку
-                    dots.forEach(d => d.classList.remove('active'));
-                    this.classList.add('active');
                 });
                 
                 dotsContainer.appendChild(dot);
                 dots.push(dot);
             }
             
-            // Следим за скроллом и обновляем активную точку
-            track.addEventListener('scroll', function() {
-                // Текущая позиция скролла
-                const scrollPos = track.scrollLeft;
+            // Обновление точек при скролле
+            function updateDots() {
+                const containerRect = track.getBoundingClientRect();
+                const containerCenter = containerRect.left + containerRect.width / 2;
                 
-                // Ищем ближайший элемент
                 let activeIndex = 0;
                 let minDistance = Infinity;
                 
                 for (let i = 0; i < items.length; i++) {
-                    const itemLeft = items[i].offsetLeft - track.offsetLeft;
-                    const distance = Math.abs(itemLeft - scrollPos);
+                    const itemRect = items[i].getBoundingClientRect();
+                    const itemCenter = itemRect.left + itemRect.width / 2;
+                    const distance = Math.abs(itemCenter - containerCenter);
                     
                     if (distance < minDistance) {
                         minDistance = distance;
@@ -1256,15 +1251,14 @@
                     }
                 }
                 
-                // Обновляем точки
                 dots.forEach((dot, i) => {
                     dot.classList.toggle('active', i === activeIndex);
                 });
-            });
-        }
-        
-        // Запускаем после загрузки страницы
-        window.addEventListener('load', initCarousel);
+            }
+            
+            track.addEventListener('scroll', updateDots);
+            updateDots(); // один раз при загрузке
+        })();
     </script>
 
 </body>
