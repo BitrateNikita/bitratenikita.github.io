@@ -1054,69 +1054,72 @@
 
 
     <script>
-        // Карусель проектов
+        // Карусель проектов (ИСПРАВЛЕННАЯ)
         function initCarousel() {
             const track = document.getElementById('project-track');
             const dotsContainer = document.getElementById('carousel-dots');
+            
+            // Если нет карусели на странице — просто выходим
             if (!track || !dotsContainer) return;
             
             const items = track.children;
             const dots = [];
             
+            // Очищаем контейнер с точками
+            dotsContainer.innerHTML = '';
+            
             // Создаём точки
             for (let i = 0; i < items.length; i++) {
                 const dot = document.createElement('div');
                 dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-                dot.onclick = () => {
+                dot.dataset.index = i;
+                
+                // При клике на точку — плавно скроллим к нужному элементу
+                dot.addEventListener('click', function() {
+                    const index = parseInt(this.dataset.index);
+                    const item = items[index];
                     track.scrollTo({
-                        left: items[i].offsetLeft - track.offsetLeft,
+                        left: item.offsetLeft - track.offsetLeft,
                         behavior: 'smooth'
                     });
-                };
+                    
+                    // Обновляем активные точки
+                    dots.forEach(d => d.classList.remove('active'));
+                    this.classList.add('active');
+                });
+                
                 dotsContainer.appendChild(dot);
                 dots.push(dot);
             }
             
             // Обновляем активную точку при скролле
-            track.addEventListener('scroll', () => {
+            track.addEventListener('scroll', function() {
                 const scrollPosition = track.scrollLeft;
                 let activeIndex = 0;
+                let minDiff = Infinity;
+                
+                // Ищем ближайший к левому краю элемент
                 for (let i = 0; i < items.length; i++) {
-                    if (items[i].offsetLeft - track.offsetLeft <= scrollPosition + 50) {
+                    const itemLeft = items[i].offsetLeft - track.offsetLeft;
+                    const diff = Math.abs(itemLeft - scrollPosition);
+                    if (diff < minDiff) {
+                        minDiff = diff;
                         activeIndex = i;
                     }
                 }
                 
+                // Обновляем классы точек
                 dots.forEach((dot, index) => {
                     dot.classList.toggle('active', index === activeIndex);
                 });
             });
         }
         
+        // Запускаем после полной загрузки страницы
         window.addEventListener('load', initCarousel);
+        // И на всякий случай через небольшую задержку (если контент грузится долго)
+        setTimeout(initCarousel, 500);
     </script>
-
-    <script>
-    function toggleMobileMenu() {
-        const menu = document.getElementById('mobileMenu');
-        menu.classList.toggle('active');
-        
-        // Блокируем прокрутку страницы когда меню открыто
-        if (menu.classList.contains('active')) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = 'auto';
-        }
-    }
-
-    // Закрываем меню при клике на ссылку
-    document.querySelectorAll('.mobile-nav a').forEach(link => {
-        link.addEventListener('click', () => {
-            document.getElementById('mobileMenu').classList.remove('active');
-            document.body.style.overflow = 'auto';
-        });
-    });
-</script>
 
 </body>
 
