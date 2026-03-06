@@ -577,6 +577,7 @@
             overflow-x: auto;
             overflow-y: hidden;
             -webkit-overflow-scrolling: touch;
+            scroll-snap-type: x mandatory; /* ← теперь прилипает */
             cursor: grab;
             user-select: none;
             padding: 10px 0 20px;
@@ -594,12 +595,20 @@
         }
 
         .project-card {
-            flex: 0 0 calc(100vw - 120px);
+            flex: 0 0 calc(85vw - 40px); /* ← на мобильных почти весь экран */
+            scroll-snap-align: start;
+            transition: 0.2s;
         }
 
         @media (min-width: 768px) {
             .project-card {
-                flex: 0 0 calc(33.333% - 20px);
+                flex: 0 0 calc(33.333% - 20px); /* ← на ПК 3 карточки */
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .project-card {
+                flex: 0 0 calc(30% - 20px); /* ← чуть меньше, чтобы было видно края следующих */
             }
         }
 
