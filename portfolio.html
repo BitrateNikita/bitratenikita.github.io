@@ -570,6 +570,61 @@
                 justify-content: center;
             }
         }
+
+        /* ===== ПРОСТАЯ КАРУСЕЛЬ ===== */
+        .projects-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+            cursor: grab;
+            user-select: none;
+            padding: 10px 0 20px;
+            margin-bottom: 20px;
+        }
+
+        .projects-wrapper:active {
+            cursor: grabbing;
+        }
+
+        .projects-track {
+            display: flex;
+            gap: 20px;
+            width: max-content;
+        }
+
+        .project-card {
+            flex: 0 0 calc(100vw - 120px);
+        }
+
+        @media (min-width: 768px) {
+            .project-card {
+                flex: 0 0 calc(33.333% - 20px);
+            }
+        }
+
+        .project-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .project-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .project-dot.active {
+            background: var(--primary);
+            width: 20px;
+            border-radius: 10px;
+        }
+
     </style>
 
 
@@ -616,16 +671,16 @@
             <p>Senior Spine-аниматор с 8-летним опытом в геймдеве (MY.GAMES, Deus Craft, Game Forest)</p>
         </section>
 
-                <!-- ===== БЛОК ПОРТФОЛИО (ГОРИЗОНТАЛЬНЫЙ СВАЙП) ===== -->
+                <!-- ===== БЛОК ПОРТФОЛИО ===== -->
                 <section id="portfolio" class="section-colored">
                     <div class="container">
                         <h2 class="section-title">Проекты</h2>
                         
-                        <!-- Горизонтальная карусель -->
-                        <div class="project-carousel">
-                            <div class="carousel-track" id="project-track">
-                                <!-- ===== ВИДЕО 1 ===== -->
-                                <div class="carousel-item">
+                        <!-- Простая обёртка для скролла -->
+                        <div class="projects-wrapper" id="projectsWrapper">
+                            <div class="projects-track" id="projectsTrack">
+                                <!-- Видео 1 -->
+                                <div class="project-card">
                                     <div class="card">
                                         <div class="video-container">
                                             <iframe src="https://vkvideo.ru/video_ext.php?oid=-64982343&id=456239125&hash=1731c63dca427705&hd=3&autoplay=1&muted=1&loop=1" 
@@ -644,8 +699,8 @@
                                     </div>
                                 </div>
                                 
-                                <!-- ===== ВИДЕО 2 ===== -->
-                                <div class="carousel-item">
+                                <!-- Видео 2 -->
+                                <div class="project-card">
                                     <div class="card">
                                         <div class="video-container">
                                             <iframe src="https://vkvideo.ru/video_ext.php?oid=-64982343&id=456239124&hash=e4f2207623026658&hd=3&autoplay=1&muted=1&loop=1" 
@@ -664,8 +719,8 @@
                                     </div>
                                 </div>
                                 
-                                <!-- ===== ВИДЕО 3 ===== -->
-                                <div class="carousel-item">
+                                <!-- Видео 3 -->
+                                <div class="project-card">
                                     <div class="card">
                                         <div class="video-container">
                                             <iframe src="https://vkvideo.ru/video_ext.php?oid=-64982343&id=456239126&hash=7c5b80813c4c73bc&hd=3&autoplay=1&muted=1&loop=1" 
@@ -684,150 +739,12 @@
                                     </div>
                                 </div>
                                 
-                                <!-- ===== ВИДЕО 4 ===== -->
-                                <div class="carousel-item">
-                                    <div class="card">
-                                        <div class="video-container">
-                                            <iframe src="https://vkvideo.ru/video_ext.php?oid=-64982343&id=456239127&hash=8d6e9f2c3b4a5d7e&hd=3&autoplay=1&muted=1&loop=1" 
-                                                    width="100%" 
-                                                    height="100%" 
-                                                    allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" 
-                                                    frameborder="0" 
-                                                    allowfullscreen>
-                                            </iframe>
-                                        </div>
-                                        <div class="card-info">
-                                            <h3>Новый проект 1</h3>
-                                            <p>Описание анимаций<br><small>замени на свои</small></p>
-                                            <a href="#" class="card-link" target="_blank">Смотреть на ArtStation →</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- ===== ВИДЕО 5 ===== -->
-                                <div class="carousel-item">
-                                    <div class="card">
-                                        <div class="video-container">
-                                            <iframe src="https://vkvideo.ru/video_ext.php?oid=-64982343&id=456239128&hash=9e7f0g3d4c5b6e8f&hd=3&autoplay=1&muted=1&loop=1" 
-                                                    width="100%" 
-                                                    height="100%" 
-                                                    allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" 
-                                                    frameborder="0" 
-                                                    allowfullscreen>
-                                            </iframe>
-                                        </div>
-                                        <div class="card-info">
-                                            <h3>Новый проект 2</h3>
-                                            <p>Описание анимаций<br><small>замени на свои</small></p>
-                                            <a href="#" class="card-link" target="_blank">Смотреть на ArtStation →</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- ===== ВИДЕО 6 ===== -->
-                                <div class="carousel-item">
-                                    <div class="card">
-                                        <div class="video-container">
-                                            <iframe src="https://vkvideo.ru/video_ext.php?oid=-64982343&id=456239129&hash=0h1i2j3k4l5m6n7o&hd=3&autoplay=1&muted=1&loop=1" 
-                                                    width="100%" 
-                                                    height="100%" 
-                                                    allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" 
-                                                    frameborder="0" 
-                                                    allowfullscreen>
-                                            </iframe>
-                                        </div>
-                                        <div class="card-info">
-                                            <h3>Новый проект 3</h3>
-                                            <p>Описание анимаций<br><small>замени на свои</small></p>
-                                            <a href="#" class="card-link" target="_blank">Смотреть на ArtStation →</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- ===== ВИДЕО 7 ===== -->
-                                <div class="carousel-item">
-                                    <div class="card">
-                                        <div class="video-container">
-                                            <iframe src="https://vkvideo.ru/video_ext.php?oid=-64982343&id=456239130&hash=1p2q3r4s5t6u7v8w&hd=3&autoplay=1&muted=1&loop=1" 
-                                                    width="100%" 
-                                                    height="100%" 
-                                                    allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" 
-                                                    frameborder="0" 
-                                                    allowfullscreen>
-                                            </iframe>
-                                        </div>
-                                        <div class="card-info">
-                                            <h3>Новый проект 4</h3>
-                                            <p>Описание анимаций<br><small>замени на свои</small></p>
-                                            <a href="#" class="card-link" target="_blank">Смотреть на ArtStation →</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- ===== ВИДЕО 8 ===== -->
-                                <div class="carousel-item">
-                                    <div class="card">
-                                        <div class="video-container">
-                                            <iframe src="https://vkvideo.ru/video_ext.php?oid=-64982343&id=456239131&hash=2x3y4z5a6b7c8d9e&hd=3&autoplay=1&muted=1&loop=1" 
-                                                    width="100%" 
-                                                    height="100%" 
-                                                    allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" 
-                                                    frameborder="0" 
-                                                    allowfullscreen>
-                                            </iframe>
-                                        </div>
-                                        <div class="card-info">
-                                            <h3>Новый проект 5</h3>
-                                            <p>Описание анимаций<br><small>замени на свои</small></p>
-                                            <a href="#" class="card-link" target="_blank">Смотреть на ArtStation →</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- ===== ВИДЕО 9 ===== -->
-                                <div class="carousel-item">
-                                    <div class="card">
-                                        <div class="video-container">
-                                            <iframe src="https://vkvideo.ru/video_ext.php?oid=-64982343&id=456239132&hash=0f1g2h3i4j5k6l7m&hd=3&autoplay=1&muted=1&loop=1" 
-                                                    width="100%" 
-                                                    height="100%" 
-                                                    allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" 
-                                                    frameborder="0" 
-                                                    allowfullscreen>
-                                            </iframe>
-                                        </div>
-                                        <div class="card-info">
-                                            <h3>Новый проект 6</h3>
-                                            <p>Описание анимаций<br><small>замени на свои</small></p>
-                                            <a href="#" class="card-link" target="_blank">Смотреть на ArtStation →</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- ===== ВИДЕО 10 ===== -->
-                                <div class="carousel-item">
-                                    <div class="card">
-                                        <div class="video-container">
-                                            <iframe src="https://vkvideo.ru/video_ext.php?oid=-64982343&id=456239133&hash=8n9o0p1q2r3s4t5u&hd=3&autoplay=1&muted=1&loop=1" 
-                                                    width="100%" 
-                                                    height="100%" 
-                                                    allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" 
-                                                    frameborder="0" 
-                                                    allowfullscreen>
-                                            </iframe>
-                                        </div>
-                                        <div class="card-info">
-                                            <h3>Новый проект 7</h3>
-                                            <p>Описание анимаций<br><small>замени на свои</small></p>
-                                            <a href="#" class="card-link" target="_blank">Смотреть на ArtStation →</a>
-                                        </div>
-                                    </div>
-                                </div>
+                                <!-- Добавляй новые видео сюда по шаблону -->
                             </div>
                         </div>
                         
-                        <!-- Индикаторы прокрутки (точки) -->
-                        <div class="carousel-dots" id="carousel-dots"></div>
+                        <!-- Точки -->
+                        <div class="project-dots" id="projectDots"></div>
                     </div>
                 </section>
 
@@ -1199,100 +1116,86 @@
 
 
     <script>
-        // КАРУСЕЛЬ — ЕДИНСТВЕННЫЙ РАБОЧИЙ СКРИПТ
-    (function() {
-        const track = document.getElementById('project-track');
-        if (!track) return;
-
-        const items = track.children;
-        if (items.length === 0) return;
-
-        // ===== КОНТЕЙНЕР ДЛЯ ТОЧЕК =====
-        let dotsContainer = document.getElementById('carousel-dots');
-        if (!dotsContainer) {
-            dotsContainer = document.createElement('div');
-            dotsContainer.className = 'carousel-dots';
-            dotsContainer.id = 'carousel-dots';
-            track.parentElement.appendChild(dotsContainer);
-        }
-        dotsContainer.innerHTML = '';
-
-        const dots = [];
-
-        // ===== СОЗДАЁМ ТОЧКИ =====
-        for (let i = 0; i < items.length; i++) {
-            const dot = document.createElement('div');
-            dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-            dot.dataset.index = i;
-
-            dot.addEventListener('click', function() {
-                const index = parseInt(this.dataset.index);
-                items[index].scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'nearest',
-                    inline: 'start'
+        (function() {
+            const wrapper = document.getElementById('projectsWrapper');
+            const track = document.getElementById('projectsTrack');
+            const dotsContainer = document.getElementById('projectDots');
+            
+            if (!wrapper || !track || !dotsContainer) return;
+            
+            const cards = track.children;
+            if (cards.length === 0) return;
+            
+            // Создаём точки
+            const dots = [];
+            dotsContainer.innerHTML = '';
+            
+            for (let i = 0; i < cards.length; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'project-dot' + (i === 0 ? ' active' : '');
+                dot.dataset.index = i;
+                
+                dot.addEventListener('click', function() {
+                    const index = parseInt(this.dataset.index);
+                    const card = cards[index];
+                    
+                    wrapper.scrollTo({
+                        left: card.offsetLeft - wrapper.offsetLeft,
+                        behavior: 'smooth'
+                    });
                 });
-            });
-
-            dotsContainer.appendChild(dot);
-            dots.push(dot);
-        }
-
-        // ===== ОБНОВЛЕНИЕ ТОЧЕК ПРИ СКРОЛЛЕ =====
-        function updateActiveDot() {
-            const containerRect = track.getBoundingClientRect();
-            const containerCenter = containerRect.left + containerRect.width / 2;
-
-            let activeIndex = 0;
-            let minDistance = Infinity;
-
-            for (let i = 0; i < items.length; i++) {
-                const itemRect = items[i].getBoundingClientRect();
-                const itemCenter = itemRect.left + itemRect.width / 2;
-                const distance = Math.abs(itemCenter - containerCenter);
-
-                if (distance < minDistance) {
-                    minDistance = distance;
-                    activeIndex = i;
-                }
+                
+                dotsContainer.appendChild(dot);
+                dots.push(dot);
             }
-
-            dots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === activeIndex);
+            
+            // Обновляем точки при скролле
+            function updateDots() {
+                const scrollPos = wrapper.scrollLeft;
+                let activeIndex = 0;
+                let minDiff = Infinity;
+                
+                for (let i = 0; i < cards.length; i++) {
+                    const cardLeft = cards[i].offsetLeft - wrapper.offsetLeft;
+                    const diff = Math.abs(cardLeft - scrollPos);
+                    
+                    if (diff < minDiff) {
+                        minDiff = diff;
+                        activeIndex = i;
+                    }
+                }
+                
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === activeIndex);
+                });
+            }
+            
+            wrapper.addEventListener('scroll', updateDots);
+            updateDots();
+            
+            // Drag to scroll
+            let isDown = false;
+            let startX;
+            let scrollLeft;
+            
+            wrapper.addEventListener('mousedown', (e) => {
+                isDown = true;
+                startX = e.pageX - wrapper.offsetLeft;
+                scrollLeft = wrapper.scrollLeft;
             });
-        }
-
-        track.addEventListener('scroll', updateActiveDot);
-        updateActiveDot();
-
-        // ===== ПЕРЕТАСКИВАНИЕ МЫШКОЙ (drag to scroll) =====
-        let isDown = false;
-        let startX;
-        let scrollLeft;
-
-        track.addEventListener('mousedown', (e) => {
-            isDown = true;
-            startX = e.pageX - track.offsetLeft;
-            scrollLeft = track.scrollLeft;
-        });
-
-        track.addEventListener('mouseleave', () => {
-            isDown = false;
-        });
-
-        track.addEventListener('mouseup', () => {
-            isDown = false;
-        });
-
-        track.addEventListener('mousemove', (e) => {
-            if (!isDown) return;
-            e.preventDefault();
-            const x = e.pageX - track.offsetLeft;
-            const walk = (x - startX) * 2;
-            track.scrollLeft = scrollLeft - walk;
-        });
-    })();
-</script>
+            
+            wrapper.addEventListener('mouseleave', () => isDown = false);
+            wrapper.addEventListener('mouseup', () => isDown = false);
+            
+            wrapper.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - wrapper.offsetLeft;
+                const walk = (x - startX) * 1.5;
+                wrapper.scrollLeft = scrollLeft - walk;
+            });
+        })();
+    </script>
 
 </body>
 
