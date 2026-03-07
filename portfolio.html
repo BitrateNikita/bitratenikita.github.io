@@ -457,11 +457,11 @@
             transform: scale(1.05);
         }
 
-        /* ===== ФУТЕР (ФИНАЛЬНАЯ ВЕРСИЯ) ===== */
+        /* ===== ФУТЕР (С ОТСТУПАМИ КАК У КОНТЕЙНЕРА) ===== */
         footer {
             max-width: 1400px;
             margin: 60px auto 0;
-            padding: 40px 0;
+            padding: 40px 100px;              /* ← теперь как у контейнера */
             background-image: url('footer-bg.png');
             background-size: cover;
             background-position: center;
@@ -472,22 +472,11 @@
             box-sizing: border-box;
         }
 
-        footer .footer-copyright {
-            font-size: 0.9rem;
-            opacity: 0.9;
-            color: white;
-        }
-
         .footer-copyright {
             font-size: 0.9rem;
             opacity: 0.9;
         }
 
-
-        .footer-copyright {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
 
         /* ===== ГОРИЗОНТАЛЬНАЯ КАРУСЕЛЬ ===== */
         .project-carousel {
