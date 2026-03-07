@@ -457,18 +457,28 @@
             transform: scale(1.05);
         }
 
-        /* ===== БЛОК ФУТЕРА ===== */
+        /* ===== ФУТЕР ===== */
         footer {
-            max-width: 1200px;           /* ← ширина как у карточек (не 1400!) */
-            margin: 60px auto 0;
-            padding: 40px 100px;          /* ← отступы как у карточек */
             background-image: url('footer-bg.png');
             background-size: cover;
             background-position: center;
             color: white;
-            text-align: center;
-            border-radius: 30px 30px 0 0;
+            margin-top: 60px;
+        }
+
+        footer .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 100px;
+            width: 100%;
             box-sizing: border-box;
+        }
+
+        .footer-copyright {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            text-align: center;
+            color: white;
         }
 
 
@@ -1083,7 +1093,7 @@
 
     <!-- ===== ФУТЕР ===== -->
     <footer>
-        <div class="footer-container">
+        <div class="container">
             <div class="footer-copyright">
                 © 2026 Кинеограф. Все права защищены.
             </div>
