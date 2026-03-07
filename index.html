@@ -641,6 +641,71 @@
             cursor: pointer;
         }
 
+        /* ===== БУРГЕР-МЕНЮ ===== */
+        .burger-menu {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1001;
+        }
+
+        .burger-menu span {
+            width: 30px;
+            height: 3px;
+            background: var(--text);
+            border-radius: 3px;
+            transition: 0.3s;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 100px 40px 40px;
+            flex-direction: column;
+            gap: 30px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .mobile-nav.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .mobile-nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-align: center;
+            padding: 15px;
+            border-radius: 30px;
+            transition: 0.3s;
+        }
+
+        .mobile-nav a:hover {
+            background: var(--primary);
+            color: var(--text-light);
+        }
+
+        .mobile-nav .nav-btn {
+            min-width: auto;
+            width: 100%;
+            font-size: 1.5rem;
+            padding: 15px !important;
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 0 20px;
@@ -693,17 +758,34 @@
 </head>
 <body>
     <header>
+        <!-- ЕДИНСТВЕННЫЙ header-glass с бургером -->
         <div class="header-glass">
             <div class="logo">
                 <a href="index.html">
                     <img src="logo.png" alt="Кинеограф">
                 </a>
             </div>
+
+            <!-- Десктопная навигация -->
             <div class="nav-links">
                 <a href="#">О школе</a>
                 <a href="#contacts">Контакты</a>
                 <a href="portfolio.html" class="nav-btn">Для студий</a>
             </div>
+
+            <!-- Бургер-кнопка (только на мобильных) -->
+            <div class="burger-menu" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <!-- Мобильное меню (скрыто по умолчанию) -->
+        <div class="mobile-nav" id="mobileMenu">
+            <a href="#" onclick="toggleMobileMenu()">О школе</a>
+            <a href="#contacts" onclick="toggleMobileMenu()">Контакты</a>
+            <a href="portfolio.html" class="nav-btn" onclick="toggleMobileMenu()">Для студий</a>
         </div>
     </header>
 
@@ -939,5 +1021,19 @@
 
 
     </script>
+
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('active');
+            
+            if (menu.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = 'auto';
+            }
+        }
+    </script>
+
 </body>
 </html>
