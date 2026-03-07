@@ -157,6 +157,71 @@
             display: none !important;
         }
 
+        /* ===== БУРГЕР-МЕНЮ ===== */
+        .burger-menu {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1001;
+        }
+
+        .burger-menu span {
+            width: 30px;
+            height: 3px;
+            background: var(--text);
+            border-radius: 3px;
+            transition: 0.3s;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 100px 40px 40px;
+            flex-direction: column;
+            gap: 30px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .mobile-nav.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .mobile-nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-align: center;
+            padding: 15px;
+            border-radius: 30px;
+            transition: 0.3s;
+        }
+
+        .mobile-nav a:hover {
+            background: var(--primary);
+            color: var(--text-light);
+        }
+
+        .mobile-nav .nav-btn {
+            min-width: auto;
+            width: 100%;
+            font-size: 1.5rem;
+            padding: 15px !important;
+        }
+
         /* =====================================================
            🎬 ГЛАВНЫЙ ЭКРАН (HERO)
            ===================================================== */
@@ -641,123 +706,56 @@
             cursor: pointer;
         }
 
-        /* ===== БУРГЕР-МЕНЮ ===== */
-        .burger-menu {
-            display: none;
-            flex-direction: column;
-            gap: 6px;
-            cursor: pointer;
-            padding: 10px;
-            z-index: 1001;
-        }
-
-        .burger-menu span {
-            width: 30px;
-            height: 3px;
-            background: var(--text);
-            border-radius: 3px;
-            transition: 0.3s;
-        }
-
-        .mobile-nav {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            z-index: 1000;
-            padding: 100px 40px 40px;
-            flex-direction: column;
-            gap: 30px;
-            opacity: 0;
-            transition: opacity 0.3s;
-            pointer-events: none;
-        }
-
-        .mobile-nav.active {
-            opacity: 1;
-            pointer-events: all;
-        }
-
-        .mobile-nav a {
-            color: var(--text);
-            text-decoration: none;
-            font-size: 1.5rem;
-            font-weight: 600;
-            text-align: center;
-            padding: 15px;
-            border-radius: 30px;
-            transition: 0.3s;
-        }
-
-        .mobile-nav a:hover {
-            background: var(--primary);
-            color: var(--text-light);
-        }
-
-        .mobile-nav .nav-btn {
-            min-width: auto;
-            width: 100%;
-            font-size: 1.5rem;
-            padding: 15px !important;
-        }
-
         @media (max-width: 768px) {
-        .container {
-            padding: 0 20px;
-        }
+            .container {
+                padding: 0 20px;
+            }
 
-        header {
-            padding: 0 20px;
-        }
+            header {
+                padding: 0 20px;
+            }
 
-        .header-glass {
-            flex-direction: row; /* Убедись, что логотип и бургер в одной строке */
-            gap: 15px;
-            padding: 15px 20px;
-        }
+            .header-glass {
+                flex-direction: row;
+                gap: 15px;
+                padding: 15px 20px;
+            }
 
-        /* Добавь эти два правила, если их нет */
-        .nav-links {
-            display: none; /* Прячем десктопное меню */
-        }
+            .nav-links {
+                display: none;
+            }
 
-        .burger-menu {
-            display: flex; /* Показываем бургер-кнопку */
-        }
+            .burger-menu {
+                display: flex;
+            }
 
-        /* Остальные твои стили для мобильных */
-        .nav-btn {
-            min-width: 180px;
-        }
+            .nav-btn {
+                min-width: 180px;
+            }
 
-        .hero h1 {
-            font-size: 1.8rem;
-        }
+            .hero h1 {
+                font-size: 1.8rem;
+            }
 
-        .hero-buttons {
-            flex-direction: column;
-            gap: 10px;
-        }
+            .hero-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
 
-        .contacts-grid {
-            grid-template-columns: 1fr;
-            gap: 30px;
-        }
+            .contacts-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
 
-        .cta-block h2 {
-            font-size: 2rem;
-        }
+            .cta-block h2 {
+                font-size: 2rem;
+            }
 
-        .cta-btn {
-            padding: 12px 30px;
-            font-size: 1.1rem;
+            .cta-btn {
+                padding: 12px 30px;
+                font-size: 1.1rem;
+            }
         }
-    }
     </style>
 </head>
 <body>
@@ -769,14 +767,14 @@
                 </a>
             </div>
 
-            <!-- Десктопная навигация (будет скрыта на мобильных) -->
+            <!-- Десктопная навигация (видна на ПК) -->
             <div class="nav-links">
                 <a href="#">О школе</a>
                 <a href="#contacts">Контакты</a>
                 <a href="portfolio.html" class="nav-btn">Для студий</a>
             </div>
 
-            <!-- Бургер-кнопка -->
+            <!-- Бургер-кнопка (видна только на мобильных) -->
             <div class="burger-menu" onclick="toggleMobileMenu()">
                 <span></span>
                 <span></span>
@@ -784,7 +782,7 @@
             </div>
         </div>
 
-        <!-- Мобильное меню -->
+        <!-- Мобильное меню (скрыто по умолчанию) -->
         <div class="mobile-nav" id="mobileMenu">
             <a href="#" onclick="toggleMobileMenu()">О школе</a>
             <a href="#contacts" onclick="toggleMobileMenu()">Контакты</a>
@@ -793,6 +791,7 @@
     </header>
 
     <div class="container">
+        <!-- ===== ГЛАВНЫЙ ЭКРАН ===== -->
         <section class="hero">
             <h1>Ваш ребёнок создаст свою первую анимацию</h1>
             <p>У нас дети 8–12 лет учится оживлять персонажей, создавать истории и собирать свои настоящие анимационные проекты.</p>
@@ -894,31 +893,26 @@
             </div>
             
             <!-- ===== КНОПКИ В ОДИН РЯД ===== -->
-            <!-- 👇 Здесь будут иконки. Пока временные, потом заменишь -->
             <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; padding: 0 20px;">
                 
                 <!-- Кнопка Телефон -->
                 <a href="tel:+79186468822" class="contact-btn" style="width: auto; min-width: 60px; padding: 15px;">
                     <span class="contact-icon">📞</span>
-                    <!-- текст убран -->
                 </a>
                 
                 <!-- Кнопка Email -->
                 <a href="mailto:bitrate.motiondesign@gmail.com" class="contact-btn" style="width: auto; min-width: 60px; padding: 15px;">
                     <span class="contact-icon">✉️</span>
-                    <!-- текст убран -->
                 </a>
                 
                 <!-- Кнопка Telegram -->
                 <a href="https://t.me/BITRATEmotion" target="_blank" class="contact-btn" style="width: auto; min-width: 60px; padding: 15px;">
                     <span class="contact-icon">📱</span>
-                    <!-- текст убран -->
                 </a>
                 
-                <!-- Кнопка Адрес (Яндекс Навигатор) -->
+                <!-- Кнопка Адрес -->
                 <a href="https://yandex.ru/maps/?text=Новороссийск+ул.+Алексея+Матвейкина+4+кабинет+8" target="_blank" class="contact-btn" style="width: auto; min-width: 60px; padding: 15px;">
                     <span class="contact-icon">📍</span>
-                    <!-- текст убран -->
                 </a>
             </div>
         </section>
@@ -947,31 +941,26 @@
             </div>
             <div class="modal-body" id="formContainer">
                 <form action="https://formspree.io/f/mvzbyode" method="POST">
-                    <!-- Имя родителя -->
                     <div class="form-group">
                         <label for="name">Ваше имя *</label>
                         <input type="text" id="name" name="name" required placeholder="Например: Иван Петров">
                     </div>
                     
-                    <!-- Возраст ребёнка -->
                     <div class="form-group">
                         <label for="child-age">Возраст ребёнка *</label>
                         <input type="number" id="child-age" name="child_age" required min="5" max="16" placeholder="Например: 8">
                     </div>
                     
-                    <!-- Телефон -->
                     <div class="form-group">
                         <label for="phone">Телефон *</label>
                         <input type="tel" id="phone" name="phone" required placeholder="+7 (999) 123-45-67">
                     </div>
                     
-                    <!-- Email -->
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="email" id="email" name="email" placeholder="ivan@example.com">
                     </div>
                     
-                    <!-- Сообщение -->
                     <div class="form-group">
                         <label for="message">Сообщение</label>
                         <textarea id="message" name="message" placeholder="Ваш вопрос или пожелание..."></textarea>
@@ -1000,7 +989,6 @@
             }
         }
 
-        
         function moveCard(event, container) {
             const card = container.querySelector('.card');
             const rect = container.getBoundingClientRect();
@@ -1022,10 +1010,6 @@
             card.style.transform = 'rotateY(0deg) rotateX(0deg)';
         }
 
-
-    </script>
-
-    <script>
         function toggleMobileMenu() {
             const menu = document.getElementById('mobileMenu');
             menu.classList.toggle('active');
@@ -1037,6 +1021,5 @@
             }
         }
     </script>
-
 </body>
 </html>
