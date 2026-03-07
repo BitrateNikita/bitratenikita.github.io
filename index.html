@@ -176,7 +176,7 @@
         }
 
         .mobile-nav {
-            display: none;
+            display: none; /* по умолчанию скрыто */
             position: fixed;
             top: 0;
             left: 0;
@@ -195,6 +195,7 @@
         }
 
         .mobile-nav.active {
+            display: flex; /* ← обязательно! */
             opacity: 1;
             pointer-events: all;
         }
