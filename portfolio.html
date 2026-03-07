@@ -457,11 +457,11 @@
             transform: scale(1.05);
         }
 
-        /* ===== ФУТЕР (С ОТСТУПАМИ КАК У КОНТЕЙНЕРА) ===== */
+        /* ===== ФУТЕР (ФИНАЛЬНЫЙ) ===== */
         footer {
             max-width: 1400px;
             margin: 60px auto 0;
-            padding: 40px 100px;              /* ← теперь как у контейнера */
+            padding: 40px 0;
             background-image: url('footer-bg.png');
             background-size: cover;
             background-position: center;
@@ -472,9 +472,13 @@
             box-sizing: border-box;
         }
 
-        .footer-copyright {
+        footer .footer-copyright {
+            max-width: 1200px;           /* ← теперь контент внутри футера такой же ширины, как у блоков */
+            margin: 0 auto;
+            padding: 0 100px;             /* ← такие же отступы, как у контейнера */
             font-size: 0.9rem;
             opacity: 0.9;
+            color: white;
         }
 
 
