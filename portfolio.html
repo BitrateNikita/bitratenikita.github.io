@@ -457,13 +457,15 @@
             transform: scale(1.05);
         }
 
-        /* ===== ФУТЕР ===== */
+        /* ===== ФИКС ФУТЕРА ===== */
         footer {
-            background-image: url('footer-bg.png');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            margin-top: 60px;
+            max-width: 1400px !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            padding-left: 100px !important;
+            padding-right: 100px !important;
+            box-sizing: border-box !important;
+            border-radius: 30px !important; /* ← теперь как у всех блоков */
         }
 
         footer .container {
