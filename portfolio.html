@@ -595,6 +595,12 @@
             width: max-content;
         }
 
+        .projects-track::before,
+        .projects-track::after {
+            content: '';
+            flex: 0 0 calc((100% - min(70%, 600px)) / 2);
+        }
+
         .project-card {
             flex: 0 0 min(70%, 600px); /* ← одинаковая с scroll-padding */
             scroll-snap-align: center;
