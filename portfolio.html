@@ -457,7 +457,7 @@
             transform: scale(1.05);
         }
 
-        /* ===== ФУТЕР (ЕДИНСТВЕННЫЙ ПРАВИЛЬНЫЙ) ===== */
+        /* ===== ФУТЕР (ФИНАЛЬНАЯ ВЕРСИЯ) ===== */
         footer {
             max-width: 1400px;
             margin: 60px auto 0;
@@ -465,11 +465,17 @@
             background-image: url('footer-bg.png');
             background-size: cover;
             background-position: center;
-            color: white;
-            text-align: center;
+            color: white !important;
+            text-align: center !important;
             border-radius: 30px 30px 0 0;
             width: 100%;
             box-sizing: border-box;
+        }
+
+        footer .footer-copyright {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            color: white;
         }
 
         .footer-copyright {
