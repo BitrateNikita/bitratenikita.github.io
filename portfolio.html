@@ -1221,6 +1221,20 @@
         })();
     </script>
 
+    <script>
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobileMenu');
+        menu.classList.toggle('active');
+        
+        if (menu.classList.contains('active')) {
+            document.body.style.overflow = 'hidden'; // запрещаем прокрутку страницы
+        } else {
+            document.body.style.overflow = 'auto'; // возвращаем прокрутку
+        }
+    }
+</script>
+    
+
 </body>
 
 </html>
