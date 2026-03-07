@@ -707,58 +707,61 @@
         }
 
         @media (max-width: 768px) {
-            .container {
-                padding: 0 20px;
-            }
-
-            header {
-                padding: 0 20px;
-            }
-
-            .header-glass {
-                flex-direction: column;
-                gap: 15px;
-                padding: 15px 20px;
-            }
-
-            .nav-links {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 20px;
-            }
-
-            .nav-btn {
-                min-width: 180px;
-            }
-
-            .hero h1 {
-                font-size: 1.8rem;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .contacts-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-
-            .cta-block h2 {
-                font-size: 2rem;
-            }
-
-            .cta-btn {
-                padding: 12px 30px;
-                font-size: 1.1rem;
-            }
+        .container {
+            padding: 0 20px;
         }
+
+        header {
+            padding: 0 20px;
+        }
+
+        .header-glass {
+            flex-direction: row; /* Убедись, что логотип и бургер в одной строке */
+            gap: 15px;
+            padding: 15px 20px;
+        }
+
+        /* Добавь эти два правила, если их нет */
+        .nav-links {
+            display: none; /* Прячем десктопное меню */
+        }
+
+        .burger-menu {
+            display: flex; /* Показываем бургер-кнопку */
+        }
+
+        /* Остальные твои стили для мобильных */
+        .nav-btn {
+            min-width: 180px;
+        }
+
+        .hero h1 {
+            font-size: 1.8rem;
+        }
+
+        .hero-buttons {
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .contacts-grid {
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        .cta-block h2 {
+            font-size: 2rem;
+        }
+
+        .cta-btn {
+            padding: 12px 30px;
+            font-size: 1.1rem;
+        }
+    }
     </style>
 </head>
 <body>
     <header>
-        <!-- ЕДИНСТВЕННЫЙ header-glass с бургером -->
         <div class="header-glass">
             <div class="logo">
                 <a href="index.html">
@@ -766,14 +769,14 @@
                 </a>
             </div>
 
-            <!-- Десктопная навигация -->
+            <!-- Десктопная навигация (будет скрыта на мобильных) -->
             <div class="nav-links">
                 <a href="#">О школе</a>
                 <a href="#contacts">Контакты</a>
                 <a href="portfolio.html" class="nav-btn">Для студий</a>
             </div>
 
-            <!-- Бургер-кнопка (только на мобильных) -->
+            <!-- Бургер-кнопка -->
             <div class="burger-menu" onclick="toggleMobileMenu()">
                 <span></span>
                 <span></span>
@@ -781,7 +784,7 @@
             </div>
         </div>
 
-        <!-- Мобильное меню (скрыто по умолчанию) -->
+        <!-- Мобильное меню -->
         <div class="mobile-nav" id="mobileMenu">
             <a href="#" onclick="toggleMobileMenu()">О школе</a>
             <a href="#contacts" onclick="toggleMobileMenu()">Контакты</a>
