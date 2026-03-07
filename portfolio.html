@@ -457,28 +457,19 @@
             transform: scale(1.05);
         }
 
-        /* ===== ФУТЕР (ФИНАЛЬНЫЙ) ===== */
+        /* ===== ФУТЕР ===== */
         footer {
-            max-width: 1400px;
-            margin: 60px auto 0;
-            padding: 40px 0;
+            max-width: 1400px;                /* ← ширина как у контейнера */
+            margin: 60px auto 0;               /* ← центрируем */
+            padding: 40px 0;                   /* ← вертикальные отступы */
             background-image: url('footer-bg.png');
             background-size: cover;
             background-position: center;
-            color: white !important;
-            text-align: center !important;
+            color: white;                      /* ← белый цвет текста */
+            text-align: center;                 /* ← текст по центру */
             border-radius: 30px 30px 0 0;
             width: 100%;
             box-sizing: border-box;
-        }
-
-        footer .footer-copyright {
-            max-width: 1200px;           /* ← теперь контент внутри футера такой же ширины, как у блоков */
-            margin: 0 auto;
-            padding: 0 100px;             /* ← такие же отступы, как у контейнера */
-            font-size: 0.9rem;
-            opacity: 0.9;
-            color: white;
         }
 
 
@@ -1097,7 +1088,7 @@
                 © 2026 Кинеограф. Все права защищены.
             </div>
         </footer>
-    </div> <!-- закрывающий тег container -->
+    </div>
 
     <script>
         function moveCard(event, container) {
