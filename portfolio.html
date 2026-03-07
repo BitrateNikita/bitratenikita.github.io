@@ -578,7 +578,7 @@
             overflow-y: hidden;
             -webkit-overflow-scrolling: touch;
             scroll-snap-type: x mandatory;
-            scroll-padding: 0 calc((100% - 70%) / 2); /* ← отступы для центрирования */
+            scroll-padding: 0 calc((100% - min(70%, 600px)) / 2); /* ← новая формула */
             cursor: grab;
             user-select: none;
             padding: 10px 0 20px;
@@ -596,7 +596,7 @@
         }
 
         .project-card {
-            flex: 0 0 calc(70% - 20px);
+            flex: 0 0 min(70%, 600px); /* ← одинаковая с scroll-padding */
             scroll-snap-align: center;
             transition: 0.2s;
             scroll-snap-stop: always;
