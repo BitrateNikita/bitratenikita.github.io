@@ -46,7 +46,18 @@
 
         body {
             font-family: inherit;
-            background: var(--bg);
+            background: linear-gradient(
+                45deg,
+                #fff4ab,
+                #ffe6c0,
+                #fad0c4,
+                #e0c3fc,
+                #a1c4fd,
+                #c2e9fb
+            );
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            background-attachment: fixed; /* ← одна эта строка */
             color: var(--text);
             line-height: 1.6;
         }
