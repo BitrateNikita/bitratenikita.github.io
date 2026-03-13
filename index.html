@@ -244,6 +244,22 @@
             z-index: 1;         /* чтобы контент был выше текстуры */
         }
 
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('images/paper-texture.png'); /* твоя текстура */
+            background-size: 200px 200px;
+            opacity: 0.2; /* 20% прозрачности */
+            pointer-events: none; /* чтобы не мешала кликам */
+            border-radius: inherit; /* наследует скругление от родителя */
+            z-index: -1; /* уходит под текст, но остаётся над фоном градиента */
+        }
+
         .hero h1 {
             font-size: 2.2rem;
             margin-bottom: 20px;
