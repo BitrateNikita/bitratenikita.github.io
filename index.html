@@ -1032,165 +1032,374 @@
 
 
         <!-- Подключаем Three.js -->
-    <script type="importmap">
-      {
-        "imports": {
-          "three": "https://unpkg.com/three@0.128.0/build/three.module.js"
-        }
-      }
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
-    <!-- Пресет с твоими цветами (БЕЗ РЕАКЦИИ НА МЫШЬ) -->
-    <script type="module">
-      import * as THREE from 'three';
-
-      // ---------- Создаём контейнер для фона ----------
-      const container = document.createElement('div');
-      container.id = 'webGLApp';
-      container.style.position = 'fixed';
-      container.style.top = '0';
-      container.style.left = '0';
-      container.style.width = '100%';
-      container.style.height = '100%';
-      container.style.zIndex = '-1';
-      container.style.pointerEvents = 'none';
-      document.body.prepend(container);
-
-      // ---------- Настройка сцены ----------
-      const scene = new THREE.Scene();
-      const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 10);
-      camera.position.z = 1;
-
-      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setPixelRatio(window.devicePixelRatio);
-      renderer.setClearColor(0x000000, 0);
-      container.appendChild(renderer.domElement);
-
-      // ---------- ТВОИ ЦВЕТА ----------
-      const colors = {
-        color1: new THREE.Color('#FFF4AB'), // жёлтый
-        color2: new THREE.Color('#E8551A'), // оранжевый
-        color3: new THREE.Color('#AEBAFF'), // фиолетовый
-        color4: new THREE.Color('#FFF4AB').multiplyScalar(0.7), // тёмно-жёлтый
-        color5: new THREE.Color('#AEBAFF').multiplyScalar(0.8), // тёмно-фиолетовый
-        color6: new THREE.Color('#E8551A').multiplyScalar(0.9)  // тёмно-оранжевый
-      };
-
-      // ---------- Uniforms для шейдера ----------
-      const uniforms = {
-        uTime: { value: 0 },
-        uColor1: { value: colors.color1 },
-        uColor2: { value: colors.color2 },
-        uColor3: { value: colors.color3 },
-        uColor4: { value: colors.color4 },
-        uColor5: { value: colors.color5 },
-        uColor6: { value: colors.color6 }
-      };
-
-      // ---------- Вершинный шейдер ----------
-      const vertexShader = `
-        varying vec2 vUv;
-        void main() {
-          vUv = uv;
-          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-        }
-      `;
-
-      // ---------- Фрагментный шейдер (БЕЗ МЫШИ) ----------
-      const fragmentShader = `
-        precision highp float;
-        varying vec2 vUv;
-        
-        uniform float uTime;
-        uniform vec3 uColor1;
-        uniform vec3 uColor2;
-        uniform vec3 uColor3;
-        uniform vec3 uColor4;
-        uniform vec3 uColor5;
-        uniform vec3 uColor6;
-
-        float random(vec2 st) {
-          return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
+    <!-- ТОЧНАЯ КОПИЯ ПРЕСЕТА (БЕЗ РЕАКЦИИ НА МЫШЬ) -->
+    <script>
+      // GradientBackground class (без TouchTexture)
+      class GradientBackground {
+        constructor(sceneManager) {
+          this.sceneManager = sceneManager;
+          this.mesh = null;
+          this.uniforms = {
+            uTime: { value: 0 },
+            uResolution: {
+              value: new THREE.Vector2(window.innerWidth, window.innerHeight)
+            },
+            // ТВОИ ЦВЕТА из :root
+            uColor1: { value: new THREE.Vector3(1.0, 0.957, 0.671) }, // #FFF4AB
+            uColor2: { value: new THREE.Vector3(0.91, 0.333, 0.102) }, // #E8551A
+            uColor3: { value: new THREE.Vector3(0.682, 0.729, 1.0) }, // #AEBAFF
+            uColor4: { value: new THREE.Vector3(0.8, 0.766, 0.537) }, // #FFF4AB темнее
+            uColor5: { value: new THREE.Vector3(0.546, 0.583, 0.8) }, // #AEBAFF темнее
+            uColor6: { value: new THREE.Vector3(0.728, 0.266, 0.082) }, // #E8551A темнее
+            uSpeed: { value: 1.2 },
+            uIntensity: { value: 1.8 },
+            uGrainIntensity: { value: 0.08 },
+            uZoom: { value: 1.0 },
+            uDarkNavy: { value: new THREE.Vector3(0.039, 0.055, 0.153) },
+            uGradientSize: { value: 1.0 },
+            uGradientCount: { value: 6.0 },
+            uColor1Weight: { value: 1.0 },
+            uColor2Weight: { value: 1.0 }
+          };
         }
 
-        float noise(vec2 p) {
-          vec2 i = floor(p);
-          vec2 f = fract(p);
-          vec2 u = f*f*(3.0-2.0*f);
-          return mix( mix(random(i + vec2(0.0,0.0)), random(i + vec2(1.0,0.0)), u.x),
-                      mix(random(i + vec2(0.0,1.0)), random(i + vec2(1.0,1.0)), u.x), u.y);
+        init() {
+          const viewSize = this.sceneManager.getViewSize();
+          const geometry = new THREE.PlaneGeometry(
+            viewSize.width,
+            viewSize.height,
+            1,
+            1
+          );
+
+          const material = new THREE.ShaderMaterial({
+            uniforms: this.uniforms,
+            vertexShader: `
+              varying vec2 vUv;
+              void main() {
+                vec3 pos = position.xyz;
+                gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.);
+                vUv = uv;
+              }
+            `,
+            fragmentShader: `
+              uniform float uTime;
+              uniform vec2 uResolution;
+              uniform vec3 uColor1;
+              uniform vec3 uColor2;
+              uniform vec3 uColor3;
+              uniform vec3 uColor4;
+              uniform vec3 uColor5;
+              uniform vec3 uColor6;
+              uniform float uSpeed;
+              uniform float uIntensity;
+              uniform float uGrainIntensity;
+              uniform float uZoom;
+              uniform vec3 uDarkNavy;
+              uniform float uGradientSize;
+              uniform float uGradientCount;
+              uniform float uColor1Weight;
+              uniform float uColor2Weight;
+              
+              varying vec2 vUv;
+              
+              #define PI 3.14159265359
+              
+              float grain(vec2 uv, float time) {
+                vec2 grainUv = uv * uResolution * 0.5;
+                float grainValue = fract(sin(dot(grainUv + time, vec2(12.9898, 78.233))) * 43758.5453);
+                return grainValue * 2.0 - 1.0;
+              }
+              
+              vec3 getGradientColor(vec2 uv, float time) {
+                float gradientRadius = uGradientSize;
+                
+                vec2 center1 = vec2(
+                  0.5 + sin(time * uSpeed * 0.4) * 0.4,
+                  0.5 + cos(time * uSpeed * 0.5) * 0.4
+                );
+                vec2 center2 = vec2(
+                  0.5 + cos(time * uSpeed * 0.6) * 0.5,
+                  0.5 + sin(time * uSpeed * 0.45) * 0.5
+                );
+                vec2 center3 = vec2(
+                  0.5 + sin(time * uSpeed * 0.35) * 0.45,
+                  0.5 + cos(time * uSpeed * 0.55) * 0.45
+                );
+                vec2 center4 = vec2(
+                  0.5 + cos(time * uSpeed * 0.5) * 0.4,
+                  0.5 + sin(time * uSpeed * 0.4) * 0.4
+                );
+                vec2 center5 = vec2(
+                  0.5 + sin(time * uSpeed * 0.7) * 0.35,
+                  0.5 + cos(time * uSpeed * 0.6) * 0.35
+                );
+                vec2 center6 = vec2(
+                  0.5 + cos(time * uSpeed * 0.45) * 0.5,
+                  0.5 + sin(time * uSpeed * 0.65) * 0.5
+                );
+                
+                vec2 center7 = vec2(
+                  0.5 + sin(time * uSpeed * 0.55) * 0.38,
+                  0.5 + cos(time * uSpeed * 0.48) * 0.42
+                );
+                vec2 center8 = vec2(
+                  0.5 + cos(time * uSpeed * 0.65) * 0.36,
+                  0.5 + sin(time * uSpeed * 0.52) * 0.44
+                );
+                vec2 center9 = vec2(
+                  0.5 + sin(time * uSpeed * 0.42) * 0.41,
+                  0.5 + cos(time * uSpeed * 0.58) * 0.39
+                );
+                vec2 center10 = vec2(
+                  0.5 + cos(time * uSpeed * 0.48) * 0.37,
+                  0.5 + sin(time * uSpeed * 0.62) * 0.43
+                );
+                vec2 center11 = vec2(
+                  0.5 + sin(time * uSpeed * 0.68) * 0.33,
+                  0.5 + cos(time * uSpeed * 0.44) * 0.46
+                );
+                vec2 center12 = vec2(
+                  0.5 + cos(time * uSpeed * 0.38) * 0.39,
+                  0.5 + sin(time * uSpeed * 0.56) * 0.41
+                );
+                
+                float dist1 = length(uv - center1);
+                float dist2 = length(uv - center2);
+                float dist3 = length(uv - center3);
+                float dist4 = length(uv - center4);
+                float dist5 = length(uv - center5);
+                float dist6 = length(uv - center6);
+                float dist7 = length(uv - center7);
+                float dist8 = length(uv - center8);
+                float dist9 = length(uv - center9);
+                float dist10 = length(uv - center10);
+                float dist11 = length(uv - center11);
+                float dist12 = length(uv - center12);
+                
+                float influence1 = 1.0 - smoothstep(0.0, gradientRadius, dist1);
+                float influence2 = 1.0 - smoothstep(0.0, gradientRadius, dist2);
+                float influence3 = 1.0 - smoothstep(0.0, gradientRadius, dist3);
+                float influence4 = 1.0 - smoothstep(0.0, gradientRadius, dist4);
+                float influence5 = 1.0 - smoothstep(0.0, gradientRadius, dist5);
+                float influence6 = 1.0 - smoothstep(0.0, gradientRadius, dist6);
+                float influence7 = 1.0 - smoothstep(0.0, gradientRadius, dist7);
+                float influence8 = 1.0 - smoothstep(0.0, gradientRadius, dist8);
+                float influence9 = 1.0 - smoothstep(0.0, gradientRadius, dist9);
+                float influence10 = 1.0 - smoothstep(0.0, gradientRadius, dist10);
+                float influence11 = 1.0 - smoothstep(0.0, gradientRadius, dist11);
+                float influence12 = 1.0 - smoothstep(0.0, gradientRadius, dist12);
+                
+                vec2 rotatedUv1 = uv - 0.5;
+                float angle1 = time * uSpeed * 0.15;
+                rotatedUv1 = vec2(
+                  rotatedUv1.x * cos(angle1) - rotatedUv1.y * sin(angle1),
+                  rotatedUv1.x * sin(angle1) + rotatedUv1.y * cos(angle1)
+                );
+                rotatedUv1 += 0.5;
+                
+                vec2 rotatedUv2 = uv - 0.5;
+                float angle2 = -time * uSpeed * 0.12;
+                rotatedUv2 = vec2(
+                  rotatedUv2.x * cos(angle2) - rotatedUv2.y * sin(angle2),
+                  rotatedUv2.x * sin(angle2) + rotatedUv2.y * cos(angle2)
+                );
+                rotatedUv2 += 0.5;
+                
+                float radialGradient1 = length(rotatedUv1 - 0.5);
+                float radialGradient2 = length(rotatedUv2 - 0.5);
+                float radialInfluence1 = 1.0 - smoothstep(0.0, 0.8, radialGradient1);
+                float radialInfluence2 = 1.0 - smoothstep(0.0, 0.8, radialGradient2);
+                
+                vec3 color = vec3(0.0);
+                color += uColor1 * influence1 * (0.55 + 0.45 * sin(time * uSpeed)) * uColor1Weight;
+                color += uColor2 * influence2 * (0.55 + 0.45 * cos(time * uSpeed * 1.2)) * uColor2Weight;
+                color += uColor3 * influence3 * (0.55 + 0.45 * sin(time * uSpeed * 0.8)) * uColor1Weight;
+                color += uColor4 * influence4 * (0.55 + 0.45 * cos(time * uSpeed * 1.3)) * uColor2Weight;
+                color += uColor5 * influence5 * (0.55 + 0.45 * sin(time * uSpeed * 1.1)) * uColor1Weight;
+                color += uColor6 * influence6 * (0.55 + 0.45 * cos(time * uSpeed * 0.9)) * uColor2Weight;
+                
+                if (uGradientCount > 6.0) {
+                  color += uColor1 * influence7 * (0.55 + 0.45 * sin(time * uSpeed * 1.4)) * uColor1Weight;
+                  color += uColor2 * influence8 * (0.55 + 0.45 * cos(time * uSpeed * 1.5)) * uColor2Weight;
+                  color += uColor3 * influence9 * (0.55 + 0.45 * sin(time * uSpeed * 1.6)) * uColor1Weight;
+                  color += uColor4 * influence10 * (0.55 + 0.45 * cos(time * uSpeed * 1.7)) * uColor2Weight;
+                }
+                if (uGradientCount > 10.0) {
+                  color += uColor5 * influence11 * (0.55 + 0.45 * sin(time * uSpeed * 1.8)) * uColor1Weight;
+                  color += uColor6 * influence12 * (0.55 + 0.45 * cos(time * uSpeed * 1.9)) * uColor2Weight;
+                }
+                
+                color += mix(uColor1, uColor3, radialInfluence1) * 0.45 * uColor1Weight;
+                color += mix(uColor2, uColor4, radialInfluence2) * 0.4 * uColor2Weight;
+                
+                color = clamp(color, vec3(0.0), vec3(1.0)) * uIntensity;
+                
+                float luminance = dot(color, vec3(0.299, 0.587, 0.114));
+                color = mix(vec3(luminance), color, 1.35);
+                
+                color = pow(color, vec3(0.92));
+                
+                float brightness1 = length(color);
+                float mixFactor1 = max(brightness1 * 1.2, 0.15);
+                color = mix(uDarkNavy, color, mixFactor1);
+                
+                float maxBrightness = 1.0;
+                float brightness = length(color);
+                if (brightness > maxBrightness) {
+                  color = color * (maxBrightness / brightness);
+                }
+                
+                return color;
+              }
+              
+              void main() {
+                vec2 uv = vUv;
+                
+                // УБРАНА реакция на мышь - оставлены только визуальные эффекты
+                
+                vec3 color = getGradientColor(uv, uTime);
+                
+                float grainValue = grain(uv, uTime);
+                color += grainValue * uGrainIntensity;
+                
+                float timeShift = uTime * 0.5;
+                color.r += sin(timeShift) * 0.02;
+                color.g += cos(timeShift * 1.4) * 0.02;
+                color.b += sin(timeShift * 1.2) * 0.02;
+                
+                float brightness2 = length(color);
+                float mixFactor2 = max(brightness2 * 1.2, 0.15);
+                color = mix(uDarkNavy, color, mixFactor2);
+                
+                color = clamp(color, vec3(0.0), vec3(1.0));
+                
+                float maxBrightness = 1.0;
+                float brightness = length(color);
+                if (brightness > maxBrightness) {
+                  color = color * (maxBrightness / brightness);
+                }
+                
+                gl_FragColor = vec4(color, 1.0);
+              }
+            `
+          });
+
+          this.mesh = new THREE.Mesh(geometry, material);
+          this.mesh.position.z = 0;
+          this.sceneManager.scene.add(this.mesh);
         }
 
-        float fbm(vec2 p) {
-          float sum = 0.0;
-          float amp = 0.5;
-          float freq = 2.0;
-          for(int i = 0; i < 5; i++) {
-            sum += amp * noise(p * freq);
-            amp *= 0.5;
-            freq *= 2.0;
+        update(delta) {
+          if (this.uniforms.uTime) {
+            this.uniforms.uTime.value += delta;
           }
-          return sum;
         }
 
-        void main() {
-          vec2 uv = vUv;
-          
-          float t = uTime * 0.2;
-          
-          vec2 q = uv * 3.0 + vec2(t * 0.3, t * 0.2);
-          
-          float n1 = fbm(q);
-          float n2 = fbm(q + vec2(1.5, 2.3) + t * 0.4);
-          float n3 = fbm(q * 2.5 + vec2(5.1, 3.7) + t * 0.6);
-          
-          float pattern = (n1 * 0.6 + n2 * 0.3 + n3 * 0.1);
-          
-          float mix1 = sin(uv.x * 5.0 + pattern * 10.0 + t) * 0.5 + 0.5;
-          float mix2 = cos(uv.y * 6.0 + pattern * 8.0 - t * 1.2) * 0.5 + 0.5;
-          float mix3 = sin((uv.x + uv.y) * 4.0 + pattern * 12.0 + t * 2.0) * 0.5 + 0.5;
-          
-          mix1 = clamp(mix1, 0.0, 1.0);
-          mix2 = clamp(mix2, 0.0, 1.0);
-          mix3 = clamp(mix3, 0.0, 1.0);
-          
-          vec3 col = mix(uColor1, uColor2, mix1);
-          col = mix(col, uColor3, mix2);
-          col = mix(col, uColor4, mix3);
-          col = mix(col, uColor5, pattern * 0.7);
-          col = mix(col, uColor6, pattern * 0.5);
-          
-          float vignette = 1.0 - length(uv - 0.5) * 0.6;
-          col *= vignette;
-          
-          gl_FragColor = vec4(col, 1.0);
+        onResize(width, height) {
+          const viewSize = this.sceneManager.getViewSize();
+          if (this.mesh) {
+            this.mesh.geometry.dispose();
+            this.mesh.geometry = new THREE.PlaneGeometry(
+              viewSize.width,
+              viewSize.height,
+              1,
+              1
+            );
+          }
+          if (this.uniforms.uResolution) {
+            this.uniforms.uResolution.value.set(width, height);
+          }
         }
-      `;
-
-      // ---------- Создаём материал и меш ----------
-      const material = new THREE.ShaderMaterial({
-        vertexShader,
-        fragmentShader,
-        uniforms
-      });
-      
-      const geometry = new THREE.PlaneGeometry(2, 2);
-      const mesh = new THREE.Mesh(geometry, material);
-      scene.add(mesh);
-
-      // ---------- Анимация ----------
-      function animate() {
-        requestAnimationFrame(animate);
-        uniforms.uTime.value += 0.01;
-        renderer.render(scene, camera);
       }
-      animate();
 
-      // ---------- Обновление при изменении размера окна ----------
-      window.addEventListener('resize', () => {
-        renderer.setSize(window.innerWidth, window.innerHeight);
-      });
+      // App class (упрощенная, без мыши)
+      class App {
+        constructor() {
+          this.renderer = new THREE.WebGLRenderer({
+            antialias: true,
+            powerPreference: "high-performance",
+            alpha: false,
+            stencil: false,
+            depth: false
+          });
+          this.renderer.setSize(window.innerWidth, window.innerHeight);
+          this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+          document.body.appendChild(this.renderer.domElement);
+          this.renderer.domElement.id = "webGLApp";
+          this.renderer.domElement.style.position = "fixed";
+          this.renderer.domElement.style.top = "0";
+          this.renderer.domElement.style.left = "0";
+          this.renderer.domElement.style.width = "100%";
+          this.renderer.domElement.style.height = "100%";
+          this.renderer.domElement.style.zIndex = "-1";
+          this.renderer.domElement.style.pointerEvents = "none";
+
+          this.camera = new THREE.PerspectiveCamera(
+            45,
+            window.innerWidth / window.innerHeight,
+            0.1,
+            10000
+          );
+          this.camera.position.z = 50;
+          this.scene = new THREE.Scene();
+          this.scene.background = new THREE.Color(0x0a0e27);
+          this.clock = new THREE.Clock();
+
+          this.gradientBackground = new GradientBackground(this);
+
+          this.init();
+        }
+
+        init() {
+          this.gradientBackground.init();
+
+          this.render();
+
+          this.tick();
+
+          window.addEventListener("resize", () => this.onResize());
+        }
+
+        getViewSize() {
+          const fovInRadians = (this.camera.fov * Math.PI) / 180;
+          const height = Math.abs(
+            this.camera.position.z * Math.tan(fovInRadians / 2) * 2
+          );
+          return { width: height * this.camera.aspect, height };
+        }
+
+        update(delta) {
+          this.gradientBackground.update(delta);
+        }
+
+        render() {
+          const delta = this.clock.getDelta();
+          const clampedDelta = Math.min(delta, 0.1);
+          this.renderer.render(this.scene, this.camera);
+          this.update(clampedDelta);
+        }
+
+        tick() {
+          this.render();
+          requestAnimationFrame(() => this.tick());
+        }
+
+        onResize() {
+          this.camera.aspect = window.innerWidth / window.innerHeight;
+          this.camera.updateProjectionMatrix();
+          this.renderer.setSize(window.innerWidth, window.innerHeight);
+          this.gradientBackground.onResize(window.innerWidth, window.innerHeight);
+        }
+      }
+
+      // Запускаем приложение
+      const app = new App();
+
+      // Убираем всё, что связано с курсором и панелью управления,
+      // так как они тебе не нужны на сайте
     </script>
 
 
