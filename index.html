@@ -232,12 +232,16 @@
         .hero {
             text-align: center;
             padding: 80px 20px;
-            background-image: url('hero-bg.png');
-            background-size: cover;
-            background-position: center;
-            border-radius: 30px 30px 30px 30px; 
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            border-radius: 30px;
             margin-bottom: 60px;
             margin-top: 20px;
+            position: relative; /* нужно для псевдоэлемента */
+            z-index: 1;         /* чтобы контент был выше текстуры */
         }
 
         .hero h1 {
@@ -1129,7 +1133,7 @@
       // Анимация
       function animate() {
         requestAnimationFrame(animate);
-        uniforms.uTime.value += 0.02;
+        uniforms.uTime.value += 0.01;
         renderer.render(scene, camera);
       }
       animate();
