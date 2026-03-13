@@ -47,9 +47,9 @@
         body {
             font-family: inherit;
             background: transparent; /* прозрачный фон */
-            background-image: url('images/paper-texture.png');
-            background-size: 200px 200px; /* или 'repeat' */
-            background-blend-mode: overlay; /* чтобы текстура смешалась с цветом */
+            /*background-image: url('images/paper-texture.png'); */
+            /*background-size: 200px 200px; /* или 'repeat' */
+            /*background-blend-mode: overlay; /* чтобы текстура смешалась с цветом */
             color: var(--text);
             line-height: 1.6;
         }
@@ -1030,19 +1030,88 @@
     </script>
 
 
-    <!-- Подключаем Three.js с CDN -->
+
+    <!-- Подключаем Three.js -->
     <script type="importmap">
       {
         "imports": {
           "three": "https://unpkg.com/three@0.128.0/build/three.module.js"
         }
-      </script>
+      }
+    </script>
 
-    <!-- Код жидкого фона -->
+    <!-- Жидкий градиент с CodePen (адаптированный под твои цвета) -->
     <script type="module">
       import * as THREE from 'three';
 
-      // Создаём сцену, камеру, рендерер
+      // ---------- TouchTexture класс (отвечает за реакцию на мышь) ----------
+      class TouchTexture {
+        constructor() {
+          this.size = 64;
+          this.width = this.height = this.size;
+          this.maxAge = 64;
+          this.radius = 0.25 * this.size;
+          this.speed = 1 / this.maxAge;
+          this.trail = [];
+          this.last = null;
+          this.initTexture();
+        }
+        
+        initTexture() {
+          this.canvas = document.createElement("canvas");
+          this.canvas.width = this.width;
+          this.canvas.height = this.height;
+          this.ctx = this.canvas.getContext("2d");
+          this.ctx.fillStyle = "black";
+          this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+          this.texture = new THREE.CanvasTexture(this.canvas);
+        }
+        
+        update() {
+          if (!this.trail.length) return;
+          
+          this.ctx.fillStyle = "black";
+          this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+          this.ctx.fillStyle = "white";
+          
+          for (let i = 0; i < this.trail.length; i++) {
+            const point = this.trail[i];
+            const age = (Date.now() - point.time) / 1000;
+            const opacity = Math.max(0, 1 - age * this.speed);
+            
+            if (opacity <= 0) {
+              this.trail.splice(i, 1);
+              i--;
+              continue;
+            }
+            
+            this.ctx.beginPath();
+            this.ctx.arc(point.x * this.size, (1 - point.y) * this.size, this.radius * opacity, 0, Math.PI * 2);
+            this.ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
+            this.ctx.fill();
+          }
+          this.texture.needsUpdate = true;
+        }
+        
+        addTouch(x, y) {
+          this.last = { x, y, time: Date.now() };
+          this.trail.push(this.last);
+        }
+      }
+
+      // ---------- Создаём контейнер для фона ----------
+      const container = document.createElement('div');
+      container.id = 'webGLApp';
+      container.style.position = 'fixed';
+      container.style.top = '0';
+      container.style.left = '0';
+      container.style.width = '100%';
+      container.style.height = '100%';
+      container.style.zIndex = '-1';
+      container.style.pointerEvents = 'none';
+      document.body.prepend(container);
+
+      // ---------- Настройка сцены ----------
       const scene = new THREE.Scene();
       const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 10);
       camera.position.z = 1;
@@ -1051,41 +1120,36 @@
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setPixelRatio(window.devicePixelRatio);
       renderer.setClearColor(0x000000, 0);
-      
-      // Добавляем холст в начало body, чтобы он был фоном
-      const canvas = renderer.domElement;
-      canvas.style.position = 'fixed';
-      canvas.style.top = '0';
-      canvas.style.left = '0';
-      canvas.style.width = '100%';
-      canvas.style.height = '100%';
-      canvas.style.zIndex = '-1';
-      canvas.style.pointerEvents = 'none';
-      document.body.prepend(canvas);
+      container.appendChild(renderer.domElement);
 
-      // ТВОИ ЦВЕТА (как в :root)
+      // ---------- ТВОИ ЦВЕТА (из :root) ----------
       const colors = {
         color1: new THREE.Color('#FFF4AB'), // жёлтый
         color2: new THREE.Color('#E8551A'), // оранжевый
         color3: new THREE.Color('#AEBAFF'), // фиолетовый
-        color4: new THREE.Color('#FFF4AB').multiplyScalar(0.8), // чуть темнее жёлтый
-        color5: new THREE.Color('#AEBAFF').multiplyScalar(0.9), // чуть темнее фиолетовый
-        color6: new THREE.Color('#E8551A').multiplyScalar(1.2)  // ярче оранжевый
+        color4: new THREE.Color('#FFF4AB').multiplyScalar(0.8), // тёмно-жёлтый
+        color5: new THREE.Color('#AEBAFF').multiplyScalar(0.9)  // тёмно-фиолетовый
       };
 
-      // Uniforms для шейдера
+      // ---------- Uniforms для шейдера ----------
       const uniforms = {
         uTime: { value: 0 },
-        uMouse: { value: new THREE.Vector2(0, 0) },
+        uSpeed: { value: 0.5 },
+        uScale: { value: 2.5 },
+        uNoiseStrength: { value: 0.3 },
         uColor1: { value: colors.color1 },
         uColor2: { value: colors.color2 },
         uColor3: { value: colors.color3 },
         uColor4: { value: colors.color4 },
         uColor5: { value: colors.color5 },
-        uColor6: { value: colors.color6 }
+        uTouchTexture: { value: null }
       };
 
-      // Шейдеры
+      // ---------- TouchTexture для реакции на мышь ----------
+      const touchTexture = new TouchTexture();
+      uniforms.uTouchTexture.value = touchTexture.texture;
+
+      // ---------- Вершинный шейдер ----------
       const vertexShader = `
         varying vec2 vUv;
         void main() {
@@ -1094,34 +1158,40 @@
         }
       `;
 
+      // ---------- Фрагментный шейдер (с красивыми переливами) ----------
       const fragmentShader = `
         precision highp float;
         varying vec2 vUv;
         uniform float uTime;
-        uniform vec2 uMouse;
+        uniform float uSpeed;
+        uniform float uScale;
+        uniform float uNoiseStrength;
         uniform vec3 uColor1;
         uniform vec3 uColor2;
         uniform vec3 uColor3;
         uniform vec3 uColor4;
         uniform vec3 uColor5;
-        uniform vec3 uColor6;
+        uniform sampler2D uTouchTexture;
 
         float random(vec2 st) {
-          return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
+          return fract(sin(dot(st.xy, vec2(12.9898, 78.233))) * 43758.5453123);
         }
 
-        float noise(vec2 p) {
-          vec2 i = floor(p);
-          vec2 f = fract(p);
+        float noise(vec2 st) {
+          vec2 i = floor(st);
+          vec2 f = fract(st);
+          float a = random(i);
+          float b = random(i + vec2(1.0, 0.0));
+          float c = random(i + vec2(0.0, 1.0));
+          float d = random(i + vec2(1.0, 1.0));
           vec2 u = f*f*(3.0-2.0*f);
-          return mix( mix(random(i + vec2(0.0,0.0)), random(i + vec2(1.0,0.0)), u.x),
-                      mix(random(i + vec2(0.0,1.0)), random(i + vec2(1.0,1.0)), u.x), u.y);
+          return mix(mix(a, b, u.x), mix(c, d, u.x), u.y);
         }
 
         float fbm(vec2 p) {
           float sum = 0.0;
           float amp = 0.5;
-          float freq = 2.0;
+          float freq = 4.0;
           for(int i = 0; i < 5; i++) {
             sum += amp * noise(p * freq);
             amp *= 0.5;
@@ -1131,75 +1201,82 @@
         }
 
         void main() {
-          vec2 uv = vUv;
-          
-          // Добавляем влияние мыши и времени
-          float t = uTime * 0.1;
-          vec2 q = uv * 3.0 + vec2(t * 0.3, t * 0.2);
-          q.x += uMouse.x * 2.0;
-          q.y += uMouse.y * 2.0;
-          
-          float n1 = fbm(q);
-          float n2 = fbm(q + vec2(1.5, 2.3) + t * 0.4);
-          float n3 = fbm(q * 2.5 + vec2(5.1, 3.7) + t * 0.6);
-          
-          float pattern = (n1 * 0.6 + n2 * 0.3 + n3 * 0.1);
-          
-          // Смешиваем цвета
-          float mix1 = sin(uv.x * 5.0 + pattern * 10.0 + t) * 0.5 + 0.5;
-          float mix2 = cos(uv.y * 6.0 + pattern * 8.0 - t * 1.2) * 0.5 + 0.5;
-          float mix3 = sin((uv.x + uv.y) * 4.0 + pattern * 12.0 + t * 2.0) * 0.5 + 0.5;
-          
-          mix1 += uMouse.x * 0.2;
-          mix2 += uMouse.y * 0.2;
-          mix3 += (uMouse.x + uMouse.y) * 0.1;
-          
-          mix1 = clamp(mix1, 0.0, 1.0);
-          mix2 = clamp(mix2, 0.0, 1.0);
-          mix3 = clamp(mix3, 0.0, 1.0);
-          
-          vec3 col = mix(uColor1, uColor2, mix1);
-          col = mix(col, uColor3, mix2);
-          col = mix(col, uColor4, mix3);
-          col = mix(col, uColor5, pattern * 0.7);
-          col = mix(col, uColor6, pattern * 0.5);
-          
-          gl_FragColor = vec4(col, 1.0);
+          vec2 uv = vUv * uScale;
+          uv.x += uTime * uSpeed * 0.5;
+          uv.y += uTime * uSpeed * 0.3;
+
+          float n1 = fbm(uv);
+          float n2 = fbm(uv + 10.0 + uTime * 0.2);
+
+          vec4 touch = texture2D(uTouchTexture, vUv);
+          float touchInfluence = touch.r;
+
+          float pattern = mix(n1, n2, 0.5 + 0.5 * sin(uTime * 0.5));
+          pattern = mix(pattern, touchInfluence, 0.3);
+
+          float distortion = sin(uv.x * 5.0 + uTime) * sin(uv.y * 5.0 + uTime) * 0.1;
+          pattern += distortion;
+
+          vec3 finalColor;
+          if (pattern < 0.25) {
+            finalColor = mix(uColor1, uColor2, pattern * 4.0);
+          } else if (pattern < 0.5) {
+            finalColor = mix(uColor2, uColor3, (pattern - 0.25) * 4.0);
+          } else if (pattern < 0.75) {
+            finalColor = mix(uColor3, uColor4, (pattern - 0.5) * 4.0);
+          } else {
+            finalColor = mix(uColor4, uColor5, (pattern - 0.75) * 4.0);
+          }
+
+          float grain = random(uv + uTime) * 0.05;
+          finalColor += grain;
+
+          gl_FragColor = vec4(finalColor, 1.0);
         }
       `;
 
-      // Создаём материал и меш
+      // ---------- Создаём материал и меш ----------
       const material = new THREE.ShaderMaterial({
-        vertexShader: vertexShader,
-        fragmentShader: fragmentShader,
-        uniforms: uniforms
+        vertexShader,
+        fragmentShader,
+        uniforms
       });
-
+      
       const geometry = new THREE.PlaneGeometry(2, 2);
       const mesh = new THREE.Mesh(geometry, material);
       scene.add(mesh);
 
-      // Отслеживаем движение мыши
+      // ---------- Отслеживание мыши ----------
+      const mouse = new THREE.Vector2();
       window.addEventListener('mousemove', (e) => {
-        const mouseX = (e.clientX / window.innerWidth) * 2 - 1;
-        const mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
-        uniforms.uMouse.value.set(mouseX, mouseY);
+        mouse.x = e.clientX / window.innerWidth;
+        mouse.y = 1.0 - (e.clientY / window.innerHeight);
+        touchTexture.addTouch(mouse.x, mouse.y);
       });
 
-      // Анимация
+      window.addEventListener('touchmove', (e) => {
+        e.preventDefault();
+        if (e.touches.length) {
+          mouse.x = e.touches[0].clientX / window.innerWidth;
+          mouse.y = 1.0 - (e.touches[0].clientY / window.innerHeight);
+          touchTexture.addTouch(mouse.x, mouse.y);
+        }
+      });
+
+      // ---------- Анимация ----------
       function animate() {
         requestAnimationFrame(animate);
         uniforms.uTime.value += 0.01;
+        touchTexture.update();
         renderer.render(scene, camera);
       }
       animate();
 
-      // Обновляем размер при изменении окна
+      // ---------- Обновление при изменении размера окна ----------
       window.addEventListener('resize', () => {
         renderer.setSize(window.innerWidth, window.innerHeight);
       });
     </script>
-
 
 
 
