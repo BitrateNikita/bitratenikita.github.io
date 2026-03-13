@@ -251,9 +251,10 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('images/paper-texture.png');
-            background-size: 200px 200px;
-            opacity: 0.2;
+            background-image: url('hero-bg.png'); /* твоя оригинальная текстура */
+            background-size: cover;
+            background-position: center;
+            opacity: 0.2; /* прозрачность 20% */
             pointer-events: none;
             border-radius: inherit;
             z-index: -1;
@@ -346,20 +347,26 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('images/paper-texture.png');
-            background-size: 200px 200px;
+            background-size: cover;
+            background-position: center;
             opacity: 0.2;
             pointer-events: none;
             border-radius: inherit;
             z-index: -1;
         }
 
+        /* Индивидуальные текстуры для каждого блока */
+        .section-colored:nth-of-type(1)::before {
+            background-image: url('section1-bg.png');
+        }
+
+        .section-colored:nth-of-type(2)::before {
+            background-image: url('section2-bg.png');
+        }
+
         /* Удали эти старые строки (они больше не нужны) */
         /* .section-colored:nth-of-type(1) { background-image: url('section1-bg.png'); } */
         /* .section-colored:nth-of-type(2) { background-image: url('section2-bg.png'); } */
-
-        .section-colored:nth-of-type(1) { background-image: url('section1-bg.png'); }
-        .section-colored:nth-of-type(2) { background-image: url('section2-bg.png'); }
 
         /* =====================================================
            🃏 СТЕКЛЯННЫЕ КАРТОЧКИ С 3D-ЭФФЕКТОМ (НА ВЕСЬ РАЗМЕР)
@@ -467,12 +474,12 @@
            🗺️ КАРТА, АДРЕС, КОНТАКТЫ (КНОПКИ)
            ===================================================== */
         .contacts-section {
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 30px;
             padding: 60px 20px;
             margin: 60px 0;
+            border-radius: 30px;
             background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border: 1px solid var(--glass-border);
             box-shadow: var(--glass-shadow);
             position: relative;
@@ -486,8 +493,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('images/paper-texture.png');
-            background-size: 200px 200px;
+            background-image: url('contacts-bg.png');
+            background-size: cover;
+            background-position: center;
             opacity: 0.2;
             pointer-events: none;
             border-radius: inherit;
@@ -564,14 +572,35 @@
            🎯 ПРИЗЫВ К ДЕЙСТВИЮ
            ===================================================== */
         .cta-block {
-            background-image: url('cta-bg.png');
-            background-size: cover;
-            background-position: center;
+            background-image: none; /* убираем старый фон, если был */
             color: var(--text-light);
             text-align: center;
             padding: 60px 20px;
             border-radius: 30px;
             margin: 60px 0;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('cta-bg.png'); /* если есть своя текстура, иначе убери */
+            background-size: cover;
+            background-position: center;
+            opacity: 0.2;
+            pointer-events: none;
+            border-radius: inherit;
+            z-index: -1;
         }
 
         .cta-block h2 {
@@ -633,8 +662,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('images/paper-texture.png');
-            background-size: 200px 200px;
+            background-image: url('footer-bg.png');
+            background-size: cover;
+            background-position: center;
             opacity: 0.2;
             pointer-events: none;
             border-radius: inherit;
