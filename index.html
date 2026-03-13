@@ -46,6 +46,21 @@
 
         body {
             font-family: inherit;
+            position: relative;
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Основной градиентный фон (через псевдоэлемент) */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background: linear-gradient(
                 45deg,
                 #fff4ab,
@@ -56,18 +71,44 @@
                 #c2e9fb
             );
             background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-            background-attachment: fixed; /* ← одна эта строка */
-            color: var(--text);
-            line-height: 1.6;
+            animation: gradientBG 8s ease infinite; /* ускорено */
+            z-index: -2;
         }
 
-        /* ===== КОНТЕЙНЕР (исправляет растянутость) ===== */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 50px 100px 0 100px;  /* ← верх 100px, остальное как было */
+        /* Движущиеся линии поверх градиента */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
+            height: 100%;
+            background-image: repeating-linear-gradient(
+                45deg,
+                rgba(255,255,255,0.1) 0px,
+                rgba(255,255,255,0.1) 2px,
+                transparent 2px,
+                transparent 8px
+            );
+            background-size: 200% 200%;
+            animation: moveLines 12s linear infinite;
+            pointer-events: none; /* чтобы линии не мешали кликать по кнопкам */
+            z-index: -1;
+        }
+
+        /* Анимация градиента */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            25% { background-position: 50% 100%; }
+            50% { background-position: 100% 50%; }
+            75% { background-position: 50% 0%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Анимация смещения линий */
+        @keyframes moveLines {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 200% 200%; }
         }
 
         /* =====================================================
