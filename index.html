@@ -1058,16 +1058,18 @@
       document.body.prepend(canvas);
 
       // Твои цвета в HEX (Three.Color сам преобразует в vec3 в шейдере)
-      const color1 = new THREE.Color('#FFF4AB'); // жёлтый
-      const color2 = new THREE.Color('#E8551A'); // оранжевый
-      const color3 = new THREE.Color('#AEBAFF'); // фиолетовый
+      const color1 = new THREE.Color('#F15A22'); // жёлтый
+      const color2 = new THREE.Color('#0A0E27'); // оранжевый
+      const color3 = new THREE.Color('#40E0D0'); // фиолетовый
+      const color3 = new THREE.Color('#F15A22'); // фиолетовый
 
       // Uniforms
       const uniforms = {
         uTime: { value: 0 },
         uColor1: { value: color1 },
         uColor2: { value: color2 },
-        uColor3: { value: color3 }
+        uColor3: { value: color3 },
+        uColor4: { value: color4 }
       };
 
       // Вершинный шейдер
@@ -1100,14 +1102,16 @@
           float pattern = (wave1 + wave2) * 0.5 + 0.5; // от 0 до 1
           
           // Смешиваем три цвета в зависимости от паттерна
-          vec3 finalColor;
-          if (pattern < 0.33) {
-            finalColor = mix(uColor1, uColor2, pattern * 3.0);
-          } else if (pattern < 0.66) {
-            finalColor = mix(uColor2, uColor3, (pattern - 0.33) * 3.0);
-          } else {
-            finalColor = mix(uColor3, uColor1, (pattern - 0.66) * 3.0);
-          }
+            vec3 finalColor;
+            if (pattern < 0.25) {
+                finalColor = mix(uColor1, uColor2, pattern * 4.0);
+            } else if (pattern < 0.5) {
+                finalColor = mix(uColor2, uColor3, (pattern - 0.25) * 4.0);
+            } else if (pattern < 0.75) {
+                finalColor = mix(uColor3, uColor4, (pattern - 0.5) * 4.0);
+            } else {
+                finalColor = mix(uColor4, uColor1, (pattern - 0.75) * 4.0);
+            }
           
           gl_FragColor = vec4(finalColor, 1.0);
         }
