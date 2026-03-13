@@ -1047,15 +1047,16 @@
               value: new THREE.Vector2(window.innerWidth, window.innerHeight)
             },
             // ТВОИ ЦВЕТА из :root - без затемнения
-            uColor1: { value: new THREE.Vector3(0.95, 0.85, 0.55) }, // #FFF4AB (приглушённый)
-            uColor2: { value: new THREE.Vector3(0.91, 0.33, 0.10) }, // #E8551A
-            uColor3: { value: new THREE.Vector3(0.58, 0.65, 0.95) }, // #AEBAFF (насыщеннее)
-            uColor4: { value: new THREE.Vector3(0.75, 0.65, 0.40) }, // #FFF4AB темнее
-            uColor5: { value: new THREE.Vector3(0.45, 0.50, 0.75) }, // #AEBAFF темнее
-            uColor6: { value: new THREE.Vector3(0.70, 0.25, 0.07) }, // #E8551A темнее
-            uSpeed: { value: 1.2 },
-            uIntensity: { value: 1.8 },
-            uGrainIntensity: { value: 0.08 },
+            // ТВОИ ЦВЕТА в HEX (значения уже переведены)
+            uColor1: { value: new THREE.Color('#FFF4AB') }, // #FFF4AB
+            uColor2: { value: new THREE.Color('#E8551A') }, // #E8551A
+            uColor3: { value: new THREE.Color('#AEBAFF') }, // #AEBAFF
+            uColor4: { value: new THREE.Color('#FFF4AB').multiplyScalar(0.8) }, // #FFF4AB темнее
+            uColor5: { value: new THREE.Color('#AEBAFF').multiplyScalar(0.8) }, // #AEBAFF темнее
+            uColor6: { value: new THREE.Color('#E8551A').multiplyScalar(0.8) }, // #E8551A темнее
+            uSpeed: { value: 1.2 },        // ← СКОРОСТЬ (чем больше, тем быстрее)
+            uGradientSize: { value: 1.0 },  // ← РАЗМЕР (чем меньше, тем мельче волны)
+            uGradientCount: { value: 6.0 }, // ← КОЛИЧЕСТВО центров градиента
             uZoom: { value: 1.0 },
             // Убираем uDarkNavy - он затемнял цвета
             uGradientSize: { value: 1.0 },
