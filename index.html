@@ -1034,7 +1034,7 @@
     <!-- Подключаем Three.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
-    <!-- ПРОСТОЙ ТЕСТОВЫЙ ГРАДИЕНТ -->
+    <!-- ПРОСТОЙ ТЕСТОВЫЙ ГРАДИЕНТ (ИСПРАВЛЕННЫЙ) -->
     <script>
       // Создаём сцену, камеру, рендерер
       const scene = new THREE.Scene();
@@ -1057,11 +1057,11 @@
       canvas.style.pointerEvents = 'none';
       document.body.prepend(canvas);
 
-      // Твои цвета в HEX (Three.Color сам преобразует в vec3 в шейдере)
-      const color1 = new THREE.Color('#F15A22'); // жёлтый
-      const color2 = new THREE.Color('#0A0E27'); // оранжевый
-      const color3 = new THREE.Color('#40E0D0'); // фиолетовый
-      const color3 = new THREE.Color('#F15A22'); // фиолетовый
+      // Твои цвета (исправлено)
+      const color1 = new THREE.Color('#F15A22'); // оранжевый
+      const color2 = new THREE.Color('#0A0E27'); // тёмно-синий
+      const color3 = new THREE.Color('#40E0D0'); // бирюзовый
+      const color4 = new THREE.Color('#F15A22'); // снова оранжевый (замыкает круг)
 
       // Uniforms
       const uniforms = {
@@ -1081,7 +1081,7 @@
         }
       `;
 
-      // Фрагментный шейдер — простое смешивание трёх цветов
+      // Фрагментный шейдер — теперь с uColor4
       const fragmentShader = `
         precision highp float;
         varying vec2 vUv;
@@ -1089,29 +1089,27 @@
         uniform vec3 uColor1;
         uniform vec3 uColor2;
         uniform vec3 uColor3;
+        uniform vec3 uColor4;   // ← добавили
 
         void main() {
-          // Используем координаты и время, чтобы создать движущийся паттерн
           float x = vUv.x * 2.0 - 1.0;
           float y = vUv.y * 2.0 - 1.0;
           
-          // Простой шум на основе синуса
           float t = uTime * 0.5;
           float wave1 = sin(x * 0.2 + t) * cos(y * 1.0 + t);
           float wave2 = sin(x * 0.5 - t * 1.3) * cos(y * 2.0 + t * 0.7);
-          float pattern = (wave1 + wave2) * 0.5 + 0.5; // от 0 до 1
+          float pattern = (wave1 + wave2) * 0.5 + 0.5;
           
-          // Смешиваем три цвета в зависимости от паттерна
-            vec3 finalColor;
-            if (pattern < 0.25) {
-                finalColor = mix(uColor1, uColor2, pattern * 4.0);
-            } else if (pattern < 0.5) {
-                finalColor = mix(uColor2, uColor3, (pattern - 0.25) * 4.0);
-            } else if (pattern < 0.75) {
-                finalColor = mix(uColor3, uColor4, (pattern - 0.5) * 4.0);
-            } else {
-                finalColor = mix(uColor4, uColor1, (pattern - 0.75) * 4.0);
-            }
+          vec3 finalColor;
+          if (pattern < 0.25) {
+            finalColor = mix(uColor1, uColor2, pattern * 4.0);
+          } else if (pattern < 0.5) {
+            finalColor = mix(uColor2, uColor3, (pattern - 0.25) * 4.0);
+          } else if (pattern < 0.75) {
+            finalColor = mix(uColor3, uColor4, (pattern - 0.5) * 4.0);
+          } else {
+            finalColor = mix(uColor4, uColor1, (pattern - 0.75) * 4.0);
+          }
           
           gl_FragColor = vec4(finalColor, 1.0);
         }
