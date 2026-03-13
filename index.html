@@ -1041,29 +1041,28 @@
         constructor(sceneManager) {
           this.sceneManager = sceneManager;
           this.mesh = null;
-          this.uniforms = {
-            uTime: { value: 0 },
-            uResolution: {
-              value: new THREE.Vector2(window.innerWidth, window.innerHeight)
-            },
-            // ТВОИ ЦВЕТА из :root - без затемнения
-            // ТВОИ ЦВЕТА в HEX (значения уже переведены)
-            uColor1: { value: new THREE.Color('#F15A22') }, // #FFF4AB
-            uColor2: { value: new THREE.Color('#0A0E27') }, // #E8551A
-            uColor3: { value: new THREE.Color('#40E0D0') }, // #AEBAFF
-            uColor4: { value: new THREE.Color('#F15A22').multiplyScalar(0.8) }, // #FFF4AB темнее
-            uColor5: { value: new THREE.Color('#AEBAFF').multiplyScalar(0.8) }, // #AEBAFF темнее
-            uColor6: { value: new THREE.Color('#E8551A').multiplyScalar(0.8) }, // #E8551A темнее
-            uSpeed: { value: 1.2 },        // ← СКОРОСТЬ (чем больше, тем быстрее)
-            uGradientSize: { value: 1.0 },  // ← РАЗМЕР (чем меньше, тем мельче волны)
-            uGradientCount: { value: 6.0 }, // ← КОЛИЧЕСТВО центров градиента
-            uZoom: { value: 1.0 },
-            // Убираем uDarkNavy - он затемнял цвета
-            uGradientSize: { value: 1.0 },
-            uGradientCount: { value: 6.0 },
-            uColor1Weight: { value: 1.0 },
-            uColor2Weight: { value: 1.0 }
-          };
+            // ---------- Uniforms для шейдера ----------
+            this.uniforms = {
+              uTime: { value: 0 },
+              uResolution: {
+                value: new THREE.Vector2(window.innerWidth, window.innerHeight)
+              },
+              // ТВОИ ЦВЕТА из :root
+              uColor1: { value: new THREE.Color('#FFF4AB') },
+              uColor2: { value: new THREE.Color('#E8551A') },
+              uColor3: { value: new THREE.Color('#AEBAFF') },
+              uColor4: { value: new THREE.Color('#FFF4AB').multiplyScalar(0.8) },
+              uColor5: { value: new THREE.Color('#AEBAFF').multiplyScalar(0.8) },
+              uColor6: { value: new THREE.Color('#E8551A').multiplyScalar(0.8) },
+              uSpeed: { value: 1.2 },
+              uIntensity: { value: 1.8 },           // ← ЭТО ВАЖНО
+              uGrainIntensity: { value: 0.08 },      // ← ЭТО ВАЖНО
+              uZoom: { value: 1.0 },
+              uGradientSize: { value: 1.0 },
+              uGradientCount: { value: 6.0 },
+              uColor1Weight: { value: 1.0 },
+              uColor2Weight: { value: 1.0 }
+            };
         }
 
         init() {
