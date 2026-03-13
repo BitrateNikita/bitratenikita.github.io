@@ -46,7 +46,7 @@
 
         body {
             font-family: inherit;
-            background: var(--bg);
+            background: transparent; /* прозрачный фон */
             background-image: url('images/paper-texture.png');
             background-size: 200px 200px; /* или 'repeat' */
             background-blend-mode: overlay; /* чтобы текстура смешалась с цветом */
@@ -763,310 +763,6 @@
             margin-top: 40px; /* или сколько тебе нужно пикселей */
             }
         }
-
-
-          /* Общие сбросы и база */
-          * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-          }
-
-          body {
-            font-family: 'Inter', sans-serif;
-            overflow: hidden;
-            width: 100vw;
-            height: 100vh;
-            color: white;
-            background: #0a0a0a;
-          }
-
-          canvas {
-            display: block;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 1;
-          }
-
-          /* Заголовок */
-          .heading {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 10;
-            font-family: 'Syne', sans-serif;
-            font-size: clamp(3rem, 15vw, 8rem);
-            font-weight: 800;
-            color: white;
-            text-shadow: 0 0 30px rgba(0,0,0,0.7);
-            letter-spacing: -0.02em;
-            pointer-events: none;
-            text-align: center;
-            width: 100%;
-            mix-blend-mode: overlay;
-            animation: softGlow 4s infinite alternate;
-          }
-
-          @keyframes softGlow {
-            0% { text-shadow: 0 0 30px rgba(255,255,255,0.5); }
-            100% { text-shadow: 0 0 60px rgba(255,255,255,0.8); }
-          }
-
-          /* Кнопки управления */
-          .color-controls {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 20;
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            justify-content: center;
-            background: rgba(20,20,20,0.5);
-            backdrop-filter: blur(10px);
-            padding: 12px 20px;
-            border-radius: 60px;
-            border: 1px solid rgba(255,255,255,0.2);
-          }
-
-          .color-btn {
-            background: transparent;
-            border: 1px solid rgba(255,255,255,0.3);
-            color: white;
-            padding: 8px 20px;
-            border-radius: 40px;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: 0.3s;
-          }
-
-          .color-btn:hover {
-            background: rgba(255,255,255,0.2);
-            border-color: white;
-          }
-
-          .color-btn.active {
-            background: white;
-            color: black;
-            border-color: white;
-          }
-
-          .toggle-adjuster-btn {
-            position: absolute;
-            top: 30px;
-            right: 30px;
-            z-index: 30;
-            background: rgba(20,20,20,0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-            color: white;
-            padding: 12px 28px;
-            border-radius: 50px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
-            letter-spacing: 0.5px;
-          }
-
-          .toggle-adjuster-btn:hover {
-            background: rgba(255,255,255,0.2);
-            border-color: white;
-          }
-
-          /* Панель настройки цветов */
-          .color-adjuster-panel {
-            position: absolute;
-            top: 100px;
-            right: 30px;
-            z-index: 40;
-            width: 320px;
-            background: rgba(15,15,15,0.8);
-            backdrop-filter: blur(20px);
-            border-radius: 24px;
-            border: 1px solid rgba(255,255,255,0.15);
-            padding: 24px;
-            color: white;
-            transition: opacity 0.3s, transform 0.3s;
-            opacity: 0;
-            transform: translateY(-10px);
-            pointer-events: none;
-            box-shadow: 0 30px 50px rgba(0,0,0,0.5);
-          }
-
-          .color-adjuster-panel.visible {
-            opacity: 1;
-            transform: translateY(0);
-            pointer-events: all;
-          }
-
-          .color-adjuster-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-          }
-
-          .color-adjuster-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin: 0;
-          }
-
-          .color-adjuster-close {
-            background: transparent;
-            border: none;
-            color: rgba(255,255,255,0.6);
-            font-size: 28px;
-            line-height: 1;
-            cursor: pointer;
-            transition: 0.2s;
-          }
-
-          .color-adjuster-close:hover {
-            color: white;
-          }
-
-          .color-picker-group {
-            margin-bottom: 18px;
-          }
-
-          .color-picker-label {
-            font-size: 14px;
-            opacity: 0.7;
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-          }
-
-          .color-picker-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: rgba(0,0,0,0.3);
-            border-radius: 12px;
-            padding: 6px;
-            border: 1px solid rgba(255,255,255,0.1);
-          }
-
-          .color-picker-input {
-            width: 50px;
-            height: 40px;
-            border: none;
-            background: transparent;
-            cursor: pointer;
-            border-radius: 8px;
-          }
-
-          .color-picker-input::-webkit-color-swatch-wrapper {
-            padding: 0;
-          }
-
-          .color-picker-input::-webkit-color-swatch {
-            border: 1px solid rgba(255,255,255,0.3);
-            border-radius: 8px;
-          }
-
-          .color-value-display {
-            flex: 1;
-            background: rgba(0,0,0,0.3);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 8px;
-            padding: 8px 12px;
-            font-family: monospace;
-            font-size: 14px;
-            color: white;
-            letter-spacing: 1px;
-          }
-
-          .copy-btn {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: 0.2s;
-          }
-
-          .copy-btn:hover {
-            background: rgba(255,255,255,0.2);
-          }
-
-          .color-adjuster-actions {
-            margin-top: 25px;
-            display: flex;
-            justify-content: center;
-          }
-
-          .export-btn {
-            background: white;
-            color: black;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 40px;
-            font-weight: 600;
-            font-size: 15px;
-            cursor: pointer;
-            transition: 0.2s;
-            width: 100%;
-          }
-
-          .export-btn:hover {
-            background: #ddd;
-          }
-
-          /* Футер */
-          .footer {
-            position: absolute;
-            bottom: 20px;
-            right: 30px;
-            z-index: 10;
-            color: rgba(255,255,255,0.4);
-            font-size: 14px;
-            pointer-events: none;
-          }
-
-          .footer a {
-            color: rgba(255,255,255,0.6);
-            text-decoration: none;
-            pointer-events: all;
-            transition: 0.2s;
-          }
-
-          .footer a:hover {
-            color: white;
-          }
-
-          /* Кастомный курсор (опционально) */
-          .custom-cursor {
-            position: fixed;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.2);
-            border: 2px solid white;
-            pointer-events: none;
-            z-index: 999;
-            transform: translate(-50%, -50%);
-            transition: width 0.2s, height 0.2s, background 0.2s;
-            mix-blend-mode: difference;
-          }
-
-
-
-
-
-
-
-
     </style>
 </head>
 <body>
@@ -1331,314 +1027,182 @@
                 document.body.style.overflow = 'auto';
             }
         }
-
-
-        (function() {
-            // ===== ИНИЦИАЛИЗАЦИЯ THREE.JS =====
-            const scene = new THREE.Scene();
-            const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 10);
-            camera.position.z = 1;
-
-            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-            document.body.prepend(renderer.domElement);
-
-            // ===== ШЕЙДЕРЫ =====
-            // Вершинный шейдер — простой, только передаём UV и позицию
-            const vertexShader = `
-              varying vec2 vUv;
-              void main() {
-                vUv = uv;
-                gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-              }
-            `;
-
-            // Фрагментный шейдер — жидкостный градиент с шумом и реакцией на мышь
-            const fragmentShader = `
-              precision highp float;
-              varying vec2 vUv;
-
-              uniform float uTime;
-              uniform vec2 uMouse;
-              uniform vec3 uColor1;
-              uniform vec3 uColor2;
-              uniform vec3 uColor3;
-              uniform vec3 uColor4;
-              uniform vec3 uColor5;
-              uniform vec3 uColor6;
-
-              // Функция псевдослучайного шума
-              float random(vec2 st) {
-                return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
-              }
-
-              // Функция шума на основе случайной интерполяции
-              float noise(vec2 p) {
-                vec2 i = floor(p);
-                vec2 f = fract(p);
-                vec2 u = f*f*(3.0-2.0*f);
-                return mix( mix(random(i + vec2(0.0,0.0)), random(i + vec2(1.0,0.0)), u.x),
-                            mix(random(i + vec2(0.0,1.0)), random(i + vec2(1.0,1.0)), u.x), u.y);
-              }
-
-              // Функция фрактального шума (fbm)
-              float fbm(vec2 p) {
-                float sum = 0.0;
-                float amp = 0.5;
-                float freq = 2.0;
-                for(int i = 0; i < 5; i++) {
-                  sum += amp * noise(p * freq);
-                  amp *= 0.5;
-                  freq *= 2.0;
-                }
-                return sum;
-              }
-
-              void main() {
-                // Искажаем координаты мышью и временем
-                vec2 uv = vUv * 2.0 - 1.0; // переводим в диапазон -1..1
-                float mouseInfluence = length(uMouse) * 0.5; // насколько мышь влияет на искажения
-
-                // Создаём несколько слоёв шума с разными частотами
-                float t = uTime * 0.2;
-
-                // Координаты, смещённые мышью и временем
-                vec2 q = uv * 3.0 + vec2(t * 0.3, t * 0.2);
-                q.x += uMouse.x * 2.0;
-                q.y += uMouse.y * 2.0;
-
-                float n1 = fbm(q);
-                float n2 = fbm(q + vec2(1.5, 2.3) + t * 0.4);
-                float n3 = fbm(q * 2.5 + vec2(5.1, 3.7) + t * 0.6);
-
-                // Комбинируем шумы в органичный паттерн
-                float pattern = (n1 * 0.6 + n2 * 0.3 + n3 * 0.1);
-
-                // Создаём плавные переходы цвета
-                float mix1 = sin(uv.x * 5.0 + pattern * 10.0 + t) * 0.5 + 0.5;
-                float mix2 = cos(uv.y * 6.0 + pattern * 8.0 - t * 1.2) * 0.5 + 0.5;
-                float mix3 = sin((uv.x + uv.y) * 4.0 + pattern * 12.0 + t * 2.0) * 0.5 + 0.5;
-
-                // Добавляем влияние мыши на смешивание
-                mix1 += uMouse.x * 0.2;
-                mix2 += uMouse.y * 0.2;
-                mix3 += (uMouse.x + uMouse.y) * 0.1;
-
-                // Нормализуем
-                mix1 = clamp(mix1, 0.0, 1.0);
-                mix2 = clamp(mix2, 0.0, 1.0);
-                mix3 = clamp(mix3, 0.0, 1.0);
-
-                // Смешиваем цвета
-                vec3 col = mix(uColor1, uColor2, mix1);
-                col = mix(col, uColor3, mix2);
-                col = mix(col, uColor4, mix3);
-                col = mix(col, uColor5, pattern * 0.7);
-                col = mix(col, uColor6, pattern * 0.5);
-
-                // Добавляем небольшую виньетку для глубины
-                float vignette = 1.0 - length(uv) * 0.3;
-                col *= vignette;
-
-                gl_FragColor = vec4(col, 1.0);
-              }
-            `;
-
-            // ===== НАЧАЛЬНЫЕ ЦВЕТА (схема 1) =====
-            let colors = [
-              [1.0, 0.8, 0.6], // мягкий персиковый
-              [0.6, 0.8, 1.0], // светло-голубой
-              [0.9, 0.5, 0.7], // розовый
-              [0.5, 0.2, 0.4], // тёмно-пурпурный
-              [0.2, 0.6, 0.5], // бирюзовый
-              [1.0, 0.9, 0.4]  // жёлтый
-            ];
-
-            // Создаём uniform-объект
-            const uniforms = {
-              uTime: { value: 0 },
-              uMouse: { value: new THREE.Vector2(0, 0) },
-              uColor1: { value: new THREE.Color().fromArray(colors[0]) },
-              uColor2: { value: new THREE.Color().fromArray(colors[1]) },
-              uColor3: { value: new THREE.Color().fromArray(colors[2]) },
-              uColor4: { value: new THREE.Color().fromArray(colors[3]) },
-              uColor5: { value: new THREE.Color().fromArray(colors[4]) },
-              uColor6: { value: new THREE.Color().fromArray(colors[5]) }
-            };
-
-            // Материал и меш
-            const material = new THREE.ShaderMaterial({
-              vertexShader: vertexShader,
-              fragmentShader: fragmentShader,
-              uniforms: uniforms
-            });
-
-            const geometry = new THREE.PlaneGeometry(2, 2);
-            const mesh = new THREE.Mesh(geometry, material);
-            scene.add(mesh);
-
-            // ===== ОБРАБОТЧИКИ МЫШИ =====
-            let mouse = new THREE.Vector2(0, 0);
-            window.addEventListener('mousemove', (e) => {
-              // Нормализуем координаты мыши в диапазон -1..1
-              mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
-              mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
-              uniforms.uMouse.value.set(mouse.x, mouse.y);
-            });
-
-            // ===== АНИМАЦИЯ =====
-            function animate() {
-              requestAnimationFrame(animate);
-              uniforms.uTime.value += 0.01;
-              renderer.render(scene, camera);
-            }
-            animate();
-
-            // ===== РЕСАЙЗ =====
-            window.addEventListener('resize', () => {
-              renderer.setSize(window.innerWidth, window.innerHeight);
-            });
-
-            // ===== ИНТЕРФЕЙС УПРАВЛЕНИЯ ЦВЕТАМИ =====
-            // Предустановленные схемы
-            const schemes = {
-              1: [
-                [1.0, 0.8, 0.6],
-                [0.6, 0.8, 1.0],
-                [0.9, 0.5, 0.7],
-                [0.5, 0.2, 0.4],
-                [0.2, 0.6, 0.5],
-                [1.0, 0.9, 0.4]
-              ],
-              2: [
-                [0.4, 0.9, 0.8],
-                [0.9, 0.3, 0.5],
-                [0.2, 0.3, 0.7],
-                [0.8, 0.7, 0.2],
-                [0.9, 0.6, 0.1],
-                [0.1, 0.6, 0.5]
-              ],
-              3: [
-                [0.9, 0.2, 0.3],
-                [0.3, 0.7, 0.9],
-                [0.8, 0.2, 0.7],
-                [0.1, 0.8, 0.4],
-                [1.0, 0.8, 0.0],
-                [0.5, 0.1, 0.5]
-              ],
-              4: [
-                [0.2, 0.5, 0.2],
-                [0.9, 0.5, 0.0],
-                [0.5, 0.0, 0.5],
-                [0.0, 0.6, 0.8],
-                [0.8, 0.2, 0.2],
-                [0.9, 0.9, 0.2]
-              ],
-              5: [
-                [0.6, 0.8, 0.9],
-                [0.9, 0.6, 0.7],
-                [0.7, 0.5, 0.9],
-                [0.5, 0.9, 0.6],
-                [0.9, 0.8, 0.4],
-                [0.4, 0.5, 0.8]
-              ]
-            };
-
-            function updateColorsFromArray(arr) {
-              for (let i = 0; i < 6; i++) {
-                const col = new THREE.Color().fromArray(arr[i]);
-                uniforms[`uColor${i+1}`].value = col;
-                // обновим input-ы, если они есть
-                const picker = document.getElementById(`colorPicker${i+1}`);
-                const display = document.getElementById(`colorValue${i+1}`);
-                if (picker) {
-                  picker.value = '#' + col.getHexString();
-                }
-                if (display) {
-                  display.value = '#' + col.getHexString().toUpperCase();
-                }
-              }
-            }
-
-            // Кнопки схем
-            const schemeBtns = document.querySelectorAll('.color-btn');
-            schemeBtns.forEach((btn, index) => {
-              btn.addEventListener('click', () => {
-                schemeBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                const scheme = (index + 1).toString();
-                if (schemes[scheme]) {
-                  updateColorsFromArray(schemes[scheme]);
-                }
-              });
-            });
-
-            // Панель настройки цветов
-            const adjusterBtn = document.getElementById('toggleAdjusterBtn');
-            const adjusterPanel = document.getElementById('colorAdjusterPanel');
-            const closeBtn = document.getElementById('closeAdjusterBtn');
-
-            adjusterBtn.addEventListener('click', () => {
-              adjusterPanel.classList.toggle('visible');
-            });
-
-            closeBtn.addEventListener('click', () => {
-              adjusterPanel.classList.remove('visible');
-            });
-
-            // Инициализация пикеров цветов
-            for (let i = 1; i <= 6; i++) {
-              const picker = document.getElementById(`colorPicker${i}`);
-              const display = document.getElementById(`colorValue${i}`);
-              const copyBtn = document.querySelector(`.copy-btn[data-copy="${i}"]`);
-
-              if (picker && display) {
-                // Установим начальное значение
-                const col = uniforms[`uColor${i}`].value;
-                picker.value = '#' + col.getHexString();
-                display.value = '#' + col.getHexString().toUpperCase();
-
-                picker.addEventListener('input', (e) => {
-                  const hex = e.target.value;
-                  uniforms[`uColor${i}`].value.set(hex);
-                  display.value = hex.toUpperCase();
-                });
-
-                if (copyBtn) {
-                  copyBtn.addEventListener('click', () => {
-                    navigator.clipboard.writeText(display.value);
-                    alert(`Copied ${display.value}`);
-                  });
-                }
-              }
-            }
-
-            // Экспорт всех цветов
-            document.getElementById('exportAllBtn').addEventListener('click', () => {
-              let colorsHex = [];
-              for (let i = 1; i <= 6; i++) {
-                const display = document.getElementById(`colorValue${i}`);
-                if (display) colorsHex.push(display.value);
-              }
-              console.log('Current colors:', colorsHex);
-              alert('Colors exported to console (F12)');
-            });
-
-            // Кастомный курсор (опционально)
-            const cursor = document.getElementById('customCursor');
-            document.addEventListener('mousemove', (e) => {
-              cursor.style.left = e.clientX + 'px';
-              cursor.style.top = e.clientY + 'px';
-            });
-
-          })();
-
-
-
-
-
-        
     </script>
+
+
+    <!-- Подключаем Three.js с CDN -->
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.128.0/build/three.module.js"
+        }
+      </script>
+
+    <!-- Код жидкого фона -->
+    <script type="module">
+      import * as THREE from 'three';
+
+      // Создаём сцену, камеру, рендерер
+      const scene = new THREE.Scene();
+      const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 10);
+      camera.position.z = 1;
+
+      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setClearColor(0x000000, 0);
+      
+      // Добавляем холст в начало body, чтобы он был фоном
+      const canvas = renderer.domElement;
+      canvas.style.position = 'fixed';
+      canvas.style.top = '0';
+      canvas.style.left = '0';
+      canvas.style.width = '100%';
+      canvas.style.height = '100%';
+      canvas.style.zIndex = '-1';
+      canvas.style.pointerEvents = 'none';
+      document.body.prepend(canvas);
+
+      // ТВОИ ЦВЕТА (как в :root)
+      const colors = {
+        color1: new THREE.Color('#FFF4AB'), // жёлтый
+        color2: new THREE.Color('#E8551A'), // оранжевый
+        color3: new THREE.Color('#AEBAFF'), // фиолетовый
+        color4: new THREE.Color('#FFF4AB').multiplyScalar(0.8), // чуть темнее жёлтый
+        color5: new THREE.Color('#AEBAFF').multiplyScalar(0.9), // чуть темнее фиолетовый
+        color6: new THREE.Color('#E8551A').multiplyScalar(1.2)  // ярче оранжевый
+      };
+
+      // Uniforms для шейдера
+      const uniforms = {
+        uTime: { value: 0 },
+        uMouse: { value: new THREE.Vector2(0, 0) },
+        uColor1: { value: colors.color1 },
+        uColor2: { value: colors.color2 },
+        uColor3: { value: colors.color3 },
+        uColor4: { value: colors.color4 },
+        uColor5: { value: colors.color5 },
+        uColor6: { value: colors.color6 }
+      };
+
+      // Шейдеры
+      const vertexShader = `
+        varying vec2 vUv;
+        void main() {
+          vUv = uv;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+      `;
+
+      const fragmentShader = `
+        precision highp float;
+        varying vec2 vUv;
+        uniform float uTime;
+        uniform vec2 uMouse;
+        uniform vec3 uColor1;
+        uniform vec3 uColor2;
+        uniform vec3 uColor3;
+        uniform vec3 uColor4;
+        uniform vec3 uColor5;
+        uniform vec3 uColor6;
+
+        float random(vec2 st) {
+          return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
+        }
+
+        float noise(vec2 p) {
+          vec2 i = floor(p);
+          vec2 f = fract(p);
+          vec2 u = f*f*(3.0-2.0*f);
+          return mix( mix(random(i + vec2(0.0,0.0)), random(i + vec2(1.0,0.0)), u.x),
+                      mix(random(i + vec2(0.0,1.0)), random(i + vec2(1.0,1.0)), u.x), u.y);
+        }
+
+        float fbm(vec2 p) {
+          float sum = 0.0;
+          float amp = 0.5;
+          float freq = 2.0;
+          for(int i = 0; i < 5; i++) {
+            sum += amp * noise(p * freq);
+            amp *= 0.5;
+            freq *= 2.0;
+          }
+          return sum;
+        }
+
+        void main() {
+          vec2 uv = vUv;
+          
+          // Добавляем влияние мыши и времени
+          float t = uTime * 0.1;
+          vec2 q = uv * 3.0 + vec2(t * 0.3, t * 0.2);
+          q.x += uMouse.x * 2.0;
+          q.y += uMouse.y * 2.0;
+          
+          float n1 = fbm(q);
+          float n2 = fbm(q + vec2(1.5, 2.3) + t * 0.4);
+          float n3 = fbm(q * 2.5 + vec2(5.1, 3.7) + t * 0.6);
+          
+          float pattern = (n1 * 0.6 + n2 * 0.3 + n3 * 0.1);
+          
+          // Смешиваем цвета
+          float mix1 = sin(uv.x * 5.0 + pattern * 10.0 + t) * 0.5 + 0.5;
+          float mix2 = cos(uv.y * 6.0 + pattern * 8.0 - t * 1.2) * 0.5 + 0.5;
+          float mix3 = sin((uv.x + uv.y) * 4.0 + pattern * 12.0 + t * 2.0) * 0.5 + 0.5;
+          
+          mix1 += uMouse.x * 0.2;
+          mix2 += uMouse.y * 0.2;
+          mix3 += (uMouse.x + uMouse.y) * 0.1;
+          
+          mix1 = clamp(mix1, 0.0, 1.0);
+          mix2 = clamp(mix2, 0.0, 1.0);
+          mix3 = clamp(mix3, 0.0, 1.0);
+          
+          vec3 col = mix(uColor1, uColor2, mix1);
+          col = mix(col, uColor3, mix2);
+          col = mix(col, uColor4, mix3);
+          col = mix(col, uColor5, pattern * 0.7);
+          col = mix(col, uColor6, pattern * 0.5);
+          
+          gl_FragColor = vec4(col, 1.0);
+        }
+      `;
+
+      // Создаём материал и меш
+      const material = new THREE.ShaderMaterial({
+        vertexShader: vertexShader,
+        fragmentShader: fragmentShader,
+        uniforms: uniforms
+      });
+
+      const geometry = new THREE.PlaneGeometry(2, 2);
+      const mesh = new THREE.Mesh(geometry, material);
+      scene.add(mesh);
+
+      // Отслеживаем движение мыши
+      window.addEventListener('mousemove', (e) => {
+        const mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+        const mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+        uniforms.uMouse.value.set(mouseX, mouseY);
+      });
+
+      // Анимация
+      function animate() {
+        requestAnimationFrame(animate);
+        uniforms.uTime.value += 0.01;
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      // Обновляем размер при изменении окна
+      window.addEventListener('resize', () => {
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    </script>
+
+
+
+
+
 </body>
 </html>
