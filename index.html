@@ -1040,64 +1040,9 @@
       }
     </script>
 
-    <!-- Жидкий градиент с CodePen (адаптированный под твои цвета) -->
+    <!-- Жидкий градиент с CodePen (адаптированный под твои цвета) - БЕЗ РЕАКЦИИ НА МЫШЬ -->
     <script type="module">
       import * as THREE from 'three';
-
-      // ---------- TouchTexture класс (отвечает за реакцию на мышь) ----------
-      class TouchTexture {
-        constructor() {
-          this.size = 64;
-          this.width = this.height = this.size;
-          this.maxAge = 64;
-          this.radius = 0.25 * this.size;
-          this.speed = 1 / this.maxAge;
-          this.trail = [];
-          this.last = null;
-          this.initTexture();
-        }
-        
-        initTexture() {
-          this.canvas = document.createElement("canvas");
-          this.canvas.width = this.width;
-          this.canvas.height = this.height;
-          this.ctx = this.canvas.getContext("2d");
-          this.ctx.fillStyle = "black";
-          this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-          this.texture = new THREE.CanvasTexture(this.canvas);
-        }
-        
-        update() {
-          if (!this.trail.length) return;
-          
-          this.ctx.fillStyle = "black";
-          this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-          this.ctx.fillStyle = "white";
-          
-          for (let i = 0; i < this.trail.length; i++) {
-            const point = this.trail[i];
-            const age = (Date.now() - point.time) / 1000;
-            const opacity = Math.max(0, 1 - age * this.speed);
-            
-            if (opacity <= 0) {
-              this.trail.splice(i, 1);
-              i--;
-              continue;
-            }
-            
-            this.ctx.beginPath();
-            this.ctx.arc(point.x * this.size, (1 - point.y) * this.size, this.radius * opacity, 0, Math.PI * 2);
-            this.ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
-            this.ctx.fill();
-          }
-          this.texture.needsUpdate = true;
-        }
-        
-        addTouch(x, y) {
-          this.last = { x, y, time: Date.now() };
-          this.trail.push(this.last);
-        }
-      }
 
       // ---------- Создаём контейнер для фона ----------
       const container = document.createElement('div');
@@ -1134,20 +1079,16 @@
       // ---------- Uniforms для шейдера ----------
       const uniforms = {
         uTime: { value: 0 },
-        uSpeed: { value: 0.2 },
-        uScale: { value: 5 },
-        uNoiseStrength: { value: 0.1 },
+        uSpeed: { value: 0.2 },      // скорость (0.1 - медленно, 1.0 - быстро)
+        uScale: { value: 5 },         // масштаб волн (больше - мельче волны)
+        uNoiseStrength: { value: 0.1 }, // сила шума
         uColor1: { value: colors.color1 },
         uColor2: { value: colors.color2 },
         uColor3: { value: colors.color3 },
         uColor4: { value: colors.color4 },
-        uColor5: { value: colors.color5 },
-        /* uTouchTexture: { value: null }  */
+        uColor5: { value: colors.color5 }
+        // uTouchTexture удалён
       };
-
-      // ---------- TouchTexture для реакции на мышь ----------
-      const touchTexture = new TouchTexture();
-      uniforms.uTouchTexture.value = touchTexture.texture;
 
       // ---------- Вершинный шейдер ----------
       const vertexShader = `
@@ -1158,7 +1099,7 @@
         }
       `;
 
-      // ---------- Фрагментный шейдер (с красивыми переливами) ----------
+      // ---------- Фрагментный шейдер (без реакции на мышь) ----------
       const fragmentShader = `
         precision highp float;
         varying vec2 vUv;
@@ -1171,7 +1112,6 @@
         uniform vec3 uColor3;
         uniform vec3 uColor4;
         uniform vec3 uColor5;
-        uniform sampler2D uTouchTexture;
 
         float random(vec2 st) {
           return fract(sin(dot(st.xy, vec2(12.9898, 78.233))) * 43758.5453123);
@@ -1208,11 +1148,7 @@
           float n1 = fbm(uv);
           float n2 = fbm(uv + 10.0 + uTime * 0.2);
 
-          vec4 touch = texture2D(uTouchTexture, vUv);
-          float touchInfluence = touch.r;
-
           float pattern = mix(n1, n2, 0.5 + 0.5 * sin(uTime * 0.5));
-          /* pattern = mix(pattern, touchInfluence, 0.3); */
 
           float distortion = sin(uv.x * 5.0 + uTime) * sin(uv.y * 5.0 + uTime) * 0.1;
           pattern += distortion;
@@ -1246,28 +1182,10 @@
       const mesh = new THREE.Mesh(geometry, material);
       scene.add(mesh);
 
-      // ---------- Отслеживание мыши ----------
-      /* const mouse = new THREE.Vector2();
-      window.addEventListener('mousemove', (e) => {
-        mouse.x = e.clientX / window.innerWidth;
-        mouse.y = 1.0 - (e.clientY / window.innerHeight);
-        touchTexture.addTouch(mouse.x, mouse.y);
-      });
-
-      window.addEventListener('touchmove', (e) => {
-        e.preventDefault();
-        if (e.touches.length) {
-          mouse.x = e.touches[0].clientX / window.innerWidth;
-          mouse.y = 1.0 - (e.touches[0].clientY / window.innerHeight);
-          touchTexture.addTouch(mouse.x, mouse.y);
-        }
-      });  */
-
       // ---------- Анимация ----------
       function animate() {
         requestAnimationFrame(animate);
         uniforms.uTime.value += 0.01;
-        /* touchTexture.update(); */
         renderer.render(scene, camera);
       }
       animate();
