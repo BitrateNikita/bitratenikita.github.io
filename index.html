@@ -232,14 +232,14 @@
 
 
 
-        /* ===== НОВАЯ СЕТКА 3x2 ===== */
+        /* ===== НОВАЯ СЕТКА 2x3 ===== */
         .grid-6 {
             display: grid;
-            grid-template-columns: repeat(3, 1fr); /* три равные колонки */
-            gap: 30px; /* такой же отступ, как у карточек */
+            grid-template-columns: repeat(2, 1fr); /* две равные колонки */
+            gap: 30px;
             max-width: 1400px;
-            margin: 0 auto 60px auto; /* центрируем и отступ снизу */
-            padding: 0 100px; /* чтобы отступить от краёв, как у .container */
+            margin: 0 auto 60px auto;
+            padding: 0 100px;
             width: 100%;
             box-sizing: border-box;
         }
@@ -250,26 +250,22 @@
             -webkit-backdrop-filter: blur(10px);
             border: 1px solid var(--glass-border);
             box-shadow: var(--glass-shadow);
-            border-radius: 30px; /* как у hero и других блоков */
-            padding: 60px 20px; /* внутренние отступы, чтобы текст не прилипал */
+            border-radius: 30px;
+            padding: 20px; /* внутренний отступ */
             text-align: center;
-            color: var(--text);
+            color: var(--text); /* цвет текста из переменной */
             font-weight: 500;
             font-size: 1.2rem;
-            min-height: 250px; /* примерно квадратная форма */
+            aspect-ratio: 1 / 1; /* делает идеальный квадрат */
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             z-index: 1;
-            transition: transform 0.3s ease; /* лёгкая анимация */
+            transition: transform 0.3s ease;
         }
 
-        .grid-item:hover {
-            transform: scale(1.02); /* чуть увеличивается при наведении */
-        }
-
-        /* Текстура поверх стекла (20%) */
+        /* текстура */
         .grid-item::before {
             content: '';
             position: absolute;
@@ -277,7 +273,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('section1-bg.png'); /* та же текстура, что у body */
+            background-image: url('paper-texture.png'); /* если в папке images, то images/paper-texture.png */
             background-size: 200px 200px;
             opacity: 0.2;
             pointer-events: none;
@@ -285,8 +281,16 @@
             z-index: -1;
         }
 
-        /* Если текстура лежит в папке images, то путь: url('images/paper-texture.png') */
+        .grid-item {
+            color: #E8551A;         /* конкретный цвет */
+            font-size: 24px;        /* размер */
+            font-weight: 700;       /* жирность */
+            text-transform: uppercase; /* заглавные */
+            line-height: 1.4;
+            font-family: 'Montserrat', sans-serif; /* если хочешь другой шрифт */
+        }
 
+        
 
 
 
@@ -990,7 +994,13 @@
         <div class="grid-item">Заглушка 6</div>
     </div>
 
-
+    <div class="grid-item">
+        <div>
+            <span class="some-icon">🎬</span>
+            <h3>Заголовок</h3>
+            <p>Описание</p>
+        </div>
+    </div>
 
 
 
