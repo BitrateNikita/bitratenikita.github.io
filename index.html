@@ -293,7 +293,7 @@
             grid-template-columns: repeat(2, 1fr); /* две равные колонки */
             gap: 30px;
             max-width: 1400px;
-            margin: 30px auto auto auto;
+            margin: 30px auto 30px auto;
             padding: 0 100px;
             width: 100%;
             box-sizing: border-box;
@@ -347,7 +347,35 @@
 
 
 
+        /* ===== МОБИЛЬНАЯ АДАПТАЦИЯ ===== */
+        @media (max-width: 768px) {
+            /* ... твой существующий код ... */
 
+            /* новый блок */
+            .full-width-block {
+                padding: 0 20px;
+                height: 400px; /* поменьше на мобилках */
+                margin: 20px auto 20px auto;
+            }
+
+            .full-width-content {
+                font-size: 2rem; /* текст помельче */
+                padding: 20px;
+            }
+
+            .grid-6 {
+                grid-template-columns: 1fr; /* одна колонка */
+                gap: 20px;
+                padding: 0 20px;
+                margin: 20px auto 30px auto;
+            }
+
+            .grid-item {
+                aspect-ratio: 1 / 1; /* квадраты остаются квадратами */
+                font-size: 1rem;
+                padding: 15px;
+            }
+        }
 
 
 
