@@ -232,13 +232,69 @@
 
 
 
+
+
+
+        .full-width-block {
+            max-width: 1400px;
+            height: 600px;
+            margin: 0 auto 60px auto;
+            padding: 0 100px;
+            width: 100%;
+            margin: 250px auto 60px auto;
+            box-sizing: border-box;
+        }
+
+        .full-width-content {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            border-radius: 30px;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--text);
+            font-size: 3rem;        /* крупный текст */
+            font-weight: 700;
+            line-height: 1.4;
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+        }
+
+        /* текстура как у остальных блоков */
+        .full-width-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('section1-bg.png'); /* подставь свой путь */
+            background-size: 200px 200px;
+            opacity: 0.2;
+            pointer-events: none;
+            border-radius: inherit;
+            z-index: -1;
+        }
+
+
+
+
+
         /* ===== НОВАЯ СЕТКА 2x3 ===== */
         .grid-6 {
             display: grid;
             grid-template-columns: repeat(2, 1fr); /* две равные колонки */
             gap: 30px;
             max-width: 1400px;
-            margin: 110px auto 60px auto;
+            margin: 50px auto 60px auto;
             margin: 0 auto 60px auto;
             padding: 0 100px;
             width: 100%;
@@ -295,53 +351,7 @@
 
 
 
-        .full-width-block {
-            max-width: 1400px;
-            height: 800px;
-            margin: 0 auto 60px auto;
-            padding: 0 100px;
-            width: 100%;
-            box-sizing: border-box;
-        }
 
-        .full-width-content {
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            box-shadow: var(--glass-shadow);
-            border-radius: 30px;
-            height: 100%;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: var(--text);
-            font-size: 3rem;        /* крупный текст */
-            font-weight: 700;
-            line-height: 1.4;
-            position: relative;
-            z-index: 1;
-            padding: 20px;
-        }
-
-        /* текстура как у остальных блоков */
-        .full-width-content::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('section1-bg.png'); /* подставь свой путь */
-            background-size: 200px 200px;
-            opacity: 0.2;
-            pointer-events: none;
-            border-radius: inherit;
-            z-index: -1;
-        }
 
 
 
@@ -1039,6 +1049,16 @@
 
 
 
+    <!-- ===== БЛОК ВО ВСЮ ШИРИНУ 800px ===== -->
+    <div class="full-width-block">
+        <div class="full-width-content">
+            ЗДЕСЬ ВСЁ ПРО АНИМАЦИЮ<br>
+            ЗДЕСЬ ВСЁ ПРО АНИМАЦИЮ<br>
+            ЗДЕСЬ ВСЁ ПРО АНИМАЦИЮ
+        </div>
+    </div>
+
+
 
     <!-- ===== НОВАЯ СЕТКА С КВАДРАТАМИ ===== -->
     <div class="grid-6">
@@ -1050,14 +1070,7 @@
         <div class="grid-item">Заглушка 6</div>
     </div>
 
-    <!-- ===== БЛОК ВО ВСЮ ШИРИНУ 800px ===== -->
-    <div class="full-width-block">
-        <div class="full-width-content">
-            ЗДЕСЬ ВСЁ ПРО АНИМАЦИЮ<br>
-            ЗДЕСЬ ВСЁ ПРО АНИМАЦИЮ<br>
-            ЗДЕСЬ ВСЁ ПРО АНИМАЦИЮ
-        </div>
-    </div>
+
 
 
 
