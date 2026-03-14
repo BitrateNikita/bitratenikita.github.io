@@ -57,9 +57,10 @@
         /* ===== КОНТЕЙНЕР (исправляет растянутость) ===== */
         .container {
             max-width: 1400px;
-            margin: 20 auto;
+            margin: 0 auto;
             padding: 30px 100px 0 100px;  /* ← верх 100px, остальное как было */
             width: 100%;
+            box-sizing: border-box;
         }
 
         /* =====================================================
@@ -236,9 +237,9 @@
 
 
         .full-width-block {
-            max-width: 1400px;
             height: 600px;
             width: 100%;
+            margin-bottom: 30px; /* отступ до сетки */
             box-sizing: border-box;
         }
 
@@ -262,7 +263,7 @@
             line-height: 1.4;
             position: relative;
             z-index: 1;
-            padding: 20px;
+            padding: 20px; /* внутренний отступ для текста */
         }
 
         /* текстура как у остальных блоков */
@@ -290,8 +291,7 @@
             display: grid;
             grid-template-columns: repeat(2, 1fr); /* две равные колонки */
             gap: 30px;
-            margin: 30px auto auto auto;
-            max-width: 1400px;
+            margin-bottom: 30px;
             width: 100%;
             box-sizing: border-box;
         }
@@ -352,7 +352,7 @@
             .full-width-block {
                 padding: 0 20px;
                 height: 400px; /* поменьше на мобилках */
-                margin: 20px auto 20px auto;
+                margin: 30px auto 20px auto;
             }
 
             .full-width-content {
@@ -361,10 +361,10 @@
             }
 
             .grid-6 {
-                grid-template-columns: 1fr; /* одна колонка */
+                grid-template-columns: 1fr;
                 gap: 20px;
-                padding: 0 20px;
-                margin: 20px auto 30px auto;
+                margin-bottom: 20px; /* только снизу */
+                width: 100%;
             }
 
             .grid-item {
@@ -398,7 +398,7 @@
             border: 1px solid var(--glass-border);
             box-shadow: var(--glass-shadow);
             border-radius: 30px;
-            margin: 30px auto auto auto;
+            margin: 0 auto 30px auto; /* сверху 0, снизу 30px */
             position: relative;
             z-index: 1;
         }
@@ -981,7 +981,7 @@
 
         @media (max-width: 768px) {
             .container {
-                padding: 0 20px;
+                padding: 30px 20px 0 20px; /* верх 30, бока 20 */
             }
 
             header {
