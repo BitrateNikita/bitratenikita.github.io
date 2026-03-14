@@ -226,6 +226,73 @@
             padding: 15px !important;
         }
 
+
+
+
+
+
+
+        /* ===== НОВАЯ СЕТКА 3x2 ===== */
+        .grid-6 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* три равные колонки */
+            gap: 30px; /* такой же отступ, как у карточек */
+            max-width: 1400px;
+            margin: 0 auto 60px auto; /* центрируем и отступ снизу */
+            padding: 0 100px; /* чтобы отступить от краёв, как у .container */
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .grid-item {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            border-radius: 30px; /* как у hero и других блоков */
+            padding: 60px 20px; /* внутренние отступы, чтобы текст не прилипал */
+            text-align: center;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 1.2rem;
+            min-height: 250px; /* примерно квадратная форма */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease; /* лёгкая анимация */
+        }
+
+        .grid-item:hover {
+            transform: scale(1.02); /* чуть увеличивается при наведении */
+        }
+
+        /* Текстура поверх стекла (20%) */
+        .grid-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('section1-bg.png'); /* та же текстура, что у body */
+            background-size: 200px 200px;
+            opacity: 0.2;
+            pointer-events: none;
+            border-radius: inherit;
+            z-index: -1;
+        }
+
+        /* Если текстура лежит в папке images, то путь: url('images/paper-texture.png') */
+
+
+
+
+
+
+
         /* =====================================================
            🎬 ГЛАВНЫЙ ЭКРАН (HERO)
            ===================================================== */
@@ -906,6 +973,28 @@
             <a href="portfolio.html" class="nav-btn" onclick="toggleMobileMenu()">Для студий</a>
         </div>
     </header>
+
+
+
+
+
+
+
+    <!-- ===== НОВАЯ СЕТКА С КВАДРАТАМИ ===== -->
+    <div class="grid-6">
+        <div class="grid-item">Заглушка 1</div>
+        <div class="grid-item">Заглушка 2</div>
+        <div class="grid-item">Заглушка 3</div>
+        <div class="grid-item">Заглушка 4</div>
+        <div class="grid-item">Заглушка 5</div>
+        <div class="grid-item">Заглушка 6</div>
+    </div>
+
+
+
+
+
+
 
     <div class="container">
         <!-- ===== ГЛАВНЫЙ ЭКРАН ===== -->
