@@ -36,6 +36,7 @@
         html {
             font-family: 'Montserrat', sans-serif;
             scroll-behavior: smooth;
+            scroll-padding-top: 120px;
         }
 
         /* ===== СБРОС СТИЛЕЙ ===== */
@@ -53,6 +54,7 @@
             /*background-blend-mode: overlay; /* чтобы текстура смешалась с цветом */
             color: var(--text);
             line-height: 1.6;
+            -webkit-overflow-scrolling: auto;
         }
 
         /* ===== КОНТЕЙНЕР (исправляет растянутость) ===== */
@@ -178,6 +180,23 @@
             background: var(--text);
             border-radius: 3px;
             transition: 0.3s;
+
+
+
+            .burger-menu.open span:nth-child(1) {
+            transform: rotate(45deg) translate(5px,5px);
+            }
+
+            .burger-menu.open span:nth-child(2) {
+            opacity: 0;
+            }
+
+            .burger-menu.open span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px,-7px);
+            }
+
+
+
         }
 
         .mobile-nav {
@@ -292,7 +311,7 @@
             display: grid;
             grid-template-columns: repeat(2, 1fr); /* две равные колонки */
             gap: 30px;
-            margin-bottom: 30px;
+            margin-bottom: 0px;
             width: 100%;
             box-sizing: border-box;
         }
@@ -315,7 +334,7 @@
             justify-content: center;
             position: relative;
             z-index: 1;
-            transition: transform 0.3s ease;
+            transition: transform 0.6s ease;
         }
 
         /* текстура */
@@ -1017,14 +1036,15 @@
             .full-width-block {
                 padding: 0 20px;
                 min-height: 420px; /* поменьше на мобилках */
+                height: auto;
                 margin: 30px auto 30px auto;
                 display: none;
             }
 
             .full-width-content {
-                font-size: 1.6rem; /* текст помельче */
+                font-size: 1.7rem; /* текст помельче */
                 line-height: 1.3;
-                padding: 20px;
+                /* padding: 20px; */
             }
 
             .grid-6 {
@@ -1044,7 +1064,7 @@
         .fade-in {
         opacity: 0;
         transform: translateY(20px);
-        transition: all 0.6s ease;
+        transition: all 0.8s ease;
         }
 
         .fade-in.visible {
@@ -1495,6 +1515,23 @@
     })
 
     </script>
+
+    <script>
+
+    const burger = document.querySelector(".burger-menu");
+    const mobileMenu = document.querySelector(".mobile-nav");
+
+    burger.addEventListener("click", () => {
+
+        mobileMenu.classList.toggle("active");
+
+        burger.classList.toggle("open");
+
+    });
+
+    </script>
+
+
 
 
 
