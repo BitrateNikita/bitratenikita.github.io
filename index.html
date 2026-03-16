@@ -227,7 +227,28 @@
             padding: 15px !important;
         }
 
+        .mobile-close-btn {
+            position: absolute;
+            top: 50px;           /* ← здесь меняй отступ сверху */
+            right: 50px;         /* ← здесь меняй отступ справа */
+            width: 30px;         /* ← здесь меняй ширину */
+            height: 30px;        /* ← здесь меняй высоту */
+            background: transparent;
+            color: var(--text);
+            border: none;
+            font-size: 52px;     /* ← здесь меняй размер крестика */
+            line-height: 1;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1002;
+            padding: 0;
+        }
 
+        .mobile-close-btn:hover {
+            opacity: 0.7;
+        }
 
 
 
@@ -238,9 +259,10 @@
 
         .full-width-block {
             height: 600px;
-            width: 100%;
-            margin-bottom: 30px; /* отступ до сетки */
+            width: auto;
+            margin-bottom: 30px;
             box-sizing: border-box;
+            /* Убираем padding отсюда */
         }
 
         .full-width-content {
@@ -251,19 +273,20 @@
             box-shadow: var(--glass-shadow);
             border-radius: 30px;
             height: 100%;
-            width: 100%;
+            width: 100%;           /* ← меняем с 100% на 1200px */
+            margin: auto auto;           /* ← добавляем центрирование */
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
             color: var(--text);
-            font-size: 3rem;        /* крупный текст */
+            font-size: 3rem;
             font-weight: 700;
             line-height: 1.4;
             position: relative;
             z-index: 1;
-            padding: 20px; /* внутренний отступ для текста */
+            padding: 15px;
         }
 
         /* текстура как у остальных блоков */
@@ -350,14 +373,16 @@
 
             /* новый блок */
             .full-width-block {
-                padding: 0 20px;
-                height: 400px; /* поменьше на мобилках */
-                margin: 30px auto 20px auto;
+                padding: 0;
+                height: 400px;
+                margin-top: 20px;
+                margin-bottom: 20px;
             }
 
             .full-width-content {
-                font-size: 2rem; /* текст помельче */
+                font-size: 2rem;
                 padding: 20px;
+                margin: 0 auto;
             }
 
             .grid-6 {
@@ -799,7 +824,7 @@
         footer {
             max-width: 1400px;
             margin: 30px auto 0;
-            padding: 0px 0;
+            padding: 40px 0;           /* ← меняй здесь вертикальные отступы */
             background: var(--glass-bg);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
@@ -1060,6 +1085,7 @@
 
         <!-- Мобильное меню (скрыто по умолчанию) -->
         <div class="mobile-nav" id="mobileMenu">
+            <button class="mobile-close-btn" onclick="toggleMobileMenu()">×</button>
             <a href="#" onclick="toggleMobileMenu()">О школе</a>
             <a href="#contacts" onclick="toggleMobileMenu()">Контакты</a>
             <a href="portfolio.html" class="nav-btn" onclick="toggleMobileMenu()">Для студий</a>
