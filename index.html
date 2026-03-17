@@ -57,8 +57,8 @@
         /* ===== КОНТЕЙНЕР (исправляет растянутость) ===== */
         .container {
             max-width: 1400px;
-            margin: 0 auto;
-            padding: 30px 100px 0 100px;  /* ← верх 100px, остальное как было */
+            margin: 40px auto 0 auto;  /* верхний отступ 100px, остальное auto */
+            padding: 0px 100px 0 100px;  /* ← верх 100px, остальное как было */
             width: 100%;
             box-sizing: border-box;
         }
@@ -213,11 +213,28 @@
             padding: 15px;
             border-radius: 30px;
             transition: 0.3s;
+            position: relative;  /* для псевдоэлемента */
+            display: block;      /* чтобы занимал всю ширину */
+        }
+
+        .mobile-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .mobile-nav a:hover::after {
+            width: 100%;
         }
 
         .mobile-nav a:hover {
-            background: var(--primary);
-            color: var(--text-light);
+            color: var(--primary);  /* меняем цвет текста, как в десктопе */
+            background: transparent; /* убираем заливку */
         }
 
         .mobile-nav .nav-btn {
@@ -225,6 +242,13 @@
             width: 100%;
             font-size: 1.5rem;
             padding: 15px !important;
+            transition: background 0.3s ease, transform 0.3s ease; /* плавность */
+        }
+
+        .mobile-nav .nav-btn:hover {
+            background: var(--primary) !important; /* оранжевый */
+            color: var(--text-light) !important;
+            transform: scale(1.05);
         }
 
         .mobile-close-btn {
@@ -1004,9 +1028,58 @@
             cursor: pointer;
         }
 
+
+
+
+
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2E2E2E;  /* черный цвет (у тебя --text) */
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .scroll-top::before {
+            content: '>';
+            transform: rotate(-90deg);
+            display: inline-block;
+        }
+
+        .scroll-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            background: rgba(255,255,255,0.35);
+            transform: scale(1.05);
+        }
+
+
         @media (max-width: 768px) {
             .container {
-                padding: 30px 20px 0 20px; /* верх 30, бока 20 */
+                padding: 0px 20px 0 20px; /* верх 30, бока 20 */
             }
 
             header {
@@ -1129,7 +1202,8 @@
 
 
 
-
+        <div id="scrollTopBtn" class="scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        </div>
 
 
 
@@ -1473,9 +1547,24 @@
       window.addEventListener('resize', () => {
         renderer.setSize(window.innerWidth, window.innerHeight);
       });
+
+
+
+
+      window.addEventListener('scroll', function() {
+        const btn = document.getElementById('scrollTopBtn');
+        if (window.scrollY > 300) {
+            btn.classList.add('show');
+        } else {
+            btn.classList.remove('show');
+        }
+    });
+
+
+
     </script>
 
-
+    
 
 
 </body>
