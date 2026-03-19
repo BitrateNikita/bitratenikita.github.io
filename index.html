@@ -35,6 +35,7 @@
         /* ===== ЕДИНЫЙ ШРИФТ ДЛЯ ВСЕГО САЙТА ===== */
         html {
             font-family: 'Montserrat', sans-serif;
+            scroll-behavior: smooth;
         }
 
         /* ===== СБРОС СТИЛЕЙ ===== */
@@ -1143,7 +1144,7 @@
 
             <!-- Десктопная навигация (видна на ПК) -->
             <div class="nav-links">
-                <a href="#">О школе</a>
+                <a href="#about">О школе</a>
                 <a href="#contacts">Контакты</a>
                 <a href="portfolio.html" class="nav-btn">Для студий</a>
             </div>
@@ -1159,7 +1160,7 @@
         <!-- Мобильное меню (скрыто по умолчанию) -->
         <div class="mobile-nav" id="mobileMenu">
             <button class="mobile-close-btn" onclick="toggleMobileMenu()">×</button>
-            <a href="#" onclick="toggleMobileMenu()">О школе</a>
+            <a href="#about" onclick="toggleMobileMenu()">О школе</a>
             <a href="#contacts" onclick="toggleMobileMenu()">Контакты</a>
             <a href="portfolio.html" class="nav-btn" onclick="toggleMobileMenu()">Для студий</a>
         </div>
@@ -1218,7 +1219,7 @@
         </section>
 
         <!-- ===== БЛОК 1: КАК ПРОХОДЯТ ЗАНЯТИЯ ===== -->
-        <div class="section-colored">
+        <div class="section-colored" id="about">
             <div class="container">
                 <h2 class="section-title">Как проходят занятия</h2>
                 <div class="cards">
@@ -1559,6 +1560,30 @@
             btn.classList.remove('show');
         }
     });
+
+
+
+    /*Контроль отступа при прокрутке (чтобы блок не уходил под хедер)*/
+
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                const headerHeight = document.querySelector('header').offsetHeight;
+                const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - headerHeight - 70; // 20px дополнительного отступа
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
 
 
 
