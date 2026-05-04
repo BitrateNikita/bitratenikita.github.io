@@ -17,14 +17,35 @@
         :root {
             --bg: #FFF4AB;
             --primary: #E8551A;
-            --secondary: #AEBAFF;  /*фиол при наведении*/
+            /*--secondary: #AEBAFF;  /*фиол при наведении
             --text: #2E2E2E;
-            --text-light: #ffffff;
+            --text-light: #ffffff; */
+            /* ===== ЦВЕТА ТЕКСТА ===== */
+            --text-color-dark: #2E2E2E;       /* основной тёмный (у тебя уже есть --text) */
+            --text-color-light: #ffffff;      /* белый (у тебя уже есть --text-light) */
+            --text-color-accent: #E8551A;     /* акцентный оранжевый */
+            --text-color-muted: #666666;      /* приглушённый серый */
+            --text-color-secondary: #AEBAFF;  /* фиолетовый */
             --hover: #C44A15;
             --section-bg-1: #AEBAFF;
             --section-bg-2: #FFF4AB;
             --footer-bg: #E8551A;
             --footer-text: #ffffff;
+
+                /* ===== ПЕРЕМЕННЫЕ ДЛЯ ТЕКСТА (текущие размеры из full-width-content) ===== */
+            --text-size-main: 3rem;        /* была font-size: 3rem */
+            --text-size-sub: 2rem;         /* новая, для второй строки */
+            --text-size-small: 1.2rem;     /* новая, для третьей строки */
+            --text-weight-bold: 700;       /* была font-weight: 700 */
+            --text-weight-semibold: 600;   /* для второй строки */
+            --text-weight-normal: 400;     /* для третьей строки */
+            --text-leading-tight: 1.3;     /* line-height для крупного текста */
+            --text-leading-normal: 1.4;    /* line-height для среднего */
+            --text-leading-relaxed: 1.5;   /* line-height для мелкого */
+            --text-gap: 8px;               /* отступ между строками */
+
+
+
             
             /* стеклянные переменные */
             --glass-bg: rgba(255,255,255,0.25);
@@ -51,7 +72,7 @@
             /*background-image: url('images/paper-texture.png'); */
             /*background-size: 200px 200px; /* или 'repeat' */
             /*background-blend-mode: overlay; /* чтобы текстура смешалась с цветом */
-            color: var(--text);
+            color: var(--text-color-dark);
             line-height: 1.6;
         }
 
@@ -141,8 +162,8 @@
         }
 
         .nav-btn {
-            background: #AEBAFF;              /* фиолетовый */
-            color: var(--text-light) !important;
+            background: var(--text-color-secondary);              /* фиолетовый */
+            color: var(--text-color-light) !important;
             padding: 10px 30px !important;
             border-radius: 30px;
             font-weight: 600;
@@ -283,14 +304,14 @@
 
 
         .full-width-block {
-            height: 600px;
-            width: auto;
-            margin-bottom: 30px;
-            box-sizing: border-box;
-            /* Убираем padding отсюда */
-        }
+                height: 600px;
+                width: auto;
+                margin-bottom: 30px;
+                box-sizing: border-box;
+                /* Убираем padding отсюда */
+            }
 
-        .full-width-content {
+                .full-width-content {
             background: var(--glass-bg);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
@@ -298,20 +319,45 @@
             box-shadow: var(--glass-shadow);
             border-radius: 30px;
             height: 100%;
-            width: 100%;           /* ← меняем с 100% на 1200px */
-            margin: auto auto;           /* ← добавляем центрирование */
+            width: 100%;
+            margin: auto auto;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
             color: var(--text);
-            font-size: 3rem;
-            font-weight: 700;
-            line-height: 1.4;
+            /* font-size, font-weight и line-height убрали */
             position: relative;
             z-index: 1;
-            padding: 15px;
+            padding: 30px;
+            gap: 8px;                      /* отступ между строками */
+        }
+
+        .full-width-content {
+            /* ... всё остальное без изменений ... */
+            gap: var(--text-gap);
+            padding: 30px;
+            /* font-size и line-height убраны */
+        }
+
+        .text-line--main {
+            font-size: var(--text-size-main);
+            line-height: var(--text-leading-tight);
+            font-weight: var(--text-weight-bold);
+        }
+
+        .text-line--sub {
+            font-size: var(--text-size-sub);
+            line-height: var(--text-leading-normal);
+            font-weight: var(--text-weight-semibold);
+        }
+
+        .text-line--small {
+            font-size: var(--text-size-small);
+            line-height: var(--text-leading-relaxed);
+            font-weight: var(--text-weight-normal);
+            max-width: 800px;
         }
 
         /* текстура как у остальных блоков */
@@ -404,10 +450,14 @@
                 margin-bottom: 20px;
             }
 
-            .full-width-content {
+            .text-line--main {
                 font-size: 2rem;
-                padding: 20px;
-                margin: 0 auto;
+            }
+            .text-line--sub {
+                font-size: 1.3rem;
+            }
+            .text-line--small {
+                font-size: 1rem;
             }
 
             .grid-6 {
@@ -422,6 +472,23 @@
                 font-size: 1rem;
                 padding: 15px;
             }
+
+
+            @media (max-width: 768px) {
+                :root {
+                    --text-size-main: 2rem;
+                    --text-size-sub: 1.3rem;
+                    --text-size-small: 1rem;
+                    --text-gap: 6px;
+                }
+            }
+
+
+
+
+
+
+
         }
 
 
@@ -476,7 +543,7 @@
             max-width: 900px;
             margin-left: auto;
             margin-right: auto;
-            color: var(--text);
+            color: var(--text-color-accent);
         }
 
         .hero p {
@@ -1183,9 +1250,15 @@
         <!-- ===== БЛОК ВО ВСЮ ШИРИНУ 800px ===== -->
         <div class="full-width-block">
             <div class="full-width-content">
-                ЗДЕСЬ ВСЁ ПРО АНИМАЦИЮ<br>
-                ЗДЕСЬ ВСЁ ПРО АНИМАЦИЮ<br>
-                ЗДЕСЬ ВСЁ ПРО АНИМАЦИЮ
+                <span class="text-line text-line--main">
+                    Оживите идеи вашего ребёнка.
+                </span>
+                <span class="text-line text-line--sub">
+                    Настоящая анимация в Новороссийске!
+                </span>
+                <span class="text-line text-line--small">
+                    От первого кадра до готового мультфильма. Преподаёт действующий аниматор из геймдев-индустрии.
+                </span>
             </div>
         </div>
 
