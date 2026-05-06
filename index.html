@@ -412,6 +412,11 @@
             position: relative;
             z-index: 1;
             transition: transform 0.3s ease;
+            
+            /* Ограничение ширины контента: 400px, но адаптивно */
+            max-width: 400px;
+            width: 100%;
+            margin: 0 auto; /* центрирование блока внутри ячейки сетки */
         }
 
         /* текстура */
@@ -1294,15 +1299,40 @@
 
         <!-- ===== НОВАЯ СЕТКА С КВАДРАТАМИ ===== -->
         <div class="grid-6">
+            <!-- БЛОК 1: Идея и раскадровка -->
             <div class="grid-item">
+                <!-- Заголовок: Цвет --text-color-secondary (фиолетовый) -->
                 <span class="text-line text-line--main">Идея и раскадровка</span>
+                <!-- Строка 1: Цвет --text-color-light (оранжевый) -->
                 <span class="text-line text-line--sub">Придумываем сюжет, рисуем героев и «карту» будущего мультфильма.</span>
+                <!-- Строка 2: Белый цвет -->
                 <span class="text-line text-line--small">Ребёнок учится превращать фантазию в чёткий план и видеть историю целиком.</span>
             </div>
-            <div class="grid-item">Заглушка 2</div>
-            <div class="grid-item">Заглушка 3</div>
+
+            <!-- БЛОК 2: Анимация перекладкой -->
+            <div class="grid-item">
+                <!-- Заголовок: Цвет --text-color-secondary (фиолетовый) -->
+                <span class="text-line text-line--main">Анимация перекладкой</span>
+                <!-- Строка 1: Цвет --text-color-light (оранжевый) -->
+                <span class="text-line text-line--sub">Вырезаем персонажей из бумаги, двигаем их по кадру и фиксируем.</span>
+                <!-- Строка 2: Белый цвет -->
+                <span class="text-line text-line--small">Осваиваем базовые принципы движения, учимся чувствовать ритм и тайминг.</span>
+            </div>
+
+            <!-- БЛОК 3: Пластилиновая анимация -->
+            <div class="grid-item">
+                <!-- Заголовок: Цвет --text-color-secondary (фиолетовый) -->
+                <span class="text-line text-line--main">Пластилиновая анимация</span>
+                <!-- Строка 1: Цвет --text-color-light (оранжевый) -->
+                <span class="text-line text-line--sub">Лепим героев, меняем позу на миллиметр и снимаем кадр за кадром.</span>
+                <!-- Строка 2: Белый цвет -->
+                <span class="text-line text-line--small">Развиваем мелкую моторику, чувство объёма и умение доводить дело до конца.</span>
+            </div>
+            <!-- БЛОК 4: Заглушка -->
             <div class="grid-item">Заглушка 4</div>
+            <!-- БЛОК 5: Заглушка -->
             <div class="grid-item">Заглушка 5</div>
+            <!-- БЛОК 6: Заглушка -->
             <div class="grid-item">Заглушка 6</div>
         </div>
 
