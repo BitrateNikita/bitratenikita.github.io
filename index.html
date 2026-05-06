@@ -398,15 +398,17 @@
             border: 1px solid var(--glass-border);
             box-shadow: var(--glass-shadow);
             border-radius: 30px;
-            padding: 20px; /* внутренний отступ */
+            padding: 30px; /* увеличенный внутренний отступ для двух строк */
             text-align: center;
             color: var(--text); /* цвет текста из переменной */
             font-weight: 500;
             font-size: 1.2rem;
             aspect-ratio: 1 / 1; /* делает идеальный квадрат */
             display: flex;
+            flex-direction: column; /* вертикальное расположение элементов */
             align-items: center;
             justify-content: center;
+            gap: 10px; /* отступ между строками текста */
             position: relative;
             z-index: 1;
             transition: transform 0.3s ease;
@@ -435,6 +437,23 @@
             text-transform: uppercase; /* заглавные */
             line-height: 1.4;
             font-family: 'Montserrat', sans-serif; /* если хочешь другой шрифт */
+        }
+
+        /* Стили для текста внутри grid-item с классами text-line */
+        .grid-item .text-line--main {
+            font-size: 1.8rem;
+            line-height: 1.3;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #E8551A;
+        }
+
+        .grid-item .text-line--sub {
+            font-size: 1.1rem;
+            line-height: 1.4;
+            font-weight: 500;
+            color: #E8551A;
+            text-transform: none;
         }
 
 
@@ -1267,10 +1286,9 @@
 
         <!-- ===== НОВАЯ СЕТКА С КВАДРАТАМИ ===== -->
         <div class="grid-6">
-            <div class="grid-item">Идея и раскадровка
-
-
-
+            <div class="grid-item">
+                <span class="text-line text-line--main">Идея и раскадровка</span>
+                <span class="text-line text-line--sub">Научим придумывать истории и создавать покадровый план</span>
             </div>
             <div class="grid-item">Заглушка 2</div>
             <div class="grid-item">Заглушка 3</div>
