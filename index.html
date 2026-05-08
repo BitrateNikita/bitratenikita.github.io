@@ -21,8 +21,8 @@
             --text: #2E2E2E;
             --text-light: #ffffff; */
             /* ===== ЦВЕТА ТЕКСТА ===== */
-            --text-color-dark: #2E2E2E;       /* основной тёмный (у тебя уже есть --text) */
-            --text-color-light: #ffffff;      /* белый (у тебя уже есть --text-light) */
+            --text-color-dark: #2E2E2E;       /* основной тёмный */
+            --text-color-light: #ffffff;      /* белый */
             --text-color-accent: #E8551A;     /* акцентный оранжевый */
             --text-color-muted: #666666;      /* приглушённый серый */
             --text-color-secondary: #AEBAFF;  /* фиолетовый */
@@ -69,9 +69,6 @@
         body {
             font-family: inherit;
             background: transparent; /* прозрачный фон */
-            /*background-image: url('images/paper-texture.png'); */
-            /*background-size: 200px 200px; /* или 'repeat' */
-            /*background-blend-mode: overlay; /* чтобы текстура смешалась с цветом */
             color: var(--text-color-dark);
             line-height: 1.6;
         }
@@ -299,10 +296,6 @@
 
 
 
-
-
-
-
         .full-width-block {
                 height: 600px;
                 width: auto;
@@ -327,7 +320,6 @@
             justify-content: center;
             text-align: center;
             color: var(--text);
-            /* font-size, font-weight и line-height убрали */
             position: relative;
             z-index: 1;
             padding: 30px;
@@ -335,11 +327,9 @@
         }
 
         .full-width-content {
-            /* ... всё остальное без изменений ... */
             gap: var(--text-gap);
             padding: 30px;
             color: var(--text-color-light);
-            /* font-size и line-height убраны */
         }
 
         .text-line--main {
@@ -391,7 +381,7 @@
             box-sizing: border-box;
         }
 
-        .grid-item {
+        .grid-item { /*СЕТКА РАЗМЕРЫ*/
             background: var(--glass-bg);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
@@ -412,6 +402,11 @@
             position: relative;
             z-index: 1;
             transition: transform 0.3s ease;
+            
+            /* Ограничение ширины контента: 400px, но адаптивно */
+            max-width: 600px;
+            width: 100%;
+            margin: 0 auto; /* центрирование блока внутри ячейки сетки */
         }
 
         /* текстура */
@@ -441,26 +436,26 @@
 
         /* Стили для текста внутри grid-item с классами text-line */
         .grid-item .text-line--main {
-            font-size: 1.8rem;
+            font-size: 1.8rem;        /* РАЗМЕР заголовка - меняй здесь */
             line-height: 1.3;
             font-weight: 700;
             text-transform: uppercase;
-            color: var(--text-color-secondary);
+            color: var(--text-color-secondary);  /* ЦВЕТ заголовка (фиолетовый) */
         }
 
         .grid-item .text-line--sub {
-            font-size: 1.1rem;
+            font-size: 1.1rem;        /* РАЗМЕР второй строки - меняй здесь */
             line-height: 1.4;
             font-weight: 500;
-            color: #E8551A;
+            color: var(--text-color-light);  /* ЦВЕТ второй строки (светлый/белый) - ИЗМЕНЕНО */
             text-transform: none;
         }
 
         .grid-item .text-line--small {
-            font-size: 1rem;
+            font-size: 1rem;          /* РАЗМЕР третьей строки - меняй здесь */
             line-height: 1.5;
             font-weight: 400;
-            color: var(--text-color-light);
+            color: var(--text-color-light);  /* ЦВЕТ третьей строки (белый) */
             text-transform: none;
         }
 
@@ -514,16 +509,7 @@
 
 
 
-
-
-
         }
-
-
-
-
-
-
 
 
 
@@ -1127,7 +1113,6 @@
 
 
 
-
         .scroll-top {
             position: fixed;
             bottom: 30px;
@@ -1265,11 +1250,7 @@
 
 
 
-
-
     <div class="container">
-
-
 
 
 
@@ -1291,26 +1272,71 @@
         </div>
 
 
-
         <!-- ===== НОВАЯ СЕТКА С КВАДРАТАМИ ===== -->
         <div class="grid-6">
+            <!-- БЛОК 1: Идея и раскадровка -->
             <div class="grid-item">
+                <!-- Заголовок: Цвет --text-color-secondary (фиолетовый) -->
                 <span class="text-line text-line--main">Идея и раскадровка</span>
+                <!-- Строка 1: Цвет --text-color-light (светлый/белый) -->
                 <span class="text-line text-line--sub">Придумываем сюжет, рисуем героев и «карту» будущего мультфильма.</span>
+                <!-- Строка 2: Белый цвет -->
                 <span class="text-line text-line--small">Ребёнок учится превращать фантазию в чёткий план и видеть историю целиком.</span>
             </div>
-            <div class="grid-item">Заглушка 2</div>
-            <div class="grid-item">Заглушка 3</div>
-            <div class="grid-item">Заглушка 4</div>
-            <div class="grid-item">Заглушка 5</div>
-            <div class="grid-item">Заглушка 6</div>
-        </div>
 
+            <!-- БЛОК 2: Анимация перекладкой -->
+            <div class="grid-item">
+                <!-- Заголовок: Цвет --text-color-secondary (фиолетовый) -->
+                <span class="text-line text-line--main">Анимация перекладкой</span>
+                <!-- Строка 1: Цвет --text-color-light (светлый/белый) -->
+                <span class="text-line text-line--sub">Вырезаем персонажей из бумаги, двигаем их по кадру и фиксируем.</span>
+                <!-- Строка 2: Белый цвет -->
+                <span class="text-line text-line--small">Осваиваем базовые принципы движения, учимся чувствовать ритм и тайминг.</span>
+            </div>
+
+            <!-- БЛОК 3: Пластилиновая анимация -->
+            <div class="grid-item">
+                <!-- Заголовок: Цвет --text-color-secondary (фиолетовый) -->
+                <span class="text-line text-line--main">Пластилиновая анимация</span>
+                <!-- Строка 1: Цвет --text-color-light (светлый/белый) -->
+                <span class="text-line text-line--sub">Лепим героев, меняем позу на миллиметр и снимаем кадр за кадром.</span>
+                <!-- Строка 2: Белый цвет -->
+                <span class="text-line text-line--small">Развиваем мелкую моторику, чувство объёма и умение доводить дело до конца.</span>
+            </div>
+            <!-- БЛОК 4: Стоп-моушн и режиссура кадра -->
+            <div class="grid-item">
+                <!-- Заголовок: Цвет --text-color-secondary (фиолетовый) -->
+                <span class="text-line text-line--main">Стоп-моушн и режиссура кадра</span>
+                <!-- Строка 1: Цвет --text-color-light (оранжевый) -->
+                <span class="text-line text-line--sub">Настраиваем свет, работаем со штативом и программой захвата.</span>
+                <!-- Строка 2: Белый цвет -->
+                <span class="text-line text-line--small">Учимся «видеть» кадр, управлять вниманием зрителя и создавать атмосферу.</span>
+            </div>
+
+            <!-- БЛОК 5: Звук, озвучка и монтаж -->
+            <div class="grid-item">
+                <!-- Заголовок: Цвет --text-color-secondary (фиолетовый) -->
+                <span class="text-line text-line--main">Звук, озвучка и монтаж</span>
+                <!-- Строка 1: Цвет --text-color-light (оранжевый) -->
+                <span class="text-line text-line--sub">Записываем диалоги, подбираем шумы и музыку, собираем кадры в ролик.</span>
+                <!-- Строка 2: Белый цвет -->
+                <span class="text-line text-line--small">Ребёнок понимает, как звук оживляет картинку, и учится работать с таймлайном.</span>
+            </div>
+
+            <!-- БЛОК 6: Финальный проект -->
+            <div class="grid-item">
+                <!-- Заголовок: Цвет --text-color-secondary (фиолетовый) -->
+                <span class="text-line text-line--main">Финальный проект</span>
+                <!-- Строка 1: Цвет --text-color-light (оранжевый) -->
+                <span class="text-line text-line--sub">От эскиза до готового мультфильма. Презентация родителям, сохранение в цифровое портфолио.</span>
+                <!-- Строка 2: Белый цвет -->
+                <span class="text-line text-line--small">Первый шаг к фестивалям, школьным проектам или личному каналу.</span>
+            </div>
+        </div>
 
 
         <div id="scrollTopBtn" class="scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
         </div>
-
 
 
         <!-- ===== ГЛАВНЫЙ ЭКРАН ===== -->
@@ -1398,40 +1424,40 @@
         <!-- ===== КАРТА, АДРЕС, КОНТАКТЫ ===== -->
         <section id="contacts" class="contacts-section">
             <h2 class="section-title">Как нас найти</h2>
-            
+
             <!-- ===== КАРТА НА ВСЮ ШИРИНУ ===== -->
             <div style="width: 100%; margin-bottom: 30px; border-radius: 20px; overflow: hidden;">
                 <div class="map-container" style="width: 100%; height: 300px; margin: 0;">
-                    <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1473.5426186517518!2d37.77455367893067!3d44.6756487566148!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40f1f9725e5a2115%3A0xa0eab5aeb45b165d!2z0JrQuNC90LXQvtCz0YDQsNGE!5e1!3m2!1sru!2sru!4v1772189966135!5m2!1sru!2sru" 
-                        width="100%" 
-                        height="100%" 
-                        style="border:0;" 
-                        allowfullscreen="" 
-                        loading="lazy" 
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1473.5426186517518!2d37.77455367893067!3d44.6756487566148!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40f1f9725e5a2115%3A0xa0eab5aeb45b165d!2z0JrQuNC90LXQvtCz0YDQsNGE!5e1!3m2!1sru!2sru!4v1772189966135!5m2!1sru!2sru"
+                        width="100%"
+                        height="100%"
+                        style="border:0;"
+                        allowfullscreen=""
+                        loading="lazy"
                         referrerpolicy="no-referrer-when-downgrade">
                     </iframe>
                 </div>
             </div>
-            
+
             <!-- ===== КНОПКИ В ОДИН РЯД ===== -->
             <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; padding: 0 20px;">
-                
+
                 <!-- Кнопка Телефон -->
                 <a href="tel:+79186468822" class="contact-btn" style="width: auto; min-width: 60px; padding: 15px;">
                     <span class="contact-icon">📞</span>
                 </a>
-                
+
                 <!-- Кнопка Email -->
                 <a href="mailto:bitrate.motiondesign@gmail.com" class="contact-btn" style="width: auto; min-width: 60px; padding: 15px;">
                     <span class="contact-icon">✉️</span>
                 </a>
-                
+
                 <!-- Кнопка Telegram -->
                 <a href="https://t.me/BITRATEmotion" target="_blank" class="contact-btn" style="width: auto; min-width: 60px; padding: 15px;">
                     <span class="contact-icon">📱</span>
                 </a>
-                
+
                 <!-- Кнопка Адрес -->
                 <a href="https://yandex.ru/maps/?text=Новороссийск+ул.+Алексея+Матвейкина+4+кабинет+8" target="_blank" class="contact-btn" style="width: auto; min-width: 60px; padding: 15px;">
                     <span class="contact-icon">📍</span>
@@ -1467,27 +1493,27 @@
                         <label for="name">Ваше имя *</label>
                         <input type="text" id="name" name="name" required placeholder="Например: Иван Петров">
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="child-age">Возраст ребёнка *</label>
                         <input type="number" id="child-age" name="child_age" required min="5" max="16" placeholder="Например: 8">
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="phone">Телефон *</label>
                         <input type="tel" id="phone" name="phone" required placeholder="+7 (999) 123-45-67">
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="email" id="email" name="email" placeholder="ivan@example.com">
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="message">Сообщение</label>
                         <textarea id="message" name="message" placeholder="Ваш вопрос или пожелание..."></textarea>
                     </div>
-                    
+
                     <button type="submit" class="submit-btn">Отправить заявку</button>
                 </form>
             </div>
@@ -1499,12 +1525,12 @@
             document.getElementById('modalOverlay').style.display = 'flex';
             document.body.style.overflow = 'hidden';
         }
-        
+
         function closeModal() {
             document.getElementById('modalOverlay').style.display = 'none';
             document.body.style.overflow = 'auto';
         }
-        
+
         function closeModalOutside(event) {
             if (event.target === document.getElementById('modalOverlay')) {
                 closeModal();
@@ -1514,15 +1540,15 @@
         function moveCard(event, container) {
             const card = container.querySelector('.card');
             const rect = container.getBoundingClientRect();
-            
+
             const x = (event.clientX - rect.left) / rect.width - 0.5;
             const y = (event.clientY - rect.top) / rect.height - 0.5;
-            
+
             const rotY = x * 20;
             const rotX = -y * 20;
-            
+
             card.style.transform = `rotateY(${rotY}deg) rotateX(${rotX}deg)`;
-            
+
             card.style.setProperty('--x', `${(event.clientX - rect.left) / rect.width * 100}%`);
             card.style.setProperty('--y', `${(event.clientY - rect.top) / rect.height * 100}%`);
         }
@@ -1535,7 +1561,7 @@
         function toggleMobileMenu() {
             const menu = document.getElementById('mobileMenu');
             menu.classList.toggle('active');
-            
+
             if (menu.classList.contains('active')) {
                 document.body.style.overflow = 'hidden';
             } else {
@@ -1560,7 +1586,7 @@
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setPixelRatio(window.devicePixelRatio);
       renderer.setClearColor(0x000000, 0);
-      
+
       // Помещаем холст на фон
       const canvas = renderer.domElement;
       canvas.style.position = 'fixed';
@@ -1609,12 +1635,12 @@
         void main() {
           float x = vUv.x * 2.0 - 1.0;
           float y = vUv.y * 2.0 - 1.0;
-          
+
           float t = uTime * 0.5;
           float wave1 = sin(x * 0.2 + t) * cos(y * 1.0 + t);
           float wave2 = sin(x * 0.5 - t * 1.3) * cos(y * 2.0 + t * 0.7);
           float pattern = (wave1 + wave2) * 0.5 + 0.5;
-          
+
           vec3 finalColor;
           if (pattern < 0.25) {
             finalColor = mix(uColor1, uColor2, pattern * 4.0);
@@ -1625,7 +1651,7 @@
           } else {
             finalColor = mix(uColor4, uColor1, (pattern - 0.75) * 4.0);
           }
-          
+
           gl_FragColor = vec4(finalColor, 1.0);
         }
       `;
@@ -1636,7 +1662,7 @@
         fragmentShader,
         uniforms
       });
-      
+
       const geometry = new THREE.PlaneGeometry(2, 2);
       const mesh = new THREE.Mesh(geometry, material);
       scene.add(mesh);
@@ -1653,7 +1679,6 @@
       window.addEventListener('resize', () => {
         renderer.setSize(window.innerWidth, window.innerHeight);
       });
-
 
 
 
@@ -1675,12 +1700,12 @@
             e.preventDefault();
             const targetId = this.getAttribute('href');
             if (targetId === '#') return;
-            
+
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
                 const headerHeight = document.querySelector('header').offsetHeight;
                 const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - headerHeight - 70; // 20px дополнительного отступа
-                
+
                 window.scrollTo({
                     top: targetPosition,
                     behavior: 'smooth'
@@ -1694,7 +1719,6 @@
 
     </script>
 
-    
 
 
 </body>
