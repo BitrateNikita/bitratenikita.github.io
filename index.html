@@ -1211,6 +1211,31 @@
             margin-top: 40px; /* или сколько тебе нужно пикселей */
             }
         }
+
+
+        /* =====================================================
+        📱 АДАПТАЦИЯ ТЕКСТА В БЛОКАХ GRID-6 ДЛЯ МОБИЛЬНЫХ
+        ===================================================== */
+        @media (max-width: 768px) {
+            .grid-text-container {
+                padding-top: 40px !important;  /* ← меняй это значение под свой дизайн */
+                gap: 4px !important;           /* ← уменьшаем отступы между строками */
+            }
+
+            /* Уменьшаем размер шрифтов для мобильных */
+            .grid-item .text-line--main {
+                font-size: 1.4rem !important;
+            }
+            .grid-item .text-line--sub {
+                font-size: 0.9rem !important;
+            }
+            .grid-item .text-line--small {
+                font-size: 0.8rem !important;
+            }
+        }
+
+
+
     </style>
 </head>
 <body>
@@ -1277,218 +1302,64 @@
 
             <!-- БЛОК 1: Идея и раскадровка -->
             <div class="grid-item" style="position: relative; overflow: hidden; background: transparent !important; backdrop-filter: none !important;">
-                <!-- Фоновое изображение с прозрачностью 40% (под текстом) -->
-                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('block1.png'); background-size: cover; background-position: center; opacity: 0.4; pointer-events: none; border-radius: inherit; z-index: 0;">                    
-                </div>
-                
-                <!-- КОНТЕЙНЕР ТЕКСТА -->
-                <!-- justify-content: flex-start   → текст вверху -->
-                <!-- justify-content: center       → текст по центру (было так) -->
-                <!-- justify-content: flex-end     → текст внизу -->
-                <!-- justify-content: space-between → текст растянут -->
-                <div style="position: relative; 
-                z-index: 2; 
-                display: flex; 
-                flex-direction: column; 
-                align-items: center; 
-                justify-content: flex-start; 
-                height: 100%; 
-                gap: var(--text-gap, 8px); 
-                padding-top: 350px;">
-                    <!-- padding-top: 0px    → текст сверху -->
-                    <!-- padding-top: 20px   → текст чуть ниже -->
-                    <!-- padding-top: 40px   → текст ещё ниже -->
-                    <!-- padding-top: 80px   → текст почти посередине -->
-                    <!-- padding-top: 150px  → текст внизу -->
-                    
-                    <!-- Заголовок: Цвет --text-color-secondary (фиолетовый) -->
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('block1.png'); background-size: cover; background-position: center; opacity: 0.4; pointer-events: none; border-radius: inherit; z-index: 0;"></div>
+                <div class="grid-text-container" style="position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; height: 100%; gap: var(--text-gap, 8px); padding-top: 350px;">
                     <span class="text-line text-line--main">Идея и раскадровка</span>
-                    <!-- Строка 1: Цвет --text-color-light (светлый/белый) -->
                     <span class="text-line text-line--sub">Придумываем сюжет, рисуем героев и «карту» будущего мультфильма.</span>
-                    <!-- Строка 2: Белый цвет -->
                     <span class="text-line text-line--small">Ребёнок учится превращать фантазию в чёткий план и видеть историю целиком.</span>
                 </div>
             </div>
 
-
-
-
             <!-- БЛОК 2: Анимация перекладкой -->
             <div class="grid-item" style="position: relative; overflow: hidden; background: transparent !important; backdrop-filter: none !important;">
-                <!-- Фоновое изображение с прозрачностью 40% (под текстом) -->
-                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('block2.png'); background-size: cover; background-position: center; opacity: 0.4; pointer-events: none; border-radius: inherit; z-index: 0;">                    
-                </div>
-                
-                <!-- КОНТЕЙНЕР ТЕКСТА -->
-                <!-- justify-content: flex-start   → текст вверху -->
-                <!-- justify-content: center       → текст по центру (было так) -->
-                <!-- justify-content: flex-end     → текст внизу -->
-                <!-- justify-content: space-between → текст растянут -->
-                <div style="position: relative; 
-                z-index: 2; 
-                display: flex; 
-                flex-direction: column; 
-                align-items: center; 
-                justify-content: flex-start; 
-                height: 100%; 
-                gap: var(--text-gap, 8px); 
-                padding-top: 350px;">
-                    <!-- padding-top: 0px    → текст сверху -->
-                    <!-- padding-top: 20px   → текст чуть ниже -->
-                    <!-- padding-top: 40px   → текст ещё ниже -->
-                    <!-- padding-top: 80px   → текст почти посередине -->
-                    <!-- padding-top: 150px  → текст внизу -->
-                    
-                    <!-- Заголовок: Цвет --text-color-secondary (фиолетовый) -->
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('block2.png'); background-size: cover; background-position: center; opacity: 0.4; pointer-events: none; border-radius: inherit; z-index: 0;"></div>
+                <div class="grid-text-container" style="position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; height: 100%; gap: var(--text-gap, 8px); padding-top: 350px;">
                     <span class="text-line text-line--main">Анимация перекладкой</span>
-                    <!-- Строка 1: Цвет --text-color-light (светлый/белый) -->
                     <span class="text-line text-line--sub">Вырезаем персонажей из бумаги, двигаем их по кадру и фиксируем.</span>
-                    <!-- Строка 2: Белый цвет -->
                     <span class="text-line text-line--small">Осваиваем базовые принципы движения, учимся чувствовать ритм и тайминг.</span>
                 </div>
             </div>
 
-
             <!-- БЛОК 3: Пластилиновая анимация -->
             <div class="grid-item" style="position: relative; overflow: hidden; background: transparent !important; backdrop-filter: none !important;">
-                <!-- Фоновое изображение с прозрачностью 40% (под текстом) -->
-                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('block3.png'); background-size: cover; background-position: center; opacity: 0.4; pointer-events: none; border-radius: inherit; z-index: 0;">                    
-                </div>
-                
-                <!-- КОНТЕЙНЕР ТЕКСТА -->
-                <!-- justify-content: flex-start   → текст вверху -->
-                <!-- justify-content: center       → текст по центру (было так) -->
-                <!-- justify-content: flex-end     → текст внизу -->
-                <!-- justify-content: space-between → текст растянут -->
-                <div style="position: relative; 
-                z-index: 2; 
-                display: flex; 
-                flex-direction: column; 
-                align-items: center; 
-                justify-content: flex-start; 
-                height: 100%; 
-                gap: var(--text-gap, 8px); 
-                padding-top: 350px;">
-                    <!-- padding-top: 0px    → текст сверху -->
-                    <!-- padding-top: 20px   → текст чуть ниже -->
-                    <!-- padding-top: 40px   → текст ещё ниже -->
-                    <!-- padding-top: 80px   → текст почти посередине -->
-                    <!-- padding-top: 150px  → текст внизу -->
-                    
-                    <!-- Заголовок: Цвет --text-color-secondary (фиолетовый) -->
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('block3.png'); background-size: cover; background-position: center; opacity: 0.4; pointer-events: none; border-radius: inherit; z-index: 0;"></div>
+                <div class="grid-text-container" style="position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; height: 100%; gap: var(--text-gap, 8px); padding-top: 350px;">
                     <span class="text-line text-line--main">Пластилиновая анимация</span>
-                    <!-- Строка 1: Цвет --text-color-light (светлый/белый) -->
                     <span class="text-line text-line--sub">Лепим героев, меняем позу на миллиметр и снимаем кадр за кадром.</span>
-                    <!-- Строка 2: Белый цвет -->
                     <span class="text-line text-line--small">Развиваем мелкую моторику, чувство объёма и умение доводить дело до конца.</span>
                 </div>
             </div>
 
             <!-- БЛОК 4: Стоп-моушн и режиссура кадра -->
             <div class="grid-item" style="position: relative; overflow: hidden; background: transparent !important; backdrop-filter: none !important;">
-                <!-- Фоновое изображение с прозрачностью 40% (под текстом) -->
-                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('block4.png'); background-size: cover; background-position: center; opacity: 0.4; pointer-events: none; border-radius: inherit; z-index: 0;">                    
-                </div>
-                
-                <!-- КОНТЕЙНЕР ТЕКСТА -->
-                <!-- justify-content: flex-start   → текст вверху -->
-                <!-- justify-content: center       → текст по центру (было так) -->
-                <!-- justify-content: flex-end     → текст внизу -->
-                <!-- justify-content: space-between → текст растянут -->
-                <div style="position: relative; 
-                z-index: 2; 
-                display: flex; 
-                flex-direction: column; 
-                align-items: center; 
-                justify-content: flex-start; 
-                height: 100%; 
-                gap: var(--text-gap, 8px); 
-                padding-top: 350px;">
-                    <!-- padding-top: 0px    → текст сверху -->
-                    <!-- padding-top: 20px   → текст чуть ниже -->
-                    <!-- padding-top: 40px   → текст ещё ниже -->
-                    <!-- padding-top: 80px   → текст почти посередине -->
-                    <!-- padding-top: 150px  → текст внизу -->
-                    
-                    <!-- Заголовок: Цвет --text-color-secondary (фиолетовый) -->
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('block4.png'); background-size: cover; background-position: center; opacity: 0.4; pointer-events: none; border-radius: inherit; z-index: 0;"></div>
+                <div class="grid-text-container" style="position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; height: 100%; gap: var(--text-gap, 8px); padding-top: 350px;">
                     <span class="text-line text-line--main">Стоп-моушн и режиссура кадра</span>
-                    <!-- Строка 1: Цвет --text-color-light (светлый/белый) -->
                     <span class="text-line text-line--sub">Настраиваем свет, работаем со штативом и программой захвата.</span>
-                    <!-- Строка 2: Белый цвет -->
                     <span class="text-line text-line--small">Учимся «видеть» кадр, управлять вниманием зрителя и создавать атмосферу.</span>
                 </div>
             </div>
 
-
             <!-- БЛОК 5: Звук, озвучка и монтаж -->
             <div class="grid-item" style="position: relative; overflow: hidden; background: transparent !important; backdrop-filter: none !important;">
-                <!-- Фоновое изображение с прозрачностью 40% (под текстом) -->
-                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('block5.png'); background-size: cover; background-position: center; opacity: 0.4; pointer-events: none; border-radius: inherit; z-index: 0;">                    
-                </div>
-                
-                <!-- КОНТЕЙНЕР ТЕКСТА -->
-                <!-- justify-content: flex-start   → текст вверху -->
-                <!-- justify-content: center       → текст по центру (было так) -->
-                <!-- justify-content: flex-end     → текст внизу -->
-                <!-- justify-content: space-between → текст растянут -->
-                <div style="position: relative; 
-                z-index: 2; 
-                display: flex; 
-                flex-direction: column; 
-                align-items: center; 
-                justify-content: flex-start; 
-                height: 100%; 
-                gap: var(--text-gap, 8px); 
-                padding-top: 350px;">
-                    <!-- padding-top: 0px    → текст сверху -->
-                    <!-- padding-top: 20px   → текст чуть ниже -->
-                    <!-- padding-top: 40px   → текст ещё ниже -->
-                    <!-- padding-top: 80px   → текст почти посередине -->
-                    <!-- padding-top: 150px  → текст внизу -->
-                    
-                    <!-- Заголовок: Цвет --text-color-secondary (фиолетовый) -->
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('block5.png'); background-size: cover; background-position: center; opacity: 0.4; pointer-events: none; border-radius: inherit; z-index: 0;"></div>
+                <div class="grid-text-container" style="position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; height: 100%; gap: var(--text-gap, 8px); padding-top: 350px;">
                     <span class="text-line text-line--main">Звук, озвучка и монтаж</span>
-                    <!-- Строка 1: Цвет --text-color-light (светлый/белый) -->
                     <span class="text-line text-line--sub">Записываем диалоги, подбираем шумы и музыку, собираем кадры в ролик.</span>
-                    <!-- Строка 2: Белый цвет -->
                     <span class="text-line text-line--small">Ребёнок понимает, как звук оживляет картинку, и учится работать с таймлайном.</span>
                 </div>
             </div>
 
             <!-- БЛОК 6: Финальный проект -->
             <div class="grid-item" style="position: relative; overflow: hidden; background: transparent !important; backdrop-filter: none !important;">
-                <!-- Фоновое изображение с прозрачностью 40% (под текстом) -->
-                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('block6.png'); background-size: cover; background-position: center; opacity: 0.4; pointer-events: none; border-radius: inherit; z-index: 0;">                    
-                </div>
-                
-                <!-- КОНТЕЙНЕР ТЕКСТА -->
-                <!-- justify-content: flex-start   → текст вверху -->
-                <!-- justify-content: center       → текст по центру (было так) -->
-                <!-- justify-content: flex-end     → текст внизу -->
-                <!-- justify-content: space-between → текст растянут -->
-                <div style="position: relative; 
-                z-index: 2; 
-                display: flex; 
-                flex-direction: column; 
-                align-items: center; 
-                justify-content: flex-start; 
-                height: 100%; 
-                gap: var(--text-gap, 8px); 
-                padding-top: 350px;">
-                    <!-- padding-top: 0px    → текст сверху -->
-                    <!-- padding-top: 20px   → текст чуть ниже -->
-                    <!-- padding-top: 40px   → текст ещё ниже -->
-                    <!-- padding-top: 80px   → текст почти посередине -->
-                    <!-- padding-top: 150px  → текст внизу -->
-                    
-                    <!-- Заголовок: Цвет --text-color-secondary (фиолетовый) -->
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('block6.png'); background-size: cover; background-position: center; opacity: 0.4; pointer-events: none; border-radius: inherit; z-index: 0;"></div>
+                <div class="grid-text-container" style="position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; height: 100%; gap: var(--text-gap, 8px); padding-top: 350px;">
                     <span class="text-line text-line--main">Финальный проект</span>
-                    <!-- Строка 1: Цвет --text-color-light (светлый/белый) -->
                     <span class="text-line text-line--sub">От эскиза до готового мультфильма. Презентация родителям, сохранение в цифровое портфолио.</span>
-                    <!-- Строка 2: Белый цвет -->
                     <span class="text-line text-line--small">Первый шаг к фестивалям, школьным проектам или личному каналу.</span>
                 </div>
             </div>
+
         </div>
 
 
