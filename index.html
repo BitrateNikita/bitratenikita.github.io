@@ -5,61 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Кинеограф — студия анимации для детей</title>
     
-    <!-- Подключение шрифта Montserrat -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* =====================================================
-           🌈 ЦВЕТОВАЯ СХЕМА (меняй здесь — всё поменяется)
-           ===================================================== */
         :root {
-            --bg: #FFF4AB;
             --primary: #E8551A;
-            /*--secondary: #AEBAFF;  /*фиол при наведении
-            --text: #2E2E2E;
-            --text-light: #ffffff; */
-            /* ===== ЦВЕТА ТЕКСТА ===== */
-            --text-color-dark: #2E2E2E;       /* основной тёмный */
-            --text-color-light: #ffffff;      /* белый */
-            --text-color-accent: #E8551A;     /* акцентный оранжевый */
-            --text-color-muted: #666666;      /* приглушённый серый */
-            --text-color-secondary: #AEBAFF;  /* фиолетовый */
+            --text-color-dark: #2E2E2E;
+            --text-color-light: #ffffff;
+            --text-color-accent: #E8551A;
+            --text-color-muted: #666666;
+            --text-color-secondary: #AEBAFF;
             --hover: #C44A15;
-            --section-bg-1: #AEBAFF;
-            --section-bg-2: #FFF4AB;
-            --footer-bg: #E8551A;
-            --footer-text: #ffffff;
-
-                /* ===== ПЕРЕМЕННЫЕ ДЛЯ ТЕКСТА (текущие размеры из full-width-content) ===== */
-            --text-size-main: 3rem;        /* была font-size: 3rem */
-            --text-size-sub: 2rem;         /* новая, для второй строки */
-            --text-size-small: 1.2rem;     /* новая, для третьей строки */
-            --text-weight-bold: 700;       /* была font-weight: 700 */
-            --text-weight-semibold: 600;   /* для второй строки */
-            --text-weight-normal: 400;     /* для третьей строки */
-            --text-leading-tight: 1.3;     /* line-height для крупного текста */
-            --text-leading-normal: 1.4;    /* line-height для среднего */
-            --text-leading-relaxed: 1.5;   /* line-height для мелкого */
-            --text-gap: 8px;               /* отступ между строками */
-
-
-
+            --text: #2E2E2E;
             
-            /* стеклянные переменные */
+            --text-size-main: 3rem;
+            --text-size-sub: 2rem;
+            --text-size-small: 1.2rem;
+            --text-weight-bold: 700;
+            --text-weight-semibold: 600;
+            --text-weight-normal: 400;
+            --text-leading-tight: 1.3;
+            --text-leading-normal: 1.4;
+            --text-leading-relaxed: 1.5;
+            --text-gap: 8px;
+            
             --glass-bg: rgba(255,255,255,0.25);
             --glass-border: rgba(255,255,255,0.3);
             --glass-shadow: 0 8px 32px rgba(0,0,0,0.1);
         }
 
-        /* ===== ЕДИНЫЙ ШРИФТ ДЛЯ ВСЕГО САЙТА ===== */
         html {
             font-family: 'Montserrat', sans-serif;
             scroll-behavior: smooth;
         }
 
-        /* ===== СБРОС СТИЛЕЙ ===== */
         * {
             margin: 0;
             padding: 0;
@@ -68,23 +49,19 @@
 
         body {
             font-family: inherit;
-            background: transparent; /* прозрачный фон */
+            background: transparent;
             color: var(--text-color-dark);
             line-height: 1.6;
         }
 
-        /* ===== КОНТЕЙНЕР (исправляет растянутость) ===== */
         .container {
             max-width: 1400px;
-            margin: 40px auto 0 auto;  /* верхний отступ 100px, остальное auto */
-            padding: 0px 100px 0 100px;  /* ← верх 100px, остальное как было */
+            margin: 40px auto 0 auto;
+            padding: 0px 100px 0 100px;
             width: 100%;
             box-sizing: border-box;
         }
 
-        /* =====================================================
-           🧷 СТЕКЛЯННЫЙ ХЕДЕР
-           ===================================================== */
         header {
             position: sticky;
             top: 20px;
@@ -159,7 +136,7 @@
         }
 
         .nav-btn {
-            background: var(--text-color-secondary);              /* фиолетовый */
+            background: var(--text-color-secondary);
             color: var(--text-color-light) !important;
             padding: 10px 30px !important;
             border-radius: 30px;
@@ -171,7 +148,7 @@
         }
 
         .nav-btn:hover {
-            background: #C8D4FF !important;    /* светлее фиолетовый */
+            background: #C8D4FF !important;
             color: var(--text-light) !important;
             transform: scale(1.05);
         }
@@ -180,7 +157,6 @@
             display: none !important;
         }
 
-        /* ===== БУРГЕР-МЕНЮ ===== */
         .burger-menu {
             display: none;
             flex-direction: column;
@@ -199,7 +175,7 @@
         }
 
         .mobile-nav {
-            display: none; /* по умолчанию скрыто */
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
@@ -218,7 +194,7 @@
         }
 
         .mobile-nav.active {
-            display: flex; /* ← обязательно! */
+            display: flex;
             opacity: 1;
             pointer-events: all;
         }
@@ -232,8 +208,8 @@
             padding: 15px;
             border-radius: 30px;
             transition: 0.3s;
-            position: relative;  /* для псевдоэлемента */
-            display: block;      /* чтобы занимал всю ширину */
+            position: relative;
+            display: block;
         }
 
         .mobile-nav a::after {
@@ -252,8 +228,8 @@
         }
 
         .mobile-nav a:hover {
-            color: var(--primary);  /* меняем цвет текста, как в десктопе */
-            background: transparent; /* убираем заливку */
+            color: var(--primary);
+            background: transparent;
         }
 
         .mobile-nav .nav-btn {
@@ -261,25 +237,25 @@
             width: 100%;
             font-size: 1.5rem;
             padding: 15px !important;
-            transition: background 0.3s ease, transform 0.3s ease; /* плавность */
+            transition: background 0.3s ease, transform 0.3s ease;
         }
 
         .mobile-nav .nav-btn:hover {
-            background: var(--primary) !important; /* оранжевый */
+            background: var(--primary) !important;
             color: var(--text-light) !important;
             transform: scale(1.05);
         }
 
         .mobile-close-btn {
             position: absolute;
-            top: 50px;           /* ← здесь меняй отступ сверху */
-            right: 50px;         /* ← здесь меняй отступ справа */
-            width: 30px;         /* ← здесь меняй ширину */
-            height: 30px;        /* ← здесь меняй высоту */
+            top: 50px;
+            right: 50px;
+            width: 30px;
+            height: 30px;
             background: transparent;
             color: var(--text);
             border: none;
-            font-size: 52px;     /* ← здесь меняй размер крестика */
+            font-size: 52px;
             line-height: 1;
             cursor: pointer;
             display: flex;
@@ -293,18 +269,14 @@
             opacity: 0.7;
         }
 
-
-
-
         .full-width-block {
-                height: 600px;
-                width: auto;
-                margin-bottom: 30px;
-                box-sizing: border-box;
-                /* Убираем padding отсюда */
-            }
+            height: 600px;
+            width: auto;
+            margin-bottom: 30px;
+            box-sizing: border-box;
+        }
 
-                .full-width-content {
+        .full-width-content {
             background: var(--glass-bg);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
@@ -319,17 +291,26 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            color: var(--text);
+            color: var(--text-color-light);
             position: relative;
             z-index: 1;
             padding: 30px;
-            gap: 8px;                      /* отступ между строками */
+            gap: var(--text-gap);
         }
 
-        .full-width-content {
-            gap: var(--text-gap);
-            padding: 30px;
-            color: var(--text-color-light);
+        .full-width-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('bg1.jpg');
+            background-size: 1200px auto;
+            opacity: 0.2;
+            pointer-events: none;
+            border-radius: inherit;
+            z-index: -1;
         }
 
         .text-line--main {
@@ -351,175 +332,76 @@
             max-width: 800px;
         }
 
-        /* текстура как у остальных блоков */
-        .full-width-content::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('bg1.jpg'); /* подставь свой путь */
-            background-size: 1200px auto;
-            opacity: 0.2;
-            pointer-events: none;
-            border-radius: inherit;
-            z-index: -1;
-        }
-
-
-
-
-
-        /* ===== НОВАЯ СЕТКА 2x3 ===== */
         .grid-6 {
             display: grid;
-            grid-template-columns: repeat(2, 1fr); /* две равные колонки */
+            grid-template-columns: repeat(2, 1fr);
             gap: 30px;
             margin-bottom: 30px;
             width: 100%;
             box-sizing: border-box;
         }
 
-        .grid-item { /*СЕТКА РАЗМЕРЫ*/
+        .grid-item {
             background: var(--glass-bg);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border: 1px solid var(--glass-border);
             box-shadow: var(--glass-shadow);
             border-radius: 30px;
-            padding: 30px; /* увеличенный внутренний отступ для двух строк */
+            padding: 30px;
             text-align: center;
-            color: var(--text); /* цвет текста из переменной */
+            color: var(--text);
             font-weight: 500;
             font-size: 1.2rem;
-            aspect-ratio: 1 / 1; /* делает идеальный квадрат */
+            aspect-ratio: 1 / 1;
             display: flex;
-            flex-direction: column; /* вертикальное расположение элементов */
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 10px; /* отступ между строками текста */
+            gap: 10px;
             position: relative;
             z-index: 1;
             transition: transform 0.3s ease;
-            
-            /* Ограничение ширины контента: 400px, но адаптивно */
-            max-width: 600px;
             width: 100%;
-            margin: 0 auto; /* центрирование блока внутри ячейки сетки */
+            margin: 0 auto;
         }
 
-        /* текстура */
-        .grid-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            /*background-image: url('section1-bg.png'); /* если в папке images, то images/paper-texture.png текстура на блоки*/ 
-            background-size: 200px 200px;
-            opacity: 0.2;
-            pointer-events: none;
-            border-radius: inherit;
-            z-index: -1;
-        }
-
-        .grid-item {
-            color: #E8551A;         /* конкретный цвет */
-            font-size: 24px;        /* размер */
-            font-weight: 700;       /* жирность */
-            text-transform: uppercase; /* заглавные */
-            line-height: 1.4;
-            font-family: 'Montserrat', sans-serif; /* если хочешь другой шрифт */
-        }
-
-        /* Стили для текста внутри grid-item с классами text-line */
         .grid-item .text-line--main {
-            font-size: 1.8rem;        /* РАЗМЕР заголовка - меняй здесь */
+            font-size: 1.8rem;
             line-height: 1.3;
             font-weight: 700;
             text-transform: uppercase;
-            color: var(--text-color-secondary);  /* ЦВЕТ заголовка (фиолетовый) */
+            color: var(--text-color-secondary);
         }
 
         .grid-item .text-line--sub {
-            font-size: 1.1rem;        /* РАЗМЕР второй строки - меняй здесь */
+            font-size: 1.1rem;
             line-height: 1.4;
             font-weight: 500;
-            color: var(--text-color-light);  /* ЦВЕТ второй строки (светлый/белый) - ИЗМЕНЕНО */
+            color: var(--text-color-light);
             text-transform: none;
         }
 
         .grid-item .text-line--small {
-            font-size: 1rem;          /* РАЗМЕР третьей строки - меняй здесь */
+            font-size: 1rem;
             line-height: 1.5;
             font-weight: 400;
-            color: var(--text-color-light);  /* ЦВЕТ третьей строки (белый) */
+            color: var(--text-color-light);
             text-transform: none;
         }
 
-
-
-        /* ===== МОБИЛЬНАЯ АДАПТАЦИЯ ===== */
-        @media (max-width: 768px) {
-            /* ... твой существующий код ... */
-
-            /* новый блок */
-            .full-width-block {
-                padding: 0;
-                height: 400px;
-                margin-top: 20px;
-                margin-bottom: 20px;
-            }
-
-            .text-line--main {
-                font-size: 2rem;
-            }
-            .text-line--sub {
-                font-size: 1.3rem;
-            }
-            .text-line--small {
-                font-size: 1rem;
-            }
-
-            .grid-6 {
-                grid-template-columns: 1fr;
-                gap: 20px;
-                margin-bottom: 20px; /* только снизу */
-                width: 100%;
-            }
-
-            .grid-item {
-                aspect-ratio: 1 / 1; /* квадраты остаются квадратами */
-                font-size: 1rem;
-                padding: 15px;
-            }
-
-
-            @media (max-width: 768px) {
-                :root {
-                    --text-size-main: 2rem;
-                    --text-size-sub: 1.3rem;
-                    --text-size-small: 1rem;
-                    --text-gap: 6px;
-                }
-            }
-
-
-
-
+        .grid-text-container {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100%;
+            gap: var(--text-gap, 8px);
+            padding-top: 350px;
         }
 
-
-
-
-
-
-
-        /* =====================================================
-           🎬 ГЛАВНЫЙ ЭКРАН (HERO)
-           ===================================================== */
         .hero {
             text-align: center;
             padding: 80px 20px;
@@ -529,7 +411,7 @@
             border: 1px solid var(--glass-border);
             box-shadow: var(--glass-shadow);
             border-radius: 30px;
-            margin: 0 auto 30px auto; /* сверху 0, снизу 30px */
+            margin: 0 auto 30px auto;
             position: relative;
             z-index: 1;
         }
@@ -541,10 +423,10 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('hero-bg.png'); /* твоя оригинальная текстура */
+            background-image: url('hero-bg.png');
             background-size: cover;
             background-position: center;
-            opacity: 0.2; /* прозрачность 20% */
+            opacity: 0.2;
             pointer-events: none;
             border-radius: inherit;
             z-index: -1;
@@ -645,7 +527,6 @@
             z-index: -1;
         }
 
-        /* Индивидуальные текстуры для каждого блока */
         .section-colored:nth-of-type(1)::before {
             background-image: url('section1-bg.png');
         }
@@ -654,13 +535,6 @@
             background-image: url('section2-bg.png');
         }
 
-        /* Удали эти старые строки (они больше не нужны) */
-        /* .section-colored:nth-of-type(1) { background-image: url('section1-bg.png'); } */
-        /* .section-colored:nth-of-type(2) { background-image: url('section2-bg.png'); } */
-
-        /* =====================================================
-           🃏 СТЕКЛЯННЫЕ КАРТОЧКИ С 3D-ЭФФЕКТОМ (НА ВЕСЬ РАЗМЕР)
-           ===================================================== */
         .cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -719,11 +593,11 @@
         }
 
         .card-bg-1 { background-image: url('card1-bg.png'); }
-        .card-bg-2 { background-image: url('card1-bg.png'); }
-        .card-bg-3 { background-image: url('card1-bg.png'); }
-        .card-bg-4 { background-image: url('card1-bg.png'); }
-        .card-bg-5 { background-image: url('card1-bg.png'); }
-        .card-bg-6 { background-image: url('card1-bg.png'); }
+        .card-bg-2 { background-image: url('card2-bg.png'); }
+        .card-bg-3 { background-image: url('card3-bg.png'); }
+        .card-bg-4 { background-image: url('card4-bg.png'); }
+        .card-bg-5 { background-image: url('card5-bg.png'); }
+        .card-bg-6 { background-image: url('card6-bg.png'); }
 
         .card h3 {
             margin-bottom: 10px;
@@ -760,9 +634,6 @@
             opacity: 1;
         }
 
-        /* =====================================================
-           🗺️ КАРТА, АДРЕС, КОНТАКТЫ (КНОПКИ)
-           ===================================================== */
         .contacts-section {
             padding: 60px 20px;
             margin: 30px 0;
@@ -790,20 +661,6 @@
             pointer-events: none;
             border-radius: inherit;
             z-index: -1;
-        }
-
-        .contacts-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin-top: 40px;
-        }
-
-        .contact-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-top: 20px;
         }
 
         .contact-btn {
@@ -858,12 +715,8 @@
             border: 0;
         }
 
-        /* =====================================================
-           🎯 ПРИЗЫВ К ДЕЙСТВИЮ
-           ===================================================== */
         .cta-block {
-            background-image: none; /* убираем старый фон, если был */
-            color: var(--text-light);
+            color: var(--text-color-light);
             text-align: center;
             padding: 60px 20px;
             border-radius: 30px;
@@ -884,7 +737,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('cta-bg.png'); /* если есть своя текстура, иначе убери */
+            background-image: url('cta-bg.png');
             background-size: cover;
             background-position: center;
             opacity: 0.2;
@@ -926,11 +779,10 @@
             opacity: 0.7;
         }
 
-        /* ===== ФУТЕР ===== */
         footer {
             max-width: 1400px;
             margin: 30px auto 0;
-            padding: 40px 0;           /* ← меняй здесь вертикальные отступы */
+            padding: 40px 0;
             background: var(--glass-bg);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
@@ -966,9 +818,6 @@
             opacity: 0.9;
         }
 
-        /* =====================================================
-           📱 МОДАЛЬНОЕ ОКНО (ПОПАП)
-           ===================================================== */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -1085,34 +934,6 @@
             opacity: 0.7;
         }
 
-        .success-message {
-            text-align: center;
-            padding: 40px 20px;
-        }
-
-        .success-message h3 {
-            color: var(--primary);
-            font-size: 2rem;
-            margin-bottom: 15px;
-        }
-
-        .success-message p {
-            color: #666;
-            margin-bottom: 25px;
-        }
-
-        .success-message button {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 50px;
-            cursor: pointer;
-        }
-
-
-
-
         .scroll-top {
             position: fixed;
             bottom: 30px;
@@ -1125,10 +946,9 @@
             border: 1px solid var(--glass-border);
             box-shadow: var(--glass-shadow);
             border-radius: 50%;
-            display: flex;
             align-items: center;
             justify-content: center;
-            color: #2E2E2E;  /* черный цвет (у тебя --text) */
+            color: #2E2E2E;
             font-size: 32px;
             font-weight: bold;
             cursor: pointer;
@@ -1136,9 +956,6 @@
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.3s ease, visibility 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .scroll-top::before {
@@ -1150,6 +967,7 @@
         .scroll-top.show {
             opacity: 1;
             visibility: visible;
+            display: flex;
         }
 
         .scroll-top:hover {
@@ -1157,10 +975,9 @@
             transform: scale(1.05);
         }
 
-
         @media (max-width: 768px) {
             .container {
-                padding: 0px 20px 0 20px; /* верх 30, бока 20 */
+                padding: 0px 20px 0 20px;
             }
 
             header {
@@ -1185,6 +1002,10 @@
                 min-width: 180px;
             }
 
+            .hero {
+                margin-top: 40px;
+            }
+
             .hero h1 {
                 font-size: 1.8rem;
             }
@@ -1192,6 +1013,57 @@
             .hero-buttons {
                 flex-direction: column;
                 gap: 10px;
+            }
+
+            .grid-6 {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                margin-bottom: 20px;
+            }
+
+            .grid-item {
+                aspect-ratio: 1 / 1;
+                font-size: 1rem;
+                padding: 15px;
+            }
+
+            .grid-text-container {
+                padding-top: 40px !important;
+                gap: 4px !important;
+            }
+
+            .grid-item .text-line--main {
+                font-size: 1.4rem !important;
+            }
+            .grid-item .text-line--sub {
+                font-size: 0.9rem !important;
+            }
+            .grid-item .text-line--small {
+                font-size: 0.8rem !important;
+            }
+
+            .full-width-block {
+                padding: 0;
+                height: 400px;
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+
+            .text-line--main {
+                font-size: 2rem;
+            }
+            .text-line--sub {
+                font-size: 1.3rem;
+            }
+            .text-line--small {
+                font-size: 1rem;
+            }
+
+            :root {
+                --text-size-main: 2rem;
+                --text-size-sub: 1.3rem;
+                --text-size-small: 1rem;
+                --text-gap: 6px;
             }
 
             .contacts-grid {
@@ -1207,32 +1079,59 @@
                 padding: 12px 30px;
                 font-size: 1.1rem;
             }
-            .hero {
-            margin-top: 40px; /* или сколько тебе нужно пикселей */
-            }
         }
 
 
         /* =====================================================
-        📱 АДАПТАЦИЯ ТЕКСТА В БЛОКАХ GRID-6 ДЛЯ МОБИЛЬНЫХ
+        АНИМИРОВАННЫЙ ЗАГОЛОВОК (как на Coolors)
         ===================================================== */
-        @media (max-width: 768px) {
-            .grid-text-container {
-                padding-top: 40px !important;  /* ← меняй это значение под свой дизайн */
-                gap: 4px !important;           /* ← уменьшаем отступы между строками */
-            }
+        .animated-headline {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.3rem 0.6rem;
+            font-size: var(--text-size-main);
+            font-weight: var(--text-weight-bold);
+            line-height: var(--text-leading-tight);
+            margin-bottom: 10px;
+        }
 
-            /* Уменьшаем размер шрифтов для мобильных */
-            .grid-item .text-line--main {
-                font-size: 1.4rem !important;
-            }
-            .grid-item .text-line--sub {
-                font-size: 0.9rem !important;
-            }
-            .grid-item .text-line--small {
-                font-size: 0.8rem !important;
+        .word {
+            position: relative;
+            display: inline-block;
+            color: #ffffff; /* начальный цвет */
+            transition: color 0.1s ease;
+            cursor: default;
+        }
+
+        /* Эффект при наведении на слово */
+        .word:hover {
+            color: #E8551A; /* оранжевый акцент */
+            animation: shake 0.3s ease-in-out;
+        }
+
+        /* Эффект при наведении на соседние слова (для красоты) */
+        .animated-headline:hover .word:not(:hover) {
+            color: rgba(255, 255, 255, 0.3);
+            transition: color 0.3s ease;
+        }
+
+        /* Анимация подёргивания */
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-2px) rotate(-1deg); }
+            75% { transform: translateX(2px) rotate(1deg); }
+            100% { transform: translateX(0); }
+        }
+
+        /* Мобильная адаптация */
+        @media (max-width: 768px) {
+            .animated-headline {
+                font-size: 2rem;
+                gap: 0.2rem 0.4rem;
             }
         }
+
 
 
 
@@ -1243,138 +1142,103 @@
         <div class="header-glass">
             <div class="logo">
                 <a href="index.html">
-                    <img src="logo.png" alt="Кинеограф">
+                    <img src="logo.png" alt="Кинеограф — студия анимации для детей">
                 </a>
             </div>
-
-            <!-- Десктопная навигация (видна на ПК) -->
             <div class="nav-links">
                 <a href="#about">О школе</a>
                 <a href="#contacts">Контакты</a>
-                <a href="portfolio.html" class="nav-btn">Для студий</a>
+                <a href="#" class="nav-btn">Для студий</a>
             </div>
-
-            <!-- Бургер-кнопка (видна только на мобильных) -->
             <div class="burger-menu" onclick="toggleMobileMenu()">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
         </div>
-
-        <!-- Мобильное меню (скрыто по умолчанию) -->
         <div class="mobile-nav" id="mobileMenu">
             <button class="mobile-close-btn" onclick="toggleMobileMenu()">×</button>
             <a href="#about" onclick="toggleMobileMenu()">О школе</a>
             <a href="#contacts" onclick="toggleMobileMenu()">Контакты</a>
-            <a href="portfolio.html" class="nav-btn" onclick="toggleMobileMenu()">Для студий</a>
+            <a href="#" class="nav-btn" onclick="toggleMobileMenu()">Для студий</a>
         </div>
     </header>
 
-
-
-
-
     <div class="container">
-
-
-
-
-
-        <!-- ===== БЛОК ВО ВСЮ ШИРИНУ 800px ===== -->
         <div class="full-width-block">
             <div class="full-width-content">
-                <span class="text-line text-line--main">
-                    Студия анимации для детей от 7 лет
-                </span>
-                <span class="text-line text-line--sub">
-                    Оживите идеи вашего ребёнка
-                </span>
-                <span class="text-line text-line--small">
-                    От первого кадра до готового мультфильма. Преподаёт действующий аниматор из геймдев-индустрии.
-                </span>
+                <span class="text-line text-line--main">Студия анимации для детей от 7 лет</span>
+                <span class="text-line text-line--sub">Оживите идеи вашего ребёнка</span>
+                <span class="text-line text-line--small">От первого кадра до готового мультфильма. Преподаёт действующий аниматор из геймдев-индустрии.</span>
             </div>
         </div>
 
+        
 
-        <!-- ===== НОВАЯ СЕТКА С КВАДРАТАМИ ===== -->
         <div class="grid-6">
-
-            <!-- БЛОК 1: Идея и раскадровка -->
+            <!-- БЛОК 1 -->
             <div class="grid-item" style="position: relative; overflow: hidden; background: transparent !important; backdrop-filter: none !important;">
                 <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('block1.png'); background-size: cover; background-position: center; opacity: 0.4; pointer-events: none; border-radius: inherit; z-index: 0;"></div>
-                <div class="grid-text-container" style="position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; height: 100%; gap: var(--text-gap, 8px); padding-top: 350px;">
+                <div class="grid-text-container">
                     <span class="text-line text-line--main">Идея и раскадровка</span>
                     <span class="text-line text-line--sub">Придумываем сюжет, рисуем героев и «карту» будущего мультфильма.</span>
                     <span class="text-line text-line--small">Ребёнок учится превращать фантазию в чёткий план и видеть историю целиком.</span>
                 </div>
             </div>
 
-            <!-- БЛОК 2: Анимация перекладкой -->
+            <!-- БЛОК 2 -->
             <div class="grid-item" style="position: relative; overflow: hidden; background: transparent !important; backdrop-filter: none !important;">
                 <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('block2.png'); background-size: cover; background-position: center; opacity: 0.4; pointer-events: none; border-radius: inherit; z-index: 0;"></div>
-                <div class="grid-text-container" style="position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; height: 100%; gap: var(--text-gap, 8px); padding-top: 350px;">
+                <div class="grid-text-container">
                     <span class="text-line text-line--main">Анимация перекладкой</span>
                     <span class="text-line text-line--sub">Вырезаем персонажей из бумаги, двигаем их по кадру и фиксируем.</span>
                     <span class="text-line text-line--small">Осваиваем базовые принципы движения, учимся чувствовать ритм и тайминг.</span>
                 </div>
             </div>
 
-            <!-- БЛОК 3: Пластилиновая анимация -->
+            <!-- БЛОК 3 -->
             <div class="grid-item" style="position: relative; overflow: hidden; background: transparent !important; backdrop-filter: none !important;">
                 <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('block3.png'); background-size: cover; background-position: center; opacity: 0.4; pointer-events: none; border-radius: inherit; z-index: 0;"></div>
-                <div class="grid-text-container" style="position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; height: 100%; gap: var(--text-gap, 8px); padding-top: 350px;">
+                <div class="grid-text-container">
                     <span class="text-line text-line--main">Пластилиновая анимация</span>
                     <span class="text-line text-line--sub">Лепим героев, меняем позу на миллиметр и снимаем кадр за кадром.</span>
                     <span class="text-line text-line--small">Развиваем мелкую моторику, чувство объёма и умение доводить дело до конца.</span>
                 </div>
             </div>
 
-            <!-- БЛОК 4: Стоп-моушн и режиссура кадра -->
+            <!-- БЛОК 4 -->
             <div class="grid-item" style="position: relative; overflow: hidden; background: transparent !important; backdrop-filter: none !important;">
                 <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('block4.png'); background-size: cover; background-position: center; opacity: 0.4; pointer-events: none; border-radius: inherit; z-index: 0;"></div>
-                <div class="grid-text-container" style="position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; height: 100%; gap: var(--text-gap, 8px); padding-top: 350px;">
+                <div class="grid-text-container">
                     <span class="text-line text-line--main">Стоп-моушн и режиссура кадра</span>
                     <span class="text-line text-line--sub">Настраиваем свет, работаем со штативом и программой захвата.</span>
                     <span class="text-line text-line--small">Учимся «видеть» кадр, управлять вниманием зрителя и создавать атмосферу.</span>
                 </div>
             </div>
 
-            <!-- БЛОК 5: Звук, озвучка и монтаж -->
+            <!-- БЛОК 5 -->
             <div class="grid-item" style="position: relative; overflow: hidden; background: transparent !important; backdrop-filter: none !important;">
                 <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('block5.png'); background-size: cover; background-position: center; opacity: 0.4; pointer-events: none; border-radius: inherit; z-index: 0;"></div>
-                <div class="grid-text-container" style="position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; height: 100%; gap: var(--text-gap, 8px); padding-top: 350px;">
+                <div class="grid-text-container">
                     <span class="text-line text-line--main">Звук, озвучка и монтаж</span>
                     <span class="text-line text-line--sub">Записываем диалоги, подбираем шумы и музыку, собираем кадры в ролик.</span>
                     <span class="text-line text-line--small">Ребёнок понимает, как звук оживляет картинку, и учится работать с таймлайном.</span>
                 </div>
             </div>
 
-            <!-- БЛОК 6: Финальный проект -->
+            <!-- БЛОК 6 -->
             <div class="grid-item" style="position: relative; overflow: hidden; background: transparent !important; backdrop-filter: none !important;">
                 <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('block6.png'); background-size: cover; background-position: center; opacity: 0.4; pointer-events: none; border-radius: inherit; z-index: 0;"></div>
-                <div class="grid-text-container" style="position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; height: 100%; gap: var(--text-gap, 8px); padding-top: 350px;">
+                <div class="grid-text-container">
                     <span class="text-line text-line--main">Финальный проект</span>
                     <span class="text-line text-line--sub">От эскиза до готового мультфильма. Презентация родителям, сохранение в цифровое портфолио.</span>
                     <span class="text-line text-line--small">Первый шаг к фестивалям, школьным проектам или личному каналу.</span>
                 </div>
             </div>
-
         </div>
 
+        <div id="scrollTopBtn" class="scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"></div>
 
-
-
-
-
-
-
-
-        <div id="scrollTopBtn" class="scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-        </div>
-
-
-        <!-- ===== ГЛАВНЫЙ ЭКРАН ===== -->
         <section class="hero">
             <h1>Ваш ребёнок создаст свою первую анимацию</h1>
             <p>У нас дети 8–12 лет учится оживлять персонажей, создавать истории и собирать свои настоящие анимационные проекты.</p>
@@ -1384,7 +1248,6 @@
             </div>
         </section>
 
-        <!-- ===== БЛОК 1: КАК ПРОХОДЯТ ЗАНЯТИЯ ===== -->
         <div class="section-colored" id="about">
             <div class="container">
                 <h2 class="section-title">Как проходят занятия</h2>
@@ -1420,7 +1283,6 @@
             </div>
         </div>
 
-        <!-- ===== БЛОК 2: ПОЧЕМУ МЫ ===== -->
         <div class="section-colored">
             <div class="container">
                 <h2 class="section-title">Почему мы</h2>
@@ -1456,66 +1318,40 @@
             </div>
         </div>
 
-        <!-- ===== КАРТА, АДРЕС, КОНТАКТЫ ===== -->
         <section id="contacts" class="contacts-section">
             <h2 class="section-title">Как нас найти</h2>
-
-            <!-- ===== КАРТА НА ВСЮ ШИРИНУ ===== -->
             <div style="width: 100%; margin-bottom: 30px; border-radius: 20px; overflow: hidden;">
                 <div class="map-container" style="width: 100%; height: 300px; margin: 0;">
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1473.5426186517518!2d37.77455367893067!3d44.6756487566148!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40f1f9725e5a2115%3A0xa0eab5aeb45b165d!2z0JrQuNC90LXQvtCz0YDQsNGE!5e1!3m2!1sru!2sru!4v1772189966135!5m2!1sru!2sru"
-                        width="100%"
-                        height="100%"
-                        style="border:0;"
-                        allowfullscreen=""
-                        loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade">
-                    </iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1473.5426186517518!2d37.77455367893067!3d44.6756487566148!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40f1f9725e5a2115%3A0xa0eab5aeb45b165d!2z0JrQuNC90LXQvtCz0YDQsNGE!5e1!3m2!1sru!2sru!4v1772189966135!5m2!1sru!2sru" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
-
-            <!-- ===== КНОПКИ В ОДИН РЯД ===== -->
             <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; padding: 0 20px;">
-
-                <!-- Кнопка Телефон -->
                 <a href="tel:+79186468822" class="contact-btn" style="width: auto; min-width: 60px; padding: 15px;">
                     <span class="contact-icon">📞</span>
                 </a>
-
-                <!-- Кнопка Email -->
                 <a href="mailto:bitrate.motiondesign@gmail.com" class="contact-btn" style="width: auto; min-width: 60px; padding: 15px;">
                     <span class="contact-icon">✉️</span>
                 </a>
-
-                <!-- Кнопка Telegram -->
                 <a href="https://t.me/BITRATEmotion" target="_blank" class="contact-btn" style="width: auto; min-width: 60px; padding: 15px;">
                     <span class="contact-icon">📱</span>
                 </a>
-
-                <!-- Кнопка Адрес -->
                 <a href="https://yandex.ru/maps/?text=Новороссийск+ул.+Алексея+Матвейкина+4+кабинет+8" target="_blank" class="contact-btn" style="width: auto; min-width: 60px; padding: 15px;">
                     <span class="contact-icon">📍</span>
                 </a>
             </div>
         </section>
 
-        <!-- ===== ПРИЗЫВ К ДЕЙСТВИЮ ===== -->
         <div class="cta-block">
             <h2>Успей записаться!</h2>
             <p>Места в группах ограничены. Первое занятие — бесплатно</p>
             <button class="cta-btn" onclick="openModal()">Записаться</button>
         </div>
 
-        <!-- ===== ФУТЕР ===== -->
         <footer>
-            <div class="footer-copyright">
-                © 2026 Кинеограф. Все права защищены.
-            </div>
+            <div class="footer-copyright">© 2026 Кинеограф. Все права защищены.</div>
         </footer>
     </div>
 
-    <!-- ===== МОДАЛЬНОЕ ОКНО ===== -->
     <div id="modalOverlay" class="modal-overlay" onclick="closeModalOutside(event)">
         <div class="modal-content" id="modalContent">
             <div class="modal-header">
@@ -1528,27 +1364,22 @@
                         <label for="name">Ваше имя *</label>
                         <input type="text" id="name" name="name" required placeholder="Например: Иван Петров">
                     </div>
-
                     <div class="form-group">
                         <label for="child-age">Возраст ребёнка *</label>
                         <input type="number" id="child-age" name="child_age" required min="5" max="16" placeholder="Например: 8">
                     </div>
-
                     <div class="form-group">
                         <label for="phone">Телефон *</label>
                         <input type="tel" id="phone" name="phone" required placeholder="+7 (999) 123-45-67">
                     </div>
-
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="email" id="email" name="email" placeholder="ivan@example.com">
                     </div>
-
                     <div class="form-group">
                         <label for="message">Сообщение</label>
                         <textarea id="message" name="message" placeholder="Ваш вопрос или пожелание..."></textarea>
                     </div>
-
                     <button type="submit" class="submit-btn">Отправить заявку</button>
                 </form>
             </div>
@@ -1575,15 +1406,11 @@
         function moveCard(event, container) {
             const card = container.querySelector('.card');
             const rect = container.getBoundingClientRect();
-
             const x = (event.clientX - rect.left) / rect.width - 0.5;
             const y = (event.clientY - rect.top) / rect.height - 0.5;
-
             const rotY = x * 20;
             const rotX = -y * 20;
-
             card.style.transform = `rotateY(${rotY}deg) rotateX(${rotX}deg)`;
-
             card.style.setProperty('--x', `${(event.clientX - rect.left) / rect.width * 100}%`);
             card.style.setProperty('--y', `${(event.clientY - rect.top) / rect.height * 100}%`);
         }
@@ -1596,165 +1423,127 @@
         function toggleMobileMenu() {
             const menu = document.getElementById('mobileMenu');
             menu.classList.toggle('active');
+            document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : 'auto';
+        }
 
-            if (menu.classList.contains('active')) {
-                document.body.style.overflow = 'hidden';
+        window.addEventListener('scroll', function() {
+            const btn = document.getElementById('scrollTopBtn');
+            if (window.scrollY > 300) {
+                btn.classList.add('show');
             } else {
-                document.body.style.overflow = 'auto';
-            }
-        }
-    </script>
-
-
-
-    <!-- Подключаем Three.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
-    <!-- ПРОСТОЙ ТЕСТОВЫЙ ГРАДИЕНТ (ИСПРАВЛЕННЫЙ) -->
-    <script>
-      // Создаём сцену, камеру, рендерер
-      const scene = new THREE.Scene();
-      const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 10);
-      camera.position.z = 1;
-
-      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setPixelRatio(window.devicePixelRatio);
-      renderer.setClearColor(0x000000, 0);
-
-      // Помещаем холст на фон
-      const canvas = renderer.domElement;
-      canvas.style.position = 'fixed';
-      canvas.style.top = '0';
-      canvas.style.left = '0';
-      canvas.style.width = '100%';
-      canvas.style.height = '100%';
-      canvas.style.zIndex = '-1';
-      canvas.style.pointerEvents = 'none';
-      document.body.prepend(canvas);
-
-      // Твои цвета (исправлено)
-      const color1 = new THREE.Color('#F15A22'); // оранжевый
-      const color2 = new THREE.Color('#0A0E27'); // тёмно-синий
-      const color3 = new THREE.Color('#40E0D0'); // бирюзовый
-      const color4 = new THREE.Color('#F15A22'); // снова оранжевый (замыкает круг)
-
-      // Uniforms
-      const uniforms = {
-        uTime: { value: 0 },
-        uColor1: { value: color1 },
-        uColor2: { value: color2 },
-        uColor3: { value: color3 },
-        uColor4: { value: color4 }
-      };
-
-      // Вершинный шейдер
-      const vertexShader = `
-        varying vec2 vUv;
-        void main() {
-          vUv = uv;
-          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-        }
-      `;
-
-      // Фрагментный шейдер — теперь с uColor4
-      const fragmentShader = `
-        precision highp float;
-        varying vec2 vUv;
-        uniform float uTime;
-        uniform vec3 uColor1;
-        uniform vec3 uColor2;
-        uniform vec3 uColor3;
-        uniform vec3 uColor4;   // ← добавили
-
-        void main() {
-          float x = vUv.x * 2.0 - 1.0;
-          float y = vUv.y * 2.0 - 1.0;
-
-          float t = uTime * 0.5;
-          float wave1 = sin(x * 0.2 + t) * cos(y * 1.0 + t);
-          float wave2 = sin(x * 0.5 - t * 1.3) * cos(y * 2.0 + t * 0.7);
-          float pattern = (wave1 + wave2) * 0.5 + 0.5;
-
-          vec3 finalColor;
-          if (pattern < 0.25) {
-            finalColor = mix(uColor1, uColor2, pattern * 4.0);
-          } else if (pattern < 0.5) {
-            finalColor = mix(uColor2, uColor3, (pattern - 0.25) * 4.0);
-          } else if (pattern < 0.75) {
-            finalColor = mix(uColor3, uColor4, (pattern - 0.5) * 4.0);
-          } else {
-            finalColor = mix(uColor4, uColor1, (pattern - 0.75) * 4.0);
-          }
-
-          gl_FragColor = vec4(finalColor, 1.0);
-        }
-      `;
-
-      // Материал и меш
-      const material = new THREE.ShaderMaterial({
-        vertexShader,
-        fragmentShader,
-        uniforms
-      });
-
-      const geometry = new THREE.PlaneGeometry(2, 2);
-      const mesh = new THREE.Mesh(geometry, material);
-      scene.add(mesh);
-
-      // Анимация
-      function animate() {
-        requestAnimationFrame(animate);
-        uniforms.uTime.value += 0.01;
-        renderer.render(scene, camera);
-      }
-      animate();
-
-      // Ресайз
-      window.addEventListener('resize', () => {
-        renderer.setSize(window.innerWidth, window.innerHeight);
-      });
-
-
-
-      window.addEventListener('scroll', function() {
-        const btn = document.getElementById('scrollTopBtn');
-        if (window.scrollY > 300) {
-            btn.classList.add('show');
-        } else {
-            btn.classList.remove('show');
-        }
-    });
-
-
-
-    /*Контроль отступа при прокрутке (чтобы блок не уходил под хедер)*/
-
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
-
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                const headerHeight = document.querySelector('header').offsetHeight;
-                const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - headerHeight - 70; // 20px дополнительного отступа
-
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
+                btn.classList.remove('show');
             }
         });
-    });
 
-
-
-
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    const headerHeight = document.querySelector('header').offsetHeight;
+                    const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - headerHeight - 70;
+                    window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+                }
+            });
+        });
     </script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        const scene = new THREE.Scene();
+        const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 10);
+        camera.position.z = 1;
 
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setClearColor(0x000000, 0);
 
+        const canvas = renderer.domElement;
+        canvas.style.position = 'fixed';
+        canvas.style.top = '0';
+        canvas.style.left = '0';
+        canvas.style.width = '100%';
+        canvas.style.height = '100%';
+        canvas.style.zIndex = '-1';
+        canvas.style.pointerEvents = 'none';
+        document.body.prepend(canvas);
+
+        const color1 = new THREE.Color('#abc6e3'); // оранжевый  f5f7f7
+        const color2 = new THREE.Color('#f7f8fc'); // тёмно-синий  dcf2f2
+        const color3 = new THREE.Color('#e6e6f0'); // бирюзовый
+        const color4 = new THREE.Color('#f7cfd7'); // снова оранжевый (замыкает круг)  8bb2d9
+
+        const uniforms = {
+            uTime: { value: 0 },
+            uColor1: { value: color1 },
+            uColor2: { value: color2 },
+            uColor3: { value: color3 },
+            uColor4: { value: color4 }
+        };
+
+        const vertexShader = `
+            varying vec2 vUv;
+            void main() {
+                vUv = uv;
+                gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+            }
+        `;
+
+        const fragmentShader = `
+            precision highp float;
+            varying vec2 vUv;
+            uniform float uTime;
+            uniform vec3 uColor1;
+            uniform vec3 uColor2;
+            uniform vec3 uColor3;
+            uniform vec3 uColor4;
+
+            void main() {
+                float x = vUv.x * 2.0 - 1.0;
+                float y = vUv.y * 2.0 - 1.0;
+                float t = uTime * 0.5;
+                float wave1 = sin(x * 0.2 + t) * cos(y * 1.0 + t);
+                float wave2 = sin(x * 0.5 - t * 1.3) * cos(y * 2.0 + t * 0.7);
+                float pattern = (wave1 + wave2) * 0.5 + 0.5;
+
+                vec3 finalColor;
+                if (pattern < 0.25) {
+                    finalColor = mix(uColor1, uColor2, pattern * 4.0);
+                } else if (pattern < 0.5) {
+                    finalColor = mix(uColor2, uColor3, (pattern - 0.25) * 4.0);
+                } else if (pattern < 0.75) {
+                    finalColor = mix(uColor3, uColor4, (pattern - 0.5) * 4.0);
+                } else {
+                    finalColor = mix(uColor4, uColor1, (pattern - 0.75) * 4.0);
+                }
+
+                gl_FragColor = vec4(finalColor, 1.0);
+            }
+        `;
+
+        const material = new THREE.ShaderMaterial({
+            vertexShader,
+            fragmentShader,
+            uniforms
+        });
+
+        const geometry = new THREE.PlaneGeometry(2, 2);
+        const mesh = new THREE.Mesh(geometry, material);
+        scene.add(mesh);
+
+        function animate() {
+            requestAnimationFrame(animate);
+            uniforms.uTime.value += 0.01;
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        window.addEventListener('resize', () => {
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
 </body>
 </html>
