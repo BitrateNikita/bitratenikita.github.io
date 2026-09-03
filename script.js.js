@@ -15,7 +15,14 @@
 //   messagingSenderId: "YOUR_SENDER_ID",
 //   appId: "YOUR_APP_ID"
 // };
-const firebaseConfig = [FIREBASE_CONFIG];
+const firebaseConfig = {
+  apiKey: "AIzaSyBU4A03ifp5vmpHAcicvoGEgexkEr1sU-c",
+  authDomain: "kineograph-site-99c7f.firebaseapp.com",
+  projectId: "kineograph-site-99c7f",
+  storageBucket: "kineograph-site-99c7f.firebasestorage.app",
+  messagingSenderId: "744025644715",
+  appId: "1:744025644715:web:55a35c3346b014e938e1ee"
+};
 
 // Инициализация Firebase
 firebase.initializeApp(firebaseConfig);
