@@ -30,7 +30,7 @@ const db = firebase.firestore();
 
 /* === КОНФИГУРАЦИЯ RECAPTCHA === */
 // ЗАМЕНИТЕ [RECAPTCHA_SITE_KEY] на реальный site key из Google reCAPTCHA Admin Console
-const RECAPTCHA_SITE_KEY = '[RECAPTCHA_SITE_KEY]';
+const RECAPTCHA_SITE_KEY = '6LerAagtAAAAADOeiDaYEO4v5KVuOBtH04mnnsHg';
 
 /* === МОБИЛЬНОЕ МЕНЮ (бургер) === */
 const burger = document.getElementById('burger');
