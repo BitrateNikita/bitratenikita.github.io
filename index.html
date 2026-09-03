@@ -51,6 +51,86 @@
 </head>
 <body>
 
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+        // === Конфигурация Firebase ===
+        const firebaseConfig = {
+            apiKey: "AIzaSyBU4A03ifp5vmpHAcicvoGEgexkEr1sU-c",
+            authDomain: "kineograph-site-99c7f.firebaseapp.com",
+            projectId: "kineograph-site-99c7f",
+            storageBucket: "kineograph-site-99c7f.firebasestorage.app",
+            messagingSenderId: "744025644715",
+            appId: "1:744025644715:web:55a35c3346b014e938e1ee"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // === Обработка формы записи ===
+        const form = document.getElementById('application-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const formMessage = document.getElementById('form-message');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Honeypot-проверка: если скрытое поле заполнено — это бот, тихо выходим
+            const honeypot = document.getElementById('website').value;
+            if (honeypot) {
+            return;
+            }
+
+            // Собираем данные полей
+            const studentName = document.getElementById('student-name').value.trim();
+            const parentName = document.getElementById('parent-name').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const agree = document.getElementById('agree').checked;
+
+            // Простая валидация обязательных полей
+            let hasError = false;
+            if (!studentName) { showFieldError('student-name-error', 'Заполните имя ученика'); hasError = true; }
+            if (!parentName) { showFieldError('parent-name-error', 'Заполните имя родителя'); hasError = true; }
+            if (!phone) { showFieldError('phone-error', 'Укажите номер телефона'); hasError = true; }
+            if (!agree) { showFieldError('agree-error', 'Нужно согласие на обработку данных'); hasError = true; }
+            if (hasError) return;
+
+            // Блокируем кнопку на время отправки
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Отправка...';
+
+            try {
+            await addDoc(collection(db, 'applications'), {
+                studentName,
+                parentName,
+                phone,
+                createdAt: serverTimestamp()
+            });
+
+            // Успех — заменяем форму на сообщение
+            form.style.display = 'none';
+            formMessage.textContent = 'Спасибо! Мы скоро свяжемся с вами.';
+            formMessage.classList.add('form__message--success');
+
+            } catch (error) {
+            console.error('Ошибка отправки заявки:', error);
+            formMessage.textContent = 'Что-то пошло не так. Попробуйте позвонить нам напрямую.';
+            formMessage.classList.add('form__message--error');
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Отправить заявку';
+            }
+        });
+
+        function showFieldError(elementId, text) {
+            const el = document.getElementById(elementId);
+            if (el) el.textContent = text;
+        }
+        </script>
+
+
+
     <!-- ========== ХЕДЕР ========== -->
     <header class="header" id="header">
         <div class="container header__inner">
