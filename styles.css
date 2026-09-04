@@ -72,8 +72,8 @@ body {
 }
 .logo__img {
     /* Базовый размер для десктопа */
-    width: 55px;
-    height: 55px;
+    width: auto;
+    height: 150px;
     object-fit: contain;
     transition: width 0.3s ease, height 0.3s ease; /* плавное изменение */
 }
