@@ -25,6 +25,14 @@
     font-style: normal;
     font-display: swap;
 }
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('Montserrat/Montserrat-Italic.ttf') format('truetype');
+    font-weight: 400;
+    font-style: italic;
+}
+
 /* Если есть SemiBold, добавьте аналогичный блок */
 
 /* === CSS-переменные === */
@@ -262,7 +270,7 @@ ul {
     transition: all 0.3s ease;
 }
 
-/* === Hero секция === */
+/* === Hero секция === ФОН*/
 .hero {
     padding: 120px 0 100px;
     background: linear-gradient(135deg, var(--color-dark) 0%, #3a3d5c 100%);
@@ -282,7 +290,22 @@ ul {
     max-width: 600px;
     margin: 0 auto 40px;
     color: rgba(255, 255, 255, 0.9);
+    
 }
+
+/* Отдельный самостоятельный стиль для второго абзаца hero — курсив */
+.hero__desc-italic {
+    font-family: 'Montserrat', sans-serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 14px;      /* подбери свой размер */
+    color: rgba(255, 255, 255, 0.9);       /* подбери свой цвет */
+    line-height: 1.5;
+    margin-top: 0 auto;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
 
 /* === Секция "О студии" === */
 .about__inner {
