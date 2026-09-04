@@ -70,6 +70,13 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+.logo__img {
+    /* Базовый размер для десктопа */
+    width: 55px;
+    height: 55px;
+    object-fit: contain;
+    transition: width 0.3s ease, height 0.3s ease; /* плавное изменение */
+}
 
 img {
     max-width: 100%;
@@ -734,6 +741,22 @@ ul {
     .footer__inner {
         flex-direction: column;
         text-align: center;
+    }
+}
+
+/* Планшеты */
+@media (max-width: 768px) {
+    .logo__img {
+        width: 45px;
+        height: 45px;
+    }
+}
+
+/* Мобильные */
+@media (max-width: 480px) {
+    .logo__img {
+        width: 40px;
+        height: 40px;
     }
 }
 
