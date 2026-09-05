@@ -313,9 +313,8 @@ ul {
 
 
 /* === Секция "О студии" === */
-/* === Секция "О студии" === */
 .about {
-    background-image: 
+    background-image:; 
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -785,7 +784,7 @@ ul {
 /* Планшеты */
 @media (max-width: 768px) {
     .logo__img {
-        width: 45px;
+        width: 150px;
         height: 45px;
     }
 }
@@ -793,7 +792,7 @@ ul {
 /* Мобильные */
 @media (max-width: 480px) {
     .logo__img {
-        width: 40px;
+        width: 150px;
         height: 40px;
     }
 }
