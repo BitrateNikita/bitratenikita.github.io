@@ -272,8 +272,13 @@ ul {
 
 /* === Hero секция === ФОН*/
 .hero {
+    background-image: 
+    linear-gradient(rgba(43, 45, 66, 0.75), rgba(43, 45, 66, 0.75)), 
+    url('1.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     padding: 120px 0 100px;
-    background: linear-gradient(135deg, var(--color-dark) 0%, #3a3d5c 100%);
     color: var(--color-white);
     text-align: center;
 }
@@ -308,6 +313,17 @@ ul {
 
 
 /* === Секция "О студии" === */
+/* === Секция "О студии" === */
+.about {
+    background-image: 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.about__text {
+    color: rgba(255, 255, 255, 0.9);
+}
 .about__inner {
     display: flex;
     align-items: center;
