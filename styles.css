@@ -312,7 +312,7 @@ ul {
 }
 
 
-/* === Секция "О студии" === */
+                                                                                    /* === Секция "О студии" === */
 .about {
     background-image:none; 
     background-size: cover;
@@ -495,35 +495,119 @@ ul {
     line-height: 1.5;
 }
 
-/* === Секция "Работы учеников" === */
-.works__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 25px;
+                                                                            /* === Какие направления будем изучать? === */
+
+/* Подзаголовок секции */
+.section-subtitle {
+    text-align: center;
+    color: var(--color-text-light);
+    font-size: 1.05rem;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto 50px;
+    position: relative;
+    padding-bottom: 20px;
 }
 
-.work-card {
+.section-subtitle::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background-color: var(--color-accent);
+    border-radius: 2px;
+}
+
+.techniques__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+}
+
+/* Карточка */
+.technique-card {
     background-color: var(--color-white);
     border-radius: var(--radius);
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    aspect-ratio: 1 / 1;
-}
-
-.work-card__placeholder {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #e9e9e6;
-    color: var(--color-text-light);
-    font-size: 0.9rem;
     text-align: center;
-    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(43, 45, 66, 0.08);
+    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+    padding: 0;
 }
 
-/* === Секция "Отзывы" === */
+/* Акцентная линия сверху, растущая при наведении — поверх картинки */
+.technique-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 0;
+    height: 3px;
+    background-color: var(--color-accent);
+    transition: width 0.35s ease, left 0.35s ease;
+    z-index: 2;
+}
+
+.technique-card:hover::before {
+    width: 100%;
+    left: 0;
+}
+
+.technique-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(43, 45, 66, 0.12);
+    border-color: transparent;
+}
+
+/* Баннер — картинка на всю ширину карточки, заголовок вверху */
+.technique-card__banner {
+    width: 100%;
+    height: 160px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 15px;
+}
+
+/* Затемняющая подложка сверху картинки — чтобы оранжевый текст читался на любом фото */
+.technique-card__banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), transparent 60%);
+}
+
+/* Заголовок поверх картинки — оранжевый, вверху */
+.technique-card__title {
+    position: relative;
+    z-index: 1;
+    color: rgba(255, 255, 255, 0.9); 
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* Текстовый блок под картинкой */
+.technique-card__body {
+    padding: 20px 25px 30px;
+}
+
+.technique-card__desc {
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+    line-height: 1.5;
+    margin: 0;
+}
+
+                                                                                                    /* === Секция "Отзывы" === */
 .reviews__grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -552,7 +636,7 @@ ul {
     text-align: right;
 }
 
-/* === Форма записи === */
+                                                                                                    /* === Форма записи === */
 .contact {
     background-color: var(--color-white);
 }
@@ -653,7 +737,7 @@ ul {
     overflow: hidden;
 }
 
-/* === Секция "Как нас найти" === */
+                                                                                    /* === Секция "Как нас найти" === */
 .location__inner {
     display: flex;
     flex-wrap: wrap;
@@ -708,7 +792,7 @@ ul {
     border: none;
 }
 
-/* === Футер === */
+                                                                                                    /* === Футер === */
 .footer {
     background-color: var(--color-dark);
     color: var(--color-white);
@@ -765,7 +849,7 @@ ul {
     color: rgba(255, 255, 255, 0.7);
 }
 
-/* === Страницы-заглушки === */
+                                                                                    /* === Страницы-заглушки === */
 .page-stub {
     padding: 100px 0;
     text-align: center;
@@ -847,7 +931,7 @@ ul {
         display: inline-block;
     }
 
-    /* Анимация бургера */
+                                                                                    /* Анимация бургера */
     .burger.active .burger__line:nth-child(1) {
         transform: translateY(8px) rotate(45deg);
     }
@@ -877,7 +961,7 @@ ul {
     }
 }
 
-/* Планшеты */
+                                                                                            /* Планшеты */
 @media (max-width: 768px) {
     .logo__img {
         width: 150px;
@@ -891,7 +975,7 @@ ul {
     }
 }
 
-/* Мобильные */
+                                                                                                /* Мобильные */
 @media (max-width: 480px) {
     .logo__img {
         width: 150px;
