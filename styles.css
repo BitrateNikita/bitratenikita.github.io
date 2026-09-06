@@ -314,7 +314,7 @@ ul {
 
 /* === Секция "О студии" === */
 .about {
-    background-image:; 
+    background-image:none; 
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -333,34 +333,63 @@ ul {
 }
 
 .about__text {
+    text-indent: 40px;   /*отступ первой строки */
     font-size: 1.1rem;
     color: var(--color-text-light);
 }
 
-.about__photo {
-    flex: 1 1 300px;
+.about__text::first-letter {
+    font-size: 2em;
+    font-weight: 700;
+    color: var(--color-accent);
+    line-height: 1;
+    /*vertical-align: 0.1em;   подгоняет букву по нижнему краю строки */
+}
+
+
+.about__photo {    
+    flex: auto;
     display: flex;
     justify-content: center;
 }
 
 .photo-placeholder {
-    width: 100%;
-    max-width: 350px;
-    aspect-ratio: 4 / 3;
-    border: 3px dashed var(--color-dark);
+    width: 400px; 
+    height: 400px;
+    background-image: url('4.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     border-radius: var(--radius);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2rem;
-    color: var(--color-text-light);
-    background-color: rgba(43, 45, 66, 0.05);
+    
+    animation: 
+        floatX 11s ease-in-out infinite,
+        floatY 13s ease-in-out infinite,
+        floatRotate 17s ease-in-out infinite;
 }
 
-/* === Секция "Как проходит обучение" === */
+@keyframes floatX {
+    0%, 100% { translate: 0 0; }
+    50%      { translate: 20px 0; }
+}
+
+@keyframes floatY {
+    0%, 100% { translate: 0 0; }
+    50%      { translate: 0 -20px; }
+}
+
+@keyframes floatRotate {
+    0%, 100% { rotate: 0deg; }
+    50%      { rotate: 2deg; }
+}
+
+/* === Как проходит обучение? === */
 .steps__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 30px;
 }
 
@@ -384,6 +413,7 @@ ul {
     color: var(--color-accent);
     margin-bottom: 15px;
     line-height: 1;
+    text-align: right;
 }
 
 .step-card__title {
@@ -391,11 +421,72 @@ ul {
     font-weight: 700;
     color: var(--color-dark);
     margin-bottom: 10px;
+    
 }
 
 .step-card__desc {
     font-size: 0.95rem;
     color: var(--color-text-light);
+    text-align: left;
+}
+
+/* === Что входит в программу обучения? === */
+.curriculum {
+    background-color: var(--color-white);
+}
+
+.curriculum__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+
+
+
+.topic-card--image {
+    padding: 0;              /* убираем внутренний отступ, чтобы фото было на всю карточку */
+    overflow: hidden;         /* обрезает углы фото по border-radius карточки */
+    border-left: none;        /* убираем акцентную полосу, она тут не нужна */
+    display: flex;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;        /* заполняет всю карточку, сохраняя пропорции */
+    min-height: 200px;        /* чтобы карточка не была слишком приплюснутой */
+   
+}
+
+.topic-card--image:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+
+
+.topic-card {
+    background-color: var(--color-bg);
+    padding: 30px;
+    border-radius: var(--radius);
+    border-left: 4px solid var(--color-accent);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.topic-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.topic-card__title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--color-dark);
+    margin-bottom: 10px;
+}
+
+.topic-card__desc {
+    font-size: 0.95rem;
+    color: var(--color-text-light);
+    line-height: 1.5;
 }
 
 /* === Секция "Работы учеников" === */
@@ -635,8 +726,8 @@ ul {
 }
 
 .footer__logo-img {
-    width: 30px;
-    height: 30px;
+    width: 150px;
+    height: auto;
     object-fit: contain;
 }
 
@@ -786,6 +877,12 @@ ul {
         width: 150px;
         height: 45px;
     }
+    .steps__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .curriculum__grid {
+        grid-template-columns: repeat(2, 1fr);   /* ← добавляешь эту строку */
+    }
 }
 
 /* Мобильные */
@@ -800,6 +897,9 @@ ul {
     .hero__title {
         font-size: 1.8rem;
     }
+    .curriculum__grid {
+        grid-template-columns: 1fr;   /* ← добавь эту строку в блок 480px */
+    }
 
     .btn {
         padding: 12px 24px;
@@ -808,5 +908,8 @@ ul {
 
     .steps__grid {
         grid-template-columns: 1fr;
+    }
+    .curriculum__grid {
+        grid-template-columns: 1fr;   /* ← добавляешь эту строку */
     }
 }
