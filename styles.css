@@ -318,7 +318,7 @@ ul {
 }
 
 
-                                                                                    /* === Секция "О студии" === */
+                                                /* === Секция "О студии" === */
 .about {
     background-image:none; 
     background-size: cover;
@@ -342,6 +342,9 @@ ul {
     text-indent: 40px;   /*отступ первой строки */
     font-size: 1.1rem;
     color: var(--color-text-light);
+}
+.about__textsimple {
+    text-indent: 40px;   /*отступ первой строки */
 }
 
 .about__text::first-letter {
@@ -503,6 +506,7 @@ ul {
 
 /* === Секция "Обо мне" === */
 .about-me {
+    text-indent: 40px;   /*отступ первой строки */
     background-color: var(--color-white);
     padding: 80px 0;
     position: relative;
@@ -510,17 +514,19 @@ ul {
 }
 
 /* Декоративный элемент на фоне */
-.about-me::after {
-    content: '';
-    position: absolute;
-    top: -50px;
-    right: -50px;
-    width: 200px;
-    height: 200px;
-    background-color: rgba(244, 162, 97, 0.1);
-    border-radius: 50%;
-    z-index: 0;
-}
+/*
+    .about-me::after {
+        content: '';
+        position: absolute;
+        top: -50px;
+        right: -50px;
+        width: 200px;
+        height: 200px;
+        background-color: rgba(244, 162, 97, 0.1);
+        border-radius: 50%;
+        z-index: 0;
+    }
+*/
 
 .about-me__inner {
     display: flex;
@@ -681,7 +687,7 @@ ul {
 
 
 
-                                                                            /* === Какие направления будем изучать? === */
+                                    /* === Какие направления будем изучать? === */
 
 /* Подзаголовок секции */
 .section-subtitle {
@@ -794,7 +800,9 @@ ul {
 }
 
 
-                    /* === Секция "Группы" === */
+
+                                          /* === Секция "Группы" === */
+
 .groups {
     background-color: var(--color-white);
 }
@@ -847,11 +855,98 @@ ul {
 }
 
 
+/* === Секция "Почему Кинеограф" === */
+.features {
+    background-color: var(--color-bg);
+    padding: 80px 0;
+}
 
+.features__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 3 колонки на десктопе */
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.feature-card {
+    background-color: var(--color-white);
+    padding: 35px 25px;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Акцентная полоска сверху карточки */
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: var(--color-accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.feature-card:hover::before {
+    transform: scaleX(1);
+}
+
+/* Иконка */
+.feature-card__icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: rgba(244, 162, 97, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-accent);
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover .feature-card__icon {
+    background-color: var(--color-accent);
+    color: var(--color-white);
+    transform: scale(1.1);
+}
+
+/* Заголовок */
+.feature-card__title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-dark);
+    margin-bottom: 10px;
+    line-height: 1.3;
+}
+
+/* Описание */
+.feature-card__desc {
+    font-size: 0.95rem;
+    color: var(--color-text-light);
+    line-height: 1.5;
+}
 
 
 
                                 /* === Секция "Работы учеников" === */
+
+/*
 .works__grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -878,13 +973,14 @@ ul {
     text-align: center;
     padding: 20px;
 }
+*/
 
 
 
 
 
-
-                                                                                                    /* === Секция "Отзывы" === */
+                                                    /* === Секция "Отзывы" === */
+/*
 .reviews__grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -912,8 +1008,10 @@ ul {
     color: var(--color-dark);
     text-align: right;
 }
+*/
 
-                                                                                                    /* === Форма записи === */
+
+                                                    /* === Форма записи === */
 .contact {
     background-color: var(--color-white);
 }
@@ -1017,7 +1115,7 @@ ul {
     border: 0;
 }
 
-                                                                                    /* === Секция "Как нас найти" === */
+                                                /* === Секция "Как нас найти" === */
 .location__inner {
     display: flex;
     flex-wrap: wrap;
@@ -1072,7 +1170,7 @@ ul {
     border: none;
 }
 
-                                                                                                    /* === Футер === */
+                                                            /* === Футер === */
 .footer {
     background-color: var(--color-dark);
     color: var(--color-white);
@@ -1129,7 +1227,7 @@ ul {
     color: rgba(255, 255, 255, 0.7);
 }
 
-                                                                                    /* === Страницы-заглушки === */
+                                                    /* === Страницы-заглушки === */
 .page-stub {
     padding: 100px 0;
     text-align: center;
@@ -1212,7 +1310,7 @@ ul {
         display: inline-block;
     }
 
-                                                                                    /* Анимация бургера */
+                                                        /* Анимация бургера */
     .burger.active .burger__line:nth-child(1) {
         transform: translateY(8px) rotate(45deg);
     }
@@ -1242,7 +1340,8 @@ ul {
     }
 }
 
-                                                                                            /* Планшеты */
+
+                                                                /* Планшеты */
 @media (max-width: 768px) {
     .logo__img {
         width: 150px;
@@ -1265,9 +1364,37 @@ ul {
         grid-template-columns: repeat(2, 1fr);   /* ← добавляешь эту строку */
     }
 
+
+
+    .features__grid {
+        grid-template-columns: 1fr; /* 1 колонка на мобильных */
+        gap: 20px;
+    }
+    
+    .feature-card {
+        padding: 25px 20px;
+        flex-direction: row;
+        text-align: left;
+        align-items: flex-start;
+        gap: 20px;
+    }
+    
+    .feature-card__icon {
+        width: 50px;
+        height: 50px;
+        flex-shrink: 0;
+        margin-bottom: 0;
+    }
+    
+    .feature-card__title {
+        font-size: 1.1rem;
+        margin-bottom: 5px;
+    }
 }
 
-                                                                                                /* Мобильные */
+
+
+                                                                /* Мобильные */
 @media (max-width: 480px) {
     .logo__img {
         width: 150px;
@@ -1301,5 +1428,118 @@ ul {
     .techniques__grid {
     grid-template-columns: 1fr;   /* ← добавляешь эту строку */
     }
+
+
+    @media (max-width: 480px) {
+        .feature-card {
+            flex-direction: column;
+            text-align: center;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .feature-card__icon {
+            margin-bottom: 10px;
+        }
+    }
+
+
+    /* =====================================================
+   ФИНАЛЬНЫЕ ИСПРАВЛЕНИЯ МОБИЛЬНОЙ ВЕРСИИ
+   ===================================================== */
+
+@media (max-width: 768px) {
+
+    /* ===== 1. ХЕДЕР ВСЕГДА ОСТАЁТСЯ СВЕРХУ ===== */
+
+    .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 70px;
+        z-index: 1000;
+    }
+
+    /* Компенсируем фиксированный хедер,
+       чтобы первый блок не залезал под него */
+    main {
+        padding-top: 70px;
+    }
+
+    /* ===== 2. МОБИЛЬНОЕ МЕНЮ НАЧИНАЕТСЯ
+       СРАЗУ ПОД ХЕДЕРОМ ===== */
+
+    .nav {
+        top: 70px;
+    }
+
+    /* ===== 3. БЛОК «О СТУДИИ» НЕ ВЫЛЕЗАЕТ
+       ЗА ПРАВЫЙ КРАЙ ЭКРАНА ===== */
+
+    .about__inner {
+        width: 100%;
+    }
+
+    .about__content {
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        flex: 1 1 auto;
+    }
+
+    .about__text {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+    }
+
+    .about__photo {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .photo-placeholder {
+        width: 100%;
+        max-width: 400px;
+        height: auto;
+        aspect-ratio: 1 / 1;
+    }
+
+    /* ===== 4. КАРТА — НА ВСЮ ШИРИНУ ЭКРАНА ===== */
+
+    .location__map {
+        width: calc(100% + 40px);
+        max-width: none;
+        margin-left: -20px;
+        flex: 0 0 auto;
+        border-radius: 0;
+    }
+
+    .location__map iframe {
+        width: 100%;
+        height: 300px;
+    }
+
+    /* ===== 5. СЕКЦИЯ С КАРТОЙ НЕ СОЗДАЁТ
+       ГОРИЗОНТАЛЬНЫЙ СКРОЛЛ ===== */
+
+    .location {
+        overflow: hidden;
+    }
+
+    /* ===== 6. СТАНДАРТНЫЙ ОТСТУП ОТ ХЕДЕРА
+       ДО ПЕРВОГО КОНТЕНТА ===== */
+
+    .hero {
+        margin-top: 30px;
+    }
+}
+
+
+
 
 }
