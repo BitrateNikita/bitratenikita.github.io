@@ -31,8 +31,9 @@
     <!-- Подключаем через @font-face в CSS -->
     
     <!-- Firebase SDK (compat) — загрузка с CDN, конфигурация в script.js -->
+     <!--
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script> -->
     
     <!-- Google reCAPTCHA v3 — site key подставляется в script.js -->
     <script src="https://www.google.com/recaptcha/api.js?render=6LerAagtAAAAADOeiDaYEO4v5KVuOBtH04mnnsHg"></script>
@@ -54,7 +55,7 @@
             "addressRegion": "Краснодарский край",
             "addressCountry": "RU"
         },
-        "telephone": "+7 995 168 8246",
+        "telephone": "+7 995 168 82 46",
         "image": "logo.png"
     }
     </script>
@@ -542,70 +543,58 @@
 
 
         <!-- ========== ФОРМА ЗАПИСИ ========== -->
-        <!--
-        <section class="contact section" id="contact">
-            <div class="container">
-                <h2 class="section-title">Ваш ребёнок может начать <br>создавать анимацию уже сейчас. </h2>
-                <p class="section-subtitle">Заполните короткую форму для связи с вами и я расскажу о ближайшем занятии.</p>
-                <form class="form" id="application-form" novalidate>
-                    <!-- Honeypot поле — скрыто от людей, видно ботам -->
-                     <!--
-                    <div class="form__honeypot" aria-hidden="true">
-                        <label for="website">Ваш сайт</label>
-                        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
-                    </div>
-                    
-                    <div class="form__group">
-                        <label for="student-name" class="form__label">Имя и фамилия ученика *</label>
-                        <input type="text" id="student-name" name="studentName" class="form__input" required>
-                        <span class="form__error" id="student-name-error"></span>
-                    </div>
-                    
-                    <div class="form__group">
-                        <label for="parent-name" class="form__label">Имя родителя *</label>
-                        <input type="text" id="parent-name" name="parentName" class="form__input" required>
-                        <span class="form__error" id="parent-name-error"></span>
-                    </div>
-
-                    <div class="form__group">
-                        <label for="student-age" class="form__label">Возраст ребенка *</label>
-                        <input type="text" id="student-age" name="studentAge" class="form__input" required>
-                        <span class="form__error" id="student-age-error"></span>
-                    </div>
-                    
-                    <div class="form__group">
-                        <label for="phone" class="form__label">Номер телефона *</label>
-                        <input type="tel" id="phone" name="phone" class="form__input" placeholder="+7 (___) ___-__-__" required>
-                        <span class="form__error" id="phone-error"></span>
-                    </div>
-                    
-                    <div class="form__group form__group--checkbox">
-                        <input type="checkbox" id="agree" name="agree" class="form__checkbox" required>
-                            <label class="privacy-check">
-                                <input type="checkbox" name="privacy_consent" required>
-                                <span>
-                                    Я даю согласие на обработку моих персональных данных
-                                    в соответствии с
-                                    <a href="/privacy.html" target="_blank" rel="noopener">
-                                        Политикой обработки персональных данных
-                                    </a>
-                                </span>
-                            </label>
-                        <span class="form__error" id="agree-error"></span>
-                    </div>
-                    -->  
-
-                    <!-- Скрытое поле для reCAPTCHA токена -->
-                     <!--
-                    <input type="hidden" id="recaptcha-token" name="recaptchaToken">
-                    
-                    <button type="submit" class="btn btn--primary form__submit" id="submit-btn">Отправить заявку</button>
-                    
-                    <div class="form__message" id="form-message" role="alert"></div>
-                </form>
+        <form class="form" id="application-form" novalidate>
+            <!-- Honeypot -->
+            <div class="form__honeypot" aria-hidden="true">
+                <label for="website">Ваш сайт</label>
+                <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
             </div>
-        -->    
-        </section>
+            
+            <!-- Имя ученика -->
+            <div class="form__group">
+                <label for="student-name" class="form__label">Имя и фамилия ученика *</label>
+                <input type="text" id="student-name" name="studentName" class="form__input" required>
+                <span class="form__error" id="student-name-error"></span>
+            </div>
+            
+            <!-- Имя родителя -->
+            <div class="form__group">
+                <label for="parent-name" class="form__label">Имя родителя *</label>
+                <input type="text" id="parent-name" name="parentName" class="form__input" required>
+                <span class="form__error" id="parent-name-error"></span>
+            </div>
+            
+            <!-- Возраст ребёнка -->
+            <div class="form__group">
+                <label for="child-age" class="form__label">Возраст ребёнка *</label>
+                <input type="number" id="child-age" name="childAge" class="form__input" min="1" max="18" required>
+                <span class="form__error" id="child-age-error"></span>
+            </div>
+            
+            <!-- Телефон -->
+            <div class="form__group">
+                <label for="phone" class="form__label">Номер телефона *</label>
+                <input type="tel" id="phone" name="phone" class="form__input" placeholder="+7 (___) ___-__-__" required>
+                <span class="form__error" id="phone-error"></span>
+            </div>
+            
+            <!-- Согласие -->
+            <div class="form__group form__group--checkbox">
+                <input type="checkbox" id="agree" name="agree" class="form__checkbox" required>
+                <label for="agree" class="form__checkbox-label">
+                    Я даю согласие на обработку моих персональных данных
+                    в соответствии с <a href="privacy.html" target="_blank" class="form__link">Политикой обработки персональных данных</a> *
+                </label>
+                <span class="form__error" id="agree-error"></span>
+            </div>
+            
+            <!-- Скрытое поле reCAPTCHA -->
+            <input type="hidden" id="recaptcha-token" name="recaptchaToken">
+            
+            <button type="submit" class="btn btn--primary form__submit" id="submit-btn">Отправить заявку</button>
+            
+            <div class="form__message" id="form-message" role="alert"></div>
+        </form>
         
 
         <!-- ========== КАК НАС НАЙТИ ========== -->
@@ -620,16 +609,16 @@
                                 <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
                                 </svg>
-                                +7 995 168 8246
+                                +7 995 168 82 46
                             </a>
                         </p>
                         <p class="location__email">
-                            <a href="mailto:kineograph@ya.ru" class="location__link">
+                            <a href="mailto:kineograph@yandex.ru" class="location__link">
                                 <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
                                     <polyline points="22,6 12,13 2,6"/>
                                 </svg>
-                                kineograph@ya.ru
+                                kineograph@yandex.ru
                             </a>
                         </p>
                         <a href="https://yandex.ru/maps/?rtext=~44.675376,37.778876" target="_blank" rel="noopener" class="btn btn--secondary location__btn">
@@ -671,7 +660,7 @@
                         <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
                     </svg>
                 </a>
-                <a href="mailto:kineograph@ya.ru" class="footer__icon" aria-label="Написать email">
+                <a href="mailto:kineograph@yandex.ru" class="footer__icon" aria-label="Написать email">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
                         <polyline points="22,6 12,13 2,6"/>

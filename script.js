@@ -15,6 +15,7 @@
 //   messagingSenderId: "YOUR_SENDER_ID",
 //   appId: "YOUR_APP_ID"
 // };
+/*
 const firebaseConfig = {
   apiKey: "AIzaSyBU4A03ifp5vmpHAcicvoGEgexkEr1sU-c",
   authDomain: "kineograph-site-99c7f.firebaseapp.com",
@@ -22,14 +23,15 @@ const firebaseConfig = {
   storageBucket: "kineograph-site-99c7f.firebasestorage.app",
   messagingSenderId: "744025644715",
   appId: "1:744025644715:web:55a35c3346b014e938e1ee"
-};
+}; 
+
 
 // Инициализация Firebase
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
+*/
 
 /* === КОНФИГУРАЦИЯ RECAPTCHA === */
-// ЗАМЕНИТЕ [RECAPTCHA_SITE_KEY] на реальный site key из Google reCAPTCHA Admin Console
 const RECAPTCHA_SITE_KEY = '6LerAagtAAAAADOeiDaYEO4v5KVuOBtH04mnnsHg';
 
 /* === МОБИЛЬНОЕ МЕНЮ (бургер) === */
@@ -130,7 +132,7 @@ if (phoneInput) {
     });
 }
 
-/* === ОТПРАВКА ФОРМЫ === */
+/* === ОТПРАВКА ФОРМЫ (Yandex Cloud API) === */
 const form = document.getElementById('application-form');
 const formMessage = document.getElementById('form-message');
 const submitBtn = document.getElementById('submit-btn');
@@ -144,102 +146,98 @@ if (form) {
         formMessage.textContent = '';
         formMessage.className = 'form__message';
         
-        // Проверка honeypot — если заполнено, значит бот
+        // === 1. Проверка honeypot ===
         const honeypot = document.getElementById('website');
         if (honeypot && honeypot.value.trim() !== '') {
-            // Тихо "успешно" завершаем, но ничего не отправляем
+            // Бот — тихо "успешно" завершаем, ничего не отправляем
             formMessage.textContent = 'Спасибо! Мы скоро свяжемся с вами';
             formMessage.classList.add('form__message--success');
             form.reset();
             return;
         }
         
-        // Базовая валидация полей
+        // === 2. Сбор и валидация полей ===
         const studentName = document.getElementById('student-name').value.trim();
         const parentName = document.getElementById('parent-name').value.trim();
+        const childAge = document.getElementById('child-age').value.trim();  // ← ДОБАВИТЬ
         const phone = document.getElementById('phone').value.trim();
         const agree = document.getElementById('agree').checked;
         
         let isValid = true;
         
-        // Проверка имени ученика
         if (!studentName) {
             markError('student-name', 'Пожалуйста, укажите имя и фамилию ученика');
             isValid = false;
-        } else {
-            clearError('student-name');
-        }
+        } else clearError('student-name');
         
-        // Проверка имени родителя
         if (!parentName) {
             markError('parent-name', 'Пожалуйста, укажите имя родителя');
             isValid = false;
-        } else {
-            clearError('parent-name');
-        }
+        } else clearError('parent-name');
         
-        // Проверка телефона (минимум 11 цифр)
-        const phoneDigits = phone.replace(/\D/g, '');
-        if (phoneDigits.length < 11) {
+        if (!childAge || childAge < 7 || childAge > 18) {
+            markError('child-age', 'Укажите возраст ребёнка от 7 до 18 лет');
+            isValid = false;
+        } else clearError('child-age');
+
+        if (phone.replace(/\D/g, '').length < 11) {
             markError('phone', 'Введите полный номер телефона');
             isValid = false;
-        } else {
-            clearError('phone');
-        }
+        } else clearError('phone');
         
-        // Проверка согласия
         if (!agree) {
             markError('agree', 'Необходимо согласие на обработку данных');
             isValid = false;
-        } else {
-            clearError('agree');
-        }
+        } else clearError('agree');
         
-        if (!isValid) {
-            return;
-        }
+        if (!isValid) return;
         
-        // Получение reCAPTCHA токена
+        // === 3. Получение reCAPTCHA токена ===
+        let recaptchaToken = '';
         try {
-            const token = await grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'submit' });
-            recaptchaTokenInput.value = token;
+            recaptchaToken = await grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'submit' });
+            if (recaptchaTokenInput) recaptchaTokenInput.value = recaptchaToken;
         } catch (error) {
             console.error('reCAPTCHA error:', error);
-            formMessage.textContent = 'Ошибка проверки reCAPTCHA. Пожалуйста, обновите страницу и попробуйте снова.';
-            formMessage.classList.add('form__message--error');
-            return;
+            // Не блокируем отправку, если reCAPTCHA не сработала
+            // (проверка произойдёт на сервере)
         }
         
-        // Блокируем кнопку на время отправки
+        // === 4. Блокировка кнопки ===
         submitBtn.disabled = true;
         submitBtn.textContent = 'Отправка...';
         
-        // Собираем данные
-        const applicationData = {
-            studentName: studentName,
-            parentName: parentName,
-            phone: phone,
-            recaptchaToken: recaptchaTokenInput.value,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-            source: 'website'
-        };
-        
+        // === 5. Отправка на Yandex Cloud API ===
         try {
-            // Отправка в Firestore коллекцию applications
-            await db.collection('applications').add(applicationData);
+            const response = await fetch(API_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    studentName: studentName,
+                    parentName: parentName,
+                    childAge: childAge,
+                    phone: phone,
+                    recaptchaToken: recaptchaToken,
+                    website: honeypot ? honeypot.value : ''
+                }),
+            });
             
-            // Успешная отправка
-            formMessage.textContent = 'Спасибо! Мы скоро свяжемся с вами';
-            formMessage.classList.add('form__message--success');
-            form.reset();
-            recaptchaTokenInput.value = '';
+            const result = await response.json();
             
-            // Скрываем форму? По заданию "заменить форму на сообщение"
-            // Можно оставить форму, но очистить, или заменить содержимое.
-            // Здесь просто показываем сообщение, форма остаётся (можно доработать)
+            if (response.ok && result.success) {
+                // Успех
+                formMessage.textContent = 'Спасибо! Мы скоро свяжемся с вами';
+                formMessage.classList.add('form__message--success');
+                form.reset();
+                if (recaptchaTokenInput) recaptchaTokenInput.value = '';
+            } else {
+                throw new Error(result.error || 'Ошибка отправки');
+            }
         } catch (error) {
-            console.error('Firebase error:', error);
-            formMessage.textContent = 'Произошла ошибка при отправке. Пожалуйста, попробуйте ещё раз или свяжитесь с нами по телефону.';
+            console.error('Send error:', error);
+            
+            // Показываем понятное сообщение пользователю
+            formMessage.textContent = 'Не удалось отправить заявку. Позвоните нам: +7 995 168 8246';
             formMessage.classList.add('form__message--error');
         } finally {
             submitBtn.disabled = false;
