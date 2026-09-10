@@ -64,29 +64,65 @@
     <!-- ========== ХЕДЕР ========== -->
     <header class="header" id="header">
         <div class="container header__inner">
-            <a href="index.html" class="logo" aria-label="Кинеограф — на главную">
+
+            <!-- Логотип → всегда ведёт на красивый корневой адрес сайта -->
+            <a href="/" class="logo" aria-label="Кинеограф — на главную">
                 <img src="logo.png" alt="Логотип студии Кинеограф" class="logo__img">
-                <!-- Текст "Кинеограф" удалён полностью -->
             </a>
-            
+
             <nav class="nav" id="nav">
                 <ul class="nav__list">
-                    <li class="nav__item"><a href="index.html#about" class="nav__link">О студии</a></li>
-                    <li class="nav__item"><a href="index.html#about-me" class="nav__link">Обо мне</a></li> <!-- ← ДОБАВЬТЕ ЭТУ СТРОКУ -->
-                    <li class="nav__item"><a href="index.html#how" class="nav__link">Обучение</a></li>
-                    <li><a href="#curriculum" class="nav__link">Программа</a></li>
-                    <!--<li class="nav__item"><a href="index.html#works" class="nav__link">Работы</a></li>-->
-                    <!--<li class="nav__item"><a href="index.html#reviews" class="nav__link">Отзывы</a></li>-->
-                    <!--<li class="nav__item"><a href="portfolio.html" class="nav__link nav__link--accent">Портфолио</a></li>-->
-                    <li class="nav__item"><a href="index.html#contact" class="nav__link nav__link--cta">Записаться</a></li>
+
+                    <!-- Разделы главной страницы -->
+                    <li class="nav__item">
+                        <a href="/#about" class="nav__link">О студии</a>
+                    </li>
+
+                    <li class="nav__item">
+                        <a href="/#about-me" class="nav__link">Обо мне</a>
+                    </li>
+
+                    <li class="nav__item">
+                        <a href="/#how" class="nav__link">Обучение</a>
+                    </li>
+
+                    <li class="nav__item">
+                        <a href="#curriculum" class="nav__link">Программа</a>
+                    </li>
+
+                    <!-- Работы и отзывы пока отключены -->
+                    <!--<li class="nav__item">
+                        <a href="/#works" class="nav__link">Работы</a>
+                    </li>-->
+
+                    <!--<li class="nav__item">
+                        <a href="/#reviews" class="nav__link">Отзывы</a>
+                    </li>-->
+
+                    <!--<li class="nav__item">
+                        <a href="portfolio.html" class="nav__link nav__link--accent">Портфолио</a>
+                    </li>-->
+
+                    <!-- Кнопка записи -->
+                    <li class="nav__item">
+                        <a href="/#contact" class="nav__link nav__link--cta">Записаться</a>
+                    </li>
+
                 </ul>
             </nav>
-            
-            <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false">
+
+            <!-- Мобильное меню -->
+            <button
+                class="burger"
+                id="burger"
+                aria-label="Открыть меню"
+                aria-expanded="false"
+            >
                 <span class="burger__line"></span>
                 <span class="burger__line"></span>
                 <span class="burger__line"></span>
             </button>
+
         </div>
     </header>
 
@@ -543,10 +579,16 @@
                     
                     <div class="form__group form__group--checkbox">
                         <input type="checkbox" id="agree" name="agree" class="form__checkbox" required>
-                        <label for="agree" class="form__checkbox-label">
-                            Я согласен(а) на обработку персональных данных согласно
-                            <a href="privacy.html" target="_blank" class="form__link">политике конфиденциальности</a> *
-                        </label>
+                            <label class="privacy-check">
+                                <input type="checkbox" name="privacy_consent" required>
+                                <span>
+                                    Я даю согласие на обработку моих персональных данных
+                                    в соответствии с
+                                    <a href="/privacy.html" target="_blank" rel="noopener">
+                                        Политикой обработки персональных данных
+                                    </a>
+                                </span>
+                            </label>
                         <span class="form__error" id="agree-error"></span>
                     </div>
                     
