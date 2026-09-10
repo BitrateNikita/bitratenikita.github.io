@@ -287,7 +287,7 @@ ul {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    padding: 120px 0 100px;
+    padding: 400px 0 100px;
     color: var(--color-white);
     text-align: center;
 }
@@ -1517,7 +1517,7 @@ ul {
     .location__map {
         width: calc(100%);
         max-width: none;
-        margin-left: -20px;
+        margin-left: 0px;
         flex: 0 0 auto;
         border-radius: 0;
     }
@@ -1538,7 +1538,7 @@ ul {
        ДО ПЕРВОГО КОНТЕНТА ===== */
 
     .hero {
-        margin-top: 30px;
+        margin-top: 0px;
     }
 }
 
