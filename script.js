@@ -33,6 +33,9 @@ const db = firebase.firestore();
 
 /* === КОНФИГУРАЦИЯ RECAPTCHA === */
 const RECAPTCHA_SITE_KEY = '6LerAagtAAAAADOeiDaYEO4v5KVuOBtH04mnnsHg';
+/* === АДРЕС CLOUD FUNCTION (Yandex Cloud) === */
+const API_URL = 'https://functions.yandexcloud.net/d4eqi3bldrtqhecvrngk';
+
 
 /* === МОБИЛЬНОЕ МЕНЮ (бургер) === */
 const burger = document.getElementById('burger');

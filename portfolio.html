@@ -3,42 +3,192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Портфолио — в разработке | Кинеограф</title>
-    <meta name="description" content="Портфолио студии Кинеограф — скоро здесь появятся работы учеников.">
-    <link rel="icon" type="image/png" href="logo.png">
+    <title>Портфолио — Кинеограф</title>
+    <meta name="description" content="Портфолио аниматора студии Кинеограф: игровая Spine-анимация, опыт работы в студиях.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon-512x512.png">
+    <link rel="manifest" href="site.webmanifest">
+    <meta name="theme-color" content="#2B2D42">
+
+    <!-- Стили -->
     <link rel="stylesheet" href="styles.css">
+
+    <!-- Spine Web Player -->
+    <link rel="stylesheet" href="https://unpkg.com/@esotericsoftware/spine-player@4.2.60/dist/spine-player.css">
+    <script src="https://unpkg.com/@esotericsoftware/spine-player@4.2.60/dist/spine-player.js"></script>
 </head>
 <body>
-    <header class="header">
+
+    <!-- ========== ХЕДЕР ========== -->
+    <header class="header" id="header">
         <div class="container header__inner">
-            <a href="index.html" class="logo">
-                <img src="logo.png" alt="Логотип Кинеограф" class="logo__img">
-                <span class="logo__text">Кинеограф</span>
+            <a href="/" class="logo" aria-label="Кинеограф — на главную">
+                <img src="logo.png" alt="Логотип студии Кинеограф" class="logo__img">
             </a>
-            <nav class="nav">
+
+            <nav class="nav" id="nav">
                 <ul class="nav__list">
-                    <li class="nav__item"><a href="index.html#about" class="nav__link">О студии</a></li>
-                    <li class="nav__item"><a href="index.html#how" class="nav__link">Обучение</a></li>
-                    <li class="nav__item"><a href="index.html#works" class="nav__link">Работы</a></li>
-                    <li class="nav__item"><a href="index.html#reviews" class="nav__link">Отзывы</a></li>
-                    <li class="nav__item"><a href="index.html#contact" class="nav__link">Записаться</a></li>
+                    <li class="nav__item"><a href="/#about" class="nav__link">О студии</a></li>
+                    <li class="nav__item"><a href="/#about-me" class="nav__link">Обо мне</a></li>
+                    <li class="nav__item"><a href="/#how" class="nav__link">Обучение</a></li>
+                    <li class="nav__item"><a href="/#curriculum" class="nav__link">Программа</a></li>
+                    <li class="nav__item"><a href="portfolio.html" class="nav__link nav__link--accent">Портфолио</a></li>
+                    <li class="nav__item"><a href="/#contact" class="nav__link nav__link--cta">Записаться</a></li>
                 </ul>
             </nav>
+
+            <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false">
+                <span class="burger__line"></span>
+                <span class="burger__line"></span>
+                <span class="burger__line"></span>
+            </button>
         </div>
     </header>
 
-    <main class="page-stub">
-        <div class="container">
-            <h1 class="section-title">Портфолио</h1>
-            <p class="stub-text">Страница в разработке. Скоро здесь появятся работы наших учеников!</p>
-            <a href="index.html" class="btn btn--primary">Вернуться на главную</a>
-        </div>
+    <main>
+        <!-- ========== SPINE PLAYER ========== -->
+        <section class="spine-section section" id="spine">
+            <div class="container">
+                <h1 class="section-title">Портфолио аниматора</h1>
+                <p class="section-subtitle">Игровая 2D-анимация в Spine</p>
+
+                <!-- Контейнер плеера -->
+                <div class="spine-player-wrap">
+                    <div id="spine-player" class="spine-player"></div>
+                </div>
+
+                <!-- Панель управления под плеером -->
+                <div class="spine-controls">
+                    <!-- Выбор персонажа -->
+                    <div class="spine-controls__row">
+                        <span class="spine-controls__label">Персонаж:</span>
+                        <div class="spine-controls__buttons" id="skin-buttons">
+                            <!-- Кнопки добавятся через JS -->
+                        </div>
+                    </div>
+
+                    <!-- Выбор анимации -->
+                    <div class="spine-controls__row">
+                        <span class="spine-controls__label">Анимация:</span>
+                        <div class="spine-controls__buttons" id="animation-buttons">
+                            <!-- Кнопки добавятся через JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== ОБО МНЕ ========== -->
+        <section class="about-me section" id="about-me">
+            <div class="container about-me__inner">
+                <div class="about-me__photo">
+                    <div class="about-me__photo-wrapper">
+                        <img src="myphoto.jpg" alt="Фото аниматора студии Кинеограф" class="about-me__img">
+                        <div class="about-me__badge">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="8" r="4"/>
+                                <path d="M4 21v-2a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v2"/>
+                            </svg>
+                            Действующий аниматор
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-me__content">
+                    <h2 class="section-title about-me__title">Обо мне</h2>
+                    <p class="about-me__intro">Мой путь в анимацию проходил через портретную фотографию, кино и игровую индустрию. Эти три профессии сформировали мой уникальный подход. Этот опыт я и приношу в студию — показываю детям анимацию не как один приём, а как целый язык, соединяющий классическую мультипликацию и современные технологии.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== ОПЫТ РАБОТЫ ========== -->
+        <section class="experience section" id="experience">
+            <div class="container">
+                <h2 class="section-title">Опыт работы</h2>
+                <p class="section-subtitle">Студии, в которых я работал и работаю</p>
+
+                <div class="experience__grid">
+                    <!-- СЮДА ДОБАВЛЯЙТЕ КАРТОЧКИ — просто копируйте блок ниже и меняйте данные -->
+
+                    <div class="experience-card">
+                        <div class="experience-card__logo">
+                            <!-- Если логотип есть — укажите путь. Если нет — оставьте текст -->
+                            <span>MYGAMES</span>
+                        </div>
+                        <h3 class="experience-card__title">MYGAMES</h3>
+                        <p class="experience-card__role">Аниматор</p>
+                        <p class="experience-card__period">20XX — 20XX</p>
+                        <p class="experience-card__desc">[Краткое описание проекта]</p>
+                    </div>
+
+                    <div class="experience-card">
+                        <div class="experience-card__logo"><span>REDRIFT</span></div>
+                        <h3 class="experience-card__title">REDRIFT</h3>
+                        <p class="experience-card__role">Аниматор</p>
+                        <p class="experience-card__period">20XX — 20XX</p>
+                        <p class="experience-card__desc">[Краткое описание проекта]</p>
+                    </div>
+
+                    <div class="experience-card">
+                        <div class="experience-card__logo"><span>MIRRORMAGIC</span></div>
+                        <h3 class="experience-card__title">MIRRORMAGIC</h3>
+                        <p class="experience-card__role">Аниматор</p>
+                        <p class="experience-card__period">20XX — 20XX</p>
+                        <p class="experience-card__desc">[Краткое описание проекта]</p>
+                    </div>
+
+                    <div class="experience-card">
+                        <div class="experience-card__logo"><span>DEEPLAY</span></div>
+                        <h3 class="experience-card__title">DEEPLAY</h3>
+                        <p class="experience-card__role">Аниматор</p>
+                        <p class="experience-card__period">20XX — 20XX</p>
+                        <p class="experience-card__desc">[Краткое описание проекта]</p>
+                    </div>
+
+                    <div class="experience-card">
+                        <div class="experience-card__logo"><span>GAMEFOREST</span></div>
+                        <h3 class="experience-card__title">GAMEFOREST</h3>
+                        <p class="experience-card__role">Аниматор</p>
+                        <p class="experience-card__period">20XX — 20XX</p>
+                        <p class="experience-card__desc">[Краткое описание проекта]</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
+    <!-- ========== ФУТЕР ========== -->
     <footer class="footer">
         <div class="container footer__inner">
-            <p class="footer__copy">© 2025 Кинеограф</p>
+            <div class="footer__logo">
+                <img src="logo-inv.png" alt="Логотип Кинеограф" class="footer__logo-img">
+            </div>
+            <div class="footer__contacts">
+                <a href="[TELEGRAM_LINK]" class="footer__icon" target="_blank" rel="noopener" aria-label="Telegram">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                    </svg>
+                </a>
+                <a href="tel:+79951688246" class="footer__icon" aria-label="Позвонить">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                    </svg>
+                </a>
+                <a href="mailto:kineograph@yandex.ru" class="footer__icon" aria-label="Написать email">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                        <polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                </a>
+            </div>
+            <p class="footer__copy">© 2026 Кинеограф. Все права защищены.</p>
         </div>
     </footer>
+
+    <script src="script.js"></script>
+    <script src="portfolio.js"></script>
 </body>
 </html>
