@@ -1446,6 +1446,50 @@ ul {
         }
     }
 
+    /* === Маленькие мобильные (до 480px) === */
+    @media (max-width: 480px) {
+
+        .contact {
+            padding: 50px 0;
+        }
+
+        .contact .section-title {
+            font-size: 1.6rem;
+        }
+
+        .contact .section-subtitle {
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+        }
+
+        .form {
+            gap: 14px;
+        }
+
+        .form__label {
+            font-size: 0.9rem;
+        }
+
+        .form__input {
+            padding: 13px 14px;
+            font-size: 16px;   /* оставляем 16px, чтобы не было зума */
+        }
+
+        .form__checkbox {
+            width: 20px;
+            height: 20px;
+        }
+
+        .form__checkbox-label {
+            font-size: 0.8rem;
+        }
+
+        .form__submit {
+            padding: 15px 20px;
+            font-size: 0.95rem;
+        }
+    }
+
 
     /* =====================================================
    ФИНАЛЬНЫЕ ИСПРАВЛЕНИЯ МОБИЛЬНОЙ ВЕРСИИ
@@ -1512,6 +1556,99 @@ ul {
         aspect-ratio: 1 / 1;
     }
 
+
+    /* =====================================================
+   ФОРМА ЗАПИСИ — МОБИЛЬНАЯ АДАПТАЦИЯ
+   ===================================================== */
+
+/* === Планшеты и небольшие ноутбуки === */
+
+    /* Секция формы — уменьшаем вертикальные отступы */
+    .contact {
+        padding: 60px 0;
+    }
+
+    .contact .section-title {
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+    }
+
+    /* Форма — на всю ширину контейнера, без лишних ограничений */
+    .form {
+        max-width: 100%;
+        width: 100%;
+        gap: 16px;
+        padding: 0;
+        margin: 0 auto;
+    }
+
+    /* Поля формы */
+    .form__group {
+        gap: 6px;
+    }
+
+    .form__label {
+        font-size: 0.95rem;
+    }
+
+    .form__input {
+        padding: 14px 16px;   /* чуть больше — удобнее попадать пальцем */
+        font-size: 16px;      /* ВАЖНО: 16px предотвращает авто-зум в iOS Safari */
+        border-radius: 10px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Убираем стрелки у input[type=number] на мобильных */
+    .form__input[type="number"]::-webkit-outer-spin-button,
+    .form__input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    .form__input[type="number"] {
+        -moz-appearance: textfield;
+        appearance: textfield;
+    }
+
+    /* Чекбокс согласия — выравнивание текста */
+    .form__group--checkbox {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 12px 0;
+    }
+
+    .form__checkbox {
+        width: 22px;
+        height: 22px;
+        margin-top: 0;
+        flex-shrink: 0;
+    }
+
+    .form__checkbox-label {
+        font-size: 0.85rem;
+        line-height: 1.4;
+        flex: 1;
+    }
+
+    /* Кнопка отправки — на всю ширину */
+    .form__submit {
+        width: 100%;
+        min-width: 0;
+        align-self: stretch;
+        padding: 16px 24px;
+        font-size: 1rem;
+    }
+
+    /* Сообщение об успехе/ошибке */
+    .form__message {
+        font-size: 0.95rem;
+        padding: 0 10px;
+    }
+}
+
+
     /* ===== 4. КАРТА — НА ВСЮ ШИРИНУ ЭКРАНА ===== */
 
     .location__map {
@@ -1542,7 +1679,3 @@ ul {
     }
 }
 
-
-
-
-}

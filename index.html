@@ -547,59 +547,64 @@
 
 
         <!-- ========== ФОРМА ЗАПИСИ ========== -->
-        <form class="form" id="application-form" novalidate>
-            <!-- Honeypot -->
-            <div class="form__honeypot" aria-hidden="true">
-                <label for="website">Ваш сайт</label>
-                <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
-            </div>
-            
-            <!-- Имя ученика -->
-            <div class="form__group">
-                <label for="student-name" class="form__label">Имя и фамилия ученика *</label>
-                <input type="text" id="student-name" name="studentName" class="form__input" required>
-                <span class="form__error" id="student-name-error"></span>
-            </div>
-            
-            <!-- Имя родителя -->
-            <div class="form__group">
-                <label for="parent-name" class="form__label">Имя родителя *</label>
-                <input type="text" id="parent-name" name="parentName" class="form__input" required>
-                <span class="form__error" id="parent-name-error"></span>
-            </div>
-            
-            <!-- Возраст ребёнка -->
-            <div class="form__group">
-                <label for="child-age" class="form__label">Возраст ребёнка *</label>
-                <input type="number" id="child-age" name="childAge" class="form__input" min="1" max="18" required>
-                <span class="form__error" id="child-age-error"></span>
-            </div>
-            
-            <!-- Телефон -->
-            <div class="form__group">
-                <label for="phone" class="form__label">Номер телефона *</label>
-                <input type="tel" id="phone" name="phone" class="form__input" placeholder="+7 (___) ___-__-__" required>
-                <span class="form__error" id="phone-error"></span>
-            </div>
-            
-            <!-- Согласие -->
-            <div class="form__group form__group--checkbox">
-                <input type="checkbox" id="agree" name="agree" class="form__checkbox" required>
-                <label for="agree" class="form__checkbox-label">
-                    Я даю согласие на обработку моих персональных данных
-                    в соответствии с <a href="privacy.html" target="_blank" class="form__link">Политикой обработки персональных данных</a> *
-                </label>
-                <span class="form__error" id="agree-error"></span>
-            </div>
-            
-            <!-- Скрытое поле reCAPTCHA -->
-            <input type="hidden" id="recaptcha-token" name="recaptchaToken">
-            
-            <button type="submit" class="btn btn--primary form__submit" id="submit-btn">Отправить заявку</button>
-            
-            <div class="form__message" id="form-message" role="alert"></div>
-        </form>
-        
+        <section class="contact section" id="contact">
+            <div class="container">
+                <h2 class="section-title">Записаться на занятие</h2>
+                <p class="section-subtitle">Заполните короткую форму для связи с вами — я расскажу о ближайшем занятии</p>
+         
+            <form class="form" id="application-form" novalidate>
+                <!-- Honeypot -->
+                <div class="form__honeypot" aria-hidden="true">
+                    <label for="website">Ваш сайт</label>
+                    <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                </div>
+                
+                <!-- Имя ученика -->
+                <div class="form__group">
+                    <label for="student-name" class="form__label">Имя и фамилия ученика *</label>
+                    <input type="text" id="student-name" name="studentName" class="form__input" required>
+                    <span class="form__error" id="student-name-error"></span>
+                </div>
+                
+                <!-- Имя родителя -->
+                <div class="form__group">
+                    <label for="parent-name" class="form__label">Имя родителя *</label>
+                    <input type="text" id="parent-name" name="parentName" class="form__input" required>
+                    <span class="form__error" id="parent-name-error"></span>
+                </div>
+                
+                <!-- Возраст ребёнка -->
+                <div class="form__group">
+                    <label for="child-age" class="form__label">Возраст ребёнка *</label>
+                    <input type="number" id="child-age" name="childAge" class="form__input" min="1" max="18" required>
+                    <span class="form__error" id="child-age-error"></span>
+                </div>
+                
+                <!-- Телефон -->
+                <div class="form__group">
+                    <label for="phone" class="form__label">Номер телефона *</label>
+                    <input type="tel" id="phone" name="phone" class="form__input" placeholder="+7 (___) ___-__-__" required>
+                    <span class="form__error" id="phone-error"></span>
+                </div>
+                
+                <!-- Согласие -->
+                <div class="form__group form__group--checkbox">
+                    <input type="checkbox" id="agree" name="agree" class="form__checkbox" required>
+                    <label for="agree" class="form__checkbox-label">
+                        Я даю согласие на обработку моих персональных данных
+                        в соответствии с <a href="privacy.html" target="_blank" class="form__link">Политикой обработки персональных данных</a> *
+                    </label>
+                    <span class="form__error" id="agree-error"></span>
+                </div>
+                
+                <!-- Скрытое поле reCAPTCHA -->
+                <input type="hidden" id="recaptcha-token" name="recaptchaToken">
+                
+                <button type="submit" class="btn btn--primary form__submit" id="submit-btn">Отправить заявку</button>
+                
+                <div class="form__message" id="form-message" role="alert"></div>
+            </form>
+        </section>
 
         <!-- ========== КАК НАС НАЙТИ ========== -->
         <section class="location section" id="location">
