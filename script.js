@@ -192,6 +192,16 @@ if (form) {
         }
     });
 }
+async function verifyRecaptcha(token) {
+    const response = await fetch('https://www.google.com/recaptcha/api/siteverify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `secret=${RECAPTCHA_SECRET}&response=${token}`
+    });
+    const data = await response.json();
+    console.log('reCAPTCHA response:', JSON.stringify(data)); // ← временная строка для диагностики
+    return data.success && data.score >= 0.5;
+}
 
 function markError(fieldId, message) {
     const field = document.getElementById(fieldId);
