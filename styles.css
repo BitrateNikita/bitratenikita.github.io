@@ -280,18 +280,71 @@ ul {
 }
 
 /* === Hero секция === ФОН*/
+/* === Hero секция === */
 .hero {
-    background-image: 
-        linear-gradient(rgba(43, 45, 66, 0.75), rgba(43, 45, 66, 0.75)),    /* затемнение — сверху */
-        url('1.png');   /* картинка — посередине */
+    position: relative;
+    /* Твой оригинальный padding, который задает высоту */
+    padding: 400px 0 100px; 
+    color: var(--color-white);
+    text-align: center;
+    /* Убрали background-color, чтобы не было двойного затемнения */
+    overflow: hidden; 
+}
+
+/* Слой с картинками (на весь блок) */
+.hero-bg-images {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+/* Картинки */
+.hero-bg-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    padding: 400px 0 100px;
-    color: var(--color-white);
-    text-align: center;
 }
 
+/* Вторая картинка (фейд) */
+.hero-bg-img--fade {
+    opacity: 0;
+    animation: overlay-fade 0.15s infinite; 
+}
+
+/* Твоя плашка */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(43, 45, 66, 0.75); 
+    z-index: 2; 
+}
+
+/* Текст поверх */
+.hero__inner {
+    position: relative;
+    z-index: 3; 
+}
+
+@keyframes overlay-fade {
+    0%   { opacity: 0; }      
+    20%  { opacity: 0.5; }      
+    60%  { opacity: 1; }      
+    80%  { opacity: 0.5; }      
+    100% { opacity: 0; }      
+}
+
+/* Твои стили текста */
 .hero__title {
     font-size: 3rem;
     font-weight: 700;
@@ -304,22 +357,19 @@ ul {
     max-width: 600px;
     margin: 0 auto 40px;
     color: rgba(255, 255, 255, 0.9);
-    
 }
 
-/* Отдельный самостоятельный стиль для второго абзаца hero — курсив */
 .hero__desc-italic {
     font-family: 'Montserrat', sans-serif;
     font-style: italic;
     font-weight: 400;
-    font-size: 14px;      /* подбери свой размер */
-    color: rgba(255, 255, 255, 0.9);       /* подбери свой цвет */
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.9);
     line-height: 1.5;
     margin-top: 0 auto;
     margin-bottom: 24px;
     text-align: center;
 }
-
 
                                                 /* === Секция "О студии" === */
 .about {
