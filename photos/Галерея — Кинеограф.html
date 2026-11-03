@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Галерея — Кинеограф</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f5f3;--surface:#fff;--ink:#2b2d42;--muted:#6b6e80;--accent:#f4a261;--line:rgba(43,45,66,.14);
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#15161f;--surface:#1f2130;--ink:#f1f1ec;--muted:#9a9db0;--line:rgba(255,255,255,.16)}
+}
+:root[data-theme="dark"]{--bg:#15161f;--surface:#1f2130;--ink:#f1f1ec;--muted:#9a9db0;--line:rgba(255,255,255,.16)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Montserrat',system-ui,-apple-system,'Segoe UI',sans-serif;line-height:1.5}
+button{font:inherit;color:inherit;cursor:pointer}
+.wrap{max-width:1180px;margin:0 auto;padding:56px 20px 80px}
+h1{font-size:clamp(2rem,5vw,3.4rem);font-weight:800;line-height:1.05;margin:0 0 14px;letter-spacing:-.02em}
+.lead{max-width:46ch;margin:0 0 36px;color:var(--muted);font-size:1.05rem}
+.bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;margin-bottom:22px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);background:transparent;border-radius:99px;padding:9px 16px;font-size:.9rem;font-weight:600;display:flex;gap:8px;align-items:center;transition:background .2s,color .2s,border-color .2s}
+.chip i{font-style:normal;font-weight:500;color:var(--muted)}
+.chip:hover{border-color:var(--ink)}
+.chip.on{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.chip.on i{color:var(--accent)}
+.count{color:var(--muted);font-size:.9rem}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:clamp(130px,17vw,220px);grid-auto-flow:dense;gap:12px}
+.tile{position:relative;border:0;padding:0;border-radius:14px;overflow:hidden;background:var(--surface);opacity:0;transform:scale(.97);transition:opacity .5s ease,transform .5s ease}
+.tile.in{opacity:1;transform:none}
+.tile.big{grid-column:span 2;grid-row:span 2;border-radius:22px}
+.tile.tall{grid-row:span 2}
+.tile.wide{grid-column:span 2}
+.art{position:absolute;inset:0;transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+@media (hover:hover){.tile:hover .art{transform:scale(1.07)}}
+.art svg,.art img,.th svg,.th img,.lb-img svg,.lb-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.cap{position:absolute;left:0;right:0;bottom:0;padding:44px 16px 14px;text-align:left;color:#fff;font-size:.88rem;font-weight:600;background:linear-gradient(to top,rgba(20,21,31,.8),transparent);opacity:0;transition:opacity .3s}
+.cap small{display:block;font-weight:500;color:var(--accent);font-size:.78rem}
+.tile:hover .cap,.tile:focus-visible .cap{opacity:1}
+.tile:focus-visible,.chip:focus-visible,.btn:focus-visible,.lb button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.more{text-align:center;margin-top:36px}
+.btn{border:2px solid var(--ink);background:transparent;border-radius:99px;padding:14px 34px;font-weight:700;transition:background .2s,color .2s}
+.btn:hover{background:var(--ink);color:var(--bg)}
+.empty{grid-column:1/-1;color:var(--muted);padding:40px 0}
+
+/* Просмотр */
+.lb{position:fixed;inset:0;z-index:50;display:none;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:rgba(14,15,22,.97);padding:max(16px,env(safe-area-inset-top,0px)) 16px max(14px,env(safe-area-inset-bottom,0px));color:#f5f5f3}
+.lb.open{display:flex}
+.lb-fig{margin:0;width:min(92vw,980px)}
+.lb-img{height:min(58vh,640px);display:flex;align-items:center;justify-content:center}
+.lb-img .box{position:relative;height:100%;aspect-ratio:var(--ar,4/3);max-width:100%;border-radius:18px;overflow:hidden}
+.lb-img>img{position:static;width:auto;height:auto;max-width:100%;max-height:100%;border-radius:18px;object-fit:contain}
+.lb-img.go{animation:adv .35s ease both}
+@keyframes adv{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}
+.lb-cap{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-top:14px}
+.lb-cap b{display:block;font-size:1.1rem}
+.lb-cap small{color:var(--accent);font-size:.85rem}
+.lb-cap span{color:#b9bbc9;font-size:.9rem;white-space:nowrap}
+.lb-x,.lb-n{position:absolute;border:0;background:rgba(255,255,255,.12);color:#fff;border-radius:50%;width:48px;height:48px;font-size:1.5rem;line-height:1;display:grid;place-items:center;transition:background .2s}
+.lb-x:hover,.lb-n:hover{background:var(--accent);color:#2b2d42}
+.lb-x{top:max(14px,env(safe-area-inset-top,0px));right:14px}
+.lb-n{top:42%}
+.prev{left:14px}.next{right:14px}
+.rail{position:relative;width:min(92vw,980px);background:#0b0c12;border-radius:10px;padding:20px 12px}
+.rail::before,.rail::after{content:'';position:absolute;left:12px;right:12px;height:7px;background:radial-gradient(circle at 5px 3.5px,#f5f5f3 2.6px,transparent 3px) 0 0/16px 7px repeat-x;opacity:.8}
+.rail::before{top:6px}.rail::after{bottom:6px}
+.strip{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+.strip::-webkit-scrollbar{display:none}
+.th{position:relative;flex:0 0 76px;height:54px;border:0;padding:0;border-radius:5px;overflow:hidden;opacity:.4;transition:opacity .2s,outline-color .2s;outline:2px solid transparent}
+.th.on{opacity:1;outline-color:var(--accent)}
+.th:hover{opacity:.8}
+
+@media (max-width:900px){.grid{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:560px){
+  .wrap{padding-top:36px}
+  .bar{flex-direction:column;align-items:stretch}
+  .chips{flex-wrap:nowrap;overflow-x:auto;margin:0 -20px;padding:0 20px 4px;scrollbar-width:none;scroll-snap-type:x proximity}
+  .chips::-webkit-scrollbar{display:none}
+  .chip{flex:none;scroll-snap-align:start}
+  .grid{grid-template-columns:repeat(2,1fr);gap:8px;grid-auto-rows:clamp(120px,38vw,190px)}
+  .cap{opacity:1;padding-top:30px;font-size:.8rem}.cap small{display:none}
+  .lb-n{top:auto;bottom:calc(env(safe-area-inset-bottom,0px) + 112px);width:44px;height:44px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.tile{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <h1>Кадры из жизни студии</h1>
+  <p class="lead">Занятия, работы ребят и закулисье — всё, из чего складываются наши мультфильмы.</p>
+  <div class="bar">
+    <div class="chips" id="chips" role="group" aria-label="Фильтр по категориям"></div>
+    <span class="count" id="count"></span>
+  </div>
+  <section class="grid" id="grid" aria-live="polite"></section>
+  <div class="more"><button class="btn" id="more">Показать ещё</button></div>
+</main>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Просмотр фотографии" aria-hidden="true">
+  <button class="lb-x" id="lbx" aria-label="Закрыть">✕</button>
+  <button class="lb-n prev" id="prev" aria-label="Предыдущее фото">‹</button>
+  <figure class="lb-fig">
+    <div class="lb-img" id="lbimg"></div>
+    <figcaption class="lb-cap"><div><b id="lbt"></b><small id="lbk"></small></div><span id="lbc"></span></figcaption>
+  </figure>
+  <button class="lb-n next" id="next" aria-label="Следующее фото">›</button>
+  <div class="rail"><div class="strip" id="strip"></div></div>
+</div>
+
+<script>
+(()=>{
+const CATS=['Занятия','Работы','Закулисье','Материалы'];
+const T={
+  'Занятия':['Снимаем покадрово','Двигаем героя по миллиметру','Рисуем раскадровку','Работаем командой','Первый кадр'],
+  'Работы':['Пластилиновый герой','Перекладной лес','Рисованная погоня','Игрушки оживают','Кадр из мультфильма'],
+  'Закулисье':['Свет и камера','Стол аниматора','Готовимся к съёмке','Декорации','Оптические игрушки'],
+  'Материалы':['Пластилин и стеки','Бумага и ножницы','Зоотроп','Фенакистископ','Краски и кисти']
+};
+// Чтобы показать настоящее фото, укажите путь в src, например src:'photos/01.jpg'
+const items=Array.from({length:36},(_,i)=>{const cat=CATS[i%4];const sz=i%9===0?'big':i%7===3?'tall':i%5===2?'wide':'';return{id:i,cat,title:T[cat][Math.floor(i/4)%5],src:'',sz,ar:sz==='tall'?'3/4':sz==='wide'?'16/10':'4/3'}});
+
+const $=s=>document.querySelector(s);
+const grid=$('#grid'),chips=$('#chips'),more=$('#more'),count=$('#count');
+const lb=$('#lb'),lbimg=$('#lbimg'),strip=$('#strip');
+let f='Все',shown=12,list=items,cur=0,last=null;
+const pad=n=>String(n).padStart(2,'0');
+const pl=n=>n%10===1&&n%100!==11?'фото':'фото';
+
+function art(i){
+  const P=['#2b2d42','#f4a261','#efe9df','#c9c4b8','#e76f51'];
+  let s=i*7919+13;const r=()=>(s=(s*9301+49297)%233280)/233280;
+  const bg=P[[0,2,2,1,3][i%5]];
+  let o='<svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="100" height="100" fill="'+bg+'"/>';
+  for(let k=0;k<4;k++){
+    const c=P[Math.floor(r()*P.length)];if(c===bg)continue;
+    const t=Math.floor(r()*3),x=8+r()*60,y=8+r()*60,w=14+r()*32,h=10+r()*28,a=Math.round(r()*60-30);
+    o+=t===0?'<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" fill="'+c+'" transform="rotate('+a+' '+(x+w/2)+' '+(y+h/2)+')"/>'
+      :t===1?'<circle cx="'+(x+w/2)+'" cy="'+(y+w/2)+'" r="'+(w/2.4)+'" fill="'+c+'"/>'
+      :'<polygon points="'+x+','+(y+h)+' '+(x+w)+','+(y+h)+' '+(x+w*.6)+','+y+'" fill="'+c+'"/>';
+  }
+  return o+'</svg>';
+}
+const media=it=>it.src?'<img src="'+it.src+'" alt="'+it.title+'" loading="lazy">':art(it.id);
+
+function drawChips(){
+  chips.innerHTML=['Все',...CATS].map(c=>{
+    const n=c==='Все'?items.length:items.filter(x=>x.cat===c).length;
+    return '<button class="chip'+(c===f?' on':'')+'" data-c="'+c+'" aria-pressed="'+(c===f)+'">'+c+'<i>'+n+'</i></button>';
+  }).join('');
+}
+function render(){
+  list=f==='Все'?items:items.filter(x=>x.cat===f);
+  grid.innerHTML=list.length?list.slice(0,shown).map((it,k)=>
+    '<button class="tile '+it.sz+'" data-k="'+k+'" style="transition-delay:'+((k%8)*45)+'ms" aria-label="Открыть: '+it.title+'"><div class="art">'+media(it)+'</div><span class="cap"><small>'+it.cat+'</small>'+it.title+'</span></button>'
+  ).join(''):'<p class="empty">В этой категории пока нет фотографий.</p>';
+  count.textContent=list.length+' '+pl(list.length);
+  more.parentElement.hidden=shown>=list.length;
+  requestAnimationFrame(()=>requestAnimationFrame(()=>grid.querySelectorAll('.tile').forEach(t=>t.classList.add('in'))));
+}
+chips.addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;f=b.dataset.c;shown=12;drawChips();render()});
+more.addEventListener('click',()=>{shown+=12;render()});
+
+function show(k){
+  cur=(k+list.length)%list.length;const it=list[cur];
+  lbimg.classList.remove('go');void lbimg.offsetWidth;
+  lbimg.innerHTML=it.src?media(it):'<div class="box" style="--ar:'+it.ar+'">'+art(it.id)+'</div>';lbimg.classList.add('go');
+  $('#lbt').textContent=it.title;$('#lbk').textContent=it.cat;
+  $('#lbc').textContent=pad(cur+1)+' из '+pad(list.length);
+  strip.querySelectorAll('.th').forEach((t,j)=>t.classList.toggle('on',j===cur));
+  const a=strip.children[cur];if(a)a.scrollIntoView({inline:'center',block:'nearest',behavior:'smooth'});
+}
+function open(k){
+  last=document.activeElement;
+  strip.innerHTML=list.map((it,j)=>'<button class="th" data-k="'+j+'" aria-label="Фото '+(j+1)+'">'+media(it)+'</button>').join('');
+  lb.classList.add('open');lb.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';
+  show(k);$('#lbx').focus();
+}
+function close(){lb.classList.remove('open');lb.setAttribute('aria-hidden','true');document.body.style.overflow='';if(last)last.focus()}
+
+grid.addEventListener('click',e=>{const t=e.target.closest('.tile');if(t)open(+t.dataset.k)});
+strip.addEventListener('click',e=>{const t=e.target.closest('.th');if(t)show(+t.dataset.k)});
+$('#prev').onclick=()=>show(cur-1);$('#next').onclick=()=>show(cur+1);$('#lbx').onclick=close;
+lb.addEventListener('click',e=>{if(e.target===lb)close()});
+document.addEventListener('keydown',e=>{
+  if(!lb.classList.contains('open'))return;
+  if(e.key==='Escape')close();
+  if(e.key==='ArrowLeft')show(cur-1);
+  if(e.key==='ArrowRight')show(cur+1);
+});
+let x0=null;
+lb.addEventListener('touchstart',e=>{x0=e.target.closest('.rail')?null:e.touches[0].clientX},{passive:true});
+lb.addEventListener('touchend',e=>{if(x0===null)return;const d=e.changedTouches[0].clientX-x0;if(Math.abs(d)>50)show(cur+(d<0?1:-1));x0=null});
+
+drawChips();render();
+})();
+</script>
+</body>
+</html>
