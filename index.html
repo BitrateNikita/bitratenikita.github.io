@@ -178,13 +178,26 @@
 
         <!-- ========== О СТУДИИ ========== -->
         <section class="about section" id="about">
+            <!-- Бегущая строка с фото на фоне -->
+            <div class="about-bg-slider">
+                <div class="about-bg-track">
+                    <!-- Первый набор фото -->
+                    <div class="about-bg-slide" style="background-image: url('photos/classes/1class.jpg');"></div>
+                    <div class="about-bg-slide" style="background-image: url('photos/classes/2class.jpg');"></div>
+                    <div class="about-bg-slide" style="background-image: url('photos/classes/3class.jpg');"></div>
+                    <!-- Второй набор (дубликат для бесшовности) -->
+                    <div class="about-bg-slide" style="background-image: url('photos/classes/1class.jpg');"></div>
+                    <div class="about-bg-slide" style="background-image: url('photos/classes/2class.jpg');"></div>
+                    <div class="about-bg-slide" style="background-image: url('photos/classes/3class.jpg');"></div>
+                </div>
+            </div>
+            
+            <!-- Контент -->
             <div class="container about__inner">
                 <div class="about__content">
                     <h2 class="section-title">О студии</h2>
-                    <p class="about__text">   Юные аниматоры погружаются в культуру создания движения: от первых оптических приборов XIX века до современных цифровых технологий.</p>
-                    Мы изучаем, как работали зоотропы, фенакистископы и праксиноскопы, и даем возможность собрать их своими руками.
-                    Это не просто теория: через прикосновение к первоисточникам ребёнок понимает, что анимация — это не только магия, но и технология, стоящая на открытиях изобретателей прошлого.</p>
-                    <!--<p class="about__textsimple">-->
+                    <p class="about__text">Юные аниматоры погружаются в культуру создания движения: от первых оптических приборов XIX века до современных цифровых технологий.</p>
+                    <p class="about__text">Мы изучаем, как работали зоотропы, фенакистископы и праксиноскопы, и даем возможность собрать их своими руками. Это не просто теория: через прикосновение к первоисточникам ребёнок понимает, что анимация - это не только магия, но и технология, стоящая на открытиях изобретателей прошлого.</p>
                 </div>
                 <div class="about__photo">
                     <div class="photo-placeholder"></div>
@@ -193,76 +206,115 @@
         </section>
 
 
+        <!-- ========== ФОТОГАЛЕРЕЯ ========== -->
+        <section class="gallery section" id="gallery">
+            <div class="container">
+                <h2 class="section-title">Фото со студии</h2>
+                <div class="gallery__rows" id="gallery-rows"></div>
+                <div class="gallery__more">
+                    <button type="button" class="btn btn--secondary" id="gallery-more">Показать ещё</button>
+                </div>
+            </div>
+        </section>
 
-        <!-- ========== ОБО МНЕ ========== -->
+        <!-- ========== ОБО МНЕ (НИКИТА) ========== -->
         <section class="about-me section" id="about-me">
+            
+            <!-- Заголовок над всем блоком -->
+            <div class="container">
+                <h2 class="section-title">О нас</h2>
+            </div>
+
             <div class="container about-me__inner">
-                <!-- Фото -->
+                
+                <!-- Фото (СЛЕВА) -->
                 <div class="about-me__photo">
                     <div class="about-me__photo-wrapper">
-                        <img src="myphoto.jpg" alt="Фото преподавателя студии Кинеограф" class="about-me__img">
+                        <img src="photos/teachers/nikita.jpg" alt="Фото Никиты" class="about-me__img">
                         <div class="about-me__badge">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="8" r="4"/>
-                                <path d="M4 21v-2a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v2"/>
-                            </svg>
-                            Основатель студии </br> Действующий аниматор
+                            <span>Петров Никита<br>Основатель студии<br>Действующий аниматор</span>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Контент -->
+
+                <!-- Контент (СПРАВА) -->
                 <div class="about-me__content">
-                    <h2 class="section-title about-me__title">О нас</h2>
+                    <h3 class="about-me__name">Преподаватель по анимации</h3>
                     <p class="about-me__intro">Мой профессиональный путь в анимацию начался через портретную фотографию, кино и игровую индустрию. Этот междисциплинарный опыт сформировал мой авторский подход к преподаванию. В студии «Кинеограф» я передаю ученикам не просто набор разрозненных приемов, а целостный язык анимации. Мы соединяем фундаментальные традиции классической мультипликации с современными цифровыми технологиями и стандартами индустрии. Здесь дети учатся мыслить как режиссеры и создавать проекты уровня настоящих студий.</p>
                     
                     <!-- Список студий -->
                     <div class="about-me__studios">
-                        <h3 class="about-me__studios-title">Студии, где я работал и работаю:</h3>
-                        <ul class="studios-list">
-                            <li class="studios-list__item">
-                                <svg class="studios-list__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <h3 class="about-me__studios-title">Компании в которых я работал и работаю:</h3>
+                        <div class="studios-list">
+                            <a href="https://my.games/ru-RU/?_1ld=3835094_1&_1lpid=130408" target="_blank" rel="noopener" class="studios-list__item">
+                                <svg class="studios-list__icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <polygon points="12 2 2 7 12 12 22 7 12 2"/>
                                     <polyline points="2 17 12 22 22 17"/>
                                     <polyline points="2 12 12 17 22 12"/>
                                 </svg>
                                 <span>MYGAMES</span>
-                            </li>
-                            <li class="studios-list__item">
-                                <svg class="studios-list__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            </a>
+                            <a href="https://redrift.com/" target="_blank" rel="noopener" class="studios-list__item">
+                                <svg class="studios-list__icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <polygon points="12 2 2 7 12 12 22 7 12 2"/>
                                     <polyline points="2 17 12 22 22 17"/>
                                     <polyline points="2 12 12 17 22 12"/>
                                 </svg>
                                 <span>REDRIFT</span>
-                            </li>
-                            <li class="studios-list__item">
-                                <svg class="studios-list__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            </a>
+                            <a href="https://play.google.com/store/apps/details?id=com.mirrormagic.vampires" target="_blank" rel="noopener" class="studios-list__item">
+                                <svg class="studios-list__icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <polygon points="12 2 2 7 12 12 22 7 12 2"/>
                                     <polyline points="2 17 12 22 22 17"/>
                                     <polyline points="2 12 12 17 22 12"/>
                                 </svg>
                                 <span>MIRRORMAGIC</span>
-                            </li>
-                            <li class="studios-list__item">
-                                <svg class="studios-list__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            </a>
+                            <div class="studios-list__item studios-list__item--disabled">
+                                <svg class="studios-list__icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <polygon points="12 2 2 7 12 12 22 7 12 2"/>
                                     <polyline points="2 17 12 22 22 17"/>
                                     <polyline points="2 12 12 17 22 12"/>
                                 </svg>
                                 <span>DEEPLAY</span>
-                            </li>
-                            <li class="studios-list__item">
-                                <svg class="studios-list__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            </div>
+                            <a href="https://studio-forest.ru/" target="_blank" rel="noopener" class="studios-list__item">
+                                <svg class="studios-list__icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <polygon points="12 2 2 7 12 12 22 7 12 2"/>
                                     <polyline points="2 17 12 22 22 17"/>
                                     <polyline points="2 12 12 17 22 12"/>
                                 </svg>
                                 <span>GAMEFOREST</span>
-                            </li>
-                        </ul>
+                            </a>
+                            
+                        </div>
                     </div>
-                    
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== О ВИКТОРИИ ========== -->
+        <section class="about-me section" id="about-vika">
+            <div class="container about-me__inner">
+                
+                <!-- Контент (СЛЕВА) -->
+                <div class="about-me__content">
+                    <h3 class="about-me__name">Преподаватель по озвучке, режиссуре</h3>
+                    <p class="about-me__intro">В студии я отвечаю за самое начало и самое звучащее завершение мультфильма, а именно за сценарий и озвучку.<br>
+                    Я помогу детям пройти путь от идеи до профессионального режиссерского сценария. Мы вместе придумаем историю, проработаем характеры героев и конфликт, а затем перенесем всё на бумагу в виде раскадровки. Помимо этого, я занимаюсь с ребятами озвучкой. Как профессиональный диктор, я научу их работать с микрофоном, управлять голосом и передавать эмоции так, чтобы персонажи оживали по-настоящему.</p>
+                </div>
+                
+                <!-- Фото (СПРАВА) -->
+                <div class="about-me__photo">
+                    <div class="about-me__photo-wrapper">
+                        <img src="photos/teachers/vika.jpg" alt="Фото Виктории" class="about-me__img">
+                        <div class="about-me__badge">
+                            <span>Думанская Виктория<br>Диктор телеведущий</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
                     <!-- Кнопка портфолио -->
                     <!--
                     <a href="portfolio.html" class="btn btn--primary about-me__btn">
@@ -273,10 +325,6 @@
                         </svg>
                     </a>
                     -->
-                </div>
-            </div>
-        </section>
-
 
         <!-- ========== НАПРАВЛЕНИЯ АНИМАЦИИ ========== -->
         <section class="techniques section" id="techniques">
@@ -484,7 +532,7 @@
                                 <path d="M21 21v-2a4 4 0 0 0-3-3.87"/>
                             </svg>
                         </div>
-                        <h3 class="feature-card__title">Результат, а не просто процесс</h3>
+                        <h3 class="feature-card__title">Результат, не просто процесс</h3>
                         <p class="feature-card__desc">Каждый ученик проходит полный цикл производства и в конце полугодия представляет готовый анимационный фильм со звуком и титрами.</p>
                     </div>
                     

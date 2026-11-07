@@ -207,6 +207,90 @@ function clearError(fieldId) {
     if (errorEl) errorEl.textContent = '';
 }
 
+/* === ФОТОГАЛЕРЕЯ === */
+const GALLERY_FOLDER = 'photos/works/';  // папка с фото
+const GALLERY_EXT = 'jpg';               // расширение файлов: jpg, png или webp
+const GALLERY_COUNT = 12;                // сколько фото: 1.jpg ... 12.jpg
+const GALLERY_STEP = 9;                  // сколько показывать за раз (кратно 3)
+
+(function () {
+    const rowsEl = document.getElementById('gallery-rows');
+    const moreBtn = document.getElementById('gallery-more');
+    if (!rowsEl || !moreBtn) return;
+
+    const touchMode = window.matchMedia('(max-width: 768px), (hover: none)');
+    let shown = 0, curRow = null, openItem = null;
+
+    function expandedHeight(item) {
+        // высота раскрытой рамки = реальные пропорции фото, но не выше 82% экрана
+        return Math.min(item.clientWidth / (item._ar || 1.5), window.innerHeight * 0.82);
+    }
+    function openIt(item) {
+        item.classList.add('is-open');
+        item.setAttribute('aria-expanded', 'true');
+        item.style.height = expandedHeight(item) + 'px';
+        setTimeout(() => item.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 580);
+    }
+    function closeIt(item) {
+        item.classList.remove('is-open');
+        item.setAttribute('aria-expanded', 'false');
+        item.style.height = '';
+    }
+
+    function addPhotos(n) {
+        const end = Math.min(shown + n, GALLERY_COUNT);
+        for (let i = shown + 1; i <= end; i++) {
+            if (!curRow || !curRow.isConnected || curRow.childElementCount >= 3) {
+                curRow = document.createElement('div');
+                curRow.className = 'g-row';
+                rowsEl.appendChild(curRow);
+            }
+            const item = document.createElement('button');
+            item.type = 'button';
+            item.className = 'g-item';
+            item.setAttribute('aria-label', 'Фото ' + i + ' со студии');
+
+            const img = new Image();
+            img.alt = 'Фото со студии «Кинеограф»';
+            img.loading = 'lazy';
+            img.decoding = 'async';
+            img.onload = () => { item._ar = img.naturalWidth / img.naturalHeight; };
+            img.onerror = () => {               // нет такого файла — тихо убираем
+                const row = item.parentElement;
+                item.remove();
+                if (row && !row.children.length) row.remove();
+            };
+            img.src = GALLERY_FOLDER + i + '.' + GALLERY_EXT;
+
+            item.appendChild(img);
+            curRow.appendChild(item);
+        }
+        shown = end;
+        moreBtn.parentElement.hidden = shown >= GALLERY_COUNT;
+    }
+
+    // Тап на телефоне: раскрыть / свернуть (открытой бывает только одна)
+    rowsEl.addEventListener('click', (e) => {
+        if (!touchMode.matches) return;
+        const item = e.target.closest('.g-item');
+        if (!item) return;
+        if (openItem && openItem !== item) closeIt(openItem);
+        if (openItem === item) { closeIt(item); openItem = null; return; }
+        openIt(item);
+        openItem = item;
+    });
+
+    // Поворот экрана или смена режима
+    window.addEventListener('resize', () => {
+        if (!openItem) return;
+        if (touchMode.matches) openItem.style.height = expandedHeight(openItem) + 'px';
+        else { closeIt(openItem); openItem = null; }
+    });
+
+    moreBtn.addEventListener('click', () => addPhotos(GALLERY_STEP));
+    addPhotos(GALLERY_STEP);
+})();
+
 /* === ПЛАВНЫЙ СКРОЛЛ ДЛЯ ЯКОРНЫХ ССЫЛОК === */
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {

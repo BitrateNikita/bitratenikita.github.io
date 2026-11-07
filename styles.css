@@ -280,7 +280,6 @@ ul {
 }
 
 /* === Hero секция === ФОН*/
-/* === Hero секция === */
 .hero {
     position: relative;
     /* Твой оригинальный padding, который задает высоту */
@@ -400,13 +399,7 @@ ul {
     text-indent: 40px;   /*отступ первой строки */
 }
 
-.about__text::first-letter {
-    font-size: 2em;
-    font-weight: 700;
-    color: var(--color-accent);
-    line-height: 1;
-    /*vertical-align: 0.1em;   подгоняет букву по нижнему краю строки */
-}
+
 
 
 .about__photo {    
@@ -447,6 +440,166 @@ ul {
     0%, 100% { rotate: 0deg; }
     50%      { rotate: 2deg; }
 }
+
+/* =====================================================
+   О СТУДИИ — БЕГУЩИЕ ФОТО НА ФОНЕ
+   ===================================================== */
+
+/* Сама секция */
+.about {
+    position: relative;
+    overflow: hidden;
+    /* Убеждаемся, что фон секции белый */
+    background-color: #FFFFFF; 
+}
+
+/* Контейнер для бегущей строки */
+.about-bg-slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Лента, которая движется */
+.about-bg-track {
+    display: flex;
+    width: max-content;
+    height: 100%;
+    animation: scroll-bg 120s linear infinite; 
+}
+
+/* Отдельное фото */
+.about-bg-slide {
+    width: 40vw;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    flex-shrink: 0;
+    
+    /* Косые срезы */
+    clip-path: polygon(5% 0, 100% 0, 95% 100%, 0% 100%); 
+    
+    /* Прозрачность фото (чтобы текст читался) */
+    opacity: 0.15; 
+}
+
+/* Контент поверх всего */
+.about .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Контент поверх всего */
+.about .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Анимация движения */
+@keyframes scroll-bg {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); } /* Сдвигаем ровно на половину ленты (один полный набор) */
+}
+
+/* --- Адаптив --- */
+@media (max-width: 768px) {
+    .about-bg-slide {
+        width: 70vw; /* На мобильных фото чуть уже, чтобы было видно движение */
+    }
+    .about-overlay {
+        background-color: rgba(245, 245, 243, 0.9); /* На мобильных делаем плашку плотнее для читаемости */
+    }
+}
+
+/* === Фотогалерея === */
+.gallery {
+    background-color: var(--color-white);
+    --g-gap: clamp(12px, 2vw, 24px);   /* пустое пространство между фото */
+    --g-grow: 2.4;                      /* во сколько раз раскрытая рамка шире соседних */
+}
+
+.gallery__rows {
+    display: flex;
+    flex-direction: column;
+    gap: var(--g-gap);
+}
+
+.g-row {
+    display: flex;
+    gap: var(--g-gap);
+    height: clamp(300px, 36vw, 480px);  /* высота ряда на компьютере */
+}
+
+.g-item {
+    position: relative;
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+    border-radius: var(--radius);
+    background-color: rgba(43, 45, 66, 0.06);
+    cursor: pointer;
+    transition: flex-grow 0.65s cubic-bezier(0.22, 0.8, 0.2, 1);
+}
+
+.g-item img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.9s cubic-bezier(0.22, 0.8, 0.2, 1);
+}
+
+.g-item:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 3px;
+}
+
+.gallery__more {
+    text-align: center;
+    margin-top: 32px;
+}
+
+/* Компьютер: рамка раскрывается при наведении */
+@media (hover: hover) and (min-width: 769px) {
+    .g-item:hover,
+    .g-item:focus-visible {
+        flex-grow: var(--g-grow);
+    }
+    .g-item:hover img,
+    .g-item:focus-visible img {
+        transform: scale(1.06);
+    }
+}
+
+/* Телефон и планшет: рамки друг под другом, тап раскрывает */
+@media (max-width: 768px), (hover: none) {
+    .g-row {
+        flex-direction: column;
+        height: auto;
+    }
+    .g-item {
+        flex: none;
+        width: 100%;
+        height: 62vw;                   /* высота свёрнутой рамки */
+        transition: height 0.55s cubic-bezier(0.22, 0.8, 0.2, 1);
+        scroll-margin: 90px 0 24px;     /* чтобы шапка не перекрывала раскрытое фото */
+    }
+    .g-item img { transform: scale(1.08); }
+    .g-item.is-open img { transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .g-item, .g-item img { transition: none; }
+}
+
 
 /* === Как проходит обучение? === */
 .steps__grid {
@@ -508,15 +661,15 @@ ul {
 
 .topic-card__image-wrap {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: center;     /* Выравнивание по вертикали (по центру) */
+    justify-content: center; /* Выравнивание по горизонтали (по центру) */
     /* никакого фона, паддинга и полоски — просто пустая ячейка сетки */
 }
 
 .topic-card__img {
     width: 100%;
-    height: 100%;
-    min-height: 200px;
+    height: auto;
+    min-height: 180px;
     object-fit: cover;
     border-radius: var(--radius);
     
@@ -557,37 +710,70 @@ ul {
     line-height: 1.5;
 }
 
-/* === Секция "Обо мне" === */
+/* =====================================================
+   СЕКЦИЯ "ОБО МНЕ" И "О ВИКТОРИИ"
+   ===================================================== */
+
 .about-me {
-    text-indent: 40px;   /*отступ первой строки */
     background-color: var(--color-white);
     padding: 80px 0;
     position: relative;
     overflow: hidden;
 }
 
-/* Декоративный элемент на фоне */
-/*
-    .about-me::after {
-        content: '';
-        position: absolute;
-        top: -50px;
-        right: -50px;
-        width: 200px;
-        height: 200px;
-        background-color: rgba(244, 162, 97, 0.1);
-        border-radius: 50%;
-        z-index: 0;
+/* Переводим контейнер в Grid для жесткого контроля */
+    .about-me__inner {
+        display: grid;
+        grid-template-columns: 1fr; /* Одна колонка */
+        gap: 30px;
     }
-*/
 
-.about-me__inner {
-    display: flex;
-    align-items: center;
-    gap: 60px;
-    flex-wrap: wrap;
-    position: relative;
-    z-index: 1;
+    /* Для блока Никиты (id="about-me") */
+    #about-me .about-me__photo {
+        grid-row: 1; /* Фото на первую строку */
+    }
+    #about-me .about-me__content {
+        grid-row: 2; /* Текст на вторую */
+    }
+
+    /* Для блока Вики (id="about-vika") */
+    #about-vika .about-me__photo {
+        grid-row: 1; /* Фото на вторую */
+    }
+    #about-vika .about-me__content {
+        grid-row: 2; /* Текст на первую */
+    }
+    
+
+    /* Убираем старые правила, если они были */
+    .about-me__photo {
+        flex: 0 1 auto;
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+
+/* Контент (текст) */
+.about-me__content {
+    flex: 1 1 500px;
+}
+
+.about-me__title {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.about-me__title::after {
+    margin: 15px 0 0;
+}
+
+.about-me__intro {
+    font-size: 1.1rem;
+    color: var(--color-text-light);
+    margin-bottom: 30px;
+    line-height: 1.7;
+    text-indent: 40px; 
 }
 
 /* Фото */
@@ -609,51 +795,35 @@ ul {
     display: block;
 }
 
-/* Бейдж "Действующий аниматор" */
+/* Плашки на фото */
 .about-me__badge {
     position: absolute;
     bottom: 20px;
     left: 20px;
     right: 20px;
-    background-color: rgba(43, 45, 66, 0.9);
+    /* Делаем фон более прозрачным (0.4 = 40% непрозрачности) */
+    background-color: rgba(43, 45, 66, 0.4); 
     color: white;
     padding: 12px 16px;
     border-radius: var(--radius-small);
     display: flex;
     align-items: center;
-    gap: 10px;
     font-weight: 500;
     font-size: 0.95rem;
-    backdrop-filter: blur(5px);
+    /* Эффект размытия фона под плашкой (стекло) */
+    backdrop-filter: blur(8px); 
+    -webkit-backdrop-filter: blur(8px); /* Для Safari */
+    /* Добавляем легкую светлую рамку для объема */
+    border: 1px solid rgba(255, 255, 255, 0.2); 
+    line-height: 1.3;
 }
 
-.about-me__badge svg {
-    flex-shrink: 0;
-    color: var(--color-accent);
+/* Смещение текста в плашке вправо */
+.about-me__badge span {
+    padding-left: 15px; 
 }
 
-/* Контент */
-.about-me__content {
-    flex: 1 1 500px;
-}
-
-.about-me__title {
-    text-align: left;
-    margin-bottom: 20px;
-}
-
-.about-me__title::after {
-    margin: 15px 0 0;
-}
-
-.about-me__intro {
-    font-size: 1.1rem;
-    color: var(--color-text-light);
-    margin-bottom: 30px;
-    line-height: 1.7;
-}
-
-/* Студии */
+/* --- СПИСОК СТУДИЙ --- */
 .about-me__studios {
     margin-bottom: 30px;
 }
@@ -667,52 +837,49 @@ ul {
 
 .studios-list {
     display: flex;
-    flex-direction: column;
-    gap: 12px;
+    flex-wrap: nowrap;       /* Запрещаем перенос на новую строку */
+    gap: 4px; /* Уменьшил отступ между плашками */
 }
 
 .studios-list__item {
-    display: flex;
+    flex: 1 1 0; /* Кнопки делят ширину поровну */
+    display: inline-flex;
     align-items: center;
-    gap: 12px;
-    padding: 12px 16px;
+    gap: 5px; /* Уменьшил отступ между иконкой и текстом */
+    padding: 6px 10px; /* Уменьшил паддинги внутри плашек */
     background-color: var(--color-bg);
     border-radius: var(--radius-small);
     font-weight: 500;
+    font-size: 0.6rem; /* УМЕНЬШИЛ ШРИФТ, чтобы влезло в ряд */
     color: var(--color-text);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    border: 1px solid transparent;
+    white-space: nowrap; /* Запрещаем перенос текста внутри одной плашки */
 }
 
-.studios-list__item:hover {
-    transform: translateX(5px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+a.studios-list__item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    border-color: var(--color-accent);
+}
+
+.studios-list__item--disabled {
+    opacity: 0.6;
+    cursor: default;
 }
 
 .studios-list__icon {
     color: var(--color-accent);
     flex-shrink: 0;
+    width: 12px; /* Уменьшил иконку */
+    height: 12px;
 }
 
-/* Кнопка */
-.about-me__btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.about-me__btn svg {
-    transition: transform 0.3s ease;
-}
-
-.about-me__btn:hover svg {
-    transform: translateX(5px);
-}
-
-/* Адаптивность */
+/* --- АДАПТИВ --- */
 @media (max-width: 768px) {
     .about-me__inner {
-        flex-direction: column;
+        flex-direction: column-reverse !important; /* На мобильных фото всегда сверху */
         gap: 40px;
     }
     
@@ -731,613 +898,665 @@ ul {
         margin: 15px auto 0;
     }
     
-    .about-me__btn {
-        width: 100%;
-        justify-content: center;
+    .about-me__intro {
+        text-indent: 0;
     }
 }
+/* Убираем оранжевую полоску у заголовка "Наши преподаватели" */
+.about-me > .container > .section-title::after {
+    display: none;
+}
 
+/* Стиль для нового заголовка "Преподаватель по анимации" */
+.about-me__name {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--color-dark);
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+/* Уменьшаем основной текст в блоках преподавателей */
+.about-me__intro {
+    font-size: 0.95rem; /* Было 1.1rem, стало меньше */
+    color: var(--color-text-light);
+    margin-bottom: 30px;
+    line-height: 1.6; /* Чуть плотнее строки */
+    text-indent: 40px; 
+}
+
+/* На мобильных убираем красную строку */
+@media (max-width: 768px) {
+    .about-me__intro {
+        text-indent: 0;
+    }
+    .about-me__name {
+        text-align: center;
+    }
+    .about-me__inner {
+        flex-direction: column; /* Меняем на обычный column */
+        gap: 40px;
+    }
+
+    /* Для блока Никиты (где фото в HTML идет первым) */
+    #about-me .about-me__photo {
+        order: -1; /* Принудительно ставим фото на первое место */
+    }
+
+    /* Для блока Вики (где текст в HTML идет первым) */
+    #about-vika .about-me__content {
+        order: -1; /* Принудительно ставим текст на первое место (если нужно) */
+    }
+    
+    /* Текст в плашке Виктории привязан к правому краю */
+    #about-vika .about-me__badge span {
+        text-align: right;
+        width: 100%; /* Растягиваем span на всю ширину плашки */
+        padding-left: 0;
+        padding-right: 15px; /* Отступ справа, как был слева у тебя */
+    }
 
 
 
                                     /* === Какие направления будем изучать? === */
 
-/* Подзаголовок секции */
-.section-subtitle {
-    text-align: center;
-    color: var(--color-text-light);
-    font-size: 1.05rem;
-    line-height: 1.6;
-    max-width: 600px;
-    margin: 0 auto 50px;
-    position: relative;
-    padding-bottom: 20px;
-}
+    /* Подзаголовок секции */
+    .section-subtitle {
+        text-align: center;
+        color: var(--color-text-light);
+        font-size: 1.05rem;
+        line-height: 1.6;
+        max-width: 600px;
+        margin: 0 auto 50px;
+        position: relative;
+        padding-bottom: 20px;
+    }
 
-.section-subtitle::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 50px;
-    height: 3px;
-    background-color: var(--color-accent);
-    border-radius: 2px;
-}
+    .section-subtitle::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50px;
+        height: 3px;
+        background-color: var(--color-accent);
+        border-radius: 2px;
+    }
 
-.techniques__grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 30px;
-}
+    .techniques__grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 30px;
+    }
 
-/* Карточка */
-.technique-card {
-    background-color: var(--color-white);
-    border-radius: var(--radius);
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    border: 1px solid rgba(43, 45, 66, 0.08);
-    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
-    padding: 0;
-}
+    /* Карточка */
+    .technique-card {
+        background-color: var(--color-white);
+        border-radius: var(--radius);
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(43, 45, 66, 0.08);
+        transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+        padding: 0;
+    }
 
-/* Акцентная линия сверху, растущая при наведении — поверх картинки */
-.technique-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    width: 0;
-    height: 3px;
-    background-color: var(--color-accent);
-    transition: width 0.35s ease, left 0.35s ease;
-    z-index: 2;
-}
+    /* Акцентная линия сверху, растущая при наведении — поверх картинки */
+    .technique-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 0;
+        height: 3px;
+        background-color: var(--color-accent);
+        transition: width 0.35s ease, left 0.35s ease;
+        z-index: 2;
+    }
 
-.technique-card:hover::before {
-    width: 100%;
-    left: 0;
-}
+    .technique-card:hover::before {
+        width: 100%;
+        left: 0;
+    }
 
-.technique-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 35px rgba(43, 45, 66, 0.12);
-    border-color: transparent;
-}
+    .technique-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 35px rgba(43, 45, 66, 0.12);
+        border-color: transparent;
+    }
 
-/* Баннер — картинка на всю ширину карточки, заголовок вверху */
-.technique-card__banner {
-    width: 100%;
-    height: 160px;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    position: relative;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    padding: 15px;
-}
+    /* Баннер — картинка на всю ширину карточки, заголовок вверху */
+    .technique-card__banner {
+        width: 100%;
+        height: 160px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: relative;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        padding: 15px;
+    }
 
-/* Затемняющая подложка сверху картинки — чтобы оранжевый текст читался на любом фото */
-.technique-card__banner::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), transparent 60%);
-}
+    /* Затемняющая подложка сверху картинки — чтобы оранжевый текст читался на любом фото */
+    .technique-card__banner::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), transparent 60%);
+    }
 
-/* Заголовок поверх картинки — оранжевый, вверху */
-.technique-card__title {
-    position: relative;
-    z-index: 1;
-    color: rgba(255, 255, 255, 0.9); 
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin: 0;
-}
+    /* Заголовок поверх картинки — оранжевый, вверху */
+    .technique-card__title {
+        position: relative;
+        z-index: 1;
+        color: rgba(255, 255, 255, 0.9); 
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin: 0;
+    }
 
-/* Текстовый блок под картинкой */
-.technique-card__body {
-    padding: 20px 25px 30px;
-}
+    /* Текстовый блок под картинкой */
+    .technique-card__body {
+        padding: 20px 25px 30px;
+    }
 
-.technique-card__desc {
-    font-size: 0.9rem;
-    color: var(--color-text-light);
-    line-height: 1.5;
-    margin: 0;
-}
+    .technique-card__desc {
+        font-size: 0.9rem;
+        color: var(--color-text-light);
+        line-height: 1.5;
+        margin: 0;
+    }
 
 
 
                                           /* === Секция "Группы" === */
 
-.groups {
-    background-color: var(--color-white);
-}
+    .groups {
+        background-color: var(--color-white);
+    }
 
-.groups__grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-}
+    .groups__grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+    }
 
-.group-card {
-    background-color: var(--color-bg);
-    padding: 40px 30px 30px;
-    border-radius: var(--radius);
-    text-align: center;
-    position: relative;
-    transition: transform 0.35s ease, box-shadow 0.35s ease;
-}
+    .group-card {
+        background-color: var(--color-bg);
+        padding: 40px 30px 30px;
+        border-radius: var(--radius);
+        text-align: center;
+        position: relative;
+        transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
 
-.group-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 35px rgba(43, 45, 66, 0.1);
-}
+    .group-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 35px rgba(43, 45, 66, 0.1);
+    }
 
-.group-card__age {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 90px;
-    padding: 8px 20px;
-    background-color: var(--color-accent);
-    color: var(--color-dark);
-    font-size: 1.3rem;
-    font-weight: 700;
-    border-radius: 50px;
-    margin-bottom: 20px;
-}
+    .group-card__age {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 90px;
+        padding: 8px 20px;
+        background-color: var(--color-accent);
+        color: var(--color-dark);
+        font-size: 1.3rem;
+        font-weight: 700;
+        border-radius: 50px;
+        margin-bottom: 20px;
+    }
 
-.group-card__title {
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: var(--color-dark);
-    margin-bottom: 12px;
-}
+    .group-card__title {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--color-dark);
+        margin-bottom: 12px;
+    }
 
-.group-card__desc {
-    font-size: 0.95rem;
-    color: var(--color-text-light);
-    line-height: 1.5;
-}
+    .group-card__desc {
+        font-size: 0.95rem;
+        color: var(--color-text-light);
+        line-height: 1.5;
+    }
 
 
-/* === Секция "Почему Кинеограф" === */
-.features {
-    background-color: var(--color-bg);
-    padding: 80px 0;
-}
+    /* === Секция "Почему Кинеограф" === */
+    .features {
+        background-color: var(--color-bg);
+        padding: 80px 0;
+    }
 
-.features__grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 3 колонки на десктопе */
-    gap: 30px;
-    margin-top: 20px;
-}
+    .features__grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* 3 колонки на десктопе */
+        gap: 30px;
+        margin-top: 20px;
+    }
 
-.feature-card {
-    background-color: var(--color-white);
-    padding: 35px 25px;
-    border-radius: var(--radius);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-    text-align: center;
-    transition: all 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    position: relative;
-    overflow: hidden;
-}
+    .feature-card {
+        background-color: var(--color-white);
+        padding: 35px 25px;
+        border-radius: var(--radius);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        text-align: center;
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        position: relative;
+        overflow: hidden;
+    }
 
-/* Акцентная полоска сверху карточки */
-.feature-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background-color: var(--color-accent);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s ease;
-}
+    /* Акцентная полоска сверху карточки */
+    .feature-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background-color: var(--color-accent);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.3s ease;
+    }
 
-.feature-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-}
+    .feature-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    }
 
-.feature-card:hover::before {
-    transform: scaleX(1);
-}
+    .feature-card:hover::before {
+        transform: scaleX(1);
+    }
 
-/* Иконка */
-.feature-card__icon {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    background-color: rgba(244, 162, 97, 0.15);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-accent);
-    margin-bottom: 20px;
-    transition: all 0.3s ease;
-}
+    /* Иконка */
+    .feature-card__icon {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background-color: rgba(244, 162, 97, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-accent);
+        margin-bottom: 20px;
+        transition: all 0.3s ease;
+    }
 
-.feature-card:hover .feature-card__icon {
-    background-color: var(--color-accent);
-    color: var(--color-white);
-    transform: scale(1.1);
-}
+    .feature-card:hover .feature-card__icon {
+        background-color: var(--color-accent);
+        color: var(--color-white);
+        transform: scale(1.1);
+    }
 
-/* Заголовок */
-.feature-card__title {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--color-dark);
-    margin-bottom: 10px;
-    line-height: 1.3;
-}
+    /* Заголовок */
+    .feature-card__title {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--color-dark);
+        margin-bottom: 10px;
+        line-height: 1.3;
+    }
 
-/* Описание */
-.feature-card__desc {
-    font-size: 0.95rem;
-    color: var(--color-text-light);
-    line-height: 1.5;
-}
+    /* Описание */
+    .feature-card__desc {
+        font-size: 0.95rem;
+        color: var(--color-text-light);
+        line-height: 1.5;
+    }
 
 
 
                                 /* === Секция "Работы учеников" === */
 
-/*
-.works__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 25px;
-}
+    /*
+    .works__grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 25px;
+    }
 
-.work-card {
-    background-color: var(--color-white);
-    border-radius: var(--radius);
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    aspect-ratio: 1 / 1;
-}
+    .work-card {
+        background-color: var(--color-white);
+        border-radius: var(--radius);
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        aspect-ratio: 1 / 1;
+    }
 
-.work-card__placeholder {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #e9e9e6;
-    color: var(--color-text-light);
-    font-size: 0.9rem;
-    text-align: center;
-    padding: 20px;
-}
-*/
-
-
+    .work-card__placeholder {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #e9e9e6;
+        color: var(--color-text-light);
+        font-size: 0.9rem;
+        text-align: center;
+        padding: 20px;
+    }
+    */
 
 
 
-                                                    /* === Секция "Отзывы" === */
-/*
-.reviews__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-}
-
-.review-card {
-    background-color: var(--color-white);
-    padding: 30px;
-    border-radius: var(--radius);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.review-card__text {
-    font-style: italic;
-    color: var(--color-text);
-    flex-grow: 1;
-}
-
-.review-card__author {
-    font-weight: 700;
-    color: var(--color-dark);
-    text-align: right;
-}
-*/
 
 
-                                                    /* === Форма записи === */
-.contact {
-    background-color: var(--color-white);
-}
+                                                        /* === Секция "Отзывы" === */
+    /*
+    .reviews__grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+    }
 
-.form {
-    max-width: 600px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
+    .review-card {
+        background-color: var(--color-white);
+        padding: 30px;
+        border-radius: var(--radius);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
 
-.form__group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
+    .review-card__text {
+        font-style: italic;
+        color: var(--color-text);
+        flex-grow: 1;
+    }
 
-.form__label {
-    font-weight: 500;
-    color: var(--color-dark);
-}
-
-.form__input {
-    padding: 12px 16px;
-    border: 2px solid #ddd;
-    border-radius: var(--radius-small);
-    font-family: var(--font-main);
-    font-size: 1rem;
-    transition: border-color 0.3s ease;
-}
-
-.form__input:focus {
-    outline: none;
-    border-color: var(--color-accent);
-}
-
-.form__input--error {
-    border-color: var(--color-error) !important;
-}
-
-.form__error {
-    color: var(--color-error);
-    font-size: 0.85rem;
-    min-height: 1.2em;
-}
-
-.form__group--checkbox {
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 10px;
-}
-
-.form__checkbox {
-    margin-top: 3px;
-    width: 18px;
-    height: 18px;
-    accent-color: var(--color-accent);
-    flex-shrink: 0;
-}
-
-.form__checkbox-label {
-    font-size: 0.9rem;
-    color: var(--color-text-light);
-}
-
-.form__link {
-    color: var(--color-accent);
-    text-decoration: underline;
-}
-
-.form__submit {
-    align-self: center;
-    min-width: 200px;
-}
-
-.form__message {
-    text-align: center;
-    font-weight: 500;
-    min-height: 1.5em;
-}
-
-.form__message--success {
-    color: #2a9d8f;
-}
-
-.form__message--error {
-    color: var(--color-error);
-}
-
-/* Honeypot — скрытое поле для ботов */
-.form__honeypot {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-}
-
-                                                /* === Секция "Как нас найти" === */
-.location__inner {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 40px;
-    align-items: flex-start;
-}
-
-.location__info {
-    flex: 1 1 300px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.location__address {
-    font-size: 1.2rem;
-    font-weight: 500;
-    color: var(--color-dark);
-}
-
-.location__link {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--color-text);
-    transition: color 0.3s ease;
-}
-
-.location__link:hover {
-    color: var(--color-accent);
-}
-
-.icon {
-    flex-shrink: 0;
-}
-
-.location__btn {
-    margin-top: 10px;
-}
-
-.location__map {
-    flex: 1 1 400px;
-    border-radius: var(--radius);
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-.location__map iframe {
-    display: block;
-    width: 100%;
-    height: 400px;
-    border: none;
-}
-
-                                                            /* === Футер === */
-.footer {
-    background-color: var(--color-dark);
-    color: var(--color-white);
-    padding: 40px 0;
-}
-
-.footer__inner {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-}
-
-.footer__logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-weight: 700;
-    font-size: 1.2rem;
-}
-
-.footer__logo-img {
-    width: 200px;
-    height: auto;
-    object-fit: contain;
-}
-
-.footer__contacts {
-    display: flex;
-    gap: 20px;
-}
-
-.footer__icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.1);
-    transition: background-color 0.3s ease;
-}
-
-.footer__icon:hover {
-    background-color: var(--color-accent);
-    color: var(--color-dark);
-}
-
-.footer__copy {
-    width: 100%;
-    text-align: center;
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.7);
-}
+    .review-card__author {
+        font-weight: 700;
+        color: var(--color-dark);
+        text-align: right;
+    }
+    */
 
 
-/* =====================================================
-   ССЫЛКИ НА СОЦСЕТИ (ФУТЕР)
-   ===================================================== */
+                                                        /* === Форма записи === */
+    .contact {
+        background-color: var(--color-white);
+    }
 
-.social-links {
-    display: flex;
-    align-items: center;
-    gap: 15px; /* Расстояние между иконками */
-    margin: 15px 0;
-}
+    .form {
+        max-width: 600px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
 
-.social-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50px;
-    height: 50px;
-    border-radius: 12px; /* Скругление, можно сделать 50% для круга */
-    background-color: rgba(255, 255, 255, 0.1); /* Полупрозрачный фон для футера */
-    transition: all 0.3s ease;
-    overflow: hidden;
-}
+    .form__group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
 
-/* Стили для картинок, когда вы их добавите */
-.social-link img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
+    .form__label {
+        font-weight: 500;
+        color: var(--color-dark);
+    }
 
-/* Заглушка (текст), пока нет картинок */
-.social-link__placeholder {
-    color: var(--color-white);
-    font-size: 0.85rem;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-}
+    .form__input {
+        padding: 12px 16px;
+        border: 2px solid #ddd;
+        border-radius: var(--radius-small);
+        font-family: var(--font-main);
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+    }
 
-/* Эффект при наведении */
-.social-link:hover {
-    background-color: var(--color-accent);
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(244, 162, 97, 0.3);
-}
+    .form__input:focus {
+        outline: none;
+        border-color: var(--color-accent);
+    }
 
-.social-link:hover .social-link__placeholder {
-    color: var(--color-dark); /* Текст темнеет на оранжевом фоне */
-}
+    .form__input--error {
+        border-color: var(--color-error) !important;
+    }
+
+    .form__error {
+        color: var(--color-error);
+        font-size: 0.85rem;
+        min-height: 1.2em;
+    }
+
+    .form__group--checkbox {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .form__checkbox {
+        margin-top: 3px;
+        width: 18px;
+        height: 18px;
+        accent-color: var(--color-accent);
+        flex-shrink: 0;
+    }
+
+    .form__checkbox-label {
+        font-size: 0.9rem;
+        color: var(--color-text-light);
+    }
+
+    .form__link {
+        color: var(--color-accent);
+        text-decoration: underline;
+    }
+
+    .form__submit {
+        align-self: center;
+        min-width: 200px;
+    }
+
+    .form__message {
+        text-align: center;
+        font-weight: 500;
+        min-height: 1.5em;
+    }
+
+    .form__message--success {
+        color: #2a9d8f;
+    }
+
+    .form__message--error {
+        color: var(--color-error);
+    }
+
+    /* Honeypot — скрытое поле для ботов */
+    .form__honeypot {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
+
+                                                    /* === Секция "Как нас найти" === */
+    .location__inner {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+        align-items: flex-start;
+    }
+
+    .location__info {
+        flex: 1 1 300px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .location__address {
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: var(--color-dark);
+    }
+
+    .location__link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--color-text);
+        transition: color 0.3s ease;
+    }
+
+    .location__link:hover {
+        color: var(--color-accent);
+    }
+
+    .icon {
+        flex-shrink: 0;
+    }
+
+    .location__btn {
+        margin-top: 10px;
+    }
+
+    .location__map {
+        flex: 1 1 400px;
+        border-radius: var(--radius);
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .location__map iframe {
+        display: block;
+        width: 100%;
+        height: 400px;
+        border: none;
+    }
+
+                                                                /* === Футер === */
+    .footer {
+        background-color: var(--color-dark);
+        color: var(--color-white);
+        padding: 40px 0;
+    }
+
+    .footer__inner {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .footer__logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 700;
+        font-size: 1.2rem;
+    }
+
+    .footer__logo-img {
+        width: 200px;
+        height: auto;
+        object-fit: contain;
+    }
+
+    .footer__contacts {
+        display: flex;
+        gap: 20px;
+    }
+
+    .footer__icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.1);
+        transition: background-color 0.3s ease;
+    }
+
+    .footer__icon:hover {
+        background-color: var(--color-accent);
+        color: var(--color-dark);
+    }
+
+    .footer__copy {
+        width: 100%;
+        text-align: center;
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+
+    /* =====================================================
+    ССЫЛКИ НА СОЦСЕТИ (ФУТЕР)
+    ===================================================== */
+
+    .social-links {
+        display: flex;
+        align-items: center;
+        gap: 15px; /* Расстояние между иконками */
+        margin: 15px 0;
+    }
+
+    .social-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        border-radius: 12px; /* Скругление, можно сделать 50% для круга */
+        background-color: rgba(255, 255, 255, 0.1); /* Полупрозрачный фон для футера */
+        transition: all 0.3s ease;
+        overflow: hidden;
+    }
+
+    /* Стили для картинок, когда вы их добавите */
+    .social-link img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    /* Заглушка (текст), пока нет картинок */
+    .social-link__placeholder {
+        color: var(--color-white);
+        font-size: 0.85rem;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+    }
+
+    /* Эффект при наведении */
+    .social-link:hover {
+        background-color: var(--color-accent);
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(244, 162, 97, 0.3);
+    }
+
+    .social-link:hover .social-link__placeholder {
+        color: var(--color-dark); /* Текст темнеет на оранжевом фоне */
+    }
+
 
 /* Мобильная адаптация (если нужно выровнять по центру) */
-@media (max-width: 768px) {
+
     .social-links {
         justify-content: center;
         margin: 20px 0;
     }
-}
+
 
 
 
@@ -1369,8 +1588,7 @@ ul {
     transform: translateY(0);
 }
 
-/* === Адаптивность === */
-@media (max-width: 768px) {
+
     .section {
         padding: 60px 0;
     }
@@ -1453,11 +1671,9 @@ ul {
         flex-direction: column;
         text-align: center;
     }
-}
 
 
-                                                                /* Планшеты */
-@media (max-width: 768px) {
+
     .logo__img {
         width: 150px;
         height: 45px;
@@ -1510,14 +1726,14 @@ ul {
 
 
                                                                 /* Мобильные */
+
 @media (max-width: 480px) {
+
     .logo__img {
         width: 150px;
         height: 40px;
     }
-}
 
-@media (max-width: 480px) {
     .hero__title {
         font-size: 1.8rem;
     }
@@ -1544,63 +1760,58 @@ ul {
     grid-template-columns: 1fr;   /* ← добавляешь эту строку */
     }
 
-
-    @media (max-width: 480px) {
-        .feature-card {
-            flex-direction: column;
-            text-align: center;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .feature-card__icon {
-            margin-bottom: 10px;
-        }
+    .feature-card {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    .feature-card__icon {
+        margin-bottom: 10px;
     }
 
-    /* === Маленькие мобильные (до 480px) === */
-    @media (max-width: 480px) {
 
-        .contact {
-            padding: 50px 0;
-        }
-
-        .contact .section-title {
-            font-size: 1.6rem;
-        }
-
-        .contact .section-subtitle {
-            font-size: 0.9rem;
-            margin-bottom: 30px;
-        }
-
-        .form {
-            gap: 14px;
-        }
-
-        .form__label {
-            font-size: 0.9rem;
-        }
-
-        .form__input {
-            padding: 13px 14px;
-            font-size: 16px;   /* оставляем 16px, чтобы не было зума */
-        }
-
-        .form__checkbox {
-            width: 20px;
-            height: 20px;
-        }
-
-        .form__checkbox-label {
-            font-size: 0.8rem;
-        }
-
-        .form__submit {
-            padding: 15px 20px;
-            font-size: 0.95rem;
-        }
+    .contact {
+        padding: 50px 0;
     }
+
+    .contact .section-title {
+        font-size: 1.6rem;
+    }
+
+    .contact .section-subtitle {
+        font-size: 0.9rem;
+        margin-bottom: 30px;
+    }
+
+    .form {
+        gap: 14px;
+    }
+
+    .form__label {
+        font-size: 0.9rem;
+    }
+
+    .form__input {
+        padding: 13px 14px;
+        font-size: 16px;   /* оставляем 16px, чтобы не было зума */
+    }
+
+    .form__checkbox {
+        width: 20px;
+        height: 20px;
+    }
+
+    .form__checkbox-label {
+        font-size: 0.8rem;
+    }
+
+    .form__submit {
+        padding: 15px 20px;
+        font-size: 0.95rem;
+    }
+}
 
 
     /* =====================================================
@@ -1662,10 +1873,11 @@ ul {
     }
 
     .photo-placeholder {
-        width: 100%;
-        max-width: 400px;
+        width: 80%;
+        max-width: 280px;
         height: auto;
         aspect-ratio: 1 / 1;
+        margin: 0 auto; /* Центрируем, если контейнер шире */
     }
 
 
@@ -1758,7 +1970,7 @@ ul {
         font-size: 0.95rem;
         padding: 0 10px;
     }
-}
+
 
 
     /* ===== 4. КАРТА — НА ВСЮ ШИРИНУ ЭКРАНА ===== */
@@ -1790,6 +2002,7 @@ ul {
         margin-top: 0px;
     }
 }
+
 
 
 
