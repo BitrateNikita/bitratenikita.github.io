@@ -924,6 +924,22 @@ a.studios-list__item:hover {
     /* Футер */
     .footer__inner { flex-direction: column; text-align: center; }
     .social-links { justify-content: center; margin: 20px 0; }
+
+
+    /* ... здесь уже есть другие стили ... */
+
+    /* ПРИНУДИТЕЛЬНО СТАВИМ ВСЁ В ОДНУ КОЛОНКУ НА МОБИЛЬНЫХ */
+    .curriculum__grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .steps__grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .groups__grid {
+        grid-template-columns: 1fr !important;
+    }
 }
 
 @media (max-width: 480px) {
