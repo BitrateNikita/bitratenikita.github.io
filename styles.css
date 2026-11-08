@@ -127,7 +127,7 @@ ul {
     color: var(--color-text-light);
     font-size: 1.05rem;
     line-height: 1.6;
-    max-width: 600px;
+    max-width: 700px;
     margin: 0 auto 50px;
     position: relative;
     padding-bottom: 20px;
@@ -1288,6 +1288,7 @@ a.studios-list__item:hover {
     /* О студии (Картинка 4.png) */
     .about__inner { 
         flex-direction: column; 
+        
     }
     .about__photo {
         position: relative;
@@ -1534,6 +1535,8 @@ a.studios-list__item:hover {
         background-position: center !important;
         background-color: transparent !important;
         border-radius: var(--radius);
-        animation: floatX 11s ease-in-out infinite, floatY 13s ease-in-out infinite, floatRotate 17s ease-in-out infinite !important;
+        animation: floatX 11s ease-in-out infinite, 
+        floatY 13s ease-in-out infinite, 
+        floatRotate 17s ease-in-out infinite !important;
     }
 }
